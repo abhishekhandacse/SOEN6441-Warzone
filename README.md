@@ -1,6 +1,3 @@
-# SOEN6441-Warzone
-SOEN-6441 Course Project Warzone Game
-
 # Risk Game Project README
 
 ## Table of Contents
