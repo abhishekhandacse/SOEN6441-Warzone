@@ -7,8 +7,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 
+
+/**
+ *  This class severs as the starting point of the game.
+ */
 public class MainGameEngineController {
-    public static void main(String[] args) {
+    /**
+     * Main Method: Accepts commands from the players and map them to corresponding logical actions.
+     * 
+     * @param p_args 
+     */
+    public static void main(String[] p_args) {
         MainGameEngineController l_mainGameEngineController = new MainGameEngineController();
         l_mainGameEngineController.initializeWarzoneGamePlay();
     }

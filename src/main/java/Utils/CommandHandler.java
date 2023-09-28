@@ -4,16 +4,32 @@ import Constants.GlobalApplicationConstants;
 
 import java.util.*;
 
+/**
+ * CommandHandler class maps the commands inputted by players with appropriate actions.
+ */
 public class CommandHandler {
 
+    /**
+     * d_terminalCommand stores the command entered by the player.
+     */
     private String d_terminalCommand;
 
+    /**
+     *  Constructer: Trims the input command and Initailizes the value of data member d_terminalCommand
+     * 
+     * @param p_command Command entered by the player.
+     */
     public CommandHandler(final String p_command){
         final String l_trimLeadingAndTrailingSpaces = p_command.trim();
         final String l_replaceAllMultipleWhiteSpacesWithSingleSpace = l_trimLeadingAndTrailingSpaces.replaceAll(" +", GlobalApplicationConstants.SPACE);
         this.d_terminalCommand = l_replaceAllMultipleWhiteSpacesWithSingleSpace;
     }
 
+    /**
+     * Getter Method
+     * 
+     * @return Root Command entered by the user
+     */
     public String fetchRootCommand(){
         return d_terminalCommand.split(GlobalApplicationConstants.SPACE)[0];
     }
