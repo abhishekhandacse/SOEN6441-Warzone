@@ -41,6 +41,73 @@ public class MainGameEngineController {
 
     private  void commandHandler(final String p_inputCommand){
         CommandHandler l_commandHandler = new CommandHandler(p_inputCommand);
+        String l_rootCommand = l_commandHandler.fetchRootCommand();
+
+        switch (l_rootCommand) {
+            case "editcontinent":
+                EditContinent();
+                break;
+            case "editcountry":
+                EditCountry();
+                break;
+            case "editneighbor":
+                EditNeighbor();
+                break;
+            case "showmap":
+                ShowMap();
+                break;
+            case "savemap":
+                SaveMap();
+                break;
+            case "editmap":
+                EditMap();
+                break;
+            case "validatemap":
+                ValidateMap();
+                break;
+            case "loadmap":
+                LoadMap();
+                break;
+            case "gameplayer":
+                AddOrRemovePlayer();
+                break;
+            case "assigncountries":
+                AssignCountries();
+                break;
+        
+            default:
+                break;
+        }
+    }
+
+    private void AssignCountries() {
+    }
+
+    private void AddOrRemovePlayer() {
+    }
+
+    private void LoadMap() {
+    }
+
+    private void ValidateMap() {
+    }
+
+    private void EditMap() {
+    }
+
+    private void SaveMap() {
+    }
+
+    private void ShowMap() {
+    }
+
+    private void EditNeighbor() {
+    }
+
+    private void EditCountry() {
+    }
+
+    private void EditContinent() {
     }
 
 
