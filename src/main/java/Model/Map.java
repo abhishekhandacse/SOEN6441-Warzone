@@ -127,4 +127,17 @@ public class Map {
         return false;
     }
 
+    public Boolean checkConnectionOfContinent() throws MapValidationException {
+        boolean l_flagConnectivity=true;
+        for (Continent c:d_continents){
+            if (null == c.getD_countries() || c.getD_countries().size()<1){
+                throw new MapValidationException(c.getD_continentName() + " has no countries, it must possess atleast 1 country");
+            }
+            if(!subGraphConnectivity(c)){
+                l_flagConnectivity=false;
+            }
+        }
+        return l_flagConnectivity;
+    }
+
 }
