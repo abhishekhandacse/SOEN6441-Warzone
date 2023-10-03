@@ -12,7 +12,7 @@ import Utils.Command;
 import Utils.CommonUtil;
 
 
-public class ModelPlayer {
+public class Player {
 
 	ConsoleLogger consoleLogger = new ConsoleLogger();
 
@@ -24,14 +24,14 @@ public class ModelPlayer {
 	Integer d_noOfUnallocatedArmies;
 
 	
-	public ModelPlayer(String p_playerName) {
+	public Player(String p_playerName) {
 		this.d_name = p_playerName;
 		this.d_noOfUnallocatedArmies = 0;
 		this.d_ordersToExecute = new ArrayList<>();
 	}
 
 	
-	public ModelPlayer() {
+	public Player() {
 
 	}
 
@@ -102,6 +102,7 @@ public class ModelPlayer {
 		return l_countryNames;
 	}
 
+	
 	public void issueOrder() throws IOException {
 		BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
 		GamePlayerController l_Game_playerController = new GamePlayerController();
@@ -125,5 +126,4 @@ public class ModelPlayer {
 		this.d_ordersToExecute.remove(l_order);
 		return l_order;
 	}
-	
 }
