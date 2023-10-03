@@ -42,4 +42,14 @@ public class Map {
     public String getD_mapFile() {
         return d_mapFile;
     }
+
+    public List<Integer> getCountryIDs(){
+        List<Integer> l_countryIDs = new ArrayList<Integer>();
+        if(!d_countries.isEmpty()){
+            for(Country c: d_countries){
+                l_countryIDs.add(c.getD_countryId());
+            }
+        }
+        return l_countryIDs;
+    }
 }
