@@ -1,7 +1,50 @@
 package Controllers;
 
+import Exceptions.MapValidationException;
+
 public class MapController {
 
+
+    public boolean saveMap(GameState p_gameState, String p_fileName) throws MapValidationException {
+        try {
+
+            // Verifies if the file linked to savemap and edited by user are same
+            if (!p_fileName.equalsIgnoreCase(p_gameState.getD_map().getD_mapFile())) {
+                p_gameState.setError("Kindly provide same file name to save which you have given for edit");
+                return false;
+            } else {
+                if (null != p_gameState.getD_map()) {
+                    Models.Map l_currentMap = p_gameState.getD_map();
+
+                    // Proceeds to save the map if it passes the validation check
+                    consoleLogger.writeLog("Validating Map......");
+                    boolean l_mapValidationStatus = l_currentMap.Validate();
+                    if (l_mapValidationStatus) {
+                        Files.deleteIfExists(Paths.get(CommonUtil.getMapFilePath(p_fileName)));
+                        FileWriter l_writer = new FileWriter(CommonUtil.getMapFilePath(p_fileName));
+
+                        if (null != p_gameState.getD_map().getD_continents()
+                                && !p_gameState.getD_map().getD_continents().isEmpty()) {
+                            writeContinentMetadata(p_gameState, l_writer);
+                        }
+                        if (null != p_gameState.getD_map().getD_countries()
+                                && !p_gameState.getD_map().getD_countries().isEmpty()) {
+                            writeCountryAndBoarderMetaData(p_gameState, l_writer);
+                        }
+                        l_writer.close();
+                    }
+                } else {
+                    consoleLogger.writeLog("Validation Failed");
+                    return false;
+                }
+            }
+            return true;
+        } catch (IOException l_e) {
+            l_e.printStackTrace();
+            consoleLogger.writeLog("Error in saving map file");
+            return false;
+        }
+    }
 
     private void writeCountryAndBoarderMetaData(GameState p_gameState, FileWriter p_writer) throws IOException {
         String l_countryMetaData;
