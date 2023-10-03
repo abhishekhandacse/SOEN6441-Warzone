@@ -77,5 +77,24 @@ public class Map {
         }
     }
 
+    public Country getCountry(Integer p_countryId) {
+        return d_countries.stream().filter(l_country -> l_country.getD_countryId().equals(p_countryId)).findFirst().orElse(null);
+    }
+
+
+    public Country getCountryByName(String p_countryName){
+        return d_countries.stream().filter(l_country -> l_country.getD_countryName().equals(p_countryName)).findFirst().orElse(null);
+    }
+
+
+    public Continent getContinent(String p_continentName){
+        return d_continents.stream().filter(l_continent -> l_continent.getD_continentName().equals(p_continentName)).findFirst().orElse(null);
+    }
+
+
+    public Continent getContinentByID(Integer p_continentID){
+        return d_continents.stream().filter(l_continent -> l_continent.getD_continentID().equals(p_continentID)).findFirst().orElse(null);
+    }
+
 
 }
