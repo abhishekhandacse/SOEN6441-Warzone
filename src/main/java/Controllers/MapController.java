@@ -17,6 +17,7 @@ import Exceptions.MapValidationException;
 import Logger.ConsoleLogger;
 import Model.Continent;
 import Model.Country;
+import Models.GameState;
 
 public class MapController {
     ConsoleLogger consoleLogger = new ConsoleLogger();
@@ -60,6 +61,23 @@ public class MapController {
 		} else {
 			return null;
 		}
+	}
+
+
+    public List<String> loadFile(String p_loadFileName) {
+
+		String l_filePath = CommonUtil.getMapFilePath(p_loadFileName);
+		List<String> l_lineList = new ArrayList<>();
+
+		BufferedReader l_reader;
+		try {
+			l_reader = new BufferedReader(new FileReader(l_filePath));
+			l_lineList = l_reader.lines().collect(Collectors.toList());
+			l_reader.close();
+		} catch (IOException l_e1) {
+			consoleLogger.writeLog("File not Found!");
+		}
+		return l_lineList;
 	}
 
     public void editContinent(GameState p_gameState, String p_argument, String p_operation) throws IOException, MapValidationException {
