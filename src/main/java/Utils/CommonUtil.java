@@ -19,4 +19,10 @@ public class CommonUtil {
     }
 
 
+    public static boolean isNull(Object p_object) {
+        return Objects.isNull(p_object);
+    }
+
+
+
 }
