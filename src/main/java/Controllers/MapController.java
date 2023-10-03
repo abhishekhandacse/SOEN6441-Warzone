@@ -143,6 +143,27 @@ public class MapController {
 		return p_countriesList;
 	}
 
+
+    public void editMap(GameState p_gameState, String p_editFilePath) throws IOException {
+
+		String l_filePath = CommonUtil.getMapFilePath(p_editFilePath);
+		File l_fileToBeEdited = new File(l_filePath);
+
+		if (l_fileToBeEdited.createNewFile()) {
+			consoleLogger.writeLog("File has been created.");
+			Map l_map = new Map();
+			l_map.setD_mapFile(p_editFilePath);
+			p_gameState.setD_map(l_map);
+		} else {
+			consoleLogger.writeLog("File already exists.");
+			this.loadMap(p_gameState, p_editFilePath);
+			if (null == p_gameState.getD_map()) {
+				p_gameState.setD_map(new Map());
+			}
+			p_gameState.getD_map().setD_mapFile(p_editFilePath);
+		}
+	}
+
     public void editContinent(GameState p_gameState, String p_argument, String p_operation) throws IOException, MapValidationException {
         String l_mapFileName = p_gameState.getD_map().getD_mapFile();
         Map l_mapToBeUpdated = (CommonUtil.isNull(p_gameState.getD_map().getD_continents())
