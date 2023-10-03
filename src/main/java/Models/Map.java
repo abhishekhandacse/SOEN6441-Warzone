@@ -270,4 +270,26 @@ public class Map {
         }
     }
 
+
+    public void removeContinent(String p_continentName) throws MapValidationException{
+        if (d_continents!=null) {
+            if(!CommonUtil.isNull(getContinent(p_continentName))){
+
+                // Deletes the continent and updates neighbour as well as country objects
+                if (getContinent(p_continentName).getD_countries()!=null) {
+                    for(Country c: getContinent(p_continentName).getD_countries()){
+                        removeAllCountryNeighbours(c.getD_countryId());
+                        updateNeighboursContinent(c.getD_countryId());
+                        d_countries.remove(c);
+                    }
+                }
+                d_continents.remove(getContinent(p_continentName));
+            }else{
+                throw new MapValidationException("No such Continent exists!");
+            }
+        } else{
+            throw new MapValidationException("No continents in the Map to remove!");
+        }
+    }
+
 }
