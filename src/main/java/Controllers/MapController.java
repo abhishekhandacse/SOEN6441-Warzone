@@ -43,6 +43,27 @@ public class MapController {
 		return l_map;
 	}
 
+
+	public List<String> getMetaData(List<String> p_fileLines, String p_switchParameter) {
+		switch (p_switchParameter) {
+		case "continent":
+			List<String> l_continentLines = p_fileLines.subList(
+			p_fileLines.indexOf("[continents]") + 1,
+			p_fileLines.indexOf("[countries]") - 1);
+			return l_continentLines;
+		case "country":
+			List<String> l_countryLines = p_fileLines.subList(p_fileLines.indexOf("[countries]") + 1,
+			p_fileLines.indexOf("[borders]") - 1);
+			return l_countryLines;
+		case "border":
+			List<String> l_bordersLines = p_fileLines.subList(p_fileLines.indexOf("[borders]") + 1,
+			p_fileLines.size());
+			return l_bordersLines;
+		default:
+			return null;
+		}
+	}
+
     public void editContinent(GameState p_gameState, String p_argument, String p_operation) throws IOException, MapValidationException {
         String l_mapFileName = p_gameState.getD_map().getD_mapFile();
         Map l_mapToBeUpdated = (CommonUtil.isNull(p_gameState.getD_map().getD_continents())
@@ -57,7 +78,7 @@ public class MapController {
     }
 
     public Map addRemoveContinents(Map p_mapToBeUpdated, String p_operation,
-                                   String p_argument) throws MapValidationException {
+                                String p_argument) throws MapValidationException {
 
         if (p_operation.equalsIgnoreCase("add") && p_argument.split(" ").length==2) {
             p_mapToBeUpdated.addContinent(p_argument.split(" ")[0], Integer.parseInt(p_argument.split(" ")[1]));
