@@ -308,4 +308,15 @@ public class Map {
         }
     }
 
+
+    public void removeCountryNeighbours(String p_countryName, String p_neighbourName) throws MapValidationException{
+        if(d_countries!=null){
+            if(!CommonUtil.isNull(getCountryByName(p_countryName)) && !CommonUtil.isNull(getCountryByName(p_neighbourName))) {
+                d_countries.get(d_countries.indexOf(getCountryByName(p_countryName))).removeNeighbours(getCountryByName(p_neighbourName).getD_countryId());
+            } else{
+                throw new MapValidationException("Invalid Neighbour Pair! Either of the Countries Doesn't exist!");
+            }
+        }
+    }
+
 }
