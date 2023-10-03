@@ -33,7 +33,14 @@ public class Command {
             l_operationsString = "-filename "+l_operationsString;
         }
 
+        List<Map<String , String>> l_operations_list  = new ArrayList<Map<String,String>>();
+        String[] l_operations = l_operationsString.split("=");
 
+        Arrays.stream(l_operations).forEach((operation) -> {
+            if(operation.length() < 1) {
+                l_operations_list.add(getOperationAndArgumentsMap(operation));
+            }
+        });
 
         return l_operations_list;
     }
