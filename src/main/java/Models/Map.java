@@ -159,4 +159,16 @@ public class Map {
         return !l_continentCountry.containsValue(false);
     }
 
+
+    public void dfsSubgraph(Country p_c, HashMap<Integer, Boolean> p_continentCountry, Continent p_continent) {
+        p_continentCountry.put(p_c.getD_countryId(), true);
+        for (Country c : p_continent.getD_countries()) {
+            if (p_c.getD_adjacentCountryIds().contains(c.getD_countryId())) {
+                if (!p_continentCountry.get(c.getD_countryId())) {
+                    dfsSubgraph(c, p_continentCountry, p_continent);
+                }
+            }
+        }
+    }
+
 }
