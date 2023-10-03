@@ -65,5 +65,10 @@ public class Command {
     }
 
 
-
+    public boolean checkRequiredKeysPresent(String p_key, Map<String, String> p_inputMap) {
+        if(p_inputMap.containsKey(p_key) && null != p_inputMap.get(p_key)
+                && !p_inputMap.get(p_key).isEmpty())
+            return true;
+        return false;
+    }
 }
