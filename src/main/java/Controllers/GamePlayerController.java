@@ -2,6 +2,7 @@ package Controllers;
 
 
 import Logger.ConsoleLogger;
+import Model.Continent;
 import Model.Country;
 import Models.*;
 import Utils.CommonUtil;
@@ -157,4 +158,42 @@ public class GamePlayerController {
 			performRandomCountryAssignment(1, l_unassignedCountries, p_players);
 		}
 	}
+
+    private void performContinentAssignment(List<Player> p_players, List<Continent> p_continents) {
+		// Iterate through each player.
+		for (Player l_pl : p_players) {
+			// Create a list to store the names of countries owned by the player.
+			List<String> l_countriesOwned = new ArrayList<>();
+
+			// Check if the player owns any countries.
+			if (!CommonUtil.isCollectionEmpty(l_pl.getD_coutriesOwned())) {
+				// Iterate through the countries owned by the player and add their names to the list.
+				l_pl.getD_coutriesOwned().forEach(l_country -> l_countriesOwned.add(l_country.getD_countryName()));
+
+				// Iterate through each continent.
+				for (Continent l_cont : p_continents) {
+					// Create a list to store the names of countries in the current continent.
+					List<String> l_countriesOfContinent = new ArrayList<>();
+
+					// Iterate through the countries in the continent and add their names to the list.
+					l_cont.getD_countries().forEach(l_count -> l_countriesOfContinent.add(l_count.getD_countryName()));
+
+					// Check if the player owns all countries in the current continent.
+					if (l_countriesOwned.containsAll(l_countriesOfContinent)) {
+						// If the player owns all countries in the continent, assign the continent to the player.
+						if (l_pl.getD_continentsOwned() == null)
+							l_pl.setD_continentsOwned(new ArrayList<>());
+
+						// Add the continent to the player's list of owned continents.
+						l_pl.getD_continentsOwned().add(l_cont);
+
+						// Log the assignment of the continent to the player.
+						consoleLogger.writeLog("Player : " + l_pl.getPlayerName() + " is assigned with continent : "
+								+ l_cont.getD_continentName());
+					}
+				}
+			}
+		}
+	}
+
 }
