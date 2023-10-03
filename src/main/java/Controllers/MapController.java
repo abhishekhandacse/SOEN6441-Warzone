@@ -4,6 +4,31 @@ import Exceptions.MapValidationException;
 
 public class MapController {
 
+
+    public void editCountry(GameState p_gameState, String p_operation, String p_argument) throws MapValidationException{
+        String l_mapFileName= p_gameState.getD_map().getD_mapFile();
+        Map l_mapToBeUpdated = (CommonUtil.isNull(p_gameState.getD_map().getD_continents())
+                && CommonUtil.isNull(p_gameState.getD_map().getD_countries())) ? this.loadMap(p_gameState, l_mapFileName)
+                : p_gameState.getD_map();
+
+        if(!CommonUtil.isNull(l_mapToBeUpdated)) {
+            Map l_updatedMap = addRemoveCountry(l_mapToBeUpdated, p_operation, p_argument);
+            p_gameState.setD_map(l_updatedMap);
+            p_gameState.getD_map().setD_mapFile(l_mapFileName);
+        }
+    }
+
+    public Map addRemoveCountry(Map p_mapToBeUpdated, String p_operation, String p_argument) throws MapValidationException{
+        if (p_operation.equalsIgnoreCase("add") && p_argument.split(" ").length==2){
+            p_mapToBeUpdated.addCountry(p_argument.split(" ")[0], p_argument.split(" ")[1]);
+        }else if(p_operation.equalsIgnoreCase("remove")&& p_argument.split(" ").length==1){
+            p_mapToBeUpdated.removeCountry(p_argument.split(" ")[0]);
+        }else{
+            consoleLogger.writeLog("Couldn't Save your changes");
+        }
+        return p_mapToBeUpdated;
+    }
+
     public void editNeighbour(GameState p_gameState, String p_operation, String p_argument) throws MapValidationException{
         String l_mapFileName= p_gameState.getD_map().getD_mapFile();
         Map l_mapToBeUpdated = (CommonUtil.isNull(p_gameState.getD_map().getD_continents())
