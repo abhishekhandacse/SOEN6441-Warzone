@@ -19,6 +19,25 @@ public class Command {
     }
 
 
+    public List<Map<String , String>> getOperationsAndArguments(){
+        String l_rootCommand = getRootCommand();
+        String l_operationsString =  d_command.replace(l_rootCommand, "").trim();
+
+        if(null == l_operationsString || l_operationsString.isEmpty()) {
+            return new ArrayList<Map<String , String>>();
+        }
+        boolean l_isFlagLessCommand = !l_operationsString.contains("-") && !l_operationsString.contains(" ");
+
+        // handle commands to load files, ex: loadmap filename
+        if(l_isFlagLessCommand){
+            l_operationsString = "-filename "+l_operationsString;
+        }
+
+
+
+        return l_operations_list;
+    }
+
 
     private Map<String, String> getOperationAndArgumentsMap(String p_operation){
         Map<String, String> l_operationMap = new HashMap<String, String>();
@@ -40,5 +59,4 @@ public class Command {
 
 
 
-    }
 }
