@@ -198,4 +198,18 @@ public class Map {
         return !d_countryReach.containsValue(false);
     }
 
+
+    public List<Country> getAdjacentCountry(Country p_country) throws MapValidationException {
+        List<Country> l_adjCountries = new ArrayList<Country>();
+
+        if (p_country.getD_adjacentCountryIds().size() > 0) {
+			for (int i : p_country.getD_adjacentCountryIds()) {
+                l_adjCountries.add(getCountry(i));
+            }
+        } else {
+            throw new MapValidationException(p_country.getD_countryName() + " doesn't have any adjacent countries");
+		}
+		return l_adjCountries;
+	}
+
 }
