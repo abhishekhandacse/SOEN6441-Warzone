@@ -1,7 +1,7 @@
 package Exceptions;
 
-public class MapValidationException {
+public class MapValidationException extends Exception{
     public MapValidationException(String p_message) {
-		super();
+		super(p_message);
 	}
 }

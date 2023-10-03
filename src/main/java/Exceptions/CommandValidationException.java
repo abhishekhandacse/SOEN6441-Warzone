@@ -1,8 +1,8 @@
 package Exceptions;
 
-public class CommandValidationException {
+public class CommandValidationException extends Exception{
 
     public CommandValidationException(String p_message) {
-		super();
+		super(p_message);
 	}
 }

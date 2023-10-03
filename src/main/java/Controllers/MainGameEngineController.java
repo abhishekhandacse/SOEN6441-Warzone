@@ -5,7 +5,12 @@ import Views.MapView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
+import Exceptions.CommandValidationException;
+import Exceptions.MapValidationException;
 import Logger.ConsoleLogger;
 import Models.State;
 import Utils.CommandHandler;
@@ -49,20 +54,20 @@ public class MainGameEngineController {
                 String l_inputCommand = l_bufferedReader.readLine();
 
                 commandHandler(l_inputCommand);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
     }
 
 
-    private  void commandHandler(final String p_inputCommand){
+    private  void commandHandler(final String p_inputCommand) throws MapValidationException, CommandValidationException, IOException{
         CommandHandler l_commandHandler = new CommandHandler(p_inputCommand);
         String l_rootCommand = l_commandHandler.getRootCommand();
         boolean l_isMapAvailable = d_state.getD_map() != null;  
 
         if ("editmap".equals(l_rootCommand)) {
-			editMap();
+			editMap(l_rootCommand);
 		} else if ("editcontinent".equals(l_rootCommand)) {
 			if (!l_isMapAvailable) {
 				consoleLogger.writeLog("Can't perform Editcontinent as Map is Not Available, please run 'editmap' command first.");
@@ -126,7 +131,20 @@ public class MainGameEngineController {
     private void validateMap() {
     }
 
-    private void editMap() {
+    private void editMap(CommandHandler p_command) throws IOException, CommandValidationException{
+        List<Map<String, String>> l_operations_list = p_command.getOperationsAndArguments();
+
+		if (Objects.isNull(l_operations_list) || l_operations_list.isEmpty()) {
+			throw new CommandValidationException("Invalid command. Please execute the 'editmap' command in the provided format: editmap filename.");
+		} else {
+			for (Map<String, String> l_map : l_operations_list) {
+				if (p_command.checkRequiredKeysPresent("arguments", l_map)) {
+					d_mapController.editMap(d_state, l_map.get("arguments"));
+				} else {
+					throw new CommandValidationException("Invalid command. Please execute the 'editmap' command in the provided format: editmap filename.");
+				}
+			}
+		}
     }
 
     private void saveMap() {
