@@ -171,4 +171,14 @@ public class Map {
         }
     }
 
+
+    public void dfsCountry(Country p_c) throws MapValidationException {
+        d_countryReach.put(p_c.getD_countryId(), true);
+        for (Country l_nextCountry : getAdjacentCountry(p_c)) {
+            if (!d_countryReach.get(l_nextCountry.getD_countryId())) {
+                dfsCountry(l_nextCountry);
+            }
+        }
+    }
+
 }
