@@ -4,6 +4,19 @@ import Exceptions.MapValidationException;
 
 public class MapController {
 
+    public Map addRemoveContinents(Map p_mapToBeUpdated, String p_operation,
+                                   String p_argument) throws MapValidationException {
+
+        if (p_operation.equalsIgnoreCase("add") && p_argument.split(" ").length==2) {
+            p_mapToBeUpdated.addContinent(p_argument.split(" ")[0], Integer.parseInt(p_argument.split(" ")[1]));
+        } else if (p_operation.equalsIgnoreCase("remove") && p_argument.split(" ").length==1) {
+            p_mapToBeUpdated.removeContinent(p_argument.split(" ")[0]);
+        } else {
+            consoleLogger.writeLog("Continent couldn't be added/removed. Changes are not made");
+        }
+
+        return p_mapToBeUpdated;
+    }
 
     public void editCountry(GameState p_gameState, String p_operation, String p_argument) throws MapValidationException{
         String l_mapFileName= p_gameState.getD_map().getD_mapFile();
