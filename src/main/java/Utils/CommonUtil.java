@@ -34,5 +34,8 @@ public class CommonUtil {
     }
 
 
-
+    public static String getMapFilePath(String p_fileName) {
+        String l_absolutePath = new File("").getAbsolutePath();
+        return l_absolutePath + File.separator + "src/main/resources" + File.separator + p_fileName;
+    }
 }
