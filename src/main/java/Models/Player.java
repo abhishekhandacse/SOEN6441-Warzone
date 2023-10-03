@@ -8,7 +8,7 @@ import java.util.List;
 
 import Controllers.GamePlayerController;
 import Logger.ConsoleLogger;
-import Utils.Command;
+import Utils.CommandHandler;
 import Utils.CommonUtil;
 
 
@@ -109,7 +109,7 @@ public class Player {
 		consoleLogger.writeLog("\nPlease enter command to deploy reinforcement armies on the map for player : "
 				+ this.getPlayerName());
 		String l_commandEntered = l_reader.readLine();
-		Command l_command = new Command(l_commandEntered);
+		CommandHandler l_command = new CommandHandler(l_commandEntered);
 
 		if (l_command.getRootCommand().equalsIgnoreCase("deploy") && l_commandEntered.split(" ").length == 3) {
 			l_Game_playerController.createDeployOrder(l_commandEntered, this);

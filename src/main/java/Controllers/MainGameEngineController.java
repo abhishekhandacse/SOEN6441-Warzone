@@ -1,16 +1,23 @@
 package Controllers;
 
 import Utils.CommandHandler;
+import Views.MapView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import Logger.ConsoleLogger;
+import Models.State;
 
 
 /**
  *  This class severs as the starting point of the game.
  */
 public class MainGameEngineController {
+
+    ConsoleLogger consoleLogger = new ConsoleLogger();
+    
     /**
      * Main Method: Accepts commands from the players and map them to corresponding logical actions.
      * 
@@ -26,7 +33,7 @@ public class MainGameEngineController {
         var l_infiniteLoop = true;
 
         while (l_infiniteLoop){
-            System.out.println("Enter the game commands or type 'exit' for quitting");
+            System.out.println("Input the game commands or input 'exit' to exit the game");
             try {
                 String l_inputCommand = l_bufferedReader.readLine();
 
@@ -40,73 +47,60 @@ public class MainGameEngineController {
 
     private  void commandHandler(final String p_inputCommand){
         CommandHandler l_commandHandler = new CommandHandler(p_inputCommand);
-        String l_rootCommand = l_commandHandler.fetchRootCommand();
+        String l_rootCommand = l_commandHandler.getRootCommand();
+        boolean l_isMapAvailable = d_state.getD_map() != null;  
 
-        switch (l_rootCommand) {
-            case "editcontinent":
-                EditContinent();
-                break;
-            case "editcountry":
-                EditCountry();
-                break;
-            case "editneighbor":
-                EditNeighbor();
-                break;
-            case "showmap":
-                ShowMap();
-                break;
-            case "savemap":
-                SaveMap();
-                break;
-            case "editmap":
-                EditMap();
-                break;
-            case "validatemap":
-                ValidateMap();
-                break;
-            case "loadmap":
-                LoadMap();
-                break;
-            case "gameplayer":
-                AddOrRemovePlayer();
-                break;
-            case "assigncountries":
-                AssignCountries();
-                break;
-        
-            default:
-                break;
-        }
+        if ("editmap".equals(l_rootCommand)) {
+			editMap();
+		} else if ("editcontinent".equals(l_rootCommand)) {
+			if (!l_isMapAvailable) {
+				consoleLogger.writeLog("Can't perform Editcontinent as Map is Not Available, please run 'editmap' command first.");
+			} else {
+				editContinent();
+			}
+		} else if ("editcountry".equals(l_rootCommand)) {
+			if (!l_isMapAvailable) {
+				consoleLogger.writeLog("Can't perform EditCountry as Map is Not Available, please run 'editmap' command first.");
+			} else {
+				editCountry();
+			}
+		} else if ("editneighbor".equals(l_rootCommand)) {
+			if (!l_isMapAvailable) {
+				consoleLogger.writeLog("Can't perform EditNeighbor as Map is Not Available, please run 'editmap' command first.");
+			} else {
+				editNeighbour();
+			}
+		} 
     }
 
-    private void AssignCountries() {
+    private void assignCountries() {
     }
 
-    private void AddOrRemovePlayer() {
+    private void addOrRemovePlayer() {
     }
 
-    private void LoadMap() {
+    private void loadMap() {
     }
 
-    private void ValidateMap() {
+    private void validateMap() {
     }
 
-    private void EditMap() {
+    private void editMap() {
     }
 
-    private void SaveMap() {
+    private void saveMap() {
     }
 
-    private void ShowMap() {
+    private void showMap() {
     }
 
-    private void EditNeighbor() {
+    private void editNeighbor() {
     }
 
-    private void EditCountry() {
+    private void editCountry() {
     }
 
-    private void EditContinent() {
+    private void editContinent() {
     }
 
 

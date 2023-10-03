@@ -3,13 +3,13 @@ package Utils;
 import java.util.*;
 
 
-public class Command {
+public class CommandHandler {
 
 
     public String d_command;
 
 
-    public Command(String p_command){
+    public CommandHandler(String p_command){
         this.d_command = p_command.trim().replaceAll(" +", " ");
     }
 
