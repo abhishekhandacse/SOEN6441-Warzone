@@ -102,6 +102,28 @@ public class ModelPlayer {
 		return l_countryNames;
 	}
 
-	
+	public void issueOrder() throws IOException {
+		BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
+		GamePlayerController l_Game_playerController = new GamePlayerController();
+		consoleLogger.writeLog("\nPlease enter command to deploy reinforcement armies on the map for player : "
+				+ this.getPlayerName());
+		String l_commandEntered = l_reader.readLine();
+		Command l_command = new Command(l_commandEntered);
+
+		if (l_command.getRootCommand().equalsIgnoreCase("deploy") && l_commandEntered.split(" ").length == 3) {
+			l_Game_playerController.createDeployOrder(l_commandEntered, this);
+		} else {
+			consoleLogger.writeLog("Invalid command. To deploy armies, use the 'deploy' command in the format: deploy countryID <CountryName> <num> (until all reinforcements have been placed)");
+		}
+	}
+
+	public Order nextOrder() {
+		if (CommonUtil.isCollectionEmpty(this.d_ordersToExecute)) {
+			return null;
+		}
+		Order l_order = this.d_ordersToExecute.get(0);
+		this.d_ordersToExecute.remove(l_order);
+		return l_order;
+	}
 	
 }
