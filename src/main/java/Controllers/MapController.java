@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 
 import Exceptions.MapValidationException;
 import Logger.ConsoleLogger;
-import Model.Continent;
-import Model.Country;
+import Models.Continent;
+import Models.Country;
 import Models.GameState;
 import Models.Map;
 import Utils.CommonUtil;
