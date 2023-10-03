@@ -15,8 +15,33 @@ import java.util.stream.Collectors;
 
 import Exceptions.MapValidationException;
 import Logger.ConsoleLogger;
+import Model.Continent;
+import Model.Country;
 
 public class MapController {
+    ConsoleLogger consoleLogger = new ConsoleLogger();
+	public Map loadMap(GameState p_gameState, String p_loadFileName) {
+		Map l_map = new Map();
+		List<String> l_linesOfFile = loadFile(p_loadFileName);
+
+		if (null != l_linesOfFile && !l_linesOfFile.isEmpty()) {
+
+			// Parses the file and stores information in objects
+			List<String> l_continentData = getMetaData(l_linesOfFile, "continent");
+			List<Continent> l_continentObjects = parseContinentsMetaData(l_continentData);
+			List<String> l_countryData = getMetaData(l_linesOfFile, "country");
+			List<String> l_bordersMetaData = getMetaData(l_linesOfFile, "border");
+			List<Country> l_countryObjects = parseCountriesMetaData(l_countryData);
+
+			// Updates the neighbour of countries in Objects
+			l_countryObjects = parseBorderMetaData(l_countryObjects, l_bordersMetaData);
+			l_continentObjects = linkCountryContinents(l_countryObjects, l_continentObjects);
+			l_map.setD_continents(l_continentObjects);
+			l_map.setD_countries(l_countryObjects);
+			p_gameState.setD_map(l_map);
+		}
+		return l_map;
+	}
 
     public void editContinent(GameState p_gameState, String p_argument, String p_operation) throws IOException, MapValidationException {
         String l_mapFileName = p_gameState.getD_map().getD_mapFile();
