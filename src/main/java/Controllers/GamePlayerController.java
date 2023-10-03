@@ -117,5 +117,44 @@ public class GamePlayerController {
 		consoleLogger.writeLog("Countries have been assigned to Players.");
 
 	}
+    private void performRandomCountryAssignment(int p_countriesPerPlayer, List<Country> p_countries,
+												List<Player> p_players) {
+		// Create a list to store unassigned countries, initially containing all countries.
+		List<Country> l_unassignedCountries = new ArrayList<>(p_countries);
 
+		// Loop through each player to assign countries.
+		for (Player l_pl : p_players) {
+			// Check if there are no unassigned countries left, and exit the loop if so.
+			if (l_unassignedCountries.isEmpty())
+				break;
+
+			// Iterate for the specified number of countries per player.
+			for (int i = 0; i < p_countriesPerPlayer; i++) {
+				// Generate a random index to pick a random country from the unassigned list.
+				Random l_random = new Random();
+				int l_randomIndex = l_random.nextInt(l_unassignedCountries.size());
+				Country l_randomCountry = l_unassignedCountries.get(l_randomIndex);
+
+				// Check if the player's list of owned countries is null, and create it if needed.
+				if (l_pl.getD_coutriesOwned() == null)
+					l_pl.setD_coutriesOwned(new ArrayList<>());
+
+				// Add the randomly selected country to the player's list of owned countries.
+				l_pl.getD_coutriesOwned().add(l_randomCountry);
+
+				// Log the assignment of the country to the player.
+				consoleLogger.writeLog("Player : " + l_pl.getPlayerName() + " is assigned with country : "
+						+ l_randomCountry.getD_countryName());
+
+				// Remove the assigned country from the list of unassigned countries.
+				l_unassignedCountries.remove(l_randomCountry);
+			}
+		}
+
+		// If there are still unassigned countries left, redistribute them among players.
+		if (!l_unassignedCountries.isEmpty()) {
+			// Recursively call the function to distribute one country to each player.
+			performRandomCountryAssignment(1, l_unassignedCountries, p_players);
+		}
+	}
 }
