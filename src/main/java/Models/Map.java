@@ -292,4 +292,20 @@ public class Map {
         }
     }
 
+
+    public void removeCountry(String p_countryName) throws MapValidationException{
+        if(d_countries!=null && !CommonUtil.isNull(getCountryByName(p_countryName))) {
+            for(Continent c: d_continents){
+                if(c.getD_continentID().equals(getCountryByName(p_countryName).getD_continentId())){
+                    c.removeCountry(getCountryByName(p_countryName));
+                }
+                c.removeAllCountryNeighbours(getCountryByName(p_countryName).getD_countryId());
+            }
+            removeAllCountryNeighbours(getCountryByName(p_countryName).getD_countryId());
+            d_countries.remove(getCountryByName(p_countryName));
+        }else{
+            throw new MapValidationException("Country:  "+ p_countryName+" does not exist!");
+        }
+    }
+
 }
