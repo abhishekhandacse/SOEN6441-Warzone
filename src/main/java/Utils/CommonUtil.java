@@ -24,5 +24,15 @@ public class CommonUtil {
     }
 
 
+    public static boolean isCollectionEmpty(Collection<?> p_collection) {
+        return (p_collection == null || p_collection.isEmpty());
+    }
+
+
+    public static boolean isMapEmpty(Map<?, ?> p_map) {
+        return (p_map == null || p_map.isEmpty());
+    }
+
+
 
 }
