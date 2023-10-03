@@ -62,4 +62,20 @@ public class Map {
         }
         return l_continentIDs;
     }
+
+    public void addContinent(Continent p_continent){
+        d_continents.add(p_continent);
+    }
+
+    public void addCountry(Country p_country){
+        d_countries.add(p_country);
+    }
+
+    public void checkContinents() {
+        for(Continent c: d_continents) {
+            System.out.println(c.getD_continentID());
+        }
+    }
+
+
 }
