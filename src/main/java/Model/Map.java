@@ -52,4 +52,14 @@ public class Map {
         }
         return l_countryIDs;
     }
+
+    public List<Integer> getContinentIDs(){
+        List<Integer> l_continentIDs = new ArrayList<Integer>();
+        if (!d_continents.isEmpty()) {
+            for(Continent c: d_continents){
+                l_continentIDs.add(c.getD_continentID());
+            }
+        }
+        return l_continentIDs;
+    }
 }
