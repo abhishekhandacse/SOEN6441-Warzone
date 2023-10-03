@@ -4,6 +4,19 @@ import Exceptions.MapValidationException;
 
 public class MapController {
 
+    public void editContinent(GameState p_gameState, String p_argument, String p_operation) throws IOException, MapValidationException {
+        String l_mapFileName = p_gameState.getD_map().getD_mapFile();
+        Map l_mapToBeUpdated = (CommonUtil.isNull(p_gameState.getD_map().getD_continents())
+                && CommonUtil.isNull(p_gameState.getD_map().getD_countries())) ? this.loadMap(p_gameState, l_mapFileName)
+                : p_gameState.getD_map();
+
+        if(!CommonUtil.isNull(l_mapToBeUpdated)) {
+            Map l_updatedMap = addRemoveContinents(l_mapToBeUpdated, p_operation, p_argument);
+            p_gameState.setD_map(l_updatedMap);
+            p_gameState.getD_map().setD_mapFile(l_mapFileName);
+        }
+    }
+
     public Map addRemoveContinents(Map p_mapToBeUpdated, String p_operation,
                                    String p_argument) throws MapValidationException {
 
