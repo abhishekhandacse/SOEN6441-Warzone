@@ -5,6 +5,17 @@ import Exceptions.MapValidationException;
 public class MapController {
 
 
+    public Map addRemoveNeighbour(Map p_mapToBeUpdated, String p_operation, String p_argument) throws MapValidationException{
+        if (p_operation.equalsIgnoreCase("add") && p_argument.split(" ").length==2){
+            p_mapToBeUpdated.addCountryNeighbours(p_argument.split(" ")[0], p_argument.split(" ")[1]);
+        }else if(p_operation.equalsIgnoreCase("remove") && p_argument.split(" ").length==2){
+            p_mapToBeUpdated.removeCountryNeighbours(p_argument.split(" ")[0], p_argument.split(" ")[1]);
+        }else{
+            consoleLogger.writeLog("Couldn't Save your changes");
+        }
+        return p_mapToBeUpdated;
+    }
+
     public boolean saveMap(GameState p_gameState, String p_fileName) throws MapValidationException {
         try {
 
