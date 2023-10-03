@@ -44,22 +44,20 @@ public class MapController {
 	}
 
 
-	public List<String> getMetaData(List<String> p_fileLines, String p_switchParameter) {
-		switch (p_switchParameter) {
-		case "continent":
-			List<String> l_continentLines = p_fileLines.subList(
-			p_fileLines.indexOf("[continents]") + 1,
-			p_fileLines.indexOf("[countries]") - 1);
-			return l_continentLines;
-		case "country":
-			List<String> l_countryLines = p_fileLines.subList(p_fileLines.indexOf("[countries]") + 1,
-			p_fileLines.indexOf("[borders]") - 1);
-			return l_countryLines;
-		case "border":
-			List<String> l_bordersLines = p_fileLines.subList(p_fileLines.indexOf("[borders]") + 1,
-			p_fileLines.size());
-			return l_bordersLines;
-		default:
+    public List<String> getMetaData(List<String> p_fileLines, String p_Parameter) {
+		if ("continent".equals(p_Parameter)) {
+			return p_fileLines.subList(
+					p_fileLines.indexOf("[continents]") + 1,
+					p_fileLines.indexOf("[countries]") - 1);
+		} else if ("country".equals(p_Parameter)) {
+			return p_fileLines.subList(
+					p_fileLines.indexOf("[countries]") + 1,
+					p_fileLines.indexOf("[borders]") - 1);
+		} else if ("border".equals(p_Parameter)) {
+			return p_fileLines.subList(
+					p_fileLines.indexOf("[borders]") + 1,
+					p_fileLines.size());
+		} else {
 			return null;
 		}
 	}
