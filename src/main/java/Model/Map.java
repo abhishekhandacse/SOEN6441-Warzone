@@ -140,4 +140,23 @@ public class Map {
         return l_flagConnectivity;
     }
 
+    public boolean subGraphConnectivity(Continent p_continent) throws MapValidationException {
+        HashMap<Integer, Boolean> l_continentCountry = new HashMap<Integer, Boolean>();
+
+        for (Country c : p_continent.getD_countries()) {
+            l_continentCountry.put(c.getD_countryId(), false);
+        }
+        dfsSubgraph(p_continent.getD_countries().get(0), l_continentCountry, p_continent);
+
+        // Iterates Over Entries to locate unreachable countries in continent
+        for (Entry<Integer, Boolean> entry : l_continentCountry.entrySet()) {
+            if (!entry.getValue()) {
+                Country l_country = getCountry(entry.getKey());
+                String l_messageException = l_country.getD_countryName() + " in Continent " + p_continent.getD_continentName() + " is not reachable";
+                throw new MapValidationException(l_messageException);
+            }
+        }
+        return !l_continentCountry.containsValue(false);
+    }
+
 }
