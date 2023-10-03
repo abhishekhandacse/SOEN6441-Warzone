@@ -240,4 +240,34 @@ public class Map {
         }
     }
 
+
+    public void updateNeighboursContinent(Integer p_countryId){
+        for(Continent c: d_continents){
+            c.removeAllCountryNeighbours(p_countryId);
+        }
+    }
+
+    public void addCountry(String p_countryName, String p_continentName) throws MapValidationException{
+        int l_countryId;
+        if(d_countries==null){
+            d_countries= new ArrayList<Country>();
+        }
+        if(CommonUtil.isNull(getCountryByName(p_countryName))){
+            l_countryId=d_countries.size()>0? Collections.max(getCountryIDs())+1:1;
+            if(d_continents!=null && getContinentIDs().contains(getContinent(p_continentName).getD_continentID())){
+                Country l_country= new Country(l_countryId, p_countryName, getContinent(p_continentName).getD_continentID());
+                d_countries.add(l_country);
+                for (Continent c: d_continents) {
+                    if (c.getD_continentName().equals(p_continentName)) {
+                        c.addCountry(l_country);
+                    }
+                }
+            } else{
+                throw new MapValidationException("Cannot add Country to a Continent that doesn't exist!");
+            }
+        }else{
+            throw new MapValidationException("Country with name "+ p_countryName+" already Exists!");
+        }
+    }
+
 }
