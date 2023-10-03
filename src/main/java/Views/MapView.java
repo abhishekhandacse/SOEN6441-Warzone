@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import Models.Continent;
 import Models.Country;
-import Models.GameState;
+import Models.State;
 import Models.Player;
 import Models.Map;
 import Utils.CommonUtil;
@@ -20,7 +20,7 @@ public class MapView {
 
 	public static final int CONSOLE_WIDTH = 80;
 	List<Player> d_players;
-	GameState d_gameState;
+	State d_gameState;
 	Map d_map;
 	List<Country> d_countries;
 	List<Continent> d_continents;
@@ -29,7 +29,7 @@ public class MapView {
 	public static final String ANSI_RESET = "\u001B[0m";
 
     
-	public MapView(GameState p_gameState){
+	public MapView(State p_gameState){
 		d_gameState = p_gameState;
 		d_map = p_gameState.getD_map();
 		d_map = p_gameState.getD_map();
@@ -38,7 +38,7 @@ public class MapView {
 	}
 
     
-	public MapView(GameState p_gameState, List<Player> p_players){
+	public MapView(State p_gameState, List<Player> p_players){
 		d_gameState = p_gameState;
 		d_players = p_players;
 		d_map = p_gameState.getD_map();

@@ -16,7 +16,7 @@ import org.junit.Test;
 import Exceptions.CommandValidationException;
 import Models.Continent;
 import Models.Country;
-import Models.GameState;
+import Models.State;
 import Models.Map;
 import Models.Player;
 import Utils.CommonUtil;
@@ -33,7 +33,7 @@ public class GamePlayerControllerTest {
 	Map d_map;
 
 	
-	GameState d_gameState;
+	State d_gameState;
 
 	
 	MapController d_mapservice;
@@ -48,7 +48,7 @@ public class GamePlayerControllerTest {
 	public void setup() {
 		d_playerInfo = new Player();
 		d_Game_playerController = new GamePlayerController();
-		d_gameState = new GameState();
+		d_gameState = new State();
 		d_exisitingPlayerList.add(new Player("Rajat"));
 		d_exisitingPlayerList.add(new Player("Anurag"));
 

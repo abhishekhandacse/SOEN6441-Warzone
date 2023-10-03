@@ -17,13 +17,13 @@ import Exceptions.MapValidationException;
 import Logger.ConsoleLogger;
 import Models.Continent;
 import Models.Country;
-import Models.GameState;
+import Models.State;
 import Models.Map;
 import Utils.CommonUtil;
 
 public class MapController {
     ConsoleLogger consoleLogger = new ConsoleLogger();
-	public Map loadMap(GameState p_gameState, String p_loadFileName) {
+	public Map loadMap(State p_gameState, String p_loadFileName) {
 		Map l_map = new Map();
 		List<String> l_linesOfFile = loadFile(p_loadFileName);
 
@@ -144,7 +144,7 @@ public class MapController {
 	}
 
 
-    public void editMap(GameState p_gameState, String p_editFilePath) throws IOException {
+    public void editMap(State p_gameState, String p_editFilePath) throws IOException {
 
 		String l_filePath = CommonUtil.getMapFilePath(p_editFilePath);
 		File l_fileToBeEdited = new File(l_filePath);
@@ -164,7 +164,7 @@ public class MapController {
 		}
 	}
 
-    public void editContinent(GameState p_gameState, String p_argument, String p_operation) throws IOException, MapValidationException {
+    public void editContinent(State p_gameState, String p_argument, String p_operation) throws IOException, MapValidationException {
         String l_mapFileName = p_gameState.getD_map().getD_mapFile();
         Map l_mapToBeUpdated = (CommonUtil.isNull(p_gameState.getD_map().getD_continents())
                 && CommonUtil.isNull(p_gameState.getD_map().getD_countries())) ? this.loadMap(p_gameState, l_mapFileName)
@@ -191,7 +191,7 @@ public class MapController {
         return p_mapToBeUpdated;
     }
 
-    public void editCountry(GameState p_gameState, String p_operation, String p_argument) throws MapValidationException{
+    public void editCountry(State p_gameState, String p_operation, String p_argument) throws MapValidationException{
         String l_mapFileName= p_gameState.getD_map().getD_mapFile();
         Map l_mapToBeUpdated = (CommonUtil.isNull(p_gameState.getD_map().getD_continents())
                 && CommonUtil.isNull(p_gameState.getD_map().getD_countries())) ? this.loadMap(p_gameState, l_mapFileName)
@@ -215,7 +215,7 @@ public class MapController {
         return p_mapToBeUpdated;
     }
 
-    public void editNeighbour(GameState p_gameState, String p_operation, String p_argument) throws MapValidationException{
+    public void editNeighbour(State p_gameState, String p_operation, String p_argument) throws MapValidationException{
         String l_mapFileName= p_gameState.getD_map().getD_mapFile();
         Map l_mapToBeUpdated = (CommonUtil.isNull(p_gameState.getD_map().getD_continents())
                 && CommonUtil.isNull(p_gameState.getD_map().getD_countries())) ? this.loadMap(p_gameState, l_mapFileName)
@@ -239,7 +239,7 @@ public class MapController {
         return p_mapToBeUpdated;
     }
 
-    public boolean saveMap(GameState p_gameState, String p_fileName) throws MapValidationException {
+    public boolean saveMap(State p_gameState, String p_fileName) throws MapValidationException {
         try {
 
             // Verifies if the file linked to savemap and edited by user are same
@@ -280,7 +280,7 @@ public class MapController {
         }
     }
 
-    private void writeCountryAndBoarderMetaData(GameState p_gameState, FileWriter p_writer) throws IOException {
+    private void writeCountryAndBoarderMetaData(State p_gameState, FileWriter p_writer) throws IOException {
         String l_countryMetaData;
         String l_bordersMetaData;
         List<String> l_bordersList = new ArrayList<>();
@@ -310,7 +310,7 @@ public class MapController {
         }
     }
 
-    private void writeContinentMetadata(GameState p_gameState, FileWriter p_writer) throws IOException {
+    private void writeContinentMetadata(State p_gameState, FileWriter p_writer) throws IOException {
         p_writer.write(System.lineSeparator() + "[continents]" + System.lineSeparator());
         for (Continent l_continent : p_gameState.getD_map().getD_continents()) {
             p_writer.write(
@@ -319,7 +319,7 @@ public class MapController {
         }
     }
 
-    public void resetMap(GameState p_gameState) {
+    public void resetMap(State p_gameState) {
         consoleLogger.writeLog("Map cannot be loaded, as it is invalid. Kindly provide valid map");
         p_gameState.setD_map(new Models.Map());
     }

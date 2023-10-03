@@ -4,7 +4,7 @@ package Controllers;
 import Logger.ConsoleLogger;
 import Models.Continent;
 import Models.Country;
-import Modelss.*;
+import Models.*;
 import Utils.CommonUtil;
 
 import java.util.ArrayList;
@@ -85,7 +85,7 @@ public class GamePlayerController {
 		}
 	}
 
-    public boolean checkPlayersAvailability(GameState p_gameState) {
+    public boolean checkPlayersAvailability(State p_gameState) {
 		if (p_gameState.getD_players() == null || p_gameState.getD_players().isEmpty()) {
 			consoleLogger.writeLog("Kindly add players before assigning countries");
 			return false;
@@ -95,7 +95,7 @@ public class GamePlayerController {
 
 	public static final String WHITE = "\u001B[47m";
 
-	public void assignColors(GameState p_gameState){
+	public void assignColors(State p_gameState){
 		if (!checkPlayersAvailability(p_gameState)) return;
 
 		List<Player> l_players = p_gameState.getD_players();
@@ -106,7 +106,7 @@ public class GamePlayerController {
 	}
 
 
-	public void assignCountries(GameState p_gameState) {
+	public void assignCountries(State p_gameState) {
 		if (!checkPlayersAvailability(p_gameState))
 			return;
 
@@ -249,7 +249,7 @@ public class GamePlayerController {
 	}
 
 
-	public void assignArmies(GameState p_gameState) {
+	public void assignArmies(State p_gameState) {
 		for (Player l_pl : p_gameState.getD_players()) {
 			Integer l_armies = this.calculateArmiesForPlayer(l_pl);
 			consoleLogger.writeLog("Player : " + l_pl.getPlayerName() + " has been assigned with " + l_armies + " armies");
@@ -276,7 +276,7 @@ public class GamePlayerController {
 	}
 
 
-	public void updatePlayers(GameState p_gameState, String p_operation, String p_argument) {
+	public void updatePlayers(State p_gameState, String p_operation, String p_argument) {
 		if (!isMapLoaded(p_gameState)) {
 			consoleLogger.writeLog("Kindly load the map first to add player: " + p_argument);
 			return;
@@ -289,7 +289,7 @@ public class GamePlayerController {
 	}
 
 
-	public boolean isMapLoaded(GameState p_gameState) {
+	public boolean isMapLoaded(State p_gameState) {
 		return !CommonUtil.isNull(p_gameState.getD_map());
 	}
 }
