@@ -195,5 +195,101 @@ public class GamePlayerController {
 			}
 		}
 	}
+    public void createDeployOrder(String p_commandEntered, Player p_player) {
+		// Retrieve the list of orders from the player or create a new list if it doesn't exist.
+		List<Order> l_orders = CommonUtil.isCollectionEmpty(p_player.getD_ordersToExecute()) ? new ArrayList<>()
+				: p_player.getD_ordersToExecute();
 
+		// Split the input command to extract relevant information.
+		String l_countryName = p_commandEntered.split(" ")[1];
+		String l_noOfArmies = p_commandEntered.split(" ")[2];
+
+		// Check if the deploy order has valid armies that can be executed.
+		if (validateDeployOrderArmies(p_player, l_noOfArmies)) {
+			// Log an error message if the deploy order cannot be executed due to insufficient armies.
+			consoleLogger.writeLog("Given deploy order can't be executed as armies in deploy order exceed player's unallocated armies");
+		} else {
+			// Create an Order object based on the command and add it to the list of orders.
+			Order l_orderObject = new Order(p_commandEntered.split(" ")[0], l_countryName,
+					Integer.parseInt(l_noOfArmies));
+			l_orders.add(l_orderObject);
+
+			// Update the player's list of orders to execute.
+			p_player.setD_ordersToExecute(l_orders);
+
+			// Deduct the allocated armies from the player's unallocated armies.
+			Integer l_unallocatedArmies = p_player.getD_noOfUnallocatedArmies() - Integer.parseInt(l_noOfArmies);
+			p_player.setD_noOfUnallocatedArmies(l_unallocatedArmies);
+
+			// Log a success message indicating the order has been added for execution.
+			consoleLogger.writeLog("Order has been added to queue for execution.");
+		}
+	}
+
+
+
+	public boolean validateDeployOrderArmies(Player p_player, String p_noOfArmies) {
+		return p_player.getD_noOfUnallocatedArmies() < Integer.parseInt(p_noOfArmies);
+	}
+
+
+	public int calculateArmiesForPlayer(Player p_player) {
+		int l_armies = 0;
+		if (!CommonUtil.isCollectionEmpty(p_player.getD_coutriesOwned())) {
+			l_armies = Math.max(3, Math.round((float) (p_player.getD_coutriesOwned().size()) / 3));
+		}
+		if (!CommonUtil.isCollectionEmpty(p_player.getD_continentsOwned())) {
+			int l_continentCtrlValue = 0;
+			for (Continent l_continent : p_player.getD_continentsOwned()) {
+				l_continentCtrlValue = l_continentCtrlValue + l_continent.getD_continentValue();
+			}
+			l_armies = l_armies + l_continentCtrlValue;
+		}
+		return l_armies;
+	}
+
+
+	public void assignArmies(GameState p_gameState) {
+		for (Player l_pl : p_gameState.getD_players()) {
+			Integer l_armies = this.calculateArmiesForPlayer(l_pl);
+			consoleLogger.writeLog("Player : " + l_pl.getPlayerName() + " has been assigned with " + l_armies + " armies");
+			l_pl.setD_noOfUnallocatedArmies(l_armies);
+		}
+	}
+
+
+	public boolean unexecutedOrdersExists(List<Player> p_playersList) {
+		int l_totalUnexecutedOrders = 0;
+		for (Player l_player : p_playersList) {
+			l_totalUnexecutedOrders = l_totalUnexecutedOrders + l_player.getD_ordersToExecute().size();
+		}
+		return l_totalUnexecutedOrders != 0;
+	}
+
+
+	public boolean unassignedArmiesExists(List<Player> p_playersList) {
+		int l_unassignedArmies = 0;
+		for (Player l_player : p_playersList) {
+			l_unassignedArmies = l_unassignedArmies + l_player.getD_noOfUnallocatedArmies();
+		}
+		return l_unassignedArmies != 0;
+	}
+
+
+	public void updatePlayers(GameState p_gameState, String p_operation, String p_argument) {
+		if (!isMapLoaded(p_gameState)) {
+			consoleLogger.writeLog("Kindly load the map first to add player: " + p_argument);
+			return;
+		}
+		List<Player> l_updatedPlayers = this.addRemovePlayers(p_gameState.getD_players(), p_operation, p_argument);
+
+		if (!CommonUtil.isNull(l_updatedPlayers)) {
+			p_gameState.setD_players(l_updatedPlayers);
+		}
+	}
+
+
+	public boolean isMapLoaded(GameState p_gameState) {
+		return !CommonUtil.isNull(p_gameState.getD_map());
+	}
 }
