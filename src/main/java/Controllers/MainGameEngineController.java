@@ -1,6 +1,5 @@
 package Controllers;
 
-import Utils.CommandHandler;
 import Views.MapView;
 
 import java.io.BufferedReader;
@@ -9,6 +8,7 @@ import java.io.InputStreamReader;
 
 import Logger.ConsoleLogger;
 import Models.State;
+import Utils.CommandHandler;
 
 
 /**
@@ -17,6 +17,17 @@ import Models.State;
 public class MainGameEngineController {
 
     ConsoleLogger consoleLogger = new ConsoleLogger();
+
+    State d_state = new State();
+
+	MapController d_mapController = new MapController();
+
+	GamePlayerController d_playerController = new GamePlayerController();
+
+	public State getD_state() {
+		return d_state;
+	}
+
     
     /**
      * Main Method: Accepts commands from the players and map them to corresponding logical actions.
@@ -68,8 +79,38 @@ public class MainGameEngineController {
 			if (!l_isMapAvailable) {
 				consoleLogger.writeLog("Can't perform EditNeighbor as Map is Not Available, please run 'editmap' command first.");
 			} else {
-				editNeighbour();
+				editNeighbor();
 			}
+		}else if ("savemap".equals(l_rootCommand)) {
+			if (!l_isMapAvailable) {
+				consoleLogger.writeLog("Can't perform EditCountry as No Map is Available, please run 'editmap' command first.");
+			} else {
+				saveMap();
+			}
+		} else if ("loadmap".equals(l_rootCommand)) {
+			loadMap();
+		} else if ("showmap".equals(l_rootCommand)) {
+			MapView l_mapView = new MapView(d_state);
+			l_mapView.showMap();
+		} else if ("validatemap".equals(l_rootCommand)) {
+			if (!l_isMapAvailable) {
+				consoleLogger.writeLog("No map available for validation; please run the  'editmap' or 'loadmap' command first.");
+			} else {
+				validateMap();
+			}
+		} else if ("assigncountries".equals(l_rootCommand)) {
+			assignCountries();
+		} else if ("gameplayer".equals(l_rootCommand)) {
+			if (!l_isMapAvailable) {
+				consoleLogger.writeLog("Can't add Game players, run 'loadmap' first because there is no map currently loaded.");
+			} else {
+				addOrRemovePlayer();
+			}
+		} else if ("exit".equals(l_rootCommand)) {
+			consoleLogger.writeLog("Exit Command Entered");
+			System.exit(0);
+		} else {
+			consoleLogger.writeLog("Invalid Command");
 		} 
     }
 
