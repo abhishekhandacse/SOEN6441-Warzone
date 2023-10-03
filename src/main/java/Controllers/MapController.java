@@ -80,6 +80,19 @@ public class MapController {
 		return l_lineList;
 	}
 
+
+    public List<Continent> parseContinentsMetaData(List<String> p_continentList) {
+		int l_continentId = 1;
+		List<Continent> l_continents = new ArrayList<Continent>();
+
+		for (String cont : p_continentList) {
+			String[] l_metaData = cont.split(" ");
+			l_continents.add(new Continent(l_continentId, l_metaData[0], Integer.parseInt(l_metaData[1])));
+			l_continentId++;
+		}
+		return l_continents;
+	}
+
     public void editContinent(GameState p_gameState, String p_argument, String p_operation) throws IOException, MapValidationException {
         String l_mapFileName = p_gameState.getD_map().getD_mapFile();
         Map l_mapToBeUpdated = (CommonUtil.isNull(p_gameState.getD_map().getD_continents())
