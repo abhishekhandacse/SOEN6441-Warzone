@@ -18,6 +18,8 @@ import Logger.ConsoleLogger;
 import Model.Continent;
 import Model.Country;
 import Models.GameState;
+import Models.Map;
+import Utils.CommonUtil;
 
 public class MapController {
     ConsoleLogger consoleLogger = new ConsoleLogger();
@@ -91,6 +93,18 @@ public class MapController {
 			l_continentId++;
 		}
 		return l_continents;
+	}
+
+
+	public List<Continent> linkCountryContinents(List<Country> p_countries, List<Continent> p_continents) {
+		for (Country c : p_countries) {
+			for (Continent cont : p_continents) {
+				if (cont.getD_continentID().equals(c.getD_continentId())) {
+					cont.addCountry(c);
+				}
+			}
+		}
+		return p_continents;
 	}
 
     public void editContinent(GameState p_gameState, String p_argument, String p_operation) throws IOException, MapValidationException {
