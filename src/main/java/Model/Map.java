@@ -96,5 +96,20 @@ public class Map {
         return d_continents.stream().filter(l_continent -> l_continent.getD_continentID().equals(p_continentID)).findFirst().orElse(null);
     }
 
+    public void checkCountries() {
+        for (Country c: d_countries) {
+            consoleLogger.writeLog("Country Id "+ c.getD_countryId());
+            consoleLogger.writeLog("Continent Id "+c.getD_continentId());
+            consoleLogger.writeLog("Neighbours:");
+            for (int i: c.getD_adjacentCountryIds()) {
+                System.out.println(i);
+            }
+        }
+    }
+
+
+    public Boolean Validate() throws MapValidationException {
+        return (!checkForNullObjects() && checkConnectionOfContinent() && checkConnectionOfCountry());
+    }
 
 }
