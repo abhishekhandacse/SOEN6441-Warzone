@@ -181,4 +181,21 @@ public class Map {
         }
     }
 
+
+    public boolean checkConnectionOfCountry() throws MapValidationException {
+        for (Country c : d_countries) {
+            d_countryReach.put(c.getD_countryId(), false);
+        }
+        dfsCountry(d_countries.get(0));
+
+        // Iterates over entries to locate the unreachable country
+        for (Entry<Integer, Boolean> entry : d_countryReach.entrySet()) {
+            if (!entry.getValue()) {
+                String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
+                throw new MapValidationException(l_exceptionMessage);
+            }
+        }
+        return !d_countryReach.containsValue(false);
+    }
+
 }
