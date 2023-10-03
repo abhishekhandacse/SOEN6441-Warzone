@@ -121,6 +121,28 @@ public class MapController {
 		return l_countriesList;
 	}
 
+
+    public List<Country> parseBorderMetaData(List<Country> p_countriesList, List<String> p_bordersList) {
+		LinkedHashMap<Integer, List<Integer>> l_countryNeighbors = new LinkedHashMap<Integer, List<Integer>>();
+
+		for (String l_border : p_bordersList) {
+			if (null != l_border && !l_border.isEmpty()) {
+				ArrayList<Integer> l_neighbours = new ArrayList<Integer>();
+				String[] l_splitString = l_border.split(" ");
+				for (int i = 1; i <= l_splitString.length - 1; i++) {
+					l_neighbours.add(Integer.parseInt(l_splitString[i]));
+
+				}
+				l_countryNeighbors.put(Integer.parseInt(l_splitString[0]), l_neighbours);
+			}
+		}
+		for (Country c : p_countriesList) {
+			List<Integer> l_adjacentCountries = l_countryNeighbors.get(c.getD_countryId());
+			c.setD_adjacentCountryIds(l_adjacentCountries);
+		}
+		return p_countriesList;
+	}
+
     public void editContinent(GameState p_gameState, String p_argument, String p_operation) throws IOException, MapValidationException {
         String l_mapFileName = p_gameState.getD_map().getD_mapFile();
         Map l_mapToBeUpdated = (CommonUtil.isNull(p_gameState.getD_map().getD_continents())
