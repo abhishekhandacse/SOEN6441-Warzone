@@ -112,4 +112,19 @@ public class Map {
         return (!checkForNullObjects() && checkConnectionOfContinent() && checkConnectionOfCountry());
     }
 
+    public Boolean checkForNullObjects() throws MapValidationException{
+        if(d_continents==null || d_continents.isEmpty()){
+            throw new MapValidationException("Map must possess atleast one continent!");
+        }
+        if(d_countries==null || d_countries.isEmpty()){
+            throw new MapValidationException("Map must possess atleast one country!");
+        }
+        for(Country c: d_countries){
+            if(c.getD_adjacentCountryIds().size()<1){
+                throw new MapValidationException(c.getD_countryName()+" does not possess any neighbour, hence isn't reachable!");
+            }
+        }
+        return false;
+    }
+
 }
