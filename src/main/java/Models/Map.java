@@ -171,7 +171,6 @@ public class Map {
         }
     }
 
-
     public void dfsCountry(Country p_c) throws MapValidationException {
         d_countryReach.put(p_c.getD_countryId(), true);
         for (Country l_nextCountry : getAdjacentCountry(p_c)) {
@@ -180,7 +179,6 @@ public class Map {
             }
         }
     }
-
 
     public boolean checkConnectionOfCountry() throws MapValidationException {
         for (Country c : d_countries) {
@@ -198,7 +196,6 @@ public class Map {
         return !d_countryReach.containsValue(false);
     }
 
-
     public List<Country> getAdjacentCountry(Country p_country) throws MapValidationException {
         List<Country> l_adjCountries = new ArrayList<Country>();
 
@@ -212,10 +209,8 @@ public class Map {
 		return l_adjCountries;
 	}
 
-
     public void addContinent(String p_continentName, Integer p_controlValue) throws MapValidationException{
         int l_continentId;
-
         if (d_continents!=null) {
             l_continentId=d_continents.size()>0?Collections.max(getContinentIDs())+1:1;
             if(CommonUtil.isNull(getContinent(p_continentName))){
@@ -229,7 +224,6 @@ public class Map {
         }
     }
 
-
     public void addCountryNeighbours(String p_countryName, String p_neighbourName) throws MapValidationException{
         if(d_countries!=null){
             if(!CommonUtil.isNull(getCountryByName(p_countryName)) && !CommonUtil.isNull(getCountryByName(p_neighbourName))){
@@ -239,7 +233,6 @@ public class Map {
             }
         }
     }
-
 
     public void updateNeighboursContinent(Integer p_countryId){
         for(Continent c: d_continents){
@@ -270,7 +263,6 @@ public class Map {
         }
     }
 
-
     public void removeContinent(String p_continentName) throws MapValidationException{
         if (d_continents!=null) {
             if(!CommonUtil.isNull(getContinent(p_continentName))){
@@ -292,7 +284,6 @@ public class Map {
         }
     }
 
-
     public void removeCountry(String p_countryName) throws MapValidationException{
         if(d_countries!=null && !CommonUtil.isNull(getCountryByName(p_countryName))) {
             for(Continent c: d_continents){
@@ -308,13 +299,22 @@ public class Map {
         }
     }
 
-
     public void removeCountryNeighbours(String p_countryName, String p_neighbourName) throws MapValidationException{
         if(d_countries!=null){
             if(!CommonUtil.isNull(getCountryByName(p_countryName)) && !CommonUtil.isNull(getCountryByName(p_neighbourName))) {
                 d_countries.get(d_countries.indexOf(getCountryByName(p_countryName))).removeNeighbours(getCountryByName(p_neighbourName).getD_countryId());
             } else{
                 throw new MapValidationException("Invalid Neighbour Pair! Either of the Countries Doesn't exist!");
+            }
+        }
+    }
+
+    public void removeAllCountryNeighbours(Integer p_countryID){
+        for (Country c: d_countries) {
+            if (!CommonUtil.isNull(c.getD_adjacentCountryIds())) {
+                if (c.getD_adjacentCountryIds().contains(p_countryID)) {
+                    c.removeNeighbours(p_countryID);
+                }
             }
         }
     }
