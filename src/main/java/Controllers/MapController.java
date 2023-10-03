@@ -107,6 +107,20 @@ public class MapController {
 		return p_continents;
 	}
 
+
+    public List<Country> parseCountriesMetaData(List<String> p_countriesList) {
+
+		LinkedHashMap<Integer, List<Integer>> l_countryNeighbors = new LinkedHashMap<Integer, List<Integer>>();
+		List<Country> l_countriesList = new ArrayList<Country>();
+
+		for (String country : p_countriesList) {
+			String[] l_metaDataCountries = country.split(" ");
+			l_countriesList.add(new Country(Integer.parseInt(l_metaDataCountries[0]), l_metaDataCountries[1],
+					Integer.parseInt(l_metaDataCountries[2])));
+		}
+		return l_countriesList;
+	}
+
     public void editContinent(GameState p_gameState, String p_argument, String p_operation) throws IOException, MapValidationException {
         String l_mapFileName = p_gameState.getD_map().getD_mapFile();
         Map l_mapToBeUpdated = (CommonUtil.isNull(p_gameState.getD_map().getD_continents())
