@@ -60,4 +60,24 @@ public class Country {
     public String getD_countryName() {
         return d_countryName;
     }
+
+    public List<Integer> getD_adjacentCountryIds() {
+        if(d_adjacentCountryIds==null){
+            d_adjacentCountryIds=new ArrayList<Integer>();
+        }
+        return d_adjacentCountryIds;
+    }
+
+    public void removeNeighbours(Integer p_countryId){
+        if(d_adjacentCountryIds.contains(p_countryId)){
+            d_adjacentCountryIds.remove(d_adjacentCountryIds.indexOf(p_countryId));
+        }else{
+            consoleLogger.writeLog("No Such Neighbour Exists");
+        }
+    }
+
+    public void addNeighbours(Integer p_countryId){
+        if(!d_adjacentCountryIds.contains(p_countryId))
+            d_adjacentCountryIds.add(p_countryId);
+    }
 }
