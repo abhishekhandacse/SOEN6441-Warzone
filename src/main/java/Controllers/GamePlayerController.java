@@ -2,6 +2,7 @@ package Controllers;
 
 
 import Logger.ConsoleLogger;
+import Model.Country;
 import Models.*;
 import Utils.CommonUtil;
 
@@ -82,4 +83,39 @@ public class GamePlayerController {
 			consoleLogger.writeLog("Player with name : " + p_enteredPlayerName + " has been added successfully.");
 		}
 	}
+
+    public boolean checkPlayersAvailability(GameState p_gameState) {
+		if (p_gameState.getD_players() == null || p_gameState.getD_players().isEmpty()) {
+			consoleLogger.writeLog("Kindly add players before assigning countries");
+			return false;
+		}
+		return true;
+	}
+
+	public static final String WHITE = "\u001B[47m";
+
+	public void assignColors(GameState p_gameState){
+		if (!checkPlayersAvailability(p_gameState)) return;
+
+		List<Player> l_players = p_gameState.getD_players();
+
+        for (Player lPlayer : l_players) {
+            lPlayer.setD_color(WHITE);
+        }
+	}
+
+
+	public void assignCountries(GameState p_gameState) {
+		if (!checkPlayersAvailability(p_gameState))
+			return;
+
+		List<Country> l_countries = p_gameState.getD_map().getD_countries();
+		int l_countriesPerPlayer = Math.floorDiv(l_countries.size(), p_gameState.getD_players().size());
+
+		this.performRandomCountryAssignment(l_countriesPerPlayer, l_countries, p_gameState.getD_players());
+		this.performContinentAssignment(p_gameState.getD_players(), p_gameState.getD_map().getD_continents());
+		consoleLogger.writeLog("Countries have been assigned to Players.");
+
+	}
+
 }
