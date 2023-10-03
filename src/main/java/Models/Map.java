@@ -212,4 +212,21 @@ public class Map {
 		return l_adjCountries;
 	}
 
+
+    public void addContinent(String p_continentName, Integer p_controlValue) throws MapValidationException{
+        int l_continentId;
+
+        if (d_continents!=null) {
+            l_continentId=d_continents.size()>0?Collections.max(getContinentIDs())+1:1;
+            if(CommonUtil.isNull(getContinent(p_continentName))){
+                d_continents.add(new Continent(l_continentId, p_continentName, p_controlValue));
+            }else{
+                throw new MapValidationException("Continent cannot be added! It already exists!");
+            }
+        }else{
+            d_continents= new ArrayList<Continent>();
+            d_continents.add(new Continent(1, p_continentName, p_controlValue));
+        }
+    }
+
 }
