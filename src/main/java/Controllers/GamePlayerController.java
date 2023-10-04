@@ -84,9 +84,9 @@ public class GamePlayerController {
     /**
      * Remove a player from the list of existing players.
      *
-     * @param p_existingPlayerList List of existing players.
-     * @param p_updatedPlayers    The list of players with the player removed.
-     * @param p_enteredPlayerName The name of the player to be removed.
+     * @param p_existingPlayerList     List of existing players.
+     * @param p_updatedPlayers         The list of players with the player removed.
+     * @param p_enteredPlayerName      The name of the player to be removed.
      * @param p_playerNameAlreadyExist Whether the player's name already exists.
      */
     private void removeGamePlayer(List<Player> p_existingPlayerList, List<Player> p_updatedPlayers,
@@ -107,8 +107,8 @@ public class GamePlayerController {
     /**
      * Add a new player to the list of updated players.
      *
-     * @param p_updatedPlayers    The list of players to which the new player is added.
-     * @param p_enteredPlayerName The name of the player to be added.
+     * @param p_updatedPlayers         The list of players to which the new player is added.
+     * @param p_enteredPlayerName      The name of the player to be added.
      * @param p_playerNameAlreadyExist Whether the player's name already exists.
      */
     private void addGamePlayer(List<Player> p_updatedPlayers, String p_enteredPlayerName,
@@ -227,8 +227,8 @@ public class GamePlayerController {
     /**
      * Perform assignment of continents to players based on the countries they own.
      *
-     * @param p_players     The list of players for whom continents are assigned.
-     * @param p_continents  The list of continents available for assignment.
+     * @param p_players    The list of players for whom continents are assigned.
+     * @param p_continents The list of continents available for assignment.
      */
     private void performContinentAssignment(List<Player> p_players, List<Continent> p_continents) {
         // Iterate through each player.
@@ -353,7 +353,6 @@ public class GamePlayerController {
             l_pl.setD_noOfUnallocatedArmies(l_armies);
         }
     }
-
 
 
     /**
