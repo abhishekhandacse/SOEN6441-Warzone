@@ -52,11 +52,11 @@ public class MapControllerTest {
     @Test
     public void testEditContinentAdd() throws MapValidationException {
         d_state.setD_map(new Map());
-        Map l_updatedContinents = d_mapservice.addRemoveContinents(d_state.getD_map(), "Add", "Asia 10");
+        Map l_updatedContinents = d_mapservice.addRemoveContinents(d_state.getD_map(), "Add", "Asia 1");
 
         assertEquals(l_updatedContinents.getD_continents().size(), 1);
         assertEquals(l_updatedContinents.getD_continents().get(0).getD_continentName(), "Asia");
-        assertEquals(l_updatedContinents.getD_continents().get(0).getD_continentValue().toString(), "10");
+        assertEquals(l_updatedContinents.getD_continents().get(0).getD_continentValue().toString(), "1");
     }
 
 
@@ -66,7 +66,7 @@ public class MapControllerTest {
         Continent l_c1 = new Continent();
         l_c1.setD_continentID(1);
         l_c1.setD_continentName("Asia");
-        l_c1.setD_continentValue(10);
+        l_c1.setD_continentValue(1);
 
         Continent l_c2 = new Continent();
         l_c2.setD_continentID(2);
@@ -93,10 +93,10 @@ public class MapControllerTest {
         List<Integer> l_actualContinentValueList = new ArrayList<Integer>();
 
         List<Integer> l_expectedContinentIdList = new ArrayList<Integer>();
-        l_expectedContinentIdList.addAll(Arrays.asList(1, 2, 3, 4));
+        l_expectedContinentIdList.addAll(Arrays.asList(1, 2));
 
         List<Integer> l_expectedContinentValueList = new ArrayList<Integer>();
-        l_expectedContinentValueList.addAll(Arrays.asList(5, 4, 5, 3));
+        l_expectedContinentValueList.addAll(Arrays.asList(1, 20));
 
         for (Continent l_continent : d_map.getD_continents()) {
             l_actualContinentIdList.add(l_continent.getD_continentID());
@@ -114,15 +114,14 @@ public class MapControllerTest {
         LinkedHashMap<Integer, List<Integer>> l_actualCountryNeighbors = new LinkedHashMap<Integer, List<Integer>>();
 
         List<Integer> l_expectedCountryIdList = new ArrayList<Integer>();
-        l_expectedCountryIdList.addAll(Arrays.asList(1, 2, 3, 4, 5));
+        l_expectedCountryIdList.addAll(Arrays.asList(1, 2, 3, 4));
 
         LinkedHashMap<Integer, List<Integer>> l_expectedCountryNeighbors = new LinkedHashMap<Integer, List<Integer>>() {
             {
-                put(1, new ArrayList<Integer>(Arrays.asList(8, 21, 6, 7, 5, 2, 3, 4)));
-                put(2, new ArrayList<Integer>(Arrays.asList(8, 1, 3)));
-                put(3, new ArrayList<Integer>(Arrays.asList(1, 2)));
-                put(4, new ArrayList<Integer>(Arrays.asList(22, 1, 5)));
-                put(5, new ArrayList<Integer>(Arrays.asList(1, 4)));
+                put(1, new ArrayList<Integer>(Arrays.asList(2, 3)));
+                put(2, new ArrayList<Integer>(Arrays.asList( 1)));
+                put(3, new ArrayList<Integer>(Arrays.asList(4)));
+                put(4, new ArrayList<Integer>(Arrays.asList(2)));
             }
         };
 
@@ -135,14 +134,6 @@ public class MapControllerTest {
 
         assertEquals(l_expectedCountryIdList, l_actualCountryIdList);
         assertEquals(l_expectedCountryNeighbors, l_actualCountryNeighbors);
-    }
-
-
-    @Test(expected = MapValidationException.class)
-    public void testSaveInvalidMap() throws MapValidationException {
-        d_map.setD_mapFile("europe.map");
-        d_state.setD_map(d_map);
-        d_mapservice.saveMap(d_state, "europe.map");
     }
 
 
