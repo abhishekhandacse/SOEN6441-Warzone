@@ -25,29 +25,29 @@ import Utils.CommonUtil;
 public class MainGameEngineController {
 
     /**
-     * The D console logger.
+     * d_consoleLogger: This object is used to write logs on the console.
      */
     ConsoleLogger d_consoleLogger = new ConsoleLogger();
 
     /**
-     * The D state.
+     * d_state: It is used to manage the state of the game.
      */
     State d_state = new State();
 
     /**
-     * The D map controller.
+     * d_mapController: It is used to access and modify the current map.
      */
     MapController d_mapController = new MapController();
 
     /**
-     * The D player controller.
+     * d_playerController: It is used to update and access the gameplayers.
      */
     GamePlayerController d_playerController = new GamePlayerController();
 
     /**
-     * Gets d state.
+     * Getter method for d_state
      *
-     * @return the d state
+     * @return the d_state
      */
     public State getD_state() {
         return d_state;
@@ -65,6 +65,9 @@ public class MainGameEngineController {
     }
 
 
+    /**
+     * This method displays the commands available to the player and handles the commands entered by them.
+     */
     private void initializeWarzoneGamePlay() {
         BufferedReader l_bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         boolean l_infiniteLoop = true;
@@ -94,8 +97,10 @@ public class MainGameEngineController {
 
 
     /***
-     *
-     * @param p_inputCommand
+     * commandHandler handles all the commands present to the player and maps them to the corresponding methods. If the user inputs 'exit', it will break the loop and exit the game.
+     * 
+     * @param p_inputCommand: The command inputted by the user.
+     * 
      * @throws MapValidationException
      * @throws CommandValidationException
      * @throws IOException
