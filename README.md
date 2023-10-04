@@ -1,10 +1,7 @@
 # WarZone
 
-## Introduction
-This project involves the development of a complex Java program for playing the game of Risk. The project is designed to be undertaken by teams of 5 or 6 members. It consists of building a challenging Java program that simulates the game of Risk, including the rules, map files, and command-line gameplay.
-
 ## Problem Statement
-The specific project for this semester is to build a simple "Risk" computer game. The goal is to create a program that is compatible with the rules and map files of the "Warzone" version of Risk, which can be found at [Warzone](https://www.warzone.com/).
+This project involves the development of a complex Java program for playing the game of Risk. The project is designed to be undertaken by teams of 5 or 6 members. The goal is to create a program that is compatible with the rules and map files of the "Warzone" version of Risk, which can be found at [Warzone](https://www.warzone.com/).
 
 ## Directory Structure
 
@@ -19,9 +16,9 @@ The specific project for this semester is to build a simple "Risk" computer game
 |  |  |  ├── Models/            <- Model classes
 |  |  |  ├── Utils/             <- Utility classes
 |  |  |  ├── View/              <- View classes
-|  |  ├── maps/                 <- 
-│  ├── test                     <- 
-│  │  ├── java/
+|  |  ├── maps/                 <- Map files
+│  ├── test                     <- Tests for the project
+│  │  ├── java/          
 |  |  |  ├── Controller/        <- Controller Tests
 |  |  |  ├── Models/            <- Model Tests
 |  |  |  ├── Utils/             <- Utility Tests
