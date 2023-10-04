@@ -90,10 +90,10 @@ public class MainGameEngineController {
 			if (!l_isMapAvailable) {
 				consoleLogger.writeLog("Can't perform EditCountry as No Map is Available, please run 'editmap' command first.");
 			} else {
-				saveMap();
+				saveMap(l_commandHandler);
 			}
 		} else if ("loadmap".equals(l_rootCommand)) {
-			loadMap();
+			loadMap(l_commandHandler);
 		} else if ("showmap".equals(l_rootCommand)) {
 			MapView l_mapView = new MapView(d_state);
 			l_mapView.showMap();
@@ -101,7 +101,7 @@ public class MainGameEngineController {
 			if (!l_isMapAvailable) {
 				consoleLogger.writeLog("No map available for validation; please run the  'editmap' or 'loadmap' command first.");
 			} else {
-				validateMap();
+				validateMap(l_commandHandler);
 			}
 		} else if ("assigncountries".equals(l_rootCommand)) {
 			assignCountries();
@@ -125,10 +125,50 @@ public class MainGameEngineController {
     private void addOrRemovePlayer() {
     }
 
-    private void loadMap() {
+    private void loadMap(CommandHandler p_command) throws CommandValidationException {
+        List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
+
+		if (Objects.isNull(l_operationsList)  || l_operationsList.isEmpty()) {
+			throw new CommandValidationException("Invalid command. Please execute the 'loadmap' command in the provided format: loadmap filename");
+		} else {
+			for (Map<String, String> l_map : l_operationsList) {
+				if (p_command.checkRequiredKeysPresent("arguments", l_map)) {
+					try {
+
+						// Loads the map if it is valid or resets the game state
+						Models.Map l_mapToLoad = d_mapController.loadMap(d_state,
+								l_map.get("arguments"));
+						if (l_mapToLoad.Validate()) {
+							consoleLogger.writeLog("Map loaded successfully.\n");
+						} else {
+							d_mapController.resetMap(d_state);
+						}
+					} catch (MapValidationException l_e) {
+						d_mapController.resetMap(d_state);
+					}
+				} else {
+					throw new CommandValidationException("Invalid command. Please execute the 'loadmap' command in the provided format: loadmap filename.");
+				}
+			}
+		}
     }
 
-    private void validateMap() {
+    private void validateMap(CommandHandler p_command) throws MapValidationException, CommandValidationException {
+        List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
+		if (Objects.isNull(l_operationsList)  || l_operationsList.isEmpty()) {
+			Models.Map l_currentMap = d_state.getD_map();
+			if (l_currentMap == null) {
+				throw new MapValidationException("Map Not found. Please load a valid map!");
+			} else {
+				if (l_currentMap.Validate()) {
+					consoleLogger.writeLog("Validated Map Successfully!");
+				} else {
+					consoleLogger.writeLog("Map validation is Unsuccessfull.");
+				}
+			}
+		} else {
+			throw new CommandValidationException("Invalid command. The 'validatemap' cannot have any arguements.");
+		}
     }
 
     private void editMap(CommandHandler p_command) throws IOException, CommandValidationException{
@@ -147,7 +187,25 @@ public class MainGameEngineController {
 		}
     }
 
-    private void saveMap() {
+    private void saveMap(CommandHandler p_command) throws CommandValidationException, MapValidationException {
+        List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
+
+		if (l_operationsList == null  || l_operationsList.isEmpty()) {
+			throw new CommandValidationException("Invalid command. Please execute the 'savemap' command in the provided format: savemap filename.");
+		} else {
+			for (Map<String, String> l_map : l_operationsList) {
+				if (p_command.checkRequiredKeysPresent("arguments", l_map)) {
+					boolean l_fileUpdateStatus = d_mapController.saveMap(d_state,
+							l_map.get("arguments"));
+					if (l_fileUpdateStatus)
+						consoleLogger.writeLog("The map file is updated with the changes.");
+					else
+						consoleLogger.writeLog(d_state.getError());
+				} else {
+					throw new CommandValidationException("Invalid command. Please execute the 'savemap' command in the provided format: savemap filename.");
+				}
+			}
+		}
     }
 
     private void showMap() {
