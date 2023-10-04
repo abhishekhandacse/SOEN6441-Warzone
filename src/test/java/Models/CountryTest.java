@@ -1,7 +1,7 @@
 package Models;
 
 /**
- * The type Country test.
+ * Test Cases for Country Model
  */
 public class CountryTest {
 }
