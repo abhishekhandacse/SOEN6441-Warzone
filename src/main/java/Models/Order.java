@@ -21,4 +21,20 @@ public class Order {
 		this.d_targetCountryName = p_targetCountryName;
 		this.d_numberOfArmiesToPlace = p_numberOfArmiesToPlace;
 	}
+
+    public void setD_orderAction(String p_orderAction) {
+		this.d_orderAction = p_orderAction;
+	}
+
+	public void setD_targetCountryName(String p_targetCountryName) {
+		this.d_targetCountryName = p_targetCountryName;
+	}
+
+	public void setD_sourceCountryName(String p_sourceCountryName) {
+		this.d_sourceCountryName = p_sourceCountryName;
+	}
+
+	public void setD_numberOfArmiesToPlace(Integer p_numberOfArmiesToPlace) {
+		this.d_numberOfArmiesToPlace = p_numberOfArmiesToPlace;
+	}
 }
