@@ -18,7 +18,7 @@ public class GamePlayerController {
     /**
      * The Console logger.
      */
-    ConsoleLogger consoleLogger = new ConsoleLogger();
+    ConsoleLogger d_consoleLogger = new ConsoleLogger();
 
     /**
      * Check if a player name is unique among existing players.
@@ -73,7 +73,7 @@ public class GamePlayerController {
             removeGamePlayer(p_existingPlayerList, l_updatedPlayers, l_enteredPlayerName, l_playerNameAlreadyExist);
         } else {
             // If an invalid operation is provided, log an error message.
-            consoleLogger.writeLog("Invalid Operation on Players list");
+            d_consoleLogger.writeLog("Invalid Operation on Players list");
         }
 
         // Return the updated list of players.
@@ -95,11 +95,11 @@ public class GamePlayerController {
             for (Player l_player : p_existingPlayerList) {
                 if (l_player.getPlayerName().equalsIgnoreCase(p_enteredPlayerName)) {
                     p_updatedPlayers.remove(l_player);
-                    consoleLogger.writeLog("Player with name : " + p_enteredPlayerName + " has been removed successfully.");
+                    d_consoleLogger.writeLog("Player with name : " + p_enteredPlayerName + " has been removed successfully.");
                 }
             }
         } else {
-            consoleLogger.writeLog("Player with name : " + p_enteredPlayerName + " does not Exist. Changes are not made.");
+            d_consoleLogger.writeLog("Player with name : " + p_enteredPlayerName + " does not Exist. Changes are not made.");
         }
     }
 
@@ -114,11 +114,11 @@ public class GamePlayerController {
     private void addGamePlayer(List<Player> p_updatedPlayers, String p_enteredPlayerName,
                                boolean p_playerNameAlreadyExist) {
         if (p_playerNameAlreadyExist) {
-            consoleLogger.writeLog("Player with name : " + p_enteredPlayerName + " already Exists. Changes are not made.");
+            d_consoleLogger.writeLog("Player with name : " + p_enteredPlayerName + " already Exists. Changes are not made.");
         } else {
             Player l_addNewPlayer = new Player(p_enteredPlayerName);
             p_updatedPlayers.add(l_addNewPlayer);
-            consoleLogger.writeLog("Player with name : " + p_enteredPlayerName + " has been added successfully.");
+            d_consoleLogger.writeLog("Player with name : " + p_enteredPlayerName + " has been added successfully.");
         }
     }
 
@@ -130,7 +130,7 @@ public class GamePlayerController {
      */
     public boolean checkPlayersAvailability(State p_gameState) {
         if (p_gameState.getD_players() == null || p_gameState.getD_players().isEmpty()) {
-            consoleLogger.writeLog("Kindly add players before assigning countries");
+            d_consoleLogger.writeLog("Kindly add players before assigning countries");
             return false;
         }
         return true;
@@ -172,7 +172,7 @@ public class GamePlayerController {
 
         this.performRandomCountryAssignment(l_countriesPerPlayer, l_countries, p_gameState.getD_players());
         this.performContinentAssignment(p_gameState.getD_players(), p_gameState.getD_map().getD_continents());
-        consoleLogger.writeLog("Countries have been assigned to Players.");
+        d_consoleLogger.writeLog("Countries have been assigned to Players.");
 
     }
 
@@ -209,7 +209,7 @@ public class GamePlayerController {
                 l_pl.getD_coutriesOwned().add(l_randomCountry);
 
                 // Log the assignment of the country to the player.
-                consoleLogger.writeLog("Player : " + l_pl.getPlayerName() + " is assigned with country : "
+                d_consoleLogger.writeLog("Player : " + l_pl.getPlayerName() + " is assigned with country : "
                         + l_randomCountry.getD_countryName());
 
                 // Remove the assigned country from the list of unassigned countries.
@@ -259,7 +259,7 @@ public class GamePlayerController {
                         l_pl.getD_continentsOwned().add(l_cont);
 
                         // Log the assignment of the continent to the player.
-                        consoleLogger.writeLog("Player : " + l_pl.getPlayerName() + " is assigned with continent : "
+                        d_consoleLogger.writeLog("Player : " + l_pl.getPlayerName() + " is assigned with continent : "
                                 + l_cont.getD_continentName());
                     }
                 }
@@ -287,7 +287,7 @@ public class GamePlayerController {
         // Check if the deploy order has valid armies that can be executed.
         if (validateDeployOrderArmies(p_player, l_noOfArmies)) {
             // Log an error message if the deploy order cannot be executed due to insufficient armies.
-            consoleLogger.writeLog("Given deploy order can't be executed as armies in deploy order exceed player's unallocated armies");
+            d_consoleLogger.writeLog("Given deploy order can't be executed as armies in deploy order exceed player's unallocated armies");
         } else {
             // Create an Order object based on the command and add it to the list of orders.
             Order l_orderObject = new Order(p_commandEntered.split(" ")[0], l_countryName,
@@ -302,7 +302,7 @@ public class GamePlayerController {
             p_player.setD_noOfUnallocatedArmies(l_unallocatedArmies);
 
             // Log a success message indicating the order has been added for execution.
-            consoleLogger.writeLog("Order has been added to queue for execution.");
+            d_consoleLogger.writeLog("Order has been added to queue for execution.");
         }
     }
 
@@ -349,7 +349,7 @@ public class GamePlayerController {
     public void assignArmies(State p_gameState) {
         for (Player l_pl : p_gameState.getD_players()) {
             Integer l_armies = this.calculateArmiesForPlayer(l_pl);
-            consoleLogger.writeLog("Player : " + l_pl.getPlayerName() + " has been assigned with " + l_armies + " armies");
+            d_consoleLogger.writeLog("Player : " + l_pl.getPlayerName() + " has been assigned with " + l_armies + " armies");
             l_pl.setD_noOfUnallocatedArmies(l_armies);
         }
     }
@@ -394,7 +394,7 @@ public class GamePlayerController {
      */
     public void updatePlayers(State p_gameState, String p_operation, String p_argument) {
         if (!isMapLoaded(p_gameState)) {
-            consoleLogger.writeLog("Kindly load the map first to add player: " + p_argument);
+            d_consoleLogger.writeLog("Kindly load the map first to add player: " + p_argument);
             return;
         }
         List<Player> l_updatedPlayers = this.addRemovePlayers(p_gameState.getD_players(), p_operation, p_argument);

@@ -19,7 +19,7 @@ public class Map {
     /**
      * The Console logger.
      */
-    ConsoleLogger consoleLogger = new ConsoleLogger();
+    ConsoleLogger d_consoleLogger = new ConsoleLogger();
 
     /**
      * The D map file.
@@ -197,9 +197,9 @@ public class Map {
      */
     public void checkCountries() {
         for (Country c : d_countries) {
-            consoleLogger.writeLog("Country Id " + c.getD_countryId());
-            consoleLogger.writeLog("Continent Id " + c.getD_continentId());
-            consoleLogger.writeLog("Neighbours:");
+            d_consoleLogger.writeLog("Country Id " + c.getD_countryId());
+            d_consoleLogger.writeLog("Continent Id " + c.getD_continentId());
+            d_consoleLogger.writeLog("Neighbours:");
             for (int i : c.getD_adjacentCountryIds()) {
                 System.out.println(i);
             }
@@ -225,14 +225,14 @@ public class Map {
      */
     public Boolean checkForNullObjects() throws MapValidationException {
         if (d_continents == null || d_continents.isEmpty()) {
-            consoleLogger.writeLog("Map must possess atleast one continent!");
+            d_consoleLogger.writeLog("Map must possess atleast one continent!");
         }
         if (d_countries == null || d_countries.isEmpty()) {
-            consoleLogger.writeLog("Map must possess atleast one country!");
+            d_consoleLogger.writeLog("Map must possess atleast one country!");
         } else {
             for (Country c : d_countries) {
                 if (c.getD_adjacentCountryIds().size() < 1) {
-                    consoleLogger.writeLog(c.getD_countryName() + " does not possess any neighbour, hence isn't reachable!");
+                    d_consoleLogger.writeLog(c.getD_countryName() + " does not possess any neighbour, hence isn't reachable!");
                 }
             }
         }
@@ -249,7 +249,7 @@ public class Map {
         boolean l_flagConnectivity = true;
         for (Continent c : d_continents) {
             if (null == c.getD_countries() || c.getD_countries().size() < 1) {
-                consoleLogger.writeLog(c.getD_continentName() + " has no countries, it must possess atleast 1 country");
+                d_consoleLogger.writeLog(c.getD_continentName() + " has no countries, it must possess atleast 1 country");
             } else if (!subGraphConnectivity(c)) {
                 l_flagConnectivity = false;
             }
@@ -277,7 +277,7 @@ public class Map {
             if (!entry.getValue()) {
                 Country l_country = getCountry(entry.getKey());
                 String l_messageException = l_country.getD_countryName() + " in Continent " + p_continent.getD_continentName() + " is not reachable";
-                consoleLogger.writeLog(l_messageException);
+                d_consoleLogger.writeLog(l_messageException);
             }
         }
         return !l_continentCountry.containsValue(false);
@@ -336,7 +336,7 @@ public class Map {
         for (Entry<Integer, Boolean> entry : d_countryReach.entrySet()) {
             if (!entry.getValue()) {
                 String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
-                consoleLogger.writeLog(l_exceptionMessage);
+                d_consoleLogger.writeLog(l_exceptionMessage);
             }
         }
         return !d_countryReach.containsValue(false);

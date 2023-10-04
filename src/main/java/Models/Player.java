@@ -20,7 +20,7 @@ public class Player {
     /**
      * The Console logger.
      */
-    ConsoleLogger consoleLogger = new ConsoleLogger();
+    ConsoleLogger d_consoleLogger = new ConsoleLogger();
     /**
      * The D coutries owned represents the list of countries owned by the player.
      */
@@ -206,7 +206,7 @@ public class Player {
     public void issueOrder() throws IOException {
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
         GamePlayerController l_Game_playerController = new GamePlayerController();
-        consoleLogger.writeLog("\nPlease enter command to deploy reinforcement armies on the map for player : "
+        d_consoleLogger.writeLog("\nPlease enter command to deploy reinforcement armies on the map for player : "
                 + this.getPlayerName());
         String l_commandEntered = l_reader.readLine();
         CommandHandler l_command = new CommandHandler(l_commandEntered);
@@ -214,7 +214,7 @@ public class Player {
         if (l_command.getRootCommand().equalsIgnoreCase("deploy") && l_commandEntered.split(" ").length == 3) {
             l_Game_playerController.createDeployOrder(l_commandEntered, this);
         } else {
-            consoleLogger.writeLog("Invalid command. To deploy armies, use the 'deploy' command in the format: deploy countryID <CountryName> <num> (until all reinforcements have been placed)");
+            d_consoleLogger.writeLog("Invalid command. To deploy armies, use the 'deploy' command in the format: deploy countryID <CountryName> <num> (until all reinforcements have been placed)");
         }
     }
 

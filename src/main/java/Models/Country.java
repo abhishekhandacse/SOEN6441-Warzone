@@ -13,7 +13,7 @@ public class Country {
     /**
      * The Console logger.
      */
-    ConsoleLogger consoleLogger = new ConsoleLogger();
+    ConsoleLogger d_consoleLogger = new ConsoleLogger();
     /**
      * The D armies is used to represent the number of armies a country currently has.
      */
@@ -161,7 +161,7 @@ public class Country {
         if (d_adjacentCountryIds.contains(p_countryId)) {
             d_adjacentCountryIds.remove(p_countryId);
         } else {
-            consoleLogger.writeLog("No Such Neighbour Exists");
+            d_consoleLogger.writeLog("No Such Neighbour Exists");
         }
     }
 
