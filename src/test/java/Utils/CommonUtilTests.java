@@ -15,7 +15,7 @@ import static org.junit.Assert.assertThat;
 public class CommonUtilTests {
 
     @Test
-    public void whenStringNull_shouldReturnTrue(){
+    public void testStringNull(){
         String l_string = null;
 
         boolean result = CommonUtil.isEmpty(l_string);
@@ -24,7 +24,7 @@ public class CommonUtilTests {
     }
 
     @Test
-    public void whenStringEmpty_shouldReturnTrue(){
+    public void testStringEmpty(){
         String l_string = "";
 
         boolean result = CommonUtil.isEmpty(l_string);
@@ -33,12 +33,31 @@ public class CommonUtilTests {
     }
 
     @Test
-    public void whenStringValid_shouldReturnFalse(){
+    public void testStringValid(){
         String l_string = "abc123";
 
         boolean result = CommonUtil.isEmpty(l_string);
 
         assertEquals(result,false);
     }
+
+    @Test
+    public void testValidObjectPassed(){
+        Object l_validObject = new Object();
+
+        boolean result = CommonUtil.isNull(l_validObject);
+
+        assertEquals(result,false);
+    }
+
+    @Test
+    public void testInValidObjectPassed(){
+        Object l_inValidObject = null;
+
+        boolean result = CommonUtil.isNull(l_inValidObject);
+
+        assertEquals(result,true);
+    }
+
 
 }

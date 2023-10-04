@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class CommandTest {
 
     @Test
-    public void test_validCommand_getRootCommand(){
+    public void testValidCommand(){
         CommandHandler l_command = new CommandHandler("editcontinent -add continentID continentvalue");
         String l_rootCommand = l_command.getRootCommand();
 
@@ -20,7 +20,7 @@ public class CommandTest {
     }
 
     @Test
-    public void test_inValidCommand_getRootCommand(){
+    public void testInValidCommand(){
         CommandHandler l_command = new CommandHandler("");
         String l_rootCommand = l_command.getRootCommand();
 
@@ -29,7 +29,7 @@ public class CommandTest {
 
 
     @Test
-    public void test_singleWord_getRootCommand(){
+    public void testSingleWord(){
         CommandHandler l_command = new CommandHandler("validatemap");
         String l_rootCommand = l_command.getRootCommand();
 
@@ -37,7 +37,7 @@ public class CommandTest {
     }
 
     @Test
-    public void test_noFlagCommand_getRootCommand(){
+    public void testnoFlagCommand(){
         CommandHandler l_command = new CommandHandler("loadmap abc.txt");
         String l_rootCommand = l_command.getRootCommand();
 
@@ -45,7 +45,7 @@ public class CommandTest {
     }
 
     @Test
-    public void test_singleCommand_getOperationsAndArguments(){
+    public void testSingleCommand(){
         CommandHandler l_command = new CommandHandler("editcontinent -remove continentID");
         List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
@@ -62,7 +62,7 @@ public class CommandTest {
     }
 
     @Test
-    public void test_singleCommandWithExtraSpaces_getOperationsAndArguments(){
+    public void testSingleCommandWithExtraSpaces(){
         CommandHandler l_command = new CommandHandler("editcontinent      -remove continentID");
         List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
@@ -79,7 +79,7 @@ public class CommandTest {
     }
 
     @Test
-    public void test_multiCommand_getOperationsAndArguments(){
+    public void testMultiCommand(){
         CommandHandler l_command = new CommandHandler("editcontinent -add continentID continentValue  -remove continentID");
         List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
@@ -101,7 +101,7 @@ public class CommandTest {
     }
 
     @Test
-    public void test_noFlagCommand_getOperationsAndArguments(){
+    public void testNoFlagCommand(){
         CommandHandler l_command = new CommandHandler("loadmap abc.txt");
         List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
@@ -118,7 +118,7 @@ public class CommandTest {
     }
 
     @Test
-    public void test_noFlagCommandWithExtraSpaces_getOperationsAndArguments(){
+    public void testNoFlagWithExtraSpaces(){
         CommandHandler l_command = new CommandHandler("loadmap         abc.txt");
         List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
