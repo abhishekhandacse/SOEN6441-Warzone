@@ -80,4 +80,11 @@ public class Order {
 			}
 		}
 	}
+
+    public boolean validateDeployOrderCountry(Player p_player, Order p_order) {
+		Country l_country = p_player.getD_coutriesOwned().stream()
+				.filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(p_order.getD_targetCountryName())).findFirst()
+				.orElse(null);
+		return l_country != null;
+	}
 }
