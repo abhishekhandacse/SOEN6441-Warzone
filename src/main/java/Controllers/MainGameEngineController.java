@@ -101,7 +101,7 @@ public class MainGameEngineController {
 			if (!l_isMapAvailable) {
 				consoleLogger.writeLog("No map available for validation; please run the  'editmap' or 'loadmap' command first.");
 			} else {
-				validateMap();
+				validateMap(l_commandHandler);
 			}
 		} else if ("assigncountries".equals(l_rootCommand)) {
 			assignCountries();
@@ -126,12 +126,12 @@ public class MainGameEngineController {
     }
 
     private void loadMap(CommandHandler p_command) throws CommandValidationException {
-        List<Map<String, String>> l_operations_list = p_command.getOperationsAndArguments();
+        List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
 
-		if (Objects.isNull(l_operations_list)  || l_operations_list.isEmpty()) {
+		if (Objects.isNull(l_operationsList)  || l_operationsList.isEmpty()) {
 			throw new CommandValidationException("Invalid command. Please execute the 'loadmap' command in the provided format: loadmap filename");
 		} else {
-			for (Map<String, String> l_map : l_operations_list) {
+			for (Map<String, String> l_map : l_operationsList) {
 				if (p_command.checkRequiredKeysPresent("arguments", l_map)) {
 					try {
 
@@ -153,7 +153,22 @@ public class MainGameEngineController {
 		}
     }
 
-    private void validateMap() {
+    private void validateMap(CommandHandler p_command) throws MapValidationException, CommandValidationException {
+        List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
+		if (Objects.isNull(l_operationsList)  || l_operationsList.isEmpty()) {
+			Models.Map l_currentMap = d_state.getD_map();
+			if (l_currentMap == null) {
+				throw new MapValidationException("Map Not found. Please load a valid map!");
+			} else {
+				if (l_currentMap.Validate()) {
+					consoleLogger.writeLog("Validated Map Successfully!");
+				} else {
+					consoleLogger.writeLog("Map validation is Unsuccessfull.");
+				}
+			}
+		} else {
+			throw new CommandValidationException("Invalid command. The 'validatemap' cannot have any arguements.");
+		}
     }
 
     private void editMap(CommandHandler p_command) throws IOException, CommandValidationException{
