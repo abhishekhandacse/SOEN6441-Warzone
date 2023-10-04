@@ -110,7 +110,6 @@ public class MapController {
 
     public List<Country> parseCountriesMetaData(List<String> p_countriesList) {
 
-		LinkedHashMap<Integer, List<Integer>> l_countryNeighbors = new LinkedHashMap<Integer, List<Integer>>();
 		List<Country> l_countriesList = new ArrayList<Country>();
 
 		for (String country : p_countriesList) {

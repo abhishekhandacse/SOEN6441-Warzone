@@ -262,9 +262,6 @@ public class MainGameEngineController {
 		}
     }
 
-    private void showMap() {
-    }
-
     private void editNeighbor(CommandHandler p_command) throws CommandValidationException, MapValidationException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
 		if (Objects.isNull(l_operationsList)  || l_operationsList.isEmpty()) {
