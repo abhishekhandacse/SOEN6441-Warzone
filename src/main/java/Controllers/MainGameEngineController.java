@@ -345,6 +345,13 @@ public class MainGameEngineController {
         }
     }
 
+    /**
+     * This method contains the logic add neibhor to a country and if neighbor doesn't exist, show an error message. 
+     * 
+     * @param p_command: Command entered by the player.
+     * @throws CommandValidationException
+     * @throws MapValidationException
+     */
     private void editNeighbor(CommandHandler p_command) throws CommandValidationException, MapValidationException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
         if (Objects.isNull(l_operationsList) || l_operationsList.isEmpty()) {
@@ -363,12 +370,12 @@ public class MainGameEngineController {
     }
 
     /**
-     * Edit country.
+     * This Method adds/remove the country from a continent using the 'editcountry' command.  
      *
-     * @param p_command the p command
-     * @throws IOException                the io exception
-     * @throws CommandValidationException the command validation exception
-     * @throws MapValidationException     the map validation exception
+     * @param p_command Command entered by the player.
+     * @throws IOException
+     * @throws CommandValidationException
+     * @throws MapValidationException
      */
     public void editCountry(CommandHandler p_command) throws IOException, CommandValidationException, MapValidationException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
@@ -388,12 +395,12 @@ public class MainGameEngineController {
     }
 
     /**
-     * Edit continent.
+     * This method contains the logic to add new continent to the map. The player has to input the continentID and the continentValue correctly inorder to add a continent.
      *
-     * @param p_command the p command
-     * @throws IOException                the io exception
-     * @throws CommandValidationException the command validation exception
-     * @throws MapValidationException     the map validation exception
+     * @param p_command Command entered by the player.
+     * @throws IOException
+     * @throws CommandValidationException
+     * @throws MapValidationException 
      */
     public void editContinent(CommandHandler p_command) throws IOException, CommandValidationException, MapValidationException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
