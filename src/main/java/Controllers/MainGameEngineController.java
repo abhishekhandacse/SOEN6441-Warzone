@@ -56,6 +56,7 @@ public class MainGameEngineController {
 			d_consoleLogger.writeLog("Sequence of commands for playing a game.:");
 			d_consoleLogger.writeLog("=========================================================================================");
 			d_consoleLogger.writeLog("Initiate the map: 'loadmap filename'.");
+			d_consoleLogger.writeLog("Edit the map: 'editmap filename'.");
 			d_consoleLogger.writeLog("Display the loaded map: use the command 'showmap'");
 			d_consoleLogger.writeLog("Include or exclude a player : gameplayer -add playername -remove playername");
 			d_consoleLogger.writeLog("Allocate countries : assigncountries");
@@ -142,7 +143,7 @@ public class MainGameEngineController {
 				d_consoleLogger.writeLog("\n============================ Main Game Loop Starts ============================\n");
 				// Assigning armies to players
 				d_playerController.assignArmies(d_state);
-
+				d_consoleLogger.writeLog("\nTo deploy armies use command: deploy countryID num \n");
 				// Issuing order for players
 				while (d_playerController.unassignedArmiesExists(d_state.getD_players())) {
 					for (Player l_player : d_state.getD_players()) {
