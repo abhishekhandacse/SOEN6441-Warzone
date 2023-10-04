@@ -10,7 +10,7 @@ public class Order {
     /**
      * The Console logger.
      */
-    ConsoleLogger consoleLogger = new ConsoleLogger();
+    ConsoleLogger d_consoleLogger = new ConsoleLogger();
 
     /**
      * The D order action.
@@ -135,12 +135,12 @@ public class Order {
         if ("deploy".equals(this.d_orderAction)) {
             if (this.validateDeployOrderCountry(p_player, this)) {
                 this.deployOrderExecution(this, p_gameState, p_player);
-                consoleLogger.writeLog("\nOrder has been executed successfully. " + this.getD_numberOfArmiesToPlace() + " number of armies has been deployed to country : " + this.getD_targetCountryName());
+                d_consoleLogger.writeLog("\nOrder has been executed successfully. " + this.getD_numberOfArmiesToPlace() + " number of armies has been deployed to country : " + this.getD_targetCountryName());
             } else {
-                consoleLogger.writeLog("\nOrder is not executed as the target country given in the deploy command doesn't belong to player : " + p_player.getPlayerName());
+                d_consoleLogger.writeLog("\nOrder is not executed as the target country given in the deploy command doesn't belong to player : " + p_player.getPlayerName());
             }
         } else {
-            consoleLogger.writeLog("Order was not executed due to an invalid Order Command");
+            d_consoleLogger.writeLog("Order was not executed due to an invalid Order Command");
         }
     }
 
