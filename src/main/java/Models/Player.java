@@ -25,27 +25,27 @@ public class Player {
     private String d_color;
     private String d_name;
     /**
-     * The D coutries owned.
+     * The D coutries owned represents the list of countries owned by the player.
      */
     List<Country> d_coutriesOwned;
     /**
-     * The D continents owned.
+     * The D continents owned represents the list of continents owned by the player.
      */
     List<Continent> d_continentsOwned;
     /**
-     * The D orders to execute.
+     * The D orders to execute represents the list of orders to be executed by the player.
      */
     List<Order> d_ordersToExecute;
     /**
-     * The D no of unallocated armies.
+     * The D no of unallocated armies represents the number of unallocated armies for the player.
      */
     Integer d_noOfUnallocatedArmies;
 
 
     /**
-     * Instantiates a new Player.
+     * Instantiates a new Player with the specified player name.
      *
-     * @param p_playerName the p player name
+     * @param p_playerName The name of the player.
      */
     public Player(String p_playerName) {
         this.d_name = p_playerName;
@@ -62,117 +62,118 @@ public class Player {
     }
 
     /**
-     * Sets player name.
+     * Sets the name of the player.
      *
-     * @param p_name the p name
+     * @param p_name The name of the player.
      */
     public void setPlayerName(String p_name) {
         this.d_name = p_name;
     }
 
     /**
-     * Sets d color.
+     * Sets the color of the player.
      *
-     * @param p_color the p color
+     * @param p_color The color of the player.
      */
     public void setD_color(String p_color) {
         d_color = p_color;
     }
 
     /**
-     * Sets d no of unallocated armies.
+     * Sets the number of unallocated armies for the player.
      *
-     * @param p_numberOfArmies the p number of armies
+     * @param p_numberOfArmies The number of unallocated armies.
      */
     public void setD_noOfUnallocatedArmies(Integer p_numberOfArmies) {
         this.d_noOfUnallocatedArmies = p_numberOfArmies;
     }
 
     /**
-     * Sets d coutries owned.
+     * Sets the list of countries owned by the player.
      *
-     * @param p_coutriesOwned the p coutries owned
+     * @param p_coutriesOwned The list of countries owned by the player.
      */
     public void setD_coutriesOwned(List<Country> p_coutriesOwned) {
         this.d_coutriesOwned = p_coutriesOwned;
     }
 
     /**
-     * Sets d continents owned.
+     * Sets the list of continents owned by the player.
      *
-     * @param p_continentsOwned the p continents owned
+     * @param p_continentsOwned The list of continents owned by the player.
      */
     public void setD_continentsOwned(List<Continent> p_continentsOwned) {
         this.d_continentsOwned = p_continentsOwned;
     }
 
     /**
-     * Sets d orders to execute.
+     * Sets the list of orders to be executed by the player.
      *
-     * @param p_ordersToExecute the p orders to execute
+     * @param p_ordersToExecute The list of orders to be executed.
      */
     public void setD_ordersToExecute(List<Order> p_ordersToExecute) {
         this.d_ordersToExecute = p_ordersToExecute;
     }
 
     /**
-     * Gets d color.
+     * Gets the color of the player.
      *
-     * @return the d color
+     * @return The color of the player.
      */
     public String getD_color() {
         return d_color;
     }
 
     /**
-     * Gets player name.
+     * Gets the name of the player.
      *
-     * @return the player name
+     * @return The name of the player.
      */
     public String getPlayerName() {
         return d_name;
     }
 
     /**
-     * Gets d coutries owned.
+     * Gets the list of countries owned by the player.
      *
-     * @return the d coutries owned
+     * @return The list of countries owned by the player.
      */
     public List<Country> getD_coutriesOwned() {
         return d_coutriesOwned;
     }
 
     /**
-     * Gets d continents owned.
+     * Gets the list of continents owned by the player.
      *
-     * @return the d continents owned
+     * @return The list of continents owned by the player.
      */
     public List<Continent> getD_continentsOwned() {
         return d_continentsOwned;
     }
 
     /**
-     * Gets d orders to execute.
+     * Gets the list of orders to be executed by the player.
      *
-     * @return the d orders to execute
+     * @return The list of orders to be executed.
      */
     public List<Order> getD_ordersToExecute() {
         return d_ordersToExecute;
     }
 
     /**
-     * Gets d no of unallocated armies.
+     * Gets the number of unallocated armies for the player.
      *
-     * @return the d no of unallocated armies
+     * @return The number of unallocated armies.
      */
     public Integer getD_noOfUnallocatedArmies() {
         return d_noOfUnallocatedArmies;
     }
 
+
     /**
-     * Get continent names list.
+     * Get continent names owned by the player.
      *
-     * @return the list
+     * @return List of continent names owned by the player.
      */
     public List<String> getContinentNames() {
         List<String> l_continentNames = new ArrayList<String>();
@@ -186,9 +187,9 @@ public class Player {
     }
 
     /**
-     * Get country names list.
+     * Get country names owned by the player.
      *
-     * @return the list
+     * @return List of country names owned by the player.
      */
     public List<String> getCountryNames() {
         List<String> l_countryNames = new ArrayList<String>();
@@ -200,9 +201,9 @@ public class Player {
 
 
     /**
-     * Issue order.
+     * Issue an order for the player.
      *
-     * @throws IOException the io exception
+     * @throws IOException Throws an exception if there is an input/output error.
      */
     public void issueOrder() throws IOException {
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
@@ -220,9 +221,9 @@ public class Player {
     }
 
     /**
-     * Next order order.
+     * Get the next order to be executed by the player.
      *
-     * @return the order
+     * @return The next order to be executed or null if there are no orders.
      */
     public Order nextOrder() {
         if (CommonUtil.isCollectionEmpty(this.d_ordersToExecute)) {
