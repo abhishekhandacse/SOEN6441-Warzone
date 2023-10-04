@@ -85,8 +85,8 @@ public class GamePlayerControllerTest {
     @Test
     public void testAddPlayers() {
         assertFalse(CommonUtil.isCollectionEmpty(d_exisitingPlayerList));
-        List<Player> l_updatedPlayers = d_Game_playerController.addRemovePlayers(d_exisitingPlayerList, "add", "Jhanvi");
-        assertEquals("Jhanvi", l_updatedPlayers.get(2).getPlayerName());
+        List<Player> l_updatedPlayers = d_Game_playerController.addRemovePlayers(d_exisitingPlayerList, "add", "Harman");
+        assertEquals("Harman", l_updatedPlayers.get(2).getPlayerName());
 
         System.setOut(new PrintStream(d_outContent));
         d_Game_playerController.addRemovePlayers(d_exisitingPlayerList, "add", "Rajat");
@@ -103,8 +103,8 @@ public class GamePlayerControllerTest {
         assertEquals(1, l_updatedPlayers.size());
 
         System.setOut(new PrintStream(d_outContent));
-        d_Game_playerController.addRemovePlayers(d_exisitingPlayerList, "remove", "Bhoomi");
-        assertEquals("Player with name : Bhoomi does not Exist. Changes are not made.", d_outContent.toString().trim());
+        d_Game_playerController.addRemovePlayers(d_exisitingPlayerList, "remove", "Aman");
+        assertEquals("Player with name : Aman does not Exist. Changes are not made.", d_outContent.toString().trim());
     }
 
 
@@ -181,7 +181,7 @@ public class GamePlayerControllerTest {
      */
     @Test
     public void testDeployOrder() throws CommandValidationException {
-        Player l_player = new Player("Maze");
+        Player l_player = new Player("Abhishek");
         l_player.setD_noOfUnallocatedArmies(10);
         Country l_country = new Country(1, "Japan", 1);
         l_player.setD_coutriesOwned(Arrays.asList(l_country));

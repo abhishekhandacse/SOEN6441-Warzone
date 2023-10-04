@@ -21,6 +21,8 @@ import Utils.CommonUtil;
 
 /**
  * This class severs as the starting point of the game.
+ * 
+ * @author Anurag Teckchandani
  */
 public class MainGameEngineController {
 
@@ -164,11 +166,11 @@ public class MainGameEngineController {
     }
 
     /**
-     * Assign countries.
+     * This method contans the logic to assign countries to the players and start a game loop to deploy the armies for each player.
      *
-     * @param p_command the p command
+     * @param p_command Command entered by the player.
      * @throws CommandValidationException the command validation exception
-     * @throws IOException                the io exception
+     * @throws IOException the io exception
      */
     public void assignCountries(CommandHandler p_command) throws CommandValidationException, IOException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
@@ -210,6 +212,12 @@ public class MainGameEngineController {
         }
     }
 
+    /**
+     * This method adds or remove players in the game using the 'gameplayer' command.
+     * 
+     * @param p_command: Command entered by the player.
+     * @throws CommandValidationException
+     */
     private void addOrRemovePlayer(CommandHandler p_command) throws CommandValidationException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
         if (CommonUtil.isCollectionEmpty(l_operationsList)) {
@@ -228,10 +236,10 @@ public class MainGameEngineController {
     }
 
     /**
-     * Load map.
+     * loadMap method loads the map already present in the resources to begin the game. If the map doesn't exist it will throw an error message.
      *
-     * @param p_command the p command
-     * @throws CommandValidationException the command validation exception
+     * @param p_command Command entered by the player.
+     * @throws CommandValidationException
      */
     public void loadMap(CommandHandler p_command) throws CommandValidationException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
@@ -261,6 +269,13 @@ public class MainGameEngineController {
         }
     }
 
+    /**
+     * This method validates the map edited by the player, if the map is validated user can proceed else player has to make changes to validate the map.
+     * 
+     * @param p_command: Command entered by the player.
+     * @throws MapValidationException
+     * @throws CommandValidationException
+     */
     private void validateMap(CommandHandler p_command) throws MapValidationException, CommandValidationException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
         if (Objects.isNull(l_operationsList) || l_operationsList.isEmpty()) {
@@ -279,6 +294,13 @@ public class MainGameEngineController {
         }
     }
 
+    /**
+     * EditMap will take the filename by the player, if the file doesn't exist it will 
+     * 
+     * @param p_command: Command entered by the player.
+     * @throws IOException
+     * @throws CommandValidationException
+     */
     private void editMap(CommandHandler p_command) throws IOException, CommandValidationException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
 
