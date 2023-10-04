@@ -36,7 +36,7 @@ public class MapTest {
         d_map= d_ms.loadMap(d_gameState, "canada.map");
 
         assertEquals(d_map.Validate(), true);
-        d_map= d_ms.loadMap(d_gameState, "swiss.map");
+        d_map= d_ms.loadMap(d_gameState, "game.map");
         d_map.Validate();
     }
 
@@ -54,20 +54,20 @@ public class MapTest {
 
     @Test (expected = MapValidationException.class)
     public void testContinentConnectivity() throws  MapValidationException{
-        d_map= d_ms.loadMap(d_gameState, "continentConnectivity.map");
+        d_map= d_ms.loadMap(d_gameState, "game.map");
         d_map.Validate();
     }
 
 
     @Test(expected = MapValidationException.class)
-    public void testCountryConnectivity() throws MapValidationException{
+    public void testCountryNeighbors() throws MapValidationException{
         d_map.addContinent("Asia", 10);
-        d_map.addCountry("India", "Asia");
-        d_map.addCountry("China", "Asia");
-        d_map.addCountry("Maldives", "Asia");
-        d_map.addCountryNeighbours("India", "China");
-        d_map.addCountryNeighbours("China", "India");
-        d_map.addCountry("India", "Maldives");
+        d_map.addCountry("Paistan", "Asia");
+        d_map.addCountry("Japan", "Asia");
+        d_map.addCountry("Sri Lanka", "Asia");
+        d_map.addCountryNeighbours("Paistan", "Japan");
+        d_map.addCountryNeighbours("Japan", "Paistan");
+        d_map.addCountry("Paistan", "Sri Lanka");
         d_map.checkConnectionOfCountry();
     }
 }
