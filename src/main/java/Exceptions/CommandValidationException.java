@@ -2,7 +2,7 @@ package Exceptions;
 
 /**
  * The type Command validation exception.
- * 
+ *
  * @author Anurag Teckchandani
  */
 public class CommandValidationException extends Exception {
