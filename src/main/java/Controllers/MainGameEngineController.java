@@ -76,6 +76,13 @@ public class MainGameEngineController {
     }
 
 
+	/***
+	 *
+	 * @param p_inputCommand
+	 * @throws MapValidationException
+	 * @throws CommandValidationException
+	 * @throws IOException
+	 */
     private  void commandHandler(final String p_inputCommand) throws MapValidationException, CommandValidationException, IOException{
         CommandHandler l_commandHandler = new CommandHandler(p_inputCommand);
         String l_rootCommand = l_commandHandler.getRootCommand();
