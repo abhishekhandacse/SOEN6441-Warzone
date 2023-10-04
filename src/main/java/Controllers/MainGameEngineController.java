@@ -331,7 +331,7 @@ public class MainGameEngineController {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
 
         if (l_operationsList == null || l_operationsList.isEmpty()) {
-            throw new CommandValidationException("Invalid command. Please execute the 'savemap' command in the provided format: savemap filename.");
+            d_consoleLogger.writeLog("Invalid command. Please execute the 'savemap' command in the provided format: savemap filename.");
         } else {
             for (Map<String, String> l_map : l_operationsList) {
                 if (p_command.checkRequiredKeysPresent("arguments", l_map)) {
@@ -342,7 +342,7 @@ public class MainGameEngineController {
                     else
                         d_consoleLogger.writeLog(d_state.getError());
                 } else {
-                    throw new CommandValidationException("Invalid command. Please execute the 'savemap' command in the provided format: savemap filename.");
+                    d_consoleLogger.writeLog("Invalid command. Please execute the 'savemap' command in the provided format: savemap filename.");
                 }
             }
         }

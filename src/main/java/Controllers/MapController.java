@@ -41,7 +41,7 @@ public class MapController {
         Map l_map = new Map();
         List<String> l_linesOfFile = loadFile(p_loadFileName);
 
-        if (null != l_linesOfFile && !l_linesOfFile.isEmpty()) {
+        if (null != l_linesOfFile && !l_linesOfFile.isEmpty() && l_linesOfFile.size() > 2) {
 
             // Parses the file and stores information in objects
             List<String> l_continentData = getMetaData(l_linesOfFile, "continent");

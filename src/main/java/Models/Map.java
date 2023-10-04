@@ -226,15 +226,17 @@ public class Map {
      */
     public Boolean checkForNullObjects() throws MapValidationException {
         if (d_continents == null || d_continents.isEmpty()) {
-            throw new MapValidationException("Map must possess atleast one continent!");
+            consoleLogger.writeLog("Map must possess atleast one continent!");
         }
         if (d_countries == null || d_countries.isEmpty()) {
-            throw new MapValidationException("Map must possess atleast one country!");
+            consoleLogger.writeLog("Map must possess atleast one country!");
         }
-        for (Country c : d_countries) {
+        else{
+            for (Country c : d_countries) {
             if (c.getD_adjacentCountryIds().size() < 1) {
-                throw new MapValidationException(c.getD_countryName() + " does not possess any neighbour, hence isn't reachable!");
+                consoleLogger.writeLog(c.getD_countryName() + " does not possess any neighbour, hence isn't reachable!");
             }
+        }
         }
         return false;
     }
@@ -249,9 +251,9 @@ public class Map {
         boolean l_flagConnectivity = true;
         for (Continent c : d_continents) {
             if (null == c.getD_countries() || c.getD_countries().size() < 1) {
-                throw new MapValidationException(c.getD_continentName() + " has no countries, it must possess atleast 1 country");
+                consoleLogger.writeLog(c.getD_continentName() + " has no countries, it must possess atleast 1 country");
             }
-            if (!subGraphConnectivity(c)) {
+            else if (!subGraphConnectivity(c)) {
                 l_flagConnectivity = false;
             }
         }
@@ -278,7 +280,7 @@ public class Map {
             if (!entry.getValue()) {
                 Country l_country = getCountry(entry.getKey());
                 String l_messageException = l_country.getD_countryName() + " in Continent " + p_continent.getD_continentName() + " is not reachable";
-                throw new MapValidationException(l_messageException);
+                consoleLogger.writeLog(l_messageException);
             }
         }
         return !l_continentCountry.containsValue(false);
@@ -325,6 +327,9 @@ public class Map {
      * @throws MapValidationException the map validation exception
      */
     public boolean checkConnectionOfCountry() throws MapValidationException {
+        if(d_countries == null || d_countries.isEmpty()){
+            return false;
+        }
         for (Country c : d_countries) {
             d_countryReach.put(c.getD_countryId(), false);
         }
@@ -334,7 +339,7 @@ public class Map {
         for (Entry<Integer, Boolean> entry : d_countryReach.entrySet()) {
             if (!entry.getValue()) {
                 String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
-                throw new MapValidationException(l_exceptionMessage);
+                consoleLogger.writeLog(l_exceptionMessage);
             }
         }
         return !d_countryReach.containsValue(false);
