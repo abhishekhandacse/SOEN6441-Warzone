@@ -36,4 +36,29 @@ public class CommandTest {
         assertEquals("validatemap", l_rootCommand);
     }
 
+    @Test
+    public void test_noFlagCommand_getRootCommand(){
+        CommandHandler l_command = new CommandHandler("loadmap abc.txt");
+        String l_rootCommand = l_command.getRootCommand();
+
+        assertEquals("loadmap", l_rootCommand);
+    }
+
+    @Test
+    public void test_singleCommand_getOperationsAndArguments(){
+        CommandHandler l_command = new CommandHandler("editcontinent -remove continentID");
+        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+
+        // Preparing Expected Value
+        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+
+        Map<String, String> l_expectedCommandTwo = new HashMap<String, String>() {{
+            put("arguments", "continentID");
+            put("operation", "remove");
+        }};
+        l_expectedOperationsAndValues.add(l_expectedCommandTwo);
+
+        assertEquals(l_expectedOperationsAndValues, l_actualOperationsAndValues);
+    }
+
 }
