@@ -84,7 +84,7 @@ public class MainGameEngineController {
 			if (!l_isMapAvailable) {
 				consoleLogger.writeLog("Can't perform EditNeighbor as Map is Not Available, please run 'editmap' command first.");
 			} else {
-				editNeighbor();
+				editNeighbor(l_commandHandler);
 			}
 		}else if ("savemap".equals(l_rootCommand)) {
 			if (!l_isMapAvailable) {
@@ -132,12 +132,12 @@ public class MainGameEngineController {
     }
 
     private void editMap(CommandHandler p_command) throws IOException, CommandValidationException{
-        List<Map<String, String>> l_operations_list = p_command.getOperationsAndArguments();
+        List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
 
-		if (Objects.isNull(l_operations_list) || l_operations_list.isEmpty()) {
+		if (Objects.isNull(l_operationsList) || l_operationsList.isEmpty()) {
 			throw new CommandValidationException("Invalid command. Please execute the 'editmap' command in the provided format: editmap filename.");
 		} else {
-			for (Map<String, String> l_map : l_operations_list) {
+			for (Map<String, String> l_map : l_operationsList) {
 				if (p_command.checkRequiredKeysPresent("arguments", l_map)) {
 					d_mapController.editMap(d_state, l_map.get("arguments"));
 				} else {
@@ -153,15 +153,29 @@ public class MainGameEngineController {
     private void showMap() {
     }
 
-    private void editNeighbor() {
+    private void editNeighbor(CommandHandler p_command) throws CommandValidationException, MapValidationException {
+        List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
+		if (Objects.isNull(l_operationsList)  || l_operationsList.isEmpty()) {
+			throw new CommandValidationException("Invalid command. Please execute the 'editcountry' command in the provided format: editcountry -add countryID continentID -remove countryID");
+		} else {
+			for (Map<String, String> l_map : l_operationsList) {
+				if (p_command.checkRequiredKeysPresent("arguments", l_map)
+						&& p_command.checkRequiredKeysPresent("operation", l_map)) {
+					d_mapController.editNeighbour(d_state, l_map.get("operation"),
+							l_map.get("arguments"));
+				} else {
+					throw new CommandValidationException("Invalid command. Please execute the 'editcountry' command in the provided format: editcountry -add countryID continentID -remove countryID");
+				}
+			}
+		}
     }
 
     private void editCountry(CommandHandler p_command) throws IOException, CommandValidationException, MapValidationException {
-        List<Map<String, String>> l_operations_list = p_command.getOperationsAndArguments();
-		if (Objects.isNull(l_operations_list)  || l_operations_list.isEmpty()) {
+        List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
+		if (Objects.isNull(l_operationsList)  || l_operationsList.isEmpty()) {
 			throw new CommandValidationException("Invalid command. Please execute the 'editcountry' command in the provided format: editcountry -add countryID continentID -remove countryID");
 		} else {
-			for (Map<String, String> l_map : l_operations_list) {
+			for (Map<String, String> l_map : l_operationsList) {
 				if (p_command.checkRequiredKeysPresent("arguments", l_map)
 						&& p_command.checkRequiredKeysPresent("operation", l_map)) {
 					d_mapController.editCountry(d_state, l_map.get("operation"),
@@ -174,14 +188,13 @@ public class MainGameEngineController {
     }
 
     private void editContinent(CommandHandler p_command) throws IOException, CommandValidationException, MapValidationException {
-        List<Map<String, String>> l_operations_list = p_command.getOperationsAndArguments();
+        List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
 
-		if (Objects.isNull(l_operations_list)  || l_operations_list.isEmpty()) {
+		if (l_operationsList == null  || l_operationsList.isEmpty()) {
 			throw new CommandValidationException("Invalid command. Please execute the 'editcontinent' command in the provided format: editcontinent -add continentID continentValue -remove continentID");
 		} else {
-			for (Map<String, String> l_map : l_operations_list) {
-				if (p_command.checkRequiredKeysPresent("arguments", l_map)
-						&& p_command.checkRequiredKeysPresent("operation", l_map)) {
+			for (Map<String, String> l_map : l_operationsList) {
+				if (p_command.checkRequiredKeysPresent("arguments", l_map) && p_command.checkRequiredKeysPresent("operation", l_map)) {
 					d_mapController.editContinent(d_state, l_map.get("arguments"),
 							l_map.get("operation"));
 				} else {
