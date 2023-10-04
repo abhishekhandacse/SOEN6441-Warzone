@@ -59,5 +59,23 @@ public class CommonUtilTests {
         assertEquals(result,true);
     }
 
+    @Test
+    public void testEmptyCollection(){
+        ArrayList<Integer> l_arrayList = Lists.newArrayList();
+
+        boolean result = CommonUtil.isCollectionEmpty(l_arrayList);
+
+        assertEquals(result,true);
+    }
+
+    @Test
+    public void testCollectionNotEmpty(){
+        ArrayList<Integer> l_arrayList = Lists.newArrayList(1,2,3);
+
+        boolean result = CommonUtil.isCollectionEmpty(l_arrayList);
+
+        assertEquals(result,false);
+    }
+
 
 }
