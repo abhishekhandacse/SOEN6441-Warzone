@@ -11,6 +11,7 @@ import org.junit.Test;
 import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 import Models.Continent;
+import Models.Country;
 import Models.Map;
 import Models.State;
 import Utils.CommandHandler;
@@ -81,5 +82,21 @@ public class MainGameEngineControllerTest {
 		d_engine.editContinent(l_removeCommand);
 		l_contList = d_state.getD_map().getD_continents();
 		assertEquals( 1, l_contList.size());
+	}
+
+	@Test
+	public void testEditCountryValidCommand() throws IOException, CommandValidationException, MapValidationException {
+		d_map.setD_mapFile("testedit.map");
+		d_state.setD_map(d_map);
+		CommandHandler l_addCommand = new CommandHandler("editcontinent -add Africa 12 -add Asia 15");
+		d_engine.editContinent(l_addCommand);
+
+		CommandHandler l_addCountryIndiaCommand = new CommandHandler("editcountry -add India Asia");
+		CommandHandler l_addCountryJapanCommand = new CommandHandler("editcountry -add Japan Asia");
+		d_engine.editCountry(l_addCountryIndiaCommand);
+		d_engine.editCountry(l_addCountryJapanCommand);
+
+		List<Country> l_countriesList = d_state.getD_map().getD_countries();
+		assertEquals( 2, l_countriesList.size());		
 	}
 }
