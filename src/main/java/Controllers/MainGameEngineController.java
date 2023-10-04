@@ -24,7 +24,7 @@ import Utils.CommonUtil;
  */
 public class MainGameEngineController {
 
-    ConsoleLogger consoleLogger = new ConsoleLogger();
+    ConsoleLogger d_consoleLogger = new ConsoleLogger();
 
     State d_state = new State();
 
@@ -52,7 +52,17 @@ public class MainGameEngineController {
         var l_infiniteLoop = true;
 
         while (l_infiniteLoop){
-            System.out.println("Input the game commands or input 'exit' to exit the game");
+			d_consoleLogger.writeLog("=========================================================================================");
+			d_consoleLogger.writeLog("Sequence of commands for playing a game.:");
+			d_consoleLogger.writeLog("=========================================================================================");
+			d_consoleLogger.writeLog("Initiate the map: 'loadmap filename'.");
+			d_consoleLogger.writeLog("Display the loaded map: use the command 'showmap'");
+			d_consoleLogger.writeLog("Include or exclude a player : gameplayer -add playername -remove playername");
+			d_consoleLogger.writeLog("Allocate countries : assigncountries");
+			d_consoleLogger.writeLog("Save the game : savegame filename");
+			d_consoleLogger.writeLog("Load the game : loadgame filename");
+			d_consoleLogger.writeLog("=========================================================================================");
+			d_consoleLogger.writeLog("Input the game commands or input 'exit' to exit the game");
             try {
                 String l_inputCommand = l_bufferedReader.readLine();
 
@@ -73,25 +83,25 @@ public class MainGameEngineController {
 			editMap(l_commandHandler);
 		} else if ("editcontinent".equals(l_rootCommand)) {
 			if (!l_isMapAvailable) {
-				consoleLogger.writeLog("Can't perform Editcontinent as Map is Not Available, please run 'editmap' command first.");
+				d_consoleLogger.writeLog("Can't perform Editcontinent as Map is Not Available, please run 'editmap' command first.");
 			} else {
 				editContinent(l_commandHandler);
 			}
 		} else if ("editcountry".equals(l_rootCommand)) {
 			if (!l_isMapAvailable) {
-				consoleLogger.writeLog("Can't perform EditCountry as Map is Not Available, please run 'editmap' command first.");
+				d_consoleLogger.writeLog("Can't perform EditCountry as Map is Not Available, please run 'editmap' command first.");
 			} else {
 				editCountry(l_commandHandler);
 			}
 		} else if ("editneighbor".equals(l_rootCommand)) {
 			if (!l_isMapAvailable) {
-				consoleLogger.writeLog("Can't perform EditNeighbor as Map is Not Available, please run 'editmap' command first.");
+				d_consoleLogger.writeLog("Can't perform EditNeighbor as Map is Not Available, please run 'editmap' command first.");
 			} else {
 				editNeighbor(l_commandHandler);
 			}
 		}else if ("savemap".equals(l_rootCommand)) {
 			if (!l_isMapAvailable) {
-				consoleLogger.writeLog("Can't perform EditCountry as No Map is Available, please run 'editmap' command first.");
+				d_consoleLogger.writeLog("Can't perform EditCountry as No Map is Available, please run 'editmap' command first.");
 			} else {
 				saveMap(l_commandHandler);
 			}
@@ -102,7 +112,7 @@ public class MainGameEngineController {
 			l_mapView.showMap();
 		} else if ("validatemap".equals(l_rootCommand)) {
 			if (!l_isMapAvailable) {
-				consoleLogger.writeLog("No map available for validation; please run the  'editmap' or 'loadmap' command first.");
+				d_consoleLogger.writeLog("No map available for validation; please run the  'editmap' or 'loadmap' command first.");
 			} else {
 				validateMap(l_commandHandler);
 			}
@@ -110,15 +120,15 @@ public class MainGameEngineController {
 			assignCountries(l_commandHandler);
 		} else if ("gameplayer".equals(l_rootCommand)) {
 			if (!l_isMapAvailable) {
-				consoleLogger.writeLog("Can't add Game players, run 'loadmap' first because there is no map currently loaded.");
+				d_consoleLogger.writeLog("Can't add Game players, run 'loadmap' first because there is no map currently loaded.");
 			} else {
 				addOrRemovePlayer(l_commandHandler);
 			}
 		} else if ("exit".equals(l_rootCommand)) {
-			consoleLogger.writeLog("Exit Command Entered");
+			d_consoleLogger.writeLog("Exit Command Entered");
 			System.exit(0);
 		} else {
-			consoleLogger.writeLog("Invalid Command");
+			d_consoleLogger.writeLog("Invalid Command");
 		} 
     }
 
@@ -129,7 +139,7 @@ public class MainGameEngineController {
 			d_playerController.assignColors(d_state);
 
 			while (!CommonUtil.isCollectionEmpty(d_state.getD_players())) {
-				consoleLogger.writeLog("\n============================ Main Game Loop Starts ============================\n");
+				d_consoleLogger.writeLog("\n============================ Main Game Loop Starts ============================\n");
 				// Assigning armies to players
 				d_playerController.assignArmies(d_state);
 
@@ -151,7 +161,7 @@ public class MainGameEngineController {
 				}
 				MapView l_mapView = new MapView(d_state, d_state.getD_players());
 				l_mapView.showMap();
-				consoleLogger.writeLog("To continue for next turn, input 'Y'/'y', or to exit, input 'N'/'n'.");
+				d_consoleLogger.writeLog("To continue for next turn, input 'Y'/'y', or to exit, input 'N'/'n'.");
 				BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
 				String l_next = l_reader.readLine();
 				if (l_next.equalsIgnoreCase("N"))
@@ -193,7 +203,7 @@ public class MainGameEngineController {
 						Models.Map l_mapToLoad = d_mapController.loadMap(d_state,
 								l_map.get("arguments"));
 						if (l_mapToLoad.Validate()) {
-							consoleLogger.writeLog("Map loaded successfully.\n");
+							d_consoleLogger.writeLog("Map loaded successfully.\n");
 						} else {
 							d_mapController.resetMap(d_state);
 						}
@@ -215,9 +225,9 @@ public class MainGameEngineController {
 				throw new MapValidationException("Map Not found. Please load a valid map!");
 			} else {
 				if (l_currentMap.Validate()) {
-					consoleLogger.writeLog("Validated Map Successfully!");
+					d_consoleLogger.writeLog("Validated Map Successfully!");
 				} else {
-					consoleLogger.writeLog("Map validation is Unsuccessfull.");
+					d_consoleLogger.writeLog("Map validation is Unsuccessfull.");
 				}
 			}
 		} else {
@@ -252,9 +262,9 @@ public class MainGameEngineController {
 					boolean l_fileUpdateStatus = d_mapController.saveMap(d_state,
 							l_map.get("arguments"));
 					if (l_fileUpdateStatus)
-						consoleLogger.writeLog("The map file is updated with the changes.");
+						d_consoleLogger.writeLog("The map file is updated with the changes.");
 					else
-						consoleLogger.writeLog(d_state.getError());
+						d_consoleLogger.writeLog(d_state.getError());
 				} else {
 					throw new CommandValidationException("Invalid command. Please execute the 'savemap' command in the provided format: savemap filename.");
 				}
