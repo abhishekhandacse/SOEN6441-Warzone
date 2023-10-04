@@ -78,4 +78,32 @@ public class CommonUtilTests {
     }
 
 
+    @Test
+    public void TestEmptyMap(){
+        Map<Object, Object> l_map = Collections.emptyMap();
+
+        boolean result = CommonUtil.isMapEmpty(l_map);
+
+        assertEquals(result,true);
+    }
+
+    @Test
+    public void TestMapNotEmpty(){
+        HashMap<String, String> l_map = new HashMap<>();
+        l_map.put("KEY","VALUE");
+
+        boolean result = CommonUtil.isMapEmpty(l_map);
+
+        assertEquals(result,false);
+    }
+
+    @Test
+    public void TestPassFileName(){
+        String l_fileName = "abcd";
+
+        String filePath = CommonUtil.getMapFilePath(l_fileName);
+
+        assertThat(filePath, CoreMatchers.containsString(l_fileName));
+    }
+
 }
