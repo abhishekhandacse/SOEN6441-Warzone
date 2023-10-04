@@ -19,18 +19,33 @@ import java.util.List;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * The type Map controller test.
+ */
 public class MapControllerTest {
 
 
+    /**
+     * The D mapservice.
+     */
     MapController d_mapservice;
 
 
+    /**
+     * The D map.
+     */
     Map d_map;
 
 
+    /**
+     * The D state.
+     */
     State d_state;
 
 
+    /**
+     * Sets .
+     */
     @Before
     public void setup() {
         d_mapservice = new MapController();
@@ -40,6 +55,11 @@ public class MapControllerTest {
     }
 
 
+    /**
+     * Test edit map.
+     *
+     * @throws IOException the io exception
+     */
     @Test
     public void testEditMap() throws IOException {
         d_mapservice.editMap(d_state, "test.map");
@@ -49,6 +69,11 @@ public class MapControllerTest {
     }
 
 
+    /**
+     * Test edit continent add.
+     *
+     * @throws MapValidationException the map validation exception
+     */
     @Test
     public void testEditContinentAdd() throws MapValidationException {
         d_state.setD_map(new Map());
@@ -60,6 +85,12 @@ public class MapControllerTest {
     }
 
 
+    /**
+     * Test edit continent remove.
+     *
+     * @throws IOException            the io exception
+     * @throws MapValidationException the map validation exception
+     */
     @Test
     public void testEditContinentRemove() throws IOException, MapValidationException {
         List<Continent> l_continents = new ArrayList<>();
@@ -87,6 +118,9 @@ public class MapControllerTest {
     }
 
 
+    /**
+     * Test continent id and values.
+     */
     @Test
     public void testContinentIdAndValues() {
         List<Integer> l_actualContinentIdList = new ArrayList<Integer>();
@@ -108,6 +142,9 @@ public class MapControllerTest {
     }
 
 
+    /**
+     * Test country id and neighbors.
+     */
     @Test
     public void testCountryIdAndNeighbors() {
         List<Integer> l_actualCountryIdList = new ArrayList<Integer>();
@@ -119,7 +156,7 @@ public class MapControllerTest {
         LinkedHashMap<Integer, List<Integer>> l_expectedCountryNeighbors = new LinkedHashMap<Integer, List<Integer>>() {
             {
                 put(1, new ArrayList<Integer>(Arrays.asList(2, 3)));
-                put(2, new ArrayList<Integer>(Arrays.asList( 1)));
+                put(2, new ArrayList<Integer>(Arrays.asList(1)));
                 put(3, new ArrayList<Integer>(Arrays.asList(4)));
                 put(4, new ArrayList<Integer>(Arrays.asList(2)));
             }
@@ -137,6 +174,12 @@ public class MapControllerTest {
     }
 
 
+    /**
+     * Test edit country add.
+     *
+     * @throws IOException            the io exception
+     * @throws MapValidationException the map validation exception
+     */
     @Test
     public void testEditCountryAdd() throws IOException, MapValidationException {
         d_mapservice.loadMap(d_state, "test.map");
@@ -146,13 +189,24 @@ public class MapControllerTest {
     }
 
 
+    /**
+     * Test edit country remove.
+     *
+     * @throws MapValidationException the map validation exception
+     */
     @Test(expected = MapValidationException.class)
-    public void testEditCountryRemove() throws MapValidationException{
+    public void testEditCountryRemove() throws MapValidationException {
         d_mapservice.loadMap(d_state, "test.map");
         d_mapservice.editCountry(d_state, "remove", "Ukraine");
     }
 
 
+    /**
+     * Test edit neighbor add.
+     *
+     * @throws MapValidationException the map validation exception
+     * @throws IOException            the io exception
+     */
     @Test
     public void testEditNeighborAdd() throws MapValidationException, IOException {
         d_mapservice.loadMap(d_state, "test.map");
@@ -165,8 +219,14 @@ public class MapControllerTest {
     }
 
 
+    /**
+     * Test edit neighbor remove.
+     *
+     * @throws MapValidationException the map validation exception
+     * @throws IOException            the io exception
+     */
     @Test(expected = MapValidationException.class)
-    public void testEditNeighborRemove() throws MapValidationException, IOException{
+    public void testEditNeighborRemove() throws MapValidationException, IOException {
         d_mapservice.editMap(d_state, "testedit.map");
         d_mapservice.editContinent(d_state, "Asia 9", "add");
         d_mapservice.editCountry(d_state, "add", "Maldives Asia");

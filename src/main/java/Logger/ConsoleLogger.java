@@ -1,5 +1,8 @@
 package Logger;
 
+/**
+ * The type Console logger.
+ */
 public class ConsoleLogger implements Logger {
     @Override
     public void writeLog(String p_message) {

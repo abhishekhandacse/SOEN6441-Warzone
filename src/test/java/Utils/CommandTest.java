@@ -9,18 +9,27 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
+/**
+ * The type Command test.
+ */
 public class CommandTest {
 
+    /**
+     * Test valid command.
+     */
     @Test
-    public void testValidCommand(){
+    public void testValidCommand() {
         CommandHandler l_command = new CommandHandler("editcontinent -add continentID continentvalue");
         String l_rootCommand = l_command.getRootCommand();
 
-        assertEquals("editcontinent",l_rootCommand);
+        assertEquals("editcontinent", l_rootCommand);
     }
 
+    /**
+     * Test in valid command.
+     */
     @Test
-    public void testInValidCommand(){
+    public void testInValidCommand() {
         CommandHandler l_command = new CommandHandler("");
         String l_rootCommand = l_command.getRootCommand();
 
@@ -28,29 +37,38 @@ public class CommandTest {
     }
 
 
+    /**
+     * Test single word.
+     */
     @Test
-    public void testSingleWord(){
+    public void testSingleWord() {
         CommandHandler l_command = new CommandHandler("validatemap");
         String l_rootCommand = l_command.getRootCommand();
 
         assertEquals("validatemap", l_rootCommand);
     }
 
+    /**
+     * Testno flag command.
+     */
     @Test
-    public void testnoFlagCommand(){
+    public void testnoFlagCommand() {
         CommandHandler l_command = new CommandHandler("loadmap abc.txt");
         String l_rootCommand = l_command.getRootCommand();
 
         assertEquals("loadmap", l_rootCommand);
     }
 
+    /**
+     * Test single command.
+     */
     @Test
-    public void testSingleCommand(){
+    public void testSingleCommand() {
         CommandHandler l_command = new CommandHandler("editcontinent -remove continentID");
-        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
 
         Map<String, String> l_expectedCommandTwo = new HashMap<String, String>() {{
             put("arguments", "continentID");
@@ -61,13 +79,16 @@ public class CommandTest {
         assertEquals(l_expectedOperationsAndValues, l_actualOperationsAndValues);
     }
 
+    /**
+     * Test single command with extra spaces.
+     */
     @Test
-    public void testSingleCommandWithExtraSpaces(){
+    public void testSingleCommandWithExtraSpaces() {
         CommandHandler l_command = new CommandHandler("editcontinent      -remove continentID");
-        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
 
         Map<String, String> l_expectedCommandTwo = new HashMap<String, String>() {{
             put("arguments", "continentID");
@@ -78,13 +99,16 @@ public class CommandTest {
         assertEquals(l_expectedOperationsAndValues, l_actualOperationsAndValues);
     }
 
+    /**
+     * Test multi command.
+     */
     @Test
-    public void testMultiCommand(){
+    public void testMultiCommand() {
         CommandHandler l_command = new CommandHandler("editcontinent -add continentID continentValue  -remove continentID");
-        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
 
         Map<String, String> l_expectedCommandOne = new HashMap<String, String>() {{
             put("arguments", "continentID continentValue");
@@ -100,13 +124,16 @@ public class CommandTest {
         assertEquals(l_expectedOperationsAndValues, l_actualOperationsAndValues);
     }
 
+    /**
+     * Test no flag command.
+     */
     @Test
-    public void testNoFlagCommand(){
+    public void testNoFlagCommand() {
         CommandHandler l_command = new CommandHandler("loadmap abc.txt");
-        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
 
         Map<String, String> l_expectedCommandOne = new HashMap<String, String>() {{
             put("arguments", "abc.txt");
@@ -117,13 +144,16 @@ public class CommandTest {
         assertEquals(l_expectedOperationsAndValues, l_actualOperationsAndValues);
     }
 
+    /**
+     * Test no flag with extra spaces.
+     */
     @Test
-    public void testNoFlagWithExtraSpaces(){
+    public void testNoFlagWithExtraSpaces() {
         CommandHandler l_command = new CommandHandler("loadmap         abc.txt");
-        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
 
         Map<String, String> l_expectedCommandOne = new HashMap<String, String>() {{
             put("arguments", "abc.txt");

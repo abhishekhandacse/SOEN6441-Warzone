@@ -12,118 +12,224 @@ import Utils.CommandHandler;
 import Utils.CommonUtil;
 
 
+/**
+ * The type Player.
+ */
 public class Player {
 
-	ConsoleLogger consoleLogger = new ConsoleLogger();
+    /**
+     * The Console logger.
+     */
+    ConsoleLogger consoleLogger = new ConsoleLogger();
 
-	private String d_color;
-	private String d_name;
-	List<Country> d_coutriesOwned;
-	List<Continent> d_continentsOwned;
-	List<Order> d_ordersToExecute;
-	Integer d_noOfUnallocatedArmies;
+    private String d_color;
+    private String d_name;
+    /**
+     * The D coutries owned.
+     */
+    List<Country> d_coutriesOwned;
+    /**
+     * The D continents owned.
+     */
+    List<Continent> d_continentsOwned;
+    /**
+     * The D orders to execute.
+     */
+    List<Order> d_ordersToExecute;
+    /**
+     * The D no of unallocated armies.
+     */
+    Integer d_noOfUnallocatedArmies;
 
-	
-	public Player(String p_playerName) {
-		this.d_name = p_playerName;
-		this.d_noOfUnallocatedArmies = 0;
-		this.d_ordersToExecute = new ArrayList<>();
-	}
 
-	
-	public Player() {
+    /**
+     * Instantiates a new Player.
+     *
+     * @param p_playerName the p player name
+     */
+    public Player(String p_playerName) {
+        this.d_name = p_playerName;
+        this.d_noOfUnallocatedArmies = 0;
+        this.d_ordersToExecute = new ArrayList<>();
+    }
 
-	}
 
-	public void setPlayerName(String p_name) {
-		this.d_name = p_name;
-	}
+    /**
+     * Instantiates a new Player.
+     */
+    public Player() {
 
-	public void setD_color(String p_color) {
-		d_color = p_color;
-	}
+    }
 
-	public void setD_noOfUnallocatedArmies(Integer p_numberOfArmies) {
-		this.d_noOfUnallocatedArmies = p_numberOfArmies;
-	}
+    /**
+     * Sets player name.
+     *
+     * @param p_name the p name
+     */
+    public void setPlayerName(String p_name) {
+        this.d_name = p_name;
+    }
 
-	public void setD_coutriesOwned(List<Country> p_coutriesOwned) {
-		this.d_coutriesOwned = p_coutriesOwned;
-	}
+    /**
+     * Sets d color.
+     *
+     * @param p_color the p color
+     */
+    public void setD_color(String p_color) {
+        d_color = p_color;
+    }
 
-	public void setD_continentsOwned(List<Continent> p_continentsOwned) {
-		this.d_continentsOwned = p_continentsOwned;
-	}
+    /**
+     * Sets d no of unallocated armies.
+     *
+     * @param p_numberOfArmies the p number of armies
+     */
+    public void setD_noOfUnallocatedArmies(Integer p_numberOfArmies) {
+        this.d_noOfUnallocatedArmies = p_numberOfArmies;
+    }
 
-	public void setD_ordersToExecute(List<Order> p_ordersToExecute) {
-		this.d_ordersToExecute = p_ordersToExecute;
-	}
+    /**
+     * Sets d coutries owned.
+     *
+     * @param p_coutriesOwned the p coutries owned
+     */
+    public void setD_coutriesOwned(List<Country> p_coutriesOwned) {
+        this.d_coutriesOwned = p_coutriesOwned;
+    }
 
-	public String getD_color() {
-		return d_color;
-	}
+    /**
+     * Sets d continents owned.
+     *
+     * @param p_continentsOwned the p continents owned
+     */
+    public void setD_continentsOwned(List<Continent> p_continentsOwned) {
+        this.d_continentsOwned = p_continentsOwned;
+    }
 
-	public String getPlayerName() {
-		return d_name;
-	}
+    /**
+     * Sets d orders to execute.
+     *
+     * @param p_ordersToExecute the p orders to execute
+     */
+    public void setD_ordersToExecute(List<Order> p_ordersToExecute) {
+        this.d_ordersToExecute = p_ordersToExecute;
+    }
 
-	public List<Country> getD_coutriesOwned() {
-		return d_coutriesOwned;
-	}
+    /**
+     * Gets d color.
+     *
+     * @return the d color
+     */
+    public String getD_color() {
+        return d_color;
+    }
 
-	public List<Continent> getD_continentsOwned() {
-		return d_continentsOwned;
-	}
+    /**
+     * Gets player name.
+     *
+     * @return the player name
+     */
+    public String getPlayerName() {
+        return d_name;
+    }
 
-	public List<Order> getD_ordersToExecute() {
-		return d_ordersToExecute;
-	}
+    /**
+     * Gets d coutries owned.
+     *
+     * @return the d coutries owned
+     */
+    public List<Country> getD_coutriesOwned() {
+        return d_coutriesOwned;
+    }
 
-	public Integer getD_noOfUnallocatedArmies() {
-		return d_noOfUnallocatedArmies;
-	}
+    /**
+     * Gets d continents owned.
+     *
+     * @return the d continents owned
+     */
+    public List<Continent> getD_continentsOwned() {
+        return d_continentsOwned;
+    }
 
-	public List<String> getContinentNames(){
-		List<String> l_continentNames = new ArrayList<String>();
-		if (d_continentsOwned != null) {
-			for(Continent c: d_continentsOwned){
-				l_continentNames.add(c.getD_continentName());
-			}
-			return l_continentNames;
-		}
-		return null;
-	}
+    /**
+     * Gets d orders to execute.
+     *
+     * @return the d orders to execute
+     */
+    public List<Order> getD_ordersToExecute() {
+        return d_ordersToExecute;
+    }
 
-	public List<String> getCountryNames(){
-		List<String> l_countryNames=new ArrayList<String>();
-		for(Country c: d_coutriesOwned){
-			l_countryNames.add(c.getD_countryName());
-		}
-		return l_countryNames;
-	}
+    /**
+     * Gets d no of unallocated armies.
+     *
+     * @return the d no of unallocated armies
+     */
+    public Integer getD_noOfUnallocatedArmies() {
+        return d_noOfUnallocatedArmies;
+    }
 
-	
-	public void issueOrder() throws IOException {
-		BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
-		GamePlayerController l_Game_playerController = new GamePlayerController();
-		consoleLogger.writeLog("\nPlease enter command to deploy reinforcement armies on the map for player : "
-				+ this.getPlayerName());
-		String l_commandEntered = l_reader.readLine();
-		CommandHandler l_command = new CommandHandler(l_commandEntered);
+    /**
+     * Get continent names list.
+     *
+     * @return the list
+     */
+    public List<String> getContinentNames() {
+        List<String> l_continentNames = new ArrayList<String>();
+        if (d_continentsOwned != null) {
+            for (Continent c : d_continentsOwned) {
+                l_continentNames.add(c.getD_continentName());
+            }
+            return l_continentNames;
+        }
+        return null;
+    }
 
-		if (l_command.getRootCommand().equalsIgnoreCase("deploy") && l_commandEntered.split(" ").length == 3) {
-			l_Game_playerController.createDeployOrder(l_commandEntered, this);
-		} else {
-			consoleLogger.writeLog("Invalid command. To deploy armies, use the 'deploy' command in the format: deploy countryID <CountryName> <num> (until all reinforcements have been placed)");
-		}
-	}
+    /**
+     * Get country names list.
+     *
+     * @return the list
+     */
+    public List<String> getCountryNames() {
+        List<String> l_countryNames = new ArrayList<String>();
+        for (Country c : d_coutriesOwned) {
+            l_countryNames.add(c.getD_countryName());
+        }
+        return l_countryNames;
+    }
 
-	public Order nextOrder() {
-		if (CommonUtil.isCollectionEmpty(this.d_ordersToExecute)) {
-			return null;
-		}
-		Order l_order = this.d_ordersToExecute.get(0);
-		this.d_ordersToExecute.remove(l_order);
-		return l_order;
-	}
+
+    /**
+     * Issue order.
+     *
+     * @throws IOException the io exception
+     */
+    public void issueOrder() throws IOException {
+        BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
+        GamePlayerController l_Game_playerController = new GamePlayerController();
+        consoleLogger.writeLog("\nPlease enter command to deploy reinforcement armies on the map for player : "
+                + this.getPlayerName());
+        String l_commandEntered = l_reader.readLine();
+        CommandHandler l_command = new CommandHandler(l_commandEntered);
+
+        if (l_command.getRootCommand().equalsIgnoreCase("deploy") && l_commandEntered.split(" ").length == 3) {
+            l_Game_playerController.createDeployOrder(l_commandEntered, this);
+        } else {
+            consoleLogger.writeLog("Invalid command. To deploy armies, use the 'deploy' command in the format: deploy countryID <CountryName> <num> (until all reinforcements have been placed)");
+        }
+    }
+
+    /**
+     * Next order order.
+     *
+     * @return the order
+     */
+    public Order nextOrder() {
+        if (CommonUtil.isCollectionEmpty(this.d_ordersToExecute)) {
+            return null;
+        }
+        Order l_order = this.d_ordersToExecute.get(0);
+        this.d_ordersToExecute.remove(l_order);
+        return l_order;
+    }
 }

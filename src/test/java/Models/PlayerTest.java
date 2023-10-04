@@ -9,38 +9,50 @@ import org.junit.Before;
 import org.junit.Test;
 
 
+/**
+ * The type Player test.
+ */
 public class PlayerTest {
-	
-	List<Player> d_exisitingPlayerList = new ArrayList<>();
 
-	
-	@Before
-	public void setup() {
-		d_exisitingPlayerList.add(new Player("Rajat"));
-		d_exisitingPlayerList.add(new Player("Anurag"));
-	}
+    /**
+     * The D exisiting player list.
+     */
+    List<Player> d_exisitingPlayerList = new ArrayList<>();
 
-	@Test
-	public void testNextOrder() {
-		Order l_order1 = new Order();
-		l_order1.setD_orderAction("deploy");
-		l_order1.setD_numberOfArmiesToPlace(5);
-		l_order1.setD_sourceCountryName(null);
-		l_order1.setD_targetCountryName("India");
 
-		Order l_order2 = new Order();
-		l_order1.setD_orderAction("deploy");
-		l_order2.setD_numberOfArmiesToPlace(6);
-		l_order2.setD_sourceCountryName("");
-		l_order2.setD_targetCountryName("Finland");
+    /**
+     * Sets .
+     */
+    @Before
+    public void setup() {
+        d_exisitingPlayerList.add(new Player("Rajat"));
+        d_exisitingPlayerList.add(new Player("Anurag"));
+    }
 
-		List<Order> l_orderlist = new ArrayList<>();
-		l_orderlist.add(l_order1);
-		l_orderlist.add(l_order2);
+    /**
+     * Test next order.
+     */
+    @Test
+    public void testNextOrder() {
+        Order l_order1 = new Order();
+        l_order1.setD_orderAction("deploy");
+        l_order1.setD_numberOfArmiesToPlace(5);
+        l_order1.setD_sourceCountryName(null);
+        l_order1.setD_targetCountryName("India");
 
-		d_exisitingPlayerList.get(0).setD_ordersToExecute(l_orderlist);
-		Order l_order = d_exisitingPlayerList.get(0).nextOrder();
-		assertEquals(l_order, l_order1);
-		assertEquals(d_exisitingPlayerList.get(0).getD_ordersToExecute().size(), 1);
-	}
+        Order l_order2 = new Order();
+        l_order1.setD_orderAction("deploy");
+        l_order2.setD_numberOfArmiesToPlace(6);
+        l_order2.setD_sourceCountryName("");
+        l_order2.setD_targetCountryName("Finland");
+
+        List<Order> l_orderlist = new ArrayList<>();
+        l_orderlist.add(l_order1);
+        l_orderlist.add(l_order2);
+
+        d_exisitingPlayerList.get(0).setD_ordersToExecute(l_orderlist);
+        Order l_order = d_exisitingPlayerList.get(0).nextOrder();
+        assertEquals(l_order, l_order1);
+        assertEquals(d_exisitingPlayerList.get(0).getD_ordersToExecute().size(), 1);
+    }
 }
