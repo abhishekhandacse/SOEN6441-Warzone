@@ -17,20 +17,20 @@ import Models.State;
 import Utils.CommandHandler;
 
 /**
- * The type Main game engine controller test.
+ * Test Cases for MainGameEngineController class
  */
 public class MainGameEngineControllerTest {
 
     /**
-     * The D map.
+     * Map variable.
      */
     Map d_map;
     /**
-     * The D state.
+     * State variable.
      */
     State d_state;
     /**
-     * The D engine.
+     * Engine Data variable.
      */
     MainGameEngineController d_engine;
 
@@ -46,10 +46,10 @@ public class MainGameEngineControllerTest {
     }
 
     /**
-     * Test load map invalid command.
+     * This test case checks loadmap command by inputting an invalid command and expects a CommandValidationException.
      *
-     * @throws IOException                the io exception
-     * @throws CommandValidationException the command validation exception
+     * @throws IOException
+     * @throws CommandValidationException
      */
     @Test(expected = CommandValidationException.class)
     public void testLoadMapInvalidCommand() throws IOException, CommandValidationException {
@@ -58,11 +58,11 @@ public class MainGameEngineControllerTest {
     }
 
     /**
-     * Test edit country invalid command.
+     * This test case validates editCountry command by inputting an invalid commandand expects a MapValidationException.
      *
-     * @throws IOException                the io exception
-     * @throws CommandValidationException the command validation exception
-     * @throws MapValidationException     the map validation exception
+     * @throws IOException 
+     * @throws CommandValidationException 
+     * @throws MapValidationException  
      */
     @Test(expected = MapValidationException.class)
     public void testEditCountryInvalidCommand() throws IOException, CommandValidationException, MapValidationException {
@@ -74,10 +74,10 @@ public class MainGameEngineControllerTest {
     }
 
     /**
-     * Test save map invalid command.
+     * This test case checks savemap command by inputting an invalid command and expects a CommandValidationException.
      *
-     * @throws CommandValidationException the command validation exception
-     * @throws MapValidationException     the map validation exception
+     * @throws CommandValidationException
+     * @throws MapValidationException
      */
     @Test(expected = CommandValidationException.class)
     public void testSaveMapInvalidCommand() throws CommandValidationException, MapValidationException {
@@ -87,10 +87,10 @@ public class MainGameEngineControllerTest {
 
 
     /**
-     * Test assign countries invalid command.
+     * This test case checks assigncountries command by inputting an invalid command and expects a CommandValidationException.
      *
-     * @throws CommandValidationException the command validation exception
-     * @throws IOException                the io exception
+     * @throws CommandValidationException
+     * @throws IOException
      */
     @Test(expected = CommandValidationException.class)
     public void testAssignCountriesInvalidCommand() throws CommandValidationException, IOException {
@@ -99,10 +99,10 @@ public class MainGameEngineControllerTest {
     }
 
     /**
-     * Test validate map invalid command.
+     * This test case checks validatemap command by inputting an invalid command and expects a CommandValidationException.
      *
-     * @throws CommandValidationException the command validation exception
-     * @throws IOException                the io exception
+     * @throws CommandValidationException
+     * @throws IOException 
      */
     @Test(expected = CommandValidationException.class)
     public void testValidateMapInvalidCommand() throws CommandValidationException, IOException {
@@ -111,11 +111,11 @@ public class MainGameEngineControllerTest {
     }
 
     /**
-     * Test edit continent valid command.
+     * This TestCase validates the editcontinent command and checks if the expected and actual values are true.
      *
-     * @throws IOException                the io exception
-     * @throws CommandValidationException the command validation exception
-     * @throws MapValidationException     the map validation exception
+     * @throws IOException
+     * @throws CommandValidationException
+     * @throws MapValidationException
      */
     @Test
     public void testEditContinentValidCommand() throws IOException, CommandValidationException, MapValidationException {
@@ -138,11 +138,11 @@ public class MainGameEngineControllerTest {
     }
 
     /**
-     * Test edit country valid command.
+     * This TestCase validates the editcountry command and checks if the expected and actual values are true.
      *
-     * @throws IOException                the io exception
-     * @throws CommandValidationException the command validation exception
-     * @throws MapValidationException     the map validation exception
+     * @throws IOException
+     * @throws CommandValidationException
+     * @throws MapValidationException
      */
     @Test
     public void testEditCountryValidCommand() throws IOException, CommandValidationException, MapValidationException {
