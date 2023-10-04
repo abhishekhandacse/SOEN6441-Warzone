@@ -47,9 +47,10 @@ public class MainGameEngineController {
         l_mainGameEngineController.initializeWarzoneGamePlay();
     }
 
+
     private void initializeWarzoneGamePlay(){
         BufferedReader l_bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        var l_infiniteLoop = true;
+        boolean l_infiniteLoop = true;
 
         while (l_infiniteLoop){
 			d_consoleLogger.writeLog("=========================================================================================");
@@ -75,6 +76,13 @@ public class MainGameEngineController {
     }
 
 
+	/***
+	 *
+	 * @param p_inputCommand
+	 * @throws MapValidationException
+	 * @throws CommandValidationException
+	 * @throws IOException
+	 */
     private  void commandHandler(final String p_inputCommand) throws MapValidationException, CommandValidationException, IOException{
         CommandHandler l_commandHandler = new CommandHandler(p_inputCommand);
         String l_rootCommand = l_commandHandler.getRootCommand();
