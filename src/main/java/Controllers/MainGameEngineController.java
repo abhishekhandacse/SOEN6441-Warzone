@@ -12,8 +12,11 @@ import java.util.Objects;
 import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 import Logger.ConsoleLogger;
+import Models.Order;
+import Models.Player;
 import Models.State;
 import Utils.CommandHandler;
+import Utils.CommonUtil;
 
 
 /**
@@ -104,12 +107,12 @@ public class MainGameEngineController {
 				validateMap(l_commandHandler);
 			}
 		} else if ("assigncountries".equals(l_rootCommand)) {
-			assignCountries();
+			assignCountries(l_commandHandler);
 		} else if ("gameplayer".equals(l_rootCommand)) {
 			if (!l_isMapAvailable) {
 				consoleLogger.writeLog("Can't add Game players, run 'loadmap' first because there is no map currently loaded.");
 			} else {
-				addOrRemovePlayer();
+				addOrRemovePlayer(l_commandHandler);
 			}
 		} else if ("exit".equals(l_rootCommand)) {
 			consoleLogger.writeLog("Exit Command Entered");
@@ -119,10 +122,61 @@ public class MainGameEngineController {
 		} 
     }
 
-    private void assignCountries() {
+    private void assignCountries(CommandHandler p_command) throws CommandValidationException, IOException {
+        List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
+		if (CommonUtil.isCollectionEmpty(l_operationsList)) {
+			d_playerController.assignCountries(d_state);
+			d_playerController.assignColors(d_state);
+
+			while (!CommonUtil.isCollectionEmpty(d_state.getD_players())) {
+				consoleLogger.writeLog("\n============================ Main Game Loop Starts ============================\n");
+				// Assigning armies to players
+				d_playerController.assignArmies(d_state);
+
+				// Issuing order for players
+				while (d_playerController.unassignedArmiesExists(d_state.getD_players())) {
+					for (Player l_player : d_state.getD_players()) {
+						if (l_player.getD_noOfUnallocatedArmies() != null && l_player.getD_noOfUnallocatedArmies() != 0)
+							l_player.issueOrder();
+					}
+				}
+
+				// Executing orders
+				while (d_playerController.unexecutedOrdersExists(d_state.getD_players())) {
+					for (Player l_player : d_state.getD_players()) {
+						Order l_order = l_player.nextOrder();
+						if (l_order != null)
+							l_order.execute(d_state, l_player);
+					}
+				}
+				MapView l_mapView = new MapView(d_state, d_state.getD_players());
+				l_mapView.showMap();
+				consoleLogger.writeLog("To continue for next turn, input 'Y'/'y', or to exit, input 'N'/'n'.");
+				BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
+				String l_next = l_reader.readLine();
+				if (l_next.equalsIgnoreCase("N"))
+					break;
+			}
+		} else {
+			throw new CommandValidationException("Invalid command. To assign countries please execute the 'assigncountries' command.");
+		}
     }
 
-    private void addOrRemovePlayer() {
+    private void addOrRemovePlayer(CommandHandler p_command) throws CommandValidationException  {
+        List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
+		if (CommonUtil.isCollectionEmpty(l_operationsList)) {
+			throw new CommandValidationException("Invalid command. To manage game players, please execute the 'gameplayer' command in the provided format: gameplayer -add playername -remove playername");
+		} else {
+			for (Map<String, String> l_map : l_operationsList) {
+				if (p_command.checkRequiredKeysPresent("arguments", l_map)
+						&& p_command.checkRequiredKeysPresent("operation", l_map)) {
+					d_playerController.updatePlayers(d_state, l_map.get("operation"),
+							l_map.get("arguments"));
+				} else {
+					throw new CommandValidationException("Invalid command. To manage game players, please execute the 'gameplayer' command in the provided format: gameplayer -add playername -remove playername");
+				}
+			}
+		}
     }
 
     private void loadMap(CommandHandler p_command) throws CommandValidationException {

@@ -3,6 +3,8 @@ package Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utils.CommonUtil;
+
 public class Continent {
     
     Integer d_continentValue;
@@ -53,6 +55,18 @@ public class Continent {
 
 	public void setD_countries(List<Country> p_countries) {
 		this.d_countries = p_countries;
+	}
+
+	public void removeAllCountryNeighbours(Integer p_countryId){
+		if (null!=d_countries && !d_countries.isEmpty()) {
+			for (Country c: d_countries){
+				if (!CommonUtil.isNull(c.d_adjacentCountryIds)) {
+					if (c.getD_adjacentCountryIds().contains(p_countryId)){
+						c.removeNeighbours(p_countryId);
+					}
+				}
+			}
+		}
 	}
 
 	public void removeCountry(Country p_country){
