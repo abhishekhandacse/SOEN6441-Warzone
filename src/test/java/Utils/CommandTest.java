@@ -19,5 +19,21 @@ public class CommandTest {
         assertEquals("editcontinent",l_rootCommand);
     }
 
+    @Test
+    public void test_inValidCommand_getRootCommand(){
+        CommandHandler l_command = new CommandHandler("");
+        String l_rootCommand = l_command.getRootCommand();
+
+        assertEquals("", l_rootCommand);
+    }
+
+
+    @Test
+    public void test_singleWord_getRootCommand(){
+        CommandHandler l_command = new CommandHandler("validatemap");
+        String l_rootCommand = l_command.getRootCommand();
+
+        assertEquals("validatemap", l_rootCommand);
+    }
 
 }
