@@ -2,7 +2,6 @@ package Utils;
 
 import com.github.davidmoten.guavamini.Lists;
 import org.hamcrest.CoreMatchers;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -12,10 +11,11 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-public class CommonUtilTests {
+public class CommonUtilTest {
 
     @Test
     public void testStringNull(){
+
         String l_string = null;
 
         boolean result = CommonUtil.isEmpty(l_string);
