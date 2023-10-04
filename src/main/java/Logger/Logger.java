@@ -2,6 +2,8 @@ package Logger;
 
 /**
  * The interface Logger.
+ * 
+ * @author Anurag Teckchandani
  */
 public interface Logger {
 
