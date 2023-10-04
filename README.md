@@ -41,7 +41,7 @@ All project deliveries are presented in the laboratory, where the team demonstra
 
 ## Contributors
 - [Abhishek Handa](https://github.com/abhishekhandacse)
-- [Rajat Sharma](https://github.com/rajatjc)
+- [Rajat Sharma](https://github.com/rajat)
 - [Harman Singh Jolly](https://github.com/coderjolly)
 - [Amanpreet Singh](https://github.com/amanpreetbatra)
 - [Anurag Teckchandani](https://github.com/anurag444)
