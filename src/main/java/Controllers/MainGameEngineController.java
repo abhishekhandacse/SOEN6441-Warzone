@@ -112,7 +112,7 @@ public class MainGameEngineController {
 			if (!l_isMapAvailable) {
 				consoleLogger.writeLog("Can't add Game players, run 'loadmap' first because there is no map currently loaded.");
 			} else {
-				addOrRemovePlayer();
+				addOrRemovePlayer(l_commandHandler);
 			}
 		} else if ("exit".equals(l_rootCommand)) {
 			consoleLogger.writeLog("Exit Command Entered");
@@ -162,7 +162,21 @@ public class MainGameEngineController {
 		}
     }
 
-    private void addOrRemovePlayer() {
+    private void addOrRemovePlayer(CommandHandler p_command) throws CommandValidationException  {
+        List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
+		if (CommonUtil.isCollectionEmpty(l_operationsList)) {
+			throw new CommandValidationException("Invalid command. To manage game players, please execute the 'gameplayer' command in the provided format: gameplayer -add playername -remove playername");
+		} else {
+			for (Map<String, String> l_map : l_operationsList) {
+				if (p_command.checkRequiredKeysPresent("arguments", l_map)
+						&& p_command.checkRequiredKeysPresent("operation", l_map)) {
+					d_playerController.updatePlayers(d_state, l_map.get("operation"),
+							l_map.get("arguments"));
+				} else {
+					throw new CommandValidationException("Invalid command. To manage game players, please execute the 'gameplayer' command in the provided format: gameplayer -add playername -remove playername");
+				}
+			}
+		}
     }
 
     private void loadMap(CommandHandler p_command) throws CommandValidationException {
