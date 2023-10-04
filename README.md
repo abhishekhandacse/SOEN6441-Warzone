@@ -43,11 +43,11 @@ The completion of the project is divided into three separate components:
 All project deliveries are presented in the laboratory, where the team demonstrates the implemented features to the TAs following a pre-circulated grading sheet.
 
 ## Contributors
-[Abhishek Handa](https://github.com/abhishekhandacse)
-[Harman Singh Jolly](https://github.com/coderjolly)
-[Rajat Sharma](https://github.com/rajatjc)
-[Amanpreet Singh](https://github.com/amanpreetbatra)
-[Anurag Teckchandani](https://github.com/anurag444)
+- [Abhishek Handa](https://github.com/abhishekhandacse)
+- [Harman Singh Jolly](https://github.com/coderjolly)
+- [Rajat Sharma](https://github.com/rajatjc)
+- [Amanpreet Singh](https://github.com/amanpreetbatra)
+- [Anurag Teckchandani](https://github.com/anurag444)
 
 ## References
 - [Warzone](https://www.warzone.com/)
