@@ -54,14 +54,14 @@ public class Country {
     /**
      * Instantiates a new Country.
      *
-     * @param p_countryName the p country name
+     * @param p_countryName the p country name is a variable to store country name.
      */
     public Country(String p_countryName) {
-        d_countryName = p_countryName;
+        this.d_countryName = p_countryName;
     }
 
     /**
-     * Sets d armies.
+     * Setter method  to set  d armies. in a country
      *
      * @param p_armies the p armies
      */
@@ -70,7 +70,7 @@ public class Country {
     }
 
     /**
-     * Sets d country id.
+     * Setter method to set  d country id. of a country.
      *
      * @param p_countryId the p country id
      */
@@ -79,7 +79,7 @@ public class Country {
     }
 
     /**
-     * Sets d continent id.
+     * Setter method to set  d continent id of a country
      *
      * @param p_continentId the p continent id
      */
@@ -88,7 +88,7 @@ public class Country {
     }
 
     /**
-     * Sets d adjacent country ids.
+     * Setter method to set all adjacent country ids. to country.
      *
      * @param p_adjacentCountryIds the p adjacent country ids
      */
@@ -97,7 +97,7 @@ public class Country {
     }
 
     /**
-     * Sets d country name.
+     * Setter  method to set the country name of a country.
      *
      * @param p_countryName the p country name
      */
@@ -106,7 +106,7 @@ public class Country {
     }
 
     /**
-     * Gets d country id.
+     * Getter method to get the country id.
      *
      * @return the d country id
      */
@@ -115,7 +115,7 @@ public class Country {
     }
 
     /**
-     * Gets d armies.
+     * Getter method to get the armies of a country.
      *
      * @return the d armies
      */
@@ -124,7 +124,7 @@ public class Country {
     }
 
     /**
-     * Gets d continent id.
+     * Getter method to get the continent id of the country
      *
      * @return the d continent id
      */
@@ -133,7 +133,7 @@ public class Country {
     }
 
     /**
-     * Gets d country name.
+     * Getter method to get the country name.
      *
      * @return the d country name
      */
@@ -142,7 +142,7 @@ public class Country {
     }
 
     /**
-     * Gets d adjacent country ids.
+     * Getter method to get the adjacent country ids of the country
      *
      * @return the d adjacent country ids
      */
@@ -154,7 +154,7 @@ public class Country {
     }
 
     /**
-     * Remove neighbours.
+     * Remove method to remove any  neighbour of the country by providing the country id of the neighbour to remove.
      *
      * @param p_countryId the p country id
      */
@@ -167,7 +167,7 @@ public class Country {
     }
 
     /**
-     * Add neighbours.
+     * Add method to add the neighbour of the country by providing the country id of the neighbor to add.
      *
      * @param p_countryId the p country id
      */
