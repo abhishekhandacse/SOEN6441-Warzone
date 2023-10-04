@@ -26,12 +26,12 @@ public class State {
     String d_error;
 
     /**
-     * Sets d map.
+     * Gets d players.
      *
-     * @param p_map the p map
+     * @return the d players
      */
-    public void setD_map(Map p_map) {
-        this.d_map = p_map;
+    public List<Player> getD_players() {
+        return d_players;
     }
 
     /**
@@ -44,39 +44,21 @@ public class State {
     }
 
     /**
-     * Sets error.
-     *
-     * @param p_error the p error
-     */
-    public void setError(String p_error) {
-        this.d_error = p_error;
-    }
-
-    /**
-     * Sets d unexecuted orders.
-     *
-     * @param p_unexecutedOrders the p unexecuted orders
-     */
-    public void setD_unexecutedOrders(List<Order> p_unexecutedOrders) {
-        this.d_unexecutedOrders = p_unexecutedOrders;
-    }
-
-    /**
-     * Gets d players.
-     *
-     * @return the d players
-     */
-    public List<Player> getD_players() {
-        return d_players;
-    }
-
-    /**
      * Gets d map.
      *
      * @return the d map
      */
     public Map getD_map() {
         return d_map;
+    }
+
+    /**
+     * Sets d map.
+     *
+     * @param p_map the p map
+     */
+    public void setD_map(Map p_map) {
+        this.d_map = p_map;
     }
 
     /**
@@ -89,12 +71,30 @@ public class State {
     }
 
     /**
+     * Sets d unexecuted orders.
+     *
+     * @param p_unexecutedOrders the p unexecuted orders
+     */
+    public void setD_unexecutedOrders(List<Order> p_unexecutedOrders) {
+        this.d_unexecutedOrders = p_unexecutedOrders;
+    }
+
+    /**
      * Gets error.
      *
      * @return the error
      */
     public String getError() {
         return d_error;
+    }
+
+    /**
+     * Sets error.
+     *
+     * @param p_error the p error
+     */
+    public void setError(String p_error) {
+        this.d_error = p_error;
     }
 
 }
