@@ -52,4 +52,10 @@ public class MainGameEngineControllerTest {
 		CommandHandler l_command = new CommandHandler("assigncountries -add");
 		d_engine.assignCountries(l_command);
 	}
+
+    @Test(expected = CommandValidationException.class)
+	public void testValidateMapInvalidCommand() throws CommandValidationException, IOException {
+		CommandHandler l_command = new CommandHandler("validatemap test.map");
+		d_engine.assignCountries(l_command);
+	}
 }
