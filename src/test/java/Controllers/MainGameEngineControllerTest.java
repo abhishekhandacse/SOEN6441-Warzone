@@ -1,12 +1,16 @@
 package Controllers;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
+import Models.Continent;
 import Models.Map;
 import Models.State;
 import Utils.CommandHandler;
@@ -57,5 +61,25 @@ public class MainGameEngineControllerTest {
 	public void testValidateMapInvalidCommand() throws CommandValidationException, IOException {
 		CommandHandler l_command = new CommandHandler("validatemap test.map");
 		d_engine.assignCountries(l_command);
+	}
+
+    @Test
+	public void testEditContinentValidCommand() throws IOException, CommandValidationException, MapValidationException {
+		d_map.setD_mapFile("testmap.map");
+		d_state.setD_map(d_map);
+		CommandHandler l_addCommand = new CommandHandler("editcontinent -add Africa 12 -add Asia 15");
+		d_engine.editContinent(l_addCommand);
+
+		List<Continent> l_contList = d_state.getD_map().getD_continents();
+		assertEquals(l_contList.size(), 2);
+		assertEquals(l_contList.get(0).getD_continentName(), "Africa");
+		assertEquals(l_contList.get(0).getD_continentValue().toString(), "12");
+		assertEquals(l_contList.get(1).getD_continentName(), "Asia");
+		assertEquals(l_contList.get(1).getD_continentValue().toString(), "15");
+
+		CommandHandler l_removeCommand = new CommandHandler("editcontinent -remove Africa");
+		d_engine.editContinent(l_removeCommand);
+		l_contList = d_state.getD_map().getD_continents();
+		assertEquals( 1, l_contList.size());
 	}
 }

@@ -307,7 +307,7 @@ public class MainGameEngineController {
 		}
     }
 
-    private void editContinent(CommandHandler p_command) throws IOException, CommandValidationException, MapValidationException {
+    public void editContinent(CommandHandler p_command) throws IOException, CommandValidationException, MapValidationException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
 
 		if (l_operationsList == null  || l_operationsList.isEmpty()) {
