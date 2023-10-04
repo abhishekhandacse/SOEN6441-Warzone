@@ -1,17 +1,11 @@
 package Views;
 
-import java.util.*;
-
 import Exceptions.MapValidationException;
+import Models.*;
+import Utils.CommonUtil;
 
 import java.util.List;
-
-import Models.Continent;
-import Models.Country;
-import Models.State;
-import Models.Player;
-import Models.Map;
-import Utils.CommonUtil;
+import java.util.Objects;
 
 
 /**
@@ -23,6 +17,10 @@ public class MapView {
      * The constant CONSOLE_WIDTH.
      */
     public static final int CONSOLE_WIDTH = 80;
+    /**
+     * The constant ANSI_RESET.
+     */
+    public static final String ANSI_RESET = "\u001B[0m";
     /**
      * The D players.
      */
@@ -43,12 +41,6 @@ public class MapView {
      * The D continents.
      */
     List<Continent> d_continents;
-
-
-    /**
-     * The constant ANSI_RESET.
-     */
-    public static final String ANSI_RESET = "\u001B[0m";
 
 
     /**
