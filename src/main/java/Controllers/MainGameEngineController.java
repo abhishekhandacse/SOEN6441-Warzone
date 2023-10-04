@@ -47,9 +47,10 @@ public class MainGameEngineController {
         l_mainGameEngineController.initializeWarzoneGamePlay();
     }
 
+
     private void initializeWarzoneGamePlay(){
         BufferedReader l_bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        var l_infiniteLoop = true;
+        boolean l_infiniteLoop = true;
 
         while (l_infiniteLoop){
 			d_consoleLogger.writeLog("=========================================================================================");
