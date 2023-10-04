@@ -1,13 +1,13 @@
 package Models;
 
+import Utils.CommonUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import Utils.CommonUtil;
-
 /**
  * Model Class for Continent
- * 
+ *
  * @author Anurag Teckchandani
  */
 public class Continent {
