@@ -53,4 +53,21 @@ public class Order {
 	public Integer getD_numberOfArmiesToPlace() {
 		return d_numberOfArmiesToPlace;
 	}
+
+    public void execute(GameState p_gameState, Player p_player) {
+		if ("deploy".equals(this.d_orderAction)) {
+			if (this.validateDeployOrderCountry(p_player, this)) {
+				this.deployOrderExecution(this, p_gameState, p_player);
+				consoleLogger.writeLog("\nOrder has been executed successfully. " + this.getD_numberOfArmiesToPlace()
+						+ " number of armies has been deployed to country : "
+						+ this.getD_targetCountryName());
+			} else {
+				consoleLogger.writeLog(
+						"\nOrder is not executed as the target country given in the deploy command doesn't belong to player : "
+								+ p_player.getPlayerName());
+			}
+		} else {
+			consoleLogger.writeLog("Order was not executed due to an invalid Order Command");
+		}
+	}
 }
