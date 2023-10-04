@@ -54,7 +54,7 @@ public class Order {
 		return d_numberOfArmiesToPlace;
 	}
 
-    public void execute(GameState p_gameState, Player p_player) {
+    public void execute(State p_gameState, Player p_player) {
 		if ("deploy".equals(this.d_orderAction)) {
 			if (this.validateDeployOrderCountry(p_player, this)) {
 				this.deployOrderExecution(this, p_gameState, p_player);
@@ -71,7 +71,7 @@ public class Order {
 		}
 	}
 
-    private void deployOrderExecution(Order p_order, GameState p_gameState, Player p_player) {
+    private void deployOrderExecution(Order p_order, State p_gameState, Player p_player) {
 		for (Country l_country : p_gameState.getD_map().getD_countries()) {
 			if (l_country.getD_countryName().equalsIgnoreCase(p_order.getD_targetCountryName())) {
 				Integer l_armiesToUpdate = l_country.getD_armies() == null ? p_order.getD_numberOfArmiesToPlace()
