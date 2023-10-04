@@ -133,7 +133,7 @@ public class MainGameEngineController {
 		} 
     }
 
-    private void assignCountries(CommandHandler p_command) throws CommandValidationException, IOException {
+    public void assignCountries(CommandHandler p_command) throws CommandValidationException, IOException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
 		if (CommonUtil.isCollectionEmpty(l_operationsList)) {
 			d_playerController.assignCountries(d_state);
@@ -190,7 +190,7 @@ public class MainGameEngineController {
 		}
     }
 
-    private void loadMap(CommandHandler p_command) throws CommandValidationException {
+    public void loadMap(CommandHandler p_command) throws CommandValidationException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
 
 		if (Objects.isNull(l_operationsList)  || l_operationsList.isEmpty()) {
@@ -252,7 +252,7 @@ public class MainGameEngineController {
 		}
     }
 
-    private void saveMap(CommandHandler p_command) throws CommandValidationException, MapValidationException {
+    public void saveMap(CommandHandler p_command) throws CommandValidationException, MapValidationException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
 
 		if (l_operationsList == null  || l_operationsList.isEmpty()) {
@@ -290,7 +290,7 @@ public class MainGameEngineController {
 		}
     }
 
-    private void editCountry(CommandHandler p_command) throws IOException, CommandValidationException, MapValidationException {
+    public void editCountry(CommandHandler p_command) throws IOException, CommandValidationException, MapValidationException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
 		if (Objects.isNull(l_operationsList)  || l_operationsList.isEmpty()) {
 			throw new CommandValidationException("Invalid command. Please execute the 'editcountry' command in the provided format: editcountry -add countryID continentID -remove countryID");
