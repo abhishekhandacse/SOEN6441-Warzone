@@ -37,4 +37,20 @@ public class Order {
 	public void setD_numberOfArmiesToPlace(Integer p_numberOfArmiesToPlace) {
 		this.d_numberOfArmiesToPlace = p_numberOfArmiesToPlace;
 	}
+
+    public String getD_targetCountryName() {
+		return d_targetCountryName;
+	}
+
+	public String getD_orderAction() {
+		return d_orderAction;
+	}
+
+	public String getD_sourceCountryName() {
+		return d_sourceCountryName;
+	}
+
+	public Integer getD_numberOfArmiesToPlace() {
+		return d_numberOfArmiesToPlace;
+	}
 }
