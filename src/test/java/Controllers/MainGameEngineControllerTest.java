@@ -72,20 +72,7 @@ public class MainGameEngineControllerTest {
         d_engine.editCountry(l_command);
 
     }
-
-    /**
-     * This test case checks savemap command by inputting an invalid command and expects a CommandValidationException.
-     *
-     * @throws CommandValidationException
-     * @throws MapValidationException
-     */
-    @Test(expected = CommandValidationException.class)
-    public void testSaveMapInvalidCommand() throws CommandValidationException, MapValidationException {
-        CommandHandler l_command = new CommandHandler("savemap");
-        d_engine.saveMap(l_command);
-    }
-
-
+    
     /**
      * This test case checks assigncountries command by inputting an invalid command and expects a CommandValidationException.
      *

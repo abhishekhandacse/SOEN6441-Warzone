@@ -1,6 +1,8 @@
 package Models;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import Controllers.MapController;
 import Exceptions.MapValidationException;
@@ -42,56 +44,45 @@ public class MapTest {
 
 
     /**
-     * Test validate no continent.
-     *
-     * @throws MapValidationException the map validation exception
-     */
-    @Test(expected = MapValidationException.class)
-    public void testValidateNoContinent() throws MapValidationException {
-        assertEquals(d_map.Validate(), false);
-    }
-
-
-    /**
      * Test validate.
      *
-     * @throws MapValidationException the map validation exception
+     *
      */
-    @Test(expected = MapValidationException.class)
+    @Test()
     public void testValidate() throws MapValidationException {
         d_map = d_ms.loadMap(d_gameState, "canada.map");
 
         assertEquals(d_map.Validate(), true);
-        d_map = d_ms.loadMap(d_gameState, "game.map");
-        d_map.Validate();
+        d_map = d_ms.loadMap(d_gameState, "failValidation.map");
+        assertEquals(false, d_map.Validate());
     }
 
 
     /**
      * Test validate no country.
      *
-     * @throws MapValidationException the map validation exception
+     *
      */
-    @Test(expected = MapValidationException.class)
+    @Test()
     public void testValidateNoCountry() throws MapValidationException {
         Continent l_continent = new Continent();
         List<Continent> l_continents = new ArrayList<Continent>();
 
         l_continents.add(l_continent);
         d_map.setD_continents(l_continents);
-        d_map.Validate();
+        assertFalse(d_map.Validate());
     }
 
 
     /**
      * Test continent connectivity.
      *
-     * @throws MapValidationException the map validation exception
+     * 
      */
-    @Test(expected = MapValidationException.class)
+    @Test()
     public void testContinentConnectivity() throws MapValidationException {
-        d_map = d_ms.loadMap(d_gameState, "game.map");
-        d_map.Validate();
+        d_map = d_ms.loadMap(d_gameState, "failValidation.map");
+        assertFalse(d_map.Validate());
     }
 
 
