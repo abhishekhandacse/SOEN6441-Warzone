@@ -70,4 +70,14 @@ public class Order {
 			consoleLogger.writeLog("Order was not executed due to an invalid Order Command");
 		}
 	}
+
+    private void deployOrderExecution(Order p_order, GameState p_gameState, Player p_player) {
+		for (Country l_country : p_gameState.getD_map().getD_countries()) {
+			if (l_country.getD_countryName().equalsIgnoreCase(p_order.getD_targetCountryName())) {
+				Integer l_armiesToUpdate = l_country.getD_armies() == null ? p_order.getD_numberOfArmiesToPlace()
+						: l_country.getD_armies() + p_order.getD_numberOfArmiesToPlace();
+				l_country.setD_armies(l_armiesToUpdate);
+			}
+		}
+	}
 }
