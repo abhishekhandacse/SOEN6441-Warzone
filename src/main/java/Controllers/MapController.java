@@ -259,8 +259,10 @@ public class MapController {
 
         if (p_operation.equalsIgnoreCase("add") && p_argument.split(" ").length == 2) {
             p_mapToBeUpdated.addContinent(p_argument.split(" ")[0], Integer.parseInt(p_argument.split(" ")[1]));
+            consoleLogger.writeLog("Continent " + p_argument.split(" ")[0] + " added successfully!");
         } else if (p_operation.equalsIgnoreCase("remove") && p_argument.split(" ").length == 1) {
             p_mapToBeUpdated.removeContinent(p_argument.split(" ")[0]);
+            consoleLogger.writeLog("Continent " + p_argument.split(" ")[0] + " removed successfully!");
         } else {
             consoleLogger.writeLog("Continent couldn't be added/removed. Changes are not made");
         }
@@ -301,10 +303,12 @@ public class MapController {
     public Map addRemoveCountry(Map p_mapToBeUpdated, String p_operation, String p_argument) throws MapValidationException {
         if (p_operation.equalsIgnoreCase("add") && p_argument.split(" ").length == 2) {
             p_mapToBeUpdated.addCountry(p_argument.split(" ")[0], p_argument.split(" ")[1]);
+            consoleLogger.writeLog("Country " + p_argument.split(" ")[0] + " added successfully!");
         } else if (p_operation.equalsIgnoreCase("remove") && p_argument.split(" ").length == 1) {
             p_mapToBeUpdated.removeCountry(p_argument.split(" ")[0]);
+            consoleLogger.writeLog("Country " + p_argument.split(" ")[0] + " removed successfully!");
         } else {
-            consoleLogger.writeLog("Couldn't Save your changes");
+            consoleLogger.writeLog("Add/Remove Country Failed!");
         }
         return p_mapToBeUpdated;
     }
@@ -342,10 +346,12 @@ public class MapController {
     public Map addRemoveNeighbour(Map p_mapToBeUpdated, String p_operation, String p_argument) throws MapValidationException {
         if (p_operation.equalsIgnoreCase("add") && p_argument.split(" ").length == 2) {
             p_mapToBeUpdated.addCountryNeighbours(p_argument.split(" ")[0], p_argument.split(" ")[1]);
+            consoleLogger.writeLog("Country " + p_argument.split(" ")[1] + " added as neighbor to " + p_argument.split(" ")[0]);
         } else if (p_operation.equalsIgnoreCase("remove") && p_argument.split(" ").length == 2) {
             p_mapToBeUpdated.removeCountryNeighbours(p_argument.split(" ")[0], p_argument.split(" ")[1]);
+            consoleLogger.writeLog("Country " + p_argument.split(" ")[1] + " removed as neighbor to " + p_argument.split(" ")[0]);
         } else {
-            consoleLogger.writeLog("Couldn't Save your changes");
+            consoleLogger.writeLog("Add/Remove Neighbor Failed!");
         }
         return p_mapToBeUpdated;
     }

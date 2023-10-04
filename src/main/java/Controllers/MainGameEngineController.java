@@ -76,17 +76,20 @@ public class MainGameEngineController {
 
         while (l_infiniteLoop) {
             d_consoleLogger.writeLog("=========================================================================================");
-            d_consoleLogger.writeLog("Sequence of commands for playing a game.:");
+            d_consoleLogger.writeLog("List of commands for playing a game.:");
             d_consoleLogger.writeLog("=========================================================================================");
             d_consoleLogger.writeLog("Initiate the map: 'loadmap filename'.");
             d_consoleLogger.writeLog("Edit the map: 'editmap filename'.");
             d_consoleLogger.writeLog("Display the loaded map: use the command 'showmap'");
             d_consoleLogger.writeLog("Include or exclude a player : gameplayer -add playername -remove playername");
             d_consoleLogger.writeLog("Allocate countries : assigncountries");
-            d_consoleLogger.writeLog("Save the game : savegame filename");
-            d_consoleLogger.writeLog("Load the game : loadgame filename");
+            d_consoleLogger.writeLog("Save the map : savemap filename");
+            d_consoleLogger.writeLog("Load the map : loadmap filename");
             d_consoleLogger.writeLog("=========================================================================================");
+            d_consoleLogger.writeLog("");
+            d_consoleLogger.writeLog("");
             d_consoleLogger.writeLog("Input the game commands or input 'exit' to exit the game");
+            
             try {
                 String l_inputCommand = l_bufferedReader.readLine();
 
