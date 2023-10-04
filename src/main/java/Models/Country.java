@@ -15,23 +15,24 @@ public class Country {
      */
     ConsoleLogger consoleLogger = new ConsoleLogger();
     /**
-     * The D armies.
+     * The D armies is used to represent the number of armies a country currently has.
      */
     Integer d_armies;
     /**
-     * The D country id.
+     * The D country id represents the country id of the country .
      */
     Integer d_countryId;
     /**
-     * The D continent id.
+     * The D continent id represents the continent id of the continent a particular country lies in.
+     * It acts as a foreign key for continent model.
      */
     Integer d_continentId;
     /**
-     * The D country name.
+     * The D country name represents the name of the country
      */
     String d_countryName;
     /**
-     * The D adjacent country ids.
+     * The D adjacent country ids. represent the id of all other countries adjacent to it.
      */
     List<Integer> d_adjacentCountryIds = new ArrayList<Integer>();
     ;
@@ -39,9 +40,9 @@ public class Country {
     /**
      * Instantiates a new Country.
      *
-     * @param p_countryId   the p country id
-     * @param p_countryName the p country name
-     * @param p_continentId the p continent id
+     * @param p_countryId   the p country id is the id of country
+     * @param p_countryName the p country name is the name of the country
+     * @param p_continentId the p continent id is the id of the continent a particular country lies in.
      */
     public Country(int p_countryId, String p_countryName, int p_continentId) {
         d_countryId = p_countryId;
