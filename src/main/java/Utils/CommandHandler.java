@@ -10,13 +10,13 @@ public class CommandHandler {
 
 
     /**
-     * The D command.
+     * The D command. This variable is used to store the command string.
      */
     public String d_command;
 
 
     /**
-     * Instantiates a new Command handler.
+     * Instantiates a new Command handler. This is a contructor for commandhandler class
      *
      * @param p_command the p command
      */
@@ -26,7 +26,7 @@ public class CommandHandler {
 
 
     /**
-     * Get root command string.
+     * Getter method to get the root command string.
      *
      * @return the string
      */
@@ -36,9 +36,10 @@ public class CommandHandler {
 
 
     /**
-     * Get operations and arguments list.
+     * Get operations and arguments list. This method returns the list of arguments to check if the command is available in the list of arguments
      *
-     * @return the list
+     *
+     * @return the list of operations that are valid and can be performed
      */
     public List<Map<String, String>> getOperationsAndArguments() {
         String l_rootCommand = getRootCommand();
@@ -66,6 +67,12 @@ public class CommandHandler {
         return l_operations_list;
     }
 
+    /**
+     * Private function to get the  list of operations that can be used on the map.
+     *
+     * @param p_operation
+     * @return the valid list of operations.
+     */
 
     private Map<String, String> getOperationAndArgumentsMap(String p_operation) {
         Map<String, String> l_operationMap = new HashMap<String, String>();
