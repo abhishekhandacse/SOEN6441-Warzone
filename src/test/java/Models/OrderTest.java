@@ -85,11 +85,11 @@ public class OrderTest {
         Order l_order2 = new Order("deploy", "Canada", 15);
         l_order1.execute(l_gameState, l_player);
         Country l_countryIndia = l_gameState.getD_map().getCountryByName("India");
-        assertEquals(l_countryIndia.getD_armies().toString(), "20");
+        assertEquals("20", l_countryIndia.getD_armies().toString());
 
         l_order2.execute(l_gameState, l_player);
         Country l_countryCanada = l_gameState.getD_map().getCountryByName("Canada");
-        assertEquals(l_countryCanada.getD_armies().toString(), "15");
+        assertEquals("15", l_countryCanada.getD_armies().toString());
 
     }
 }

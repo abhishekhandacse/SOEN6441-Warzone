@@ -406,6 +406,13 @@ public class MapController {
         }
     }
 
+    /**
+     * This method writes the objects for country and organizes the border data.
+     * 
+     * @param p_gameState: Current Game State
+     * @param p_writer: Filewriter object
+     * @throws IOException
+     */
     private void writeCountryAndBoarderMetaData(State p_gameState, FileWriter p_writer) throws IOException {
         String l_countryMetaData;
         String l_bordersMetaData;
@@ -436,6 +443,13 @@ public class MapController {
         }
     }
 
+    /**
+     * This method writes the objects for continent and organizes the border data.
+     * 
+     * @param p_gameState: GameState
+     * @param p_writer: File Writer Object
+     * @throws IOException
+     */
     private void writeContinentMetadata(State p_gameState, FileWriter p_writer) throws IOException {
         p_writer.write(System.lineSeparator() + "[continents]" + System.lineSeparator());
         for (Continent l_continent : p_gameState.getD_map().getD_continents()) {

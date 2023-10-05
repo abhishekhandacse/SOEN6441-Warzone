@@ -144,6 +144,13 @@ public class Order {
         }
     }
 
+    /**
+     * This method maps the armies to be deployed for each country
+     * 
+     * @param p_order: Current order
+     * @param p_gameState: Game State
+     * @param p_player: Current Player
+     */
     private void deployOrderExecution(Order p_order, State p_gameState, Player p_player) {
         for (Country l_country : p_gameState.getD_map().getD_countries()) {
             if (l_country.getD_countryName().equalsIgnoreCase(p_order.getD_targetCountryName())) {
