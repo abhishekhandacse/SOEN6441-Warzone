@@ -7,22 +7,23 @@ This project involves the development of a complex Java program for playing the 
 
 ```
 ├── documentation/              <- All project related documentation and reports
+├── javadocs/                   <- Javadocs for the project
 ├── src/                        <- Source code for the project
 │  ├── main/
 │  │  ├── java/
-|  |  |  ├── Controller/        <- Controller classes
-|  |  |  ├── Exceptions         <- Exception Handling classes
-|  |  |  ├── Logger/            <- Logging classes
-|  |  |  ├── Models/            <- Model classes
-|  |  |  ├── Utils/             <- Utility classes
-|  |  |  ├── View/              <- View classes
-|  |  ├── maps/                 <- Map files
+│  │  │  ├── Controller/        <- Controller classes
+│  │  │  ├── Exceptions         <- Exception Handling classes
+│  │  │  ├── Logger/            <- Logging classes
+│  │  │  ├── Models/            <- Model classes
+│  │  │  ├── Utils/             <- Utility classes
+│  │  │  ├── View/              <- View classes
+│  │  ├── maps/                 <- Map files
 │  ├── test                     <- Tests for the project
 │  │  ├── java/          
-|  |  |  ├── Controller/        <- Controller Tests
-|  |  |  ├── Models/            <- Model Tests
-|  |  |  ├── Utils/             <- Utility Tests
-|  |  |  ├── View/              <- View Tests
+│  │  │  ├── Controller/        <- Controller Tests
+│  │  │  ├── Models/            <- Model Tests
+│  │  │  ├── Utils/             <- Utility Tests
+│  │  │  ├── View/              <- View Tests
 ├── .gitignore                  <- List of files and folders git should ignore
 └── README.md                   <- The top-level README for developers using this project 
 ```
