@@ -28,7 +28,7 @@ public class MapController {
     /**
      * The Console logger.
      */
-    ConsoleLogger consoleLogger = new ConsoleLogger();
+    ConsoleLogger d_consoleLogger = new ConsoleLogger();
 
     /**
      * Load map map.
@@ -89,6 +89,7 @@ public class MapController {
 
     /**
      * Load file list.
+     * //     *
      *
      * @param p_loadFileName the p load file name
      * @return the list
@@ -104,7 +105,7 @@ public class MapController {
             l_lineList = l_reader.lines().collect(Collectors.toList());
             l_reader.close();
         } catch (IOException l_e1) {
-            consoleLogger.writeLog("File not Found!");
+            d_consoleLogger.writeLog("File not Found!");
         }
         return l_lineList;
     }
@@ -209,12 +210,12 @@ public class MapController {
         File l_fileToBeEdited = new File(l_filePath);
 
         if (l_fileToBeEdited.createNewFile()) {
-            consoleLogger.writeLog("File has been created.");
+            d_consoleLogger.writeLog("File has been created.");
             Map l_map = new Map();
             l_map.setD_mapFile(p_editFilePath);
             p_gameState.setD_map(l_map);
         } else {
-            consoleLogger.writeLog("File already exists.");
+            d_consoleLogger.writeLog("File already exists.");
             this.loadMap(p_gameState, p_editFilePath);
             if (null == p_gameState.getD_map()) {
                 p_gameState.setD_map(new Map());
@@ -259,12 +260,12 @@ public class MapController {
 
         if (p_operation.equalsIgnoreCase("add") && p_argument.split(" ").length == 2) {
             p_mapToBeUpdated.addContinent(p_argument.split(" ")[0], Integer.parseInt(p_argument.split(" ")[1]));
-            consoleLogger.writeLog("Continent " + p_argument.split(" ")[0] + " added successfully!");
+            d_consoleLogger.writeLog("Continent " + p_argument.split(" ")[0] + " added successfully!");
         } else if (p_operation.equalsIgnoreCase("remove") && p_argument.split(" ").length == 1) {
             p_mapToBeUpdated.removeContinent(p_argument.split(" ")[0]);
-            consoleLogger.writeLog("Continent " + p_argument.split(" ")[0] + " removed successfully!");
+            d_consoleLogger.writeLog("Continent " + p_argument.split(" ")[0] + " removed successfully!");
         } else {
-            consoleLogger.writeLog("Continent couldn't be added/removed. Changes are not made");
+            d_consoleLogger.writeLog("Continent couldn't be added/removed. Changes are not made");
         }
 
         return p_mapToBeUpdated;
@@ -303,12 +304,12 @@ public class MapController {
     public Map addRemoveCountry(Map p_mapToBeUpdated, String p_operation, String p_argument) throws MapValidationException {
         if (p_operation.equalsIgnoreCase("add") && p_argument.split(" ").length == 2) {
             p_mapToBeUpdated.addCountry(p_argument.split(" ")[0], p_argument.split(" ")[1]);
-            consoleLogger.writeLog("Country " + p_argument.split(" ")[0] + " added successfully!");
+            d_consoleLogger.writeLog("Country " + p_argument.split(" ")[0] + " added successfully!");
         } else if (p_operation.equalsIgnoreCase("remove") && p_argument.split(" ").length == 1) {
             p_mapToBeUpdated.removeCountry(p_argument.split(" ")[0]);
-            consoleLogger.writeLog("Country " + p_argument.split(" ")[0] + " removed successfully!");
+            d_consoleLogger.writeLog("Country " + p_argument.split(" ")[0] + " removed successfully!");
         } else {
-            consoleLogger.writeLog("Add/Remove Country Failed!");
+            d_consoleLogger.writeLog("Add/Remove Country Failed!");
         }
         return p_mapToBeUpdated;
     }
@@ -346,12 +347,12 @@ public class MapController {
     public Map addRemoveNeighbour(Map p_mapToBeUpdated, String p_operation, String p_argument) throws MapValidationException {
         if (p_operation.equalsIgnoreCase("add") && p_argument.split(" ").length == 2) {
             p_mapToBeUpdated.addCountryNeighbours(p_argument.split(" ")[0], p_argument.split(" ")[1]);
-            consoleLogger.writeLog("Country " + p_argument.split(" ")[1] + " added as neighbor to " + p_argument.split(" ")[0]);
+            d_consoleLogger.writeLog("Country " + p_argument.split(" ")[1] + " added as neighbor to " + p_argument.split(" ")[0]);
         } else if (p_operation.equalsIgnoreCase("remove") && p_argument.split(" ").length == 2) {
             p_mapToBeUpdated.removeCountryNeighbours(p_argument.split(" ")[0], p_argument.split(" ")[1]);
-            consoleLogger.writeLog("Country " + p_argument.split(" ")[1] + " removed as neighbor to " + p_argument.split(" ")[0]);
+            d_consoleLogger.writeLog("Country " + p_argument.split(" ")[1] + " removed as neighbor to " + p_argument.split(" ")[0]);
         } else {
-            consoleLogger.writeLog("Add/Remove Neighbor Failed!");
+            d_consoleLogger.writeLog("Add/Remove Neighbor Failed!");
         }
         return p_mapToBeUpdated;
     }
@@ -376,7 +377,7 @@ public class MapController {
                     Models.Map l_currentMap = p_gameState.getD_map();
 
                     // Proceeds to save the map if it passes the validation check
-                    consoleLogger.writeLog("Validating Map......");
+                    d_consoleLogger.writeLog("Validating Map......");
                     boolean l_mapValidationStatus = l_currentMap.Validate();
                     if (l_mapValidationStatus) {
                         Files.deleteIfExists(Paths.get(CommonUtil.getMapFilePath(p_fileName)));
@@ -393,14 +394,14 @@ public class MapController {
                         l_writer.close();
                     }
                 } else {
-                    consoleLogger.writeLog("Validation Failed");
+                    d_consoleLogger.writeLog("Validation Failed");
                     return false;
                 }
             }
             return true;
         } catch (IOException l_e) {
             l_e.printStackTrace();
-            consoleLogger.writeLog("Error in saving map file");
+            d_consoleLogger.writeLog("Error in saving map file");
             return false;
         }
     }
@@ -450,7 +451,7 @@ public class MapController {
      * @param p_gameState the p game state
      */
     public void resetMap(State p_gameState) {
-        consoleLogger.writeLog("Map cannot be loaded, as it is invalid. Kindly provide valid map");
+        d_consoleLogger.writeLog("Map cannot be loaded, as it is invalid. Kindly provide valid map");
         p_gameState.setD_map(new Models.Map());
     }
 }

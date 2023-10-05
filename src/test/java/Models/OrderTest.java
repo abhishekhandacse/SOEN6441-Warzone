@@ -11,25 +11,24 @@ import org.junit.Test;
 
 
 /**
- * The type Order test.
+ * Test Cases for Order Model.
  */
 public class OrderTest {
 
 
     /**
-     * The D order details.
+     * The order details.
      */
     Order d_orderDetails;
 
 
     /**
-     * The D player info.
+     * The player info.
      */
     Player d_playerInfo;
 
-
     /**
-     * Sets .
+     * Initialization.
      */
     @Before
     public void setup() {
@@ -39,7 +38,7 @@ public class OrderTest {
 
 
     /**
-     * Test validate deploy order country.
+     * Test case to validate country for the deployed order.
      */
     @Test
     public void testValidateDeployOrderCountry() {
@@ -54,22 +53,22 @@ public class OrderTest {
 
 
     /**
-     * Testdeploy order execution.
+     * TestCase to validate the deploy order execution.
      */
     @Test
     public void testdeployOrderExecution() {
-        Order l_order1 = new Order("deploy", "India", 5);
-        Order l_order2 = new Order("deploy", "Canada", 15);
+       //Adding player and assigning countries
         Player l_player = new Player();
         List<Country> l_playersCountries = new ArrayList<Country>();
         l_playersCountries.add(new Country("India"));
         l_playersCountries.add(new Country("Canada"));
         l_player.setD_coutriesOwned(l_playersCountries);
 
+        // Creating list of countries
         List<Country> l_mapCountries = new ArrayList<Country>();
         Country l_country1 = new Country(1, "Canada", 1);
         Country l_country2 = new Country(1, "India", 2);
-        l_country2.setD_armies(5);
+        l_country2.setD_armies(10);
         Country l_country3 = new Country(1, "Japan", 2);
 
         l_mapCountries.add(l_country1);
@@ -81,9 +80,12 @@ public class OrderTest {
         State l_gameState = new State();
         l_gameState.setD_map(l_map);
 
+        //create deploy orders
+        Order l_order1 = new Order("deploy", "India", 10);
+        Order l_order2 = new Order("deploy", "Canada", 15);
         l_order1.execute(l_gameState, l_player);
         Country l_countryIndia = l_gameState.getD_map().getCountryByName("India");
-        assertEquals(l_countryIndia.getD_armies().toString(), "10");
+        assertEquals(l_countryIndia.getD_armies().toString(), "20");
 
         l_order2.execute(l_gameState, l_player);
         Country l_countryCanada = l_gameState.getD_map().getCountryByName("Canada");

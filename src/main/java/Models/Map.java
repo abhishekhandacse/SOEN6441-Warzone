@@ -1,14 +1,13 @@
 package Models;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import Exceptions.MapValidationException;
 import Logger.ConsoleLogger;
 import Utils.CommonUtil;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 
@@ -20,7 +19,7 @@ public class Map {
     /**
      * The Console logger.
      */
-    ConsoleLogger consoleLogger = new ConsoleLogger();
+    ConsoleLogger d_consoleLogger = new ConsoleLogger();
 
     /**
      * The D map file.
@@ -40,12 +39,12 @@ public class Map {
     HashMap<Integer, Boolean> d_countryReach = new HashMap<Integer, Boolean>();
 
     /**
-     * Sets d map file.
+     * Gets d continents.
      *
-     * @param p_mapFile the p map file
+     * @return the d continents
      */
-    public void setD_mapFile(String p_mapFile) {
-        this.d_mapFile = p_mapFile;
+    public List<Continent> getD_continents() {
+        return d_continents;
     }
 
     /**
@@ -58,24 +57,6 @@ public class Map {
     }
 
     /**
-     * Sets d countries.
-     *
-     * @param p_countries the p countries
-     */
-    public void setD_countries(List<Country> p_countries) {
-        this.d_countries = p_countries;
-    }
-
-    /**
-     * Gets d continents.
-     *
-     * @return the d continents
-     */
-    public List<Continent> getD_continents() {
-        return d_continents;
-    }
-
-    /**
      * Gets d countries.
      *
      * @return the d countries
@@ -85,12 +66,30 @@ public class Map {
     }
 
     /**
+     * Sets d countries.
+     *
+     * @param p_countries the p countries
+     */
+    public void setD_countries(List<Country> p_countries) {
+        this.d_countries = p_countries;
+    }
+
+    /**
      * Gets d map file.
      *
      * @return the d map file
      */
     public String getD_mapFile() {
         return d_mapFile;
+    }
+
+    /**
+     * Sets d map file.
+     *
+     * @param p_mapFile the p map file
+     */
+    public void setD_mapFile(String p_mapFile) {
+        this.d_mapFile = p_mapFile;
     }
 
     /**
@@ -198,9 +197,9 @@ public class Map {
      */
     public void checkCountries() {
         for (Country c : d_countries) {
-            consoleLogger.writeLog("Country Id " + c.getD_countryId());
-            consoleLogger.writeLog("Continent Id " + c.getD_continentId());
-            consoleLogger.writeLog("Neighbours:");
+            d_consoleLogger.writeLog("Country Id " + c.getD_countryId());
+            d_consoleLogger.writeLog("Continent Id " + c.getD_continentId());
+            d_consoleLogger.writeLog("Neighbours:");
             for (int i : c.getD_adjacentCountryIds()) {
                 System.out.println(i);
             }
@@ -226,17 +225,16 @@ public class Map {
      */
     public Boolean checkForNullObjects() throws MapValidationException {
         if (d_continents == null || d_continents.isEmpty()) {
-            consoleLogger.writeLog("Map must possess atleast one continent!");
+            d_consoleLogger.writeLog("Map must possess atleast one continent!");
         }
         if (d_countries == null || d_countries.isEmpty()) {
-            consoleLogger.writeLog("Map must possess atleast one country!");
-        }
-        else{
+            d_consoleLogger.writeLog("Map must possess atleast one country!");
+        } else {
             for (Country c : d_countries) {
-            if (c.getD_adjacentCountryIds().size() < 1) {
-                consoleLogger.writeLog(c.getD_countryName() + " does not possess any neighbour, hence isn't reachable!");
+                if (c.getD_adjacentCountryIds().size() < 1) {
+                    d_consoleLogger.writeLog(c.getD_countryName() + " does not possess any neighbour, hence isn't reachable!");
+                }
             }
-        }
         }
         return false;
     }
@@ -251,9 +249,8 @@ public class Map {
         boolean l_flagConnectivity = true;
         for (Continent c : d_continents) {
             if (null == c.getD_countries() || c.getD_countries().size() < 1) {
-                consoleLogger.writeLog(c.getD_continentName() + " has no countries, it must possess atleast 1 country");
-            }
-            else if (!subGraphConnectivity(c)) {
+                d_consoleLogger.writeLog(c.getD_continentName() + " has no countries, it must possess atleast 1 country");
+            } else if (!subGraphConnectivity(c)) {
                 l_flagConnectivity = false;
             }
         }
@@ -280,7 +277,7 @@ public class Map {
             if (!entry.getValue()) {
                 Country l_country = getCountry(entry.getKey());
                 String l_messageException = l_country.getD_countryName() + " in Continent " + p_continent.getD_continentName() + " is not reachable";
-                consoleLogger.writeLog(l_messageException);
+                d_consoleLogger.writeLog(l_messageException);
             }
         }
         return !l_continentCountry.containsValue(false);
@@ -327,7 +324,7 @@ public class Map {
      * @throws MapValidationException the map validation exception
      */
     public boolean checkConnectionOfCountry() throws MapValidationException {
-        if(d_countries == null || d_countries.isEmpty()){
+        if (d_countries == null || d_countries.isEmpty()) {
             return false;
         }
         for (Country c : d_countries) {
@@ -339,7 +336,7 @@ public class Map {
         for (Entry<Integer, Boolean> entry : d_countryReach.entrySet()) {
             if (!entry.getValue()) {
                 String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
-                consoleLogger.writeLog(l_exceptionMessage);
+                d_consoleLogger.writeLog(l_exceptionMessage);
             }
         }
         return !d_countryReach.containsValue(false);

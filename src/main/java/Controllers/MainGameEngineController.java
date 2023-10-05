@@ -21,7 +21,7 @@ import Utils.CommonUtil;
 
 /**
  * This class severs as the starting point of the game.
- * 
+ *
  * @author Anurag Teckchandani
  */
 public class MainGameEngineController {
@@ -47,16 +47,6 @@ public class MainGameEngineController {
     GamePlayerController d_playerController = new GamePlayerController();
 
     /**
-     * Getter method for d_state
-     *
-     * @return the d_state
-     */
-    public State getD_state() {
-        return d_state;
-    }
-
-
-    /**
      * Main Method: Accepts commands from the players and map them to corresponding logical actions.
      *
      * @param p_args the input arguments
@@ -66,6 +56,14 @@ public class MainGameEngineController {
         l_mainGameEngineController.initializeWarzoneGamePlay();
     }
 
+    /**
+     * Getter method for d_state
+     *
+     * @return the d_state
+     */
+    public State getD_state() {
+        return d_state;
+    }
 
     /**
      * This method displays the commands available to the player and handles the commands entered by them.
@@ -89,7 +87,7 @@ public class MainGameEngineController {
             d_consoleLogger.writeLog("");
             d_consoleLogger.writeLog("");
             d_consoleLogger.writeLog("Input the game commands or input 'exit' to exit the game");
-            
+
             try {
                 String l_inputCommand = l_bufferedReader.readLine();
 
@@ -103,9 +101,9 @@ public class MainGameEngineController {
 
     /***
      * commandHandler handles all the commands present to the player and maps them to the corresponding methods. If the user inputs 'exit', it will break the loop and exit the game.
-     * 
+     *
      * @param p_inputCommand: The command inputted by the user.
-     * 
+     *
      * @throws MapValidationException
      * @throws CommandValidationException
      * @throws IOException
@@ -173,7 +171,7 @@ public class MainGameEngineController {
      *
      * @param p_command Command entered by the player.
      * @throws CommandValidationException the command validation exception
-     * @throws IOException the io exception
+     * @throws IOException                the io exception
      */
     public void assignCountries(CommandHandler p_command) throws CommandValidationException, IOException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
@@ -217,7 +215,7 @@ public class MainGameEngineController {
 
     /**
      * This method adds or remove players in the game using the 'gameplayer' command.
-     * 
+     *
      * @param p_command: Command entered by the player.
      * @throws CommandValidationException
      */
@@ -274,7 +272,7 @@ public class MainGameEngineController {
 
     /**
      * This method validates the map edited by the player, if the map is validated user can proceed else player has to make changes to validate the map.
-     * 
+     *
      * @param p_command: Command entered by the player.
      * @throws MapValidationException
      * @throws CommandValidationException
@@ -298,8 +296,8 @@ public class MainGameEngineController {
     }
 
     /**
-     * EditMap will take the filename by the player, if the file doesn't exist it will 
-     * 
+     * EditMap will take the filename by the player, if the file doesn't exist it will
+     *
      * @param p_command: Command entered by the player.
      * @throws IOException
      * @throws CommandValidationException
@@ -349,8 +347,8 @@ public class MainGameEngineController {
     }
 
     /**
-     * This method contains the logic add neibhor to a country and if neighbor doesn't exist, show an error message. 
-     * 
+     * This method contains the logic add neibhor to a country and if neighbor doesn't exist, show an error message.
+     *
      * @param p_command: Command entered by the player.
      * @throws CommandValidationException
      * @throws MapValidationException
@@ -373,7 +371,7 @@ public class MainGameEngineController {
     }
 
     /**
-     * This Method adds/remove the country from a continent using the 'editcountry' command.  
+     * This Method adds/remove the country from a continent using the 'editcountry' command.
      *
      * @param p_command Command entered by the player.
      * @throws IOException
@@ -403,7 +401,7 @@ public class MainGameEngineController {
      * @param p_command Command entered by the player.
      * @throws IOException
      * @throws CommandValidationException
-     * @throws MapValidationException 
+     * @throws MapValidationException
      */
     public void editContinent(CommandHandler p_command) throws IOException, CommandValidationException, MapValidationException {
         List<Map<String, String>> l_operationsList = p_command.getOperationsAndArguments();
