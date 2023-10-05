@@ -18,7 +18,7 @@ import static org.junit.Assert.assertThat;
 public class CommonUtilTest {
 
     /**
-     * Test string null.
+     * Test string null. to check if string is null. It should result true.
      */
     @Test
     public void testStringNull() {
@@ -31,7 +31,7 @@ public class CommonUtilTest {
     }
 
     /**
-     * Test string empty.
+     * Test string empty. To check if String entered is empty. Result should be true
      */
     @Test
     public void testStringEmpty() {
@@ -43,7 +43,7 @@ public class CommonUtilTest {
     }
 
     /**
-     * Test string valid.
+     * Test string valid. To check if string entered is valid and not empty. Result should be false
      */
     @Test
     public void testStringValid() {
@@ -55,7 +55,7 @@ public class CommonUtilTest {
     }
 
     /**
-     * Test valid object passed.
+     * Test valid object passed. To check if the object is valid.
      */
     @Test
     public void testValidObjectPassed() {
@@ -67,7 +67,7 @@ public class CommonUtilTest {
     }
 
     /**
-     * Test in valid object passed.
+     * Test in valid object passed. to check if the object is not null.
      */
     @Test
     public void testInValidObjectPassed() {
@@ -79,7 +79,7 @@ public class CommonUtilTest {
     }
 
     /**
-     * Test empty collection.
+     * Test empty collection. TO check if the collection passed is empty.
      */
     @Test
     public void testEmptyCollection() {
@@ -91,7 +91,7 @@ public class CommonUtilTest {
     }
 
     /**
-     * Test collection not empty.
+     * Test collection not empty.To check if the collection passed is not empty.
      */
     @Test
     public void testCollectionNotEmpty() {
@@ -104,7 +104,7 @@ public class CommonUtilTest {
 
 
     /**
-     * Test empty map.
+     * Test empty map.To check if the map passed is  empty.
      */
     @Test
     public void TestEmptyMap() {
@@ -116,7 +116,7 @@ public class CommonUtilTest {
     }
 
     /**
-     * Test map not empty.
+     * Test map not empty. To check if the map passed is not empty.
      */
     @Test
     public void TestMapNotEmpty() {
@@ -129,7 +129,7 @@ public class CommonUtilTest {
     }
 
     /**
-     * Test pass file name.
+     * Test pass file name.  To check if valid file name is passed.
      */
     @Test
     public void TestPassFileName() {
