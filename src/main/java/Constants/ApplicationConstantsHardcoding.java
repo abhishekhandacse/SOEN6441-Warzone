@@ -1,2 +1,4 @@
-package PACKAGE_NAME;public class ApplicationConstantsHardcoding {
+package Constants;
+
+public class ApplicationConstantsHardcoding {
 }
