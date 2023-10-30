@@ -1,2 +1,5 @@
-package Constants;public class ApplicationConstantsHardcodingTest {
+package Constants;
+
+public class ApplicationConstantsHardcodingTest {
+// Empty test class
 }
