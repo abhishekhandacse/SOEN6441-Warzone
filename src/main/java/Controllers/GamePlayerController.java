@@ -277,7 +277,7 @@ public class GamePlayerController {
 
     public void createDeployOrder(String p_commandEntered, Player p_player) {
         // Retrieve the list of orders from the player or create a new list if it doesn't exist.
-        List<Order> l_orders = CommonUtil.isCollectionEmpty(p_player.getD_ordersToExecute()) ? new ArrayList<>()
+        List<Deploy> l_orders = CommonUtil.isCollectionEmpty(p_player.getD_ordersToExecute()) ? new ArrayList<>()
                 : p_player.getD_ordersToExecute();
 
         // Split the input command to extract relevant information.
@@ -290,7 +290,7 @@ public class GamePlayerController {
             d_consoleLogger.writeLog("Given deploy order can't be executed as armies in deploy order exceed player's unallocated armies");
         } else {
             // Create an Order object based on the command and add it to the list of orders.
-            Order l_orderObject = new Order(p_commandEntered.split(" ")[0], l_countryName,
+            Deploy l_orderObject = new Deploy(p_commandEntered.split(" ")[0], l_countryName,
                     Integer.parseInt(l_noOfArmies));
             l_orders.add(l_orderObject);
 

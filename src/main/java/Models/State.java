@@ -19,7 +19,7 @@ public class State {
     /**
      * The D unexecuted orders.
      */
-    List<Order> d_unexecutedOrders;
+    List<Deploy> d_unexecutedOrders;
     /**
      * The D error.
      */
@@ -66,7 +66,7 @@ public class State {
      *
      * @return the d unexecuted orders
      */
-    public List<Order> getD_unexecutedOrders() {
+    public List<Deploy> getD_unexecutedOrders() {
         return d_unexecutedOrders;
     }
 
@@ -75,7 +75,7 @@ public class State {
      *
      * @param p_unexecutedOrders the p unexecuted orders
      */
-    public void setD_unexecutedOrders(List<Order> p_unexecutedOrders) {
+    public void setD_unexecutedOrders(List<Deploy> p_unexecutedOrders) {
         this.d_unexecutedOrders = p_unexecutedOrders;
     }
 

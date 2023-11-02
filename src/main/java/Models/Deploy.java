@@ -5,7 +5,7 @@ import Logger.ConsoleLogger;
 /**
  * The type Order.
  */
-public class Order {
+public class Deploy {
 
     /**
      * The Console logger.
@@ -31,13 +31,13 @@ public class Order {
     /**
      * The Order obj.
      */
-    Order orderObj;
+    Deploy orderObj;
 
 
     /**
      * Instantiates a new Order.
      */
-    public Order() {
+    public Deploy() {
     }
 
     /**
@@ -47,7 +47,7 @@ public class Order {
      * @param p_targetCountryName     the p target country name
      * @param p_numberOfArmiesToPlace the p number of armies to place
      */
-    public Order(String p_orderAction, String p_targetCountryName, Integer p_numberOfArmiesToPlace) {
+    public Deploy(String p_orderAction, String p_targetCountryName, Integer p_numberOfArmiesToPlace) {
         this.d_orderAction = p_orderAction;
         this.d_targetCountryName = p_targetCountryName;
         this.d_numberOfArmiesToPlace = p_numberOfArmiesToPlace;
@@ -151,7 +151,7 @@ public class Order {
      * @param p_gameState: Game State
      * @param p_player: Current Player
      */
-    private void deployOrderExecution(Order p_order, State p_gameState, Player p_player) {
+    private void deployOrderExecution(Deploy p_order, State p_gameState, Player p_player) {
         for (Country l_country : p_gameState.getD_map().getD_countries()) {
             if (l_country.getD_countryName().equalsIgnoreCase(p_order.getD_targetCountryName())) {
                 Integer l_armiesToUpdate = l_country.getD_armies() == null ? p_order.getD_numberOfArmiesToPlace() : l_country.getD_armies() + p_order.getD_numberOfArmiesToPlace();
@@ -167,7 +167,7 @@ public class Order {
      * @param p_order  the p order
      * @return the boolean
      */
-    public boolean validateDeployOrderCountry(Player p_player, Order p_order) {
+    public boolean validateDeployOrderCountry(Player p_player, Deploy p_order) {
         Country l_country = p_player.getD_coutriesOwned().stream().filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(p_order.getD_targetCountryName())).findFirst().orElse(null);
         return l_country != null;
     }

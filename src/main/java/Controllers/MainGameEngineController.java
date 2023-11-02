@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.Deploy;
 import Views.MapView;
 
 import java.io.BufferedReader;
@@ -12,7 +13,6 @@ import java.util.Objects;
 import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 import Logger.ConsoleLogger;
-import Models.Order;
 import Models.Player;
 import Models.State;
 import Utils.CommandHandler;
@@ -195,7 +195,7 @@ public class MainGameEngineController {
                 // Executing orders
                 while (d_playerController.unexecutedOrdersExists(d_state.getD_players())) {
                     for (Player l_player : d_state.getD_players()) {
-                        Order l_order = l_player.nextOrder();
+                        Deploy l_order = l_player.nextOrder();
                         if (l_order != null)
                             l_order.execute(d_state, l_player);
                     }

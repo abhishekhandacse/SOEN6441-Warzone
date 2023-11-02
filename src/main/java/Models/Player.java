@@ -32,7 +32,7 @@ public class Player {
     /**
      * The D orders to execute represents the list of orders to be executed by the player.
      */
-    List<Order> d_ordersToExecute;
+    List<Deploy> d_ordersToExecute;
     /**
      * The D no of unallocated armies represents the number of unallocated armies for the player.
      */
@@ -137,7 +137,7 @@ public class Player {
      *
      * @return The list of orders to be executed.
      */
-    public List<Order> getD_ordersToExecute() {
+    public List<Deploy> getD_ordersToExecute() {
         return d_ordersToExecute;
     }
 
@@ -146,7 +146,7 @@ public class Player {
      *
      * @param p_ordersToExecute The list of orders to be executed.
      */
-    public void setD_ordersToExecute(List<Order> p_ordersToExecute) {
+    public void setD_ordersToExecute(List<Deploy> p_ordersToExecute) {
         this.d_ordersToExecute = p_ordersToExecute;
     }
 
@@ -223,11 +223,11 @@ public class Player {
      *
      * @return The next order to be executed or null if there are no orders.
      */
-    public Order nextOrder() {
+    public Deploy nextOrder() {
         if (CommonUtil.isCollectionEmpty(this.d_ordersToExecute)) {
             return null;
         }
-        Order l_order = this.d_ordersToExecute.get(0);
+        Deploy l_order = this.d_ordersToExecute.get(0);
         this.d_ordersToExecute.remove(l_order);
         return l_order;
     }

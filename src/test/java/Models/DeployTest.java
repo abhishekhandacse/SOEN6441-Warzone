@@ -13,13 +13,13 @@ import org.junit.Test;
 /**
  * Test Cases for Order Model.
  */
-public class OrderTest {
+public class DeployTest {
 
 
     /**
      * The order details.
      */
-    Order d_orderDetails;
+    Deploy d_orderDetails;
 
 
     /**
@@ -32,7 +32,7 @@ public class OrderTest {
      */
     @Before
     public void setup() {
-        d_orderDetails = new Order();
+        d_orderDetails = new Deploy();
         d_playerInfo = new Player();
     }
 
@@ -81,8 +81,8 @@ public class OrderTest {
         l_gameState.setD_map(l_map);
 
         //create deploy orders
-        Order l_order1 = new Order("deploy", "India", 10);
-        Order l_order2 = new Order("deploy", "Canada", 15);
+        Deploy l_order1 = new Deploy("deploy", "India", 10);
+        Deploy l_order2 = new Deploy("deploy", "Canada", 15);
         l_order1.execute(l_gameState, l_player);
         Country l_countryIndia = l_gameState.getD_map().getCountryByName("India");
         assertEquals("20", l_countryIndia.getD_armies().toString());
