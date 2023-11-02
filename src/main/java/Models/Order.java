@@ -1,6 +1,6 @@
 package Models;
 
-public interface OrderI {
+public interface Order {
     public void execute(GameState p_gameState);
     public boolean valid(GameState p_gameState);
     public void printOrder();
