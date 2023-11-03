@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
@@ -15,81 +16,111 @@ import org.junit.Test;
  */
 public class DeployTest {
 
-
     /**
-     * The order details.
+     * First Player
      */
-    Deploy d_orderDetails;
-
+    ModelPlayer d_player1;
 
     /**
-     * The player info.
+     * Second Player
      */
-    Player d_playerInfo;
+    ModelPlayer d_player2;
 
     /**
-     * Initialization.
+     * First Deploy Order.
+     */
+    Deploy d_deployOrder1;
+
+    /**
+     * Second Deploy Order.
+     */
+    Deploy d_deployOrder2;
+
+    /**
+     * Game State.
+     */
+    GameState d_gameState = new GameState();
+
+    /**
+     * The setup is called before each test case of this class is executed.
      */
     @Before
     public void setup() {
-        d_orderDetails = new Deploy();
-        d_playerInfo = new Player();
-    }
+        d_player1 = new ModelPlayer();
+        d_player1.setPlayerName("avni");
 
+        d_player2 = new ModelPlayer();
+        d_player2.setPlayerName("priya");
 
-    /**
-     * Test case to validate country for the deployed order.
-     */
-    @Test
-    public void testValidateDeployOrderCountry() {
-        d_orderDetails.setD_targetCountryName("India");
-        List<Country> l_countryList = new ArrayList<Country>();
-        l_countryList.add(new Country("India"));
-        l_countryList.add(new Country("Canada"));
-        d_playerInfo.setD_coutriesOwned(l_countryList);
-        boolean l_actualBoolean = d_orderDetails.validateDeployOrderCountry(d_playerInfo, d_orderDetails);
-        assertTrue(l_actualBoolean);
-    }
+        List<ModelCountry> l_countryList = new ArrayList<ModelCountry>();
+        l_countryList.add(new ModelCountry("India"));
+        l_countryList.add(new ModelCountry("Canada"));
+        d_player1.setD_coutriesOwned(l_countryList);
+        d_player2.setD_coutriesOwned(l_countryList);
 
-
-    /**
-     * TestCase to validate the deploy order execution.
-     */
-    @Test
-    public void testdeployOrderExecution() {
-       //Adding player and assigning countries
-        Player l_player = new Player();
-        List<Country> l_playersCountries = new ArrayList<Country>();
-        l_playersCountries.add(new Country("India"));
-        l_playersCountries.add(new Country("Canada"));
-        l_player.setD_coutriesOwned(l_playersCountries);
-
-        // Creating list of countries
-        List<Country> l_mapCountries = new ArrayList<Country>();
-        Country l_country1 = new Country(1, "Canada", 1);
-        Country l_country2 = new Country(1, "India", 2);
-        l_country2.setD_armies(10);
-        Country l_country3 = new Country(1, "Japan", 2);
+        List<ModelCountry> l_mapCountries = new ArrayList<ModelCountry>();
+        ModelCountry l_country1 = new ModelCountry(1, "Canada", 1);
+        ModelCountry l_country2 = new ModelCountry(2, "India", 2);
+        l_country2.setD_armies(5);
 
         l_mapCountries.add(l_country1);
         l_mapCountries.add(l_country2);
-        l_mapCountries.add(l_country3);
 
         Map l_map = new Map();
-        l_map.setD_countries(l_mapCountries);
-        State l_gameState = new State();
-        l_gameState.setD_map(l_map);
+        l_map.setD_allCountries(l_mapCountries);
+        d_gameState.setD_map(l_map);
 
-        //create deploy orders
-        Deploy l_order1 = new Deploy("deploy", "India", 10);
-        Deploy l_order2 = new Deploy("deploy", "Canada", 15);
-        l_order1.execute(l_gameState, l_player);
-        Country l_countryIndia = l_gameState.getD_map().getCountryByName("India");
-        assertEquals("20", l_countryIndia.getD_armies().toString());
+        d_deployOrder1 = new Deploy(d_player1, "India", 5);
+        d_deployOrder2 = new Deploy(d_player2, "Canada", 15);
+    }
 
-        l_order2.execute(l_gameState, l_player);
-        Country l_countryCanada = l_gameState.getD_map().getCountryByName("Canada");
+    /**
+     * Used to test country name entered by player in deploy command to check if the
+     * entered country name belongs to player or not. If it does not belongs to
+     * player, order will not be executed.
+     */
+    @Test
+    public void testValidateDeployOrderCountry() {
+        boolean l_actualBoolean = d_deployOrder1.valid(d_gameState);
+        assertTrue(l_actualBoolean);
+        boolean l_actualBoolean2 = d_deployOrder2.valid(d_gameState);
+        assertTrue(l_actualBoolean2);
+    }
+
+    /**
+     * Used to test execution of deploy order and check if required armies are
+     * deployed at country level or not.
+     */
+    @Test
+    public void testDeployOrderExecution() {
+        d_deployOrder1.execute(d_gameState);
+        ModelCountry l_countryIndia = d_gameState.getD_map().getCountryByName("India");
+        assertEquals("10", l_countryIndia.getD_armies().toString());
+
+        d_deployOrder2.execute(d_gameState);
+        ModelCountry l_countryCanada = d_gameState.getD_map().getCountryByName("Canada");
         assertEquals("15", l_countryCanada.getD_armies().toString());
+    }
 
+    /**
+     * Tests deploy order logic to see if required order is created and armies are
+     * re-calculated.
+     *
+     * @throws InvalidCommand if given command is invalid
+     */
+    @Test
+    public void testDeployOrder() throws InvalidCommand {
+        ModelPlayer l_player = new ModelPlayer("Maze");
+        l_player.setD_noOfUnallocatedArmies(10);
+        ModelCountry l_country = new ModelCountry(1, "Japan", 1);
+        l_player.setD_coutriesOwned(Arrays.asList(l_country));
+
+        l_player.createDeployOrder("deploy Japan 4");
+
+        assertEquals(l_player.getD_noOfUnallocatedArmies().toString(), "6");
+        assertEquals(l_player.getD_ordersToExecute().size(), 1);
+        Deploy l_order = (Deploy) l_player.order_list.get(0);
+        assertEquals("Japan", l_order.d_nameOfTargetCountry);
+        assertEquals("4", String.valueOf(l_order.d_quantityOfArmiesToPlace));
     }
 }
