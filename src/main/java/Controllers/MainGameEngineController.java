@@ -14,7 +14,7 @@ import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 import Logger.ConsoleLogger;
 import Models.Player;
-import Models.State;
+import Models.GameState;
 import Utils.CommandHandler;
 import Utils.CommonUtil;
 
@@ -34,7 +34,7 @@ public class MainGameEngineController {
     /**
      * d_state: It is used to manage the state of the game.
      */
-    State d_state = new State();
+    GameState d_state = new GameState();
 
     /**
      * d_mapController: It is used to access and modify the current map.
@@ -61,7 +61,7 @@ public class MainGameEngineController {
      *
      * @return the d_state
      */
-    public State getD_state() {
+    public GameState getD_state() {
         return d_state;
     }
 

@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * The type State.
  */
-public class State {
+public class GameState {
 
 
     /**
