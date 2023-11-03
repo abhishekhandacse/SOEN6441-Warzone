@@ -9,19 +9,32 @@ public class GameState {
 
 
     /**
-     * The D map.
+     * The map.
      */
     Map d_map;
+
     /**
-     * The D players.
+     * The players.
      */
-    List<Player> d_players;
+    List<Player> d_playersList;
+
     /**
-     * The D unexecuted orders.
+     * The unexecuted orders.
      */
-    List<Deploy> d_unexecutedOrders;
+    List<Order> d_unexecutedOrdersList;
+
+     /**
+      * The load command
+      */
+    Boolean d_loadCommand = false;
+
+	/**
+     * Log Buffer object
+     */
+	ModelLogBuffer d_logBuffer = new ModelLogBuffer();
+    
     /**
-     * The D error.
+     * The error.
      */
     String d_error;
 
@@ -30,8 +43,8 @@ public class GameState {
      *
      * @return the d players
      */
-    public List<Player> getD_players() {
-        return d_players;
+    public List<Player> getD_playersList() {
+        return d_playersList;
     }
 
     /**
@@ -39,8 +52,8 @@ public class GameState {
      *
      * @param p_players the p players
      */
-    public void setD_players(List<Player> p_players) {
-        this.d_players = p_players;
+    public void setD_playersList(List<Player> p_players) {
+        this.d_playersList = p_players;
     }
 
     /**

@@ -179,28 +179,28 @@ public class MainGameEngineController {
             d_playerController.assignCountries(d_state);
             d_playerController.assignColors(d_state);
 
-            while (!CommonUtil.isCollectionEmpty(d_state.getD_players())) {
+            while (!CommonUtil.isCollectionEmpty(d_state.getD_playersList())) {
                 d_consoleLogger.writeLog("\n============================ Main Game Loop Starts ============================\n");
                 // Assigning armies to players
                 d_playerController.assignArmies(d_state);
                 d_consoleLogger.writeLog("\nTo deploy armies use command: deploy countryID num \n");
                 // Issuing order for players
-                while (d_playerController.unassignedArmiesExists(d_state.getD_players())) {
-                    for (Player l_player : d_state.getD_players()) {
+                while (d_playerController.unassignedArmiesExists(d_state.getD_playersList())) {
+                    for (Player l_player : d_state.getD_playersList()) {
                         if (l_player.getD_noOfUnallocatedArmies() != null && l_player.getD_noOfUnallocatedArmies() != 0)
                             l_player.issueOrder();
                     }
                 }
 
                 // Executing orders
-                while (d_playerController.unexecutedOrdersExists(d_state.getD_players())) {
-                    for (Player l_player : d_state.getD_players()) {
+                while (d_playerController.unexecutedOrdersExists(d_state.getD_playersList())) {
+                    for (Player l_player : d_state.getD_playersList()) {
                         Deploy l_order = l_player.nextOrder();
                         if (l_order != null)
                             l_order.execute(d_state, l_player);
                     }
                 }
-                MapView l_mapView = new MapView(d_state, d_state.getD_players());
+                MapView l_mapView = new MapView(d_state, d_state.getD_playersList());
                 l_mapView.showMap();
                 d_consoleLogger.writeLog("To continue for next turn, input 'Y'/'y', or to exit, input 'N'/'n'.");
                 BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
