@@ -18,88 +18,83 @@ import java.util.List;
  */
 public class MapTest {
 
-    /**
-     * The D map.
-     */
     Map d_map;
-    /**
-     * The D ms.
-     */
-    MapController d_ms;
-    /**
-     * The D game state.
-     */
+    MapService d_ms;
     GameState d_gameState;
 
-
     /**
-     * Before validate test.
+     * Checking Map Model Operations
      */
     @Before
-    public void beforeValidateTest() {
-        d_map = new Map();
-        d_gameState = new GameState();
-        d_ms = new MapController();
+    public void beforeValidateTest(){
+        d_map=new Map();
+        d_gameState=new GameState();
+        d_ms= new MapService();
     }
 
+    /**
+     * Checking {@link InvalidMap} for no continent in Map
+     * @throws InvalidMap Exception
+     */
+    @Test (expected = InvalidMap.class)
+    public void testValidateNoContinent() throws InvalidMap{
+        assertEquals(d_map.Validate(), false);
+    }
 
     /**
-     * Test validate.
+     * Tests a valid and invalid Map for Validate function
      *
-     *
+     * @throws InvalidMap Exception
      */
-    @Test()
-    public void testValidate() throws MapValidationException {
-        d_map = d_ms.loadMap(d_gameState, "canada.map");
+    @Test (expected = InvalidMap.class)
+    public void testValidate() throws InvalidMap {
+        d_map= d_ms.loadMap(d_gameState, "canada.map");
 
         assertEquals(d_map.Validate(), true);
-        d_map = d_ms.loadMap(d_gameState, "failValidation.map");
-        assertEquals(false, d_map.Validate());
+        d_map= d_ms.loadMap(d_gameState, "swiss.map");
+        d_map.Validate();
     }
 
-
     /**
-     * Test validate no country.
+     * Checking {@link InvalidMap} for no country in Map
      *
-     *
+     * @throws InvalidMap Exception
      */
-    @Test()
-    public void testValidateNoCountry() throws MapValidationException {
+    @Test (expected = InvalidMap.class)
+    public void testValidateNoCountry() throws InvalidMap{
         Continent l_continent = new Continent();
-        List<Continent> l_continents = new ArrayList<Continent>();
+        List <Continent> l_continents = new ArrayList<Continent>();
 
         l_continents.add(l_continent);
-        d_map.setD_continents(l_continents);
-        assertFalse(d_map.Validate());
+        d_map.setD_allContinents(l_continents);
+        d_map.Validate();
     }
 
-
     /**
-     * Test continent connectivity.
+     * Checks Continent connectivity of an unconnected continent
      *
-     * 
+     * @throws InvalidMap Exception
      */
-    @Test()
-    public void testContinentConnectivity() throws MapValidationException {
-        d_map = d_ms.loadMap(d_gameState, "failValidation.map");
-        assertFalse(d_map.Validate());
+    @Test (expected = InvalidMap.class)
+    public void testContinentConnectivity() throws  InvalidMap{
+        d_map= d_ms.loadMap(d_gameState, "continentConnectivity.map");
+        d_map.Validate();
     }
 
-
     /**
-     * Test country neighbors.
+     * Checks Country Connectivity for not connected countries
      *
-     * @throws MapValidationException the map validation exception
+     * @throws InvalidMap Exception
      */
-    @Test(expected = MapValidationException.class)
-    public void testCountryNeighbors() throws MapValidationException {
+    @Test(expected = InvalidMap.class)
+    public void testCountryConnectivity() throws InvalidMap{
         d_map.addContinent("Asia", 10);
-        d_map.addCountry("Paistan", "Asia");
-        d_map.addCountry("Japan", "Asia");
-        d_map.addCountry("Sri Lanka", "Asia");
-        d_map.addCountryNeighbours("Paistan", "Japan");
-        d_map.addCountryNeighbours("Japan", "Paistan");
-        d_map.addCountry("Paistan", "Sri Lanka");
-        d_map.checkConnectionOfCountry();
+        d_map.addCountry("India", "Asia");
+        d_map.addCountry("China", "Asia");
+        d_map.addCountry("Maldives", "Asia");
+        d_map.addCountryNeighbour("India", "China");
+        d_map.addCountryNeighbour("China", "India");
+        d_map.addCountry("India", "Maldives");
+        d_map.checkCountryConnectivity();
     }
 }
