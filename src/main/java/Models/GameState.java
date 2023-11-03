@@ -32,7 +32,7 @@ public class GameState {
      * Log Buffer object
      */
 	ModelLogBuffer d_logBuffer = new ModelLogBuffer();
-    
+
     /**
      * The error.
      */
@@ -75,24 +75,6 @@ public class GameState {
     }
 
     /**
-     * Gets d unexecuted orders.
-     *
-     * @return the d unexecuted orders
-     */
-    public List<Deploy> getD_unexecutedOrders() {
-        return d_unexecutedOrders;
-    }
-
-    /**
-     * Sets d unexecuted orders.
-     *
-     * @param p_unexecutedOrders the p unexecuted orders
-     */
-    public void setD_unexecutedOrders(List<Deploy> p_unexecutedOrders) {
-        this.d_unexecutedOrders = p_unexecutedOrders;
-    }
-
-    /**
      * Gets error.
      *
      * @return the error
@@ -109,5 +91,39 @@ public class GameState {
     public void setError(String p_error) {
         this.d_error = p_error;
     }
+
+	public boolean getD_loadCommand() {
+		return this.d_loadCommand;
+	}
+
+	public void setD_loadCommand() {
+		this.d_loadCommand = true;
+	}
+
+    /**
+     * Gets d unexecuted orders.
+     *
+     * @return the d unexecuted orders
+     */
+	public List<Order> getD_unexecutedOrdersList() {
+		return d_unexecutedOrdersList;
+	}
+
+    /**
+     * Sets d unexecuted orders.
+     *
+     * @param p_unexecutedOrders the p unexecuted orders
+     */
+	public void setD_unexecutedOrdersList(List<Order> p_unexecutedOrders) {
+		this.d_unexecutedOrdersList = p_unexecutedOrders;
+	}
+
+	public String getRecentLog() {
+		return d_logBuffer.getD_logMessage();
+	}
+
+	public void updateLog(String p_logMessage, String p_logType) {
+		d_logBuffer.currentLog(p_logMessage, p_logType);
+	}
 
 }
