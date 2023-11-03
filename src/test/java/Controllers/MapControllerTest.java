@@ -4,7 +4,7 @@ import Exceptions.MapValidationException;
 import Models.Continent;
 import Models.Country;
 import Models.Map;
-import Models.State;
+import Models.GameState;
 import Utils.CommonUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +40,7 @@ public class MapControllerTest {
     /**
      * The D state.
      */
-    State d_state;
+    GameState d_state;
 
 
     /**
@@ -50,7 +50,7 @@ public class MapControllerTest {
     public void setup() {
         d_mapservice = new MapController();
         d_map = new Map();
-        d_state = new State();
+        d_state = new GameState();
         d_map = d_mapservice.loadMap(d_state, "europe.map");
     }
 

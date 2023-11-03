@@ -29,7 +29,7 @@ public class MapTest {
     /**
      * The D game state.
      */
-    State d_gameState;
+    GameState d_gameState;
 
 
     /**
@@ -38,7 +38,7 @@ public class MapTest {
     @Before
     public void beforeValidateTest() {
         d_map = new Map();
-        d_gameState = new State();
+        d_gameState = new GameState();
         d_ms = new MapController();
     }
 

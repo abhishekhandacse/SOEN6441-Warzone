@@ -1,5 +1,5 @@
 package Models;
 
-public interface Card extends Order{
+public interface Card extends Order {
     
 }

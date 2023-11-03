@@ -128,7 +128,7 @@ public class GamePlayerController {
      * @param p_gameState The game state to check.
      * @return True if players are available; false otherwise.
      */
-    public boolean checkPlayersAvailability(State p_gameState) {
+    public boolean checkPlayersAvailability(GameState p_gameState) {
         if (p_gameState.getD_players() == null || p_gameState.getD_players().isEmpty()) {
             d_consoleLogger.writeLog("Kindly add players before assigning countries");
             return false;
@@ -147,7 +147,7 @@ public class GamePlayerController {
      *
      * @param p_gameState The game state in which players' colors are assigned.
      */
-    public void assignColors(State p_gameState) {
+    public void assignColors(GameState p_gameState) {
         if (!checkPlayersAvailability(p_gameState)) return;
 
         List<Player> l_players = p_gameState.getD_players();
@@ -163,7 +163,7 @@ public class GamePlayerController {
      *
      * @param p_gameState The game state in which countries are assigned to players.
      */
-    public void assignCountries(State p_gameState) {
+    public void assignCountries(GameState p_gameState) {
         if (!checkPlayersAvailability(p_gameState))
             return;
 
@@ -346,7 +346,7 @@ public class GamePlayerController {
      *
      * @param p_gameState The game state in which armies are assigned to players.
      */
-    public void assignArmies(State p_gameState) {
+    public void assignArmies(GameState p_gameState) {
         for (Player l_pl : p_gameState.getD_players()) {
             Integer l_armies = this.calculateArmiesForPlayer(l_pl);
             d_consoleLogger.writeLog("Player : " + l_pl.getPlayerName() + " has been assigned with " + l_armies + " armies");
@@ -392,7 +392,7 @@ public class GamePlayerController {
      * @param p_operation The operation to perform (add or remove).
      * @param p_argument  The player name to add or remove.
      */
-    public void updatePlayers(State p_gameState, String p_operation, String p_argument) {
+    public void updatePlayers(GameState p_gameState, String p_operation, String p_argument) {
         if (!isMapLoaded(p_gameState)) {
             d_consoleLogger.writeLog("Kindly load the map first to add player: " + p_argument);
             return;
@@ -411,7 +411,7 @@ public class GamePlayerController {
      * @param p_gameState The game state to check for a loaded map.
      * @return True if a map is loaded; false otherwise.
      */
-    public boolean isMapLoaded(State p_gameState) {
+    public boolean isMapLoaded(GameState p_gameState) {
         return !CommonUtil.isNull(p_gameState.getD_map());
     }
 }

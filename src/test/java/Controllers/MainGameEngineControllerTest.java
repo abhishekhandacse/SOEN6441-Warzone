@@ -13,7 +13,7 @@ import Exceptions.MapValidationException;
 import Models.Continent;
 import Models.Country;
 import Models.Map;
-import Models.State;
+import Models.GameState;
 import Utils.CommandHandler;
 
 /**
@@ -28,7 +28,7 @@ public class MainGameEngineControllerTest {
     /**
      * State variable.
      */
-    State d_state;
+    GameState d_state;
     /**
      * Engine Data variable.
      */

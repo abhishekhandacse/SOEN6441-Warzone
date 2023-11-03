@@ -28,7 +28,7 @@ public class MapView {
     /**
      * The D game state.
      */
-    State d_gameState;
+    GameState d_gameState;
     /**
      * The D map.
      */
@@ -48,7 +48,7 @@ public class MapView {
      *
      * @param p_gameState the p game state
      */
-    public MapView(State p_gameState) {
+    public MapView(GameState p_gameState) {
         d_gameState = p_gameState;
         d_map = p_gameState.getD_map();
         d_map = p_gameState.getD_map();
@@ -63,7 +63,7 @@ public class MapView {
      * @param p_gameState the p game state
      * @param p_players   the p players
      */
-    public MapView(State p_gameState, List<Player> p_players) {
+    public MapView(GameState p_gameState, List<Player> p_players) {
         d_gameState = p_gameState;
         d_players = p_players;
         d_map = p_gameState.getD_map();

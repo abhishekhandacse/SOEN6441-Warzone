@@ -1,5 +1,7 @@
 package Models;
 
+import Utils.CommonUtil;
+
 public class Bomb implements Card{
     Player d_player;
 
@@ -13,40 +15,74 @@ public class Bomb implements Card{
 		this.d_targetCountryID = p_targetCountry;
 	}
 
-    @Override
-    public void execute(State p_state) {
-       
-    }
+    	@Override
+	public String getOrderName() {
+		return "bomb";
+	}
 
-    @Override
-    public boolean valid(State p_state) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'valid'");
-    }
+	@Override
+	public void printOrder() {
+		this.d_logOrderExecution = "----------Bomb card order issued by player "
+				+ this.d_player.getPlayerName() + "----------" + System.lineSeparator()
+				+ "Creating a bomb order = " + "on country ID. " + this.d_targetCountryID;
+		System.out.println(System.lineSeparator() + this.d_logOrderExecution);
 
-    @Override
-    public void printOrder() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'printOrder'");
-    }
+	}
 
-    @Override
-    public String orderExecutionLog() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'orderExecutionLog'");
-    }
+	private String currentOrder() {
+		return "Bomb card order : " + "bomb" + " " + this.d_targetCountryID;
+	}
 
-    @Override
-    public void setD_orderExecutionLog(String p_orderExecutionLog, String p_logType) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setD_orderExecutionLog'");
-    }
+	@Override
+	public boolean valid(GameState p_gameState) {
+		Country l_country = d_player.getD_coutriesOwned().stream()
+				.filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(this.d_targetCountryID)).findFirst()
+				.orElse(null);
 
-    @Override
-    public String getOrderName() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getOrderName'");
-    }
+		// Player cannot bomb own territory
+		if (!CommonUtil.isNullObject(l_country)) {
+			this.setD_orderExecutionLog(this.currentOrder() + " is not executed since Target country : "
+					+ this.d_targetCountryID + " given in bomb command is owned by the player : "
+					+ d_player.getPlayerName() + " VALIDATES:- You cannot bomb your own territory!", "error");
+			p_gameState.updateLog(orderExecutionLog(), "effect");
+			return false;
+		}
+
+		if(!d_player.negotiationValidation(this.d_targetCountryID)){
+			this.setD_orderExecutionLog(this.currentOrder() + " is not executed as "+ d_player.getPlayerName()+ " has negotiation pact with the target country's player!", "error");
+			p_gameState.updateLog(orderExecutionLog(), "effect");
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public Boolean validOrderCheck(GameState p_gameState) {
+		Country l_targetCountry = p_gameState.getD_map().getCountryByName(d_targetCountryID);
+		if (l_targetCountry == null) {
+			this.setD_orderExecutionLog("Invalid Target Country! Doesn't exist on the map!", "error");
+			return false;
+		}
+		return true;
+	}
+
+	public String orderExecutionLog() {
+		return this.d_logOrderExecution;
+	}
+
+	public void setD_orderExecutionLog(String p_orderExecutionLog, String p_logType) {
+		this.d_logOrderExecution = p_orderExecutionLog;
+		if (p_logType.equals("error")) {
+			System.err.println(p_orderExecutionLog);
+		} else {
+			System.out.println(p_orderExecutionLog);
+		}
+	}
+
+	@Override
+	public void execute(GameState p_gameState) {
+		
+	}
 
     
 }
