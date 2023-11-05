@@ -129,4 +129,33 @@ public class OrderExecutionPhase extends Phase{
 		}
 		return false;
 	}
+
+    protected void executeOrders() {
+		addNeutralPlayer(d_gameState);
+		// Executing orders
+		d_gameEngine.setD_gameEngineLog("\nStarting Execution Of Orders.....", "start");
+		while (d_playerService.unexecutedOrdersExists(d_gameState.getD_playersList())) {
+			for (ModelPlayer l_player : d_gameState.getD_playersList()) {
+				Order l_order = l_player.next_order();
+				if (l_order != null) {
+					l_order.printOrder();
+					d_gameState.updateLog(l_order.orderExecutionLog(), "effect");
+					l_order.execute(d_gameState);
+				}
+			}
+		}
+		d_playerService.resetPlayersFlag(d_gameState.getD_playersList());
+	}
+
+	public void addNeutralPlayer(GameState p_gameState) {
+		ModelPlayer l_player = p_gameState.getD_playersList().stream()
+				.filter(l_pl -> l_pl.getPlayerName().equalsIgnoreCase("Neutral")).findFirst().orElse(null);
+		if (CommonUtil.isNullObject(l_player)) {
+			ModelPlayer l_neutralPlayer = new ModelPlayer("Neutral");
+			l_neutralPlayer.setD_moreOrders(false);
+			p_gameState.getD_playersList().add(l_neutralPlayer);
+		} else {
+			return;
+		}
+	}
 }
