@@ -9,19 +9,32 @@ public class GameState {
 
 
     /**
-     * The D map.
+     * The map.
      */
     Map d_map;
+
     /**
-     * The D players.
+     * The players.
      */
-    List<Player> d_players;
+    List<Player> d_playersList;
+
     /**
-     * The D unexecuted orders.
+     * The unexecuted orders.
      */
-    List<Deploy> d_unexecutedOrders;
+    List<Order> d_unexecutedOrdersList;
+
+     /**
+      * The load command
+      */
+    Boolean d_loadCommand = false;
+
+	/**
+     * Log Buffer object
+     */
+	ModelLogBuffer d_logBuffer = new ModelLogBuffer();
+
     /**
-     * The D error.
+     * The error.
      */
     String d_error;
 
@@ -30,8 +43,8 @@ public class GameState {
      *
      * @return the d players
      */
-    public List<Player> getD_players() {
-        return d_players;
+    public List<Player> getD_playersList() {
+        return d_playersList;
     }
 
     /**
@@ -39,8 +52,8 @@ public class GameState {
      *
      * @param p_players the p players
      */
-    public void setD_players(List<Player> p_players) {
-        this.d_players = p_players;
+    public void setD_playersList(List<Player> p_players) {
+        this.d_playersList = p_players;
     }
 
     /**
@@ -62,24 +75,6 @@ public class GameState {
     }
 
     /**
-     * Gets d unexecuted orders.
-     *
-     * @return the d unexecuted orders
-     */
-    public List<Deploy> getD_unexecutedOrders() {
-        return d_unexecutedOrders;
-    }
-
-    /**
-     * Sets d unexecuted orders.
-     *
-     * @param p_unexecutedOrders the p unexecuted orders
-     */
-    public void setD_unexecutedOrders(List<Deploy> p_unexecutedOrders) {
-        this.d_unexecutedOrders = p_unexecutedOrders;
-    }
-
-    /**
      * Gets error.
      *
      * @return the error
@@ -96,5 +91,39 @@ public class GameState {
     public void setError(String p_error) {
         this.d_error = p_error;
     }
+
+	public boolean getD_loadCommand() {
+		return this.d_loadCommand;
+	}
+
+	public void setD_loadCommand() {
+		this.d_loadCommand = true;
+	}
+
+    /**
+     * Gets d unexecuted orders.
+     *
+     * @return the d unexecuted orders
+     */
+	public List<Order> getD_unexecutedOrdersList() {
+		return d_unexecutedOrdersList;
+	}
+
+    /**
+     * Sets d unexecuted orders.
+     *
+     * @param p_unexecutedOrders the p unexecuted orders
+     */
+	public void setD_unexecutedOrdersList(List<Order> p_unexecutedOrders) {
+		this.d_unexecutedOrdersList = p_unexecutedOrders;
+	}
+
+	public String getRecentLog() {
+		return d_logBuffer.getD_logMessage();
+	}
+
+	public void updateLog(String p_logMessage, String p_logType) {
+		d_logBuffer.currentLog(p_logMessage, p_logType);
+	}
 
 }

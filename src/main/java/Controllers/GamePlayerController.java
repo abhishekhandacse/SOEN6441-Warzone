@@ -129,7 +129,7 @@ public class GamePlayerController {
      * @return True if players are available; false otherwise.
      */
     public boolean checkPlayersAvailability(GameState p_gameState) {
-        if (p_gameState.getD_players() == null || p_gameState.getD_players().isEmpty()) {
+        if (p_gameState.getD_playersList() == null || p_gameState.getD_playersList().isEmpty()) {
             d_consoleLogger.writeLog("Kindly add players before assigning countries");
             return false;
         }
@@ -150,7 +150,7 @@ public class GamePlayerController {
     public void assignColors(GameState p_gameState) {
         if (!checkPlayersAvailability(p_gameState)) return;
 
-        List<Player> l_players = p_gameState.getD_players();
+        List<Player> l_players = p_gameState.getD_playersList();
 
         for (Player lPlayer : l_players) {
             lPlayer.setD_color(WHITE);
@@ -168,10 +168,10 @@ public class GamePlayerController {
             return;
 
         List<Country> l_countries = p_gameState.getD_map().getD_countries();
-        int l_countriesPerPlayer = Math.floorDiv(l_countries.size(), p_gameState.getD_players().size());
+        int l_countriesPerPlayer = Math.floorDiv(l_countries.size(), p_gameState.getD_playersList().size());
 
-        this.performRandomCountryAssignment(l_countriesPerPlayer, l_countries, p_gameState.getD_players());
-        this.performContinentAssignment(p_gameState.getD_players(), p_gameState.getD_map().getD_continents());
+        this.performRandomCountryAssignment(l_countriesPerPlayer, l_countries, p_gameState.getD_playersList());
+        this.performContinentAssignment(p_gameState.getD_playersList(), p_gameState.getD_map().getD_continents());
         d_consoleLogger.writeLog("Countries have been assigned to Players.");
 
     }
@@ -347,7 +347,7 @@ public class GamePlayerController {
      * @param p_gameState The game state in which armies are assigned to players.
      */
     public void assignArmies(GameState p_gameState) {
-        for (Player l_pl : p_gameState.getD_players()) {
+        for (Player l_pl : p_gameState.getD_playersList()) {
             Integer l_armies = this.calculateArmiesForPlayer(l_pl);
             d_consoleLogger.writeLog("Player : " + l_pl.getPlayerName() + " has been assigned with " + l_armies + " armies");
             l_pl.setD_noOfUnallocatedArmies(l_armies);
@@ -397,10 +397,10 @@ public class GamePlayerController {
             d_consoleLogger.writeLog("Kindly load the map first to add player: " + p_argument);
             return;
         }
-        List<Player> l_updatedPlayers = this.addRemovePlayers(p_gameState.getD_players(), p_operation, p_argument);
+        List<Player> l_updatedPlayers = this.addRemovePlayers(p_gameState.getD_playersList(), p_operation, p_argument);
 
         if (!CommonUtil.isNull(l_updatedPlayers)) {
-            p_gameState.setD_players(l_updatedPlayers);
+            p_gameState.setD_playersList(l_updatedPlayers);
         }
     }
 

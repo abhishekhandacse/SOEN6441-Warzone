@@ -127,11 +127,11 @@ public class GamePlayerControllerTest {
         d_map = new Map();
         d_map = d_mapservice.loadMap(d_gameState, "canada.map");
         d_gameState.setD_map(d_map);
-        d_gameState.setD_players(d_exisitingPlayerList);
+        d_gameState.setD_playersList(d_exisitingPlayerList);
         d_Game_playerController.assignCountries(d_gameState);
 
         int l_assignedCountriesSize = 0;
-        for (Player l_pl : d_gameState.getD_players()) {
+        for (Player l_pl : d_gameState.getD_playersList()) {
             assertNotNull(l_pl.getD_coutriesOwned());
             l_assignedCountriesSize = l_assignedCountriesSize + l_pl.getD_coutriesOwned().size();
         }
