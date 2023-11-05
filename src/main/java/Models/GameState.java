@@ -16,7 +16,7 @@ public class GameState {
     /**
      * The players.
      */
-    List<Player> d_playersList;
+    List<ModelPlayer> d_playersList;
 
     /**
      * The unexecuted orders.
@@ -43,7 +43,7 @@ public class GameState {
      *
      * @return the d players
      */
-    public List<Player> getD_playersList() {
+    public List<ModelPlayer> getD_playersList() {
         return d_playersList;
     }
 
@@ -52,7 +52,7 @@ public class GameState {
      *
      * @param p_players the p players
      */
-    public void setD_playersList(List<Player> p_players) {
+    public void setD_playersList(List<ModelPlayer> p_players) {
         this.d_playersList = p_players;
     }
 

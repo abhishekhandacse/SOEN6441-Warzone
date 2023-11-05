@@ -27,10 +27,10 @@ public class GamePlayerController {
      * @param p_playerName         The player name to check for uniqueness.
      * @return True if the player name is unique; false otherwise.
      */
-    public boolean isPlayerNameUnique(List<Player> p_existingPlayerList, String p_playerName) {
+    public boolean isPlayerNameUnique(List<ModelPlayer> p_existingPlayerList, String p_playerName) {
         boolean l_isUnique = true;
         if (!CommonUtil.isCollectionEmpty(p_existingPlayerList)) {
-            for (Player l_player : p_existingPlayerList) {
+            for (ModelPlayer l_player : p_existingPlayerList) {
                 if (l_player.getPlayerName().equalsIgnoreCase(p_playerName)) {
                     l_isUnique = false;
                     break;
@@ -48,9 +48,9 @@ public class GamePlayerController {
      * @param p_argument           The player name to add or remove.
      * @return The updated list of players.
      */
-    public List<Player> addRemovePlayers(List<Player> p_existingPlayerList, String p_operation, String p_argument) {
+    public List<ModelPlayer> addRemovePlayers(List<ModelPlayer> p_existingPlayerList, String p_operation, String p_argument) {
         // Create a new list to store the updated players.
-        List<Player> l_updatedPlayers = new ArrayList<>();
+        List<ModelPlayer> l_updatedPlayers = new ArrayList<>();
 
         // Check if the input list of existing players is not empty.
         if (!CommonUtil.isCollectionEmpty(p_existingPlayerList)) {
@@ -89,10 +89,10 @@ public class GamePlayerController {
      * @param p_enteredPlayerName      The name of the player to be removed.
      * @param p_playerNameAlreadyExist Whether the player's name already exists.
      */
-    private void removeGamePlayer(List<Player> p_existingPlayerList, List<Player> p_updatedPlayers,
+    private void removeGamePlayer(List<ModelPlayer> p_existingPlayerList, List<ModelPlayer> p_updatedPlayers,
                                   String p_enteredPlayerName, boolean p_playerNameAlreadyExist) {
         if (p_playerNameAlreadyExist) {
-            for (Player l_player : p_existingPlayerList) {
+            for (ModelPlayer l_player : p_existingPlayerList) {
                 if (l_player.getPlayerName().equalsIgnoreCase(p_enteredPlayerName)) {
                     p_updatedPlayers.remove(l_player);
                     d_consoleLogger.writeLog("Player with name : " + p_enteredPlayerName + " has been removed successfully.");
@@ -111,12 +111,12 @@ public class GamePlayerController {
      * @param p_enteredPlayerName      The name of the player to be added.
      * @param p_playerNameAlreadyExist Whether the player's name already exists.
      */
-    private void addGamePlayer(List<Player> p_updatedPlayers, String p_enteredPlayerName,
+    private void addGamePlayer(List<ModelPlayer> p_updatedPlayers, String p_enteredPlayerName,
                                boolean p_playerNameAlreadyExist) {
         if (p_playerNameAlreadyExist) {
             d_consoleLogger.writeLog("Player with name : " + p_enteredPlayerName + " already Exists. Changes are not made.");
         } else {
-            Player l_addNewPlayer = new Player(p_enteredPlayerName);
+            ModelPlayer l_addNewPlayer = new ModelPlayer(p_enteredPlayerName);
             p_updatedPlayers.add(l_addNewPlayer);
             d_consoleLogger.writeLog("Player with name : " + p_enteredPlayerName + " has been added successfully.");
         }
@@ -150,9 +150,9 @@ public class GamePlayerController {
     public void assignColors(GameState p_gameState) {
         if (!checkPlayersAvailability(p_gameState)) return;
 
-        List<Player> l_players = p_gameState.getD_playersList();
+        List<ModelPlayer> l_players = p_gameState.getD_playersList();
 
-        for (Player lPlayer : l_players) {
+        for (ModelPlayer lPlayer : l_players) {
             lPlayer.setD_color(WHITE);
         }
     }
@@ -184,12 +184,12 @@ public class GamePlayerController {
      * @param p_players            The list of players to whom countries are assigned.
      */
     private void performRandomCountryAssignment(int p_countriesPerPlayer, List<Country> p_countries,
-                                                List<Player> p_players) {
+                                                List<ModelPlayer> p_players) {
         // Create a list to store unassigned countries, initially containing all countries.
         List<Country> l_unassignedCountries = new ArrayList<>(p_countries);
 
         // Loop through each player to assign countries.
-        for (Player l_pl : p_players) {
+        for (ModelPlayer l_pl : p_players) {
             // Check if there are no unassigned countries left, and exit the loop if so.
             if (l_unassignedCountries.isEmpty())
                 break;
@@ -230,9 +230,9 @@ public class GamePlayerController {
      * @param p_players    The list of players for whom continents are assigned.
      * @param p_continents The list of continents available for assignment.
      */
-    private void performContinentAssignment(List<Player> p_players, List<Continent> p_continents) {
+    private void performContinentAssignment(List<ModelPlayer> p_players, List<Continent> p_continents) {
         // Iterate through each player.
-        for (Player l_pl : p_players) {
+        for (ModelPlayer l_pl : p_players) {
             // Create a list to store the names of countries owned by the player.
             List<String> l_countriesOwned = new ArrayList<>();
 
@@ -275,7 +275,7 @@ public class GamePlayerController {
      * @param p_player         The player for whom the deploy order is created.
      */
 
-    public void createDeployOrder(String p_commandEntered, Player p_player) {
+    public void createDeployOrder(String p_commandEntered, ModelPlayer p_player) {
         // Retrieve the list of orders from the player or create a new list if it doesn't exist.
         List<Deploy> l_orders = CommonUtil.isCollectionEmpty(p_player.getD_ordersToExecute()) ? new ArrayList<>()
                 : p_player.getD_ordersToExecute();
@@ -314,7 +314,7 @@ public class GamePlayerController {
      * @param p_noOfArmies The number of armies in the deploy order.
      * @return True if the deploy order is valid; false otherwise.
      */
-    public boolean validateDeployOrderArmies(Player p_player, String p_noOfArmies) {
+    public boolean validateDeployOrderArmies(ModelPlayer p_player, String p_noOfArmies) {
         return p_player.getD_noOfUnallocatedArmies() < Integer.parseInt(p_noOfArmies);
     }
 
@@ -325,7 +325,7 @@ public class GamePlayerController {
      * @param p_player The player for whom armies are calculated.
      * @return The calculated number of armies.
      */
-    public int calculateArmiesForPlayer(Player p_player) {
+    public int calculateArmiesForPlayer(ModelPlayer p_player) {
         int l_armies = 0;
         if (!CommonUtil.isCollectionEmpty(p_player.getD_coutriesOwned())) {
             l_armies = Math.max(3, Math.round((float) (p_player.getD_coutriesOwned().size()) / 3));
@@ -347,7 +347,7 @@ public class GamePlayerController {
      * @param p_gameState The game state in which armies are assigned to players.
      */
     public void assignArmies(GameState p_gameState) {
-        for (Player l_pl : p_gameState.getD_playersList()) {
+        for (ModelPlayer l_pl : p_gameState.getD_playersList()) {
             Integer l_armies = this.calculateArmiesForPlayer(l_pl);
             d_consoleLogger.writeLog("Player : " + l_pl.getPlayerName() + " has been assigned with " + l_armies + " armies");
             l_pl.setD_noOfUnallocatedArmies(l_armies);
@@ -361,9 +361,9 @@ public class GamePlayerController {
      * @param p_playersList The list of players to check for unexecuted orders.
      * @return True if unexecuted orders exist; false otherwise.
      */
-    public boolean unexecutedOrdersExists(List<Player> p_playersList) {
+    public boolean unexecutedOrdersExists(List<ModelPlayer> p_playersList) {
         int l_totalUnexecutedOrders = 0;
-        for (Player l_player : p_playersList) {
+        for (ModelPlayer l_player : p_playersList) {
             l_totalUnexecutedOrders = l_totalUnexecutedOrders + l_player.getD_ordersToExecute().size();
         }
         return l_totalUnexecutedOrders != 0;
@@ -376,9 +376,9 @@ public class GamePlayerController {
      * @param p_playersList The list of players to check for unassigned armies.
      * @return True if unassigned armies exist; false otherwise.
      */
-    public boolean unassignedArmiesExists(List<Player> p_playersList) {
+    public boolean unassignedArmiesExists(List<ModelPlayer> p_playersList) {
         int l_unassignedArmies = 0;
-        for (Player l_player : p_playersList) {
+        for (ModelPlayer l_player : p_playersList) {
             l_unassignedArmies = l_unassignedArmies + l_player.getD_noOfUnallocatedArmies();
         }
         return l_unassignedArmies != 0;
@@ -397,7 +397,7 @@ public class GamePlayerController {
             d_consoleLogger.writeLog("Kindly load the map first to add player: " + p_argument);
             return;
         }
-        List<Player> l_updatedPlayers = this.addRemovePlayers(p_gameState.getD_playersList(), p_operation, p_argument);
+        List<ModelPlayer> l_updatedPlayers = this.addRemovePlayers(p_gameState.getD_playersList(), p_operation, p_argument);
 
         if (!CommonUtil.isNull(l_updatedPlayers)) {
             p_gameState.setD_playersList(l_updatedPlayers);

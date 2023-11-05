@@ -24,7 +24,7 @@ public class MapView {
     /**
      * The D players.
      */
-    List<Player> d_players;
+    List<ModelPlayer> d_players;
     /**
      * The D game state.
      */
@@ -63,7 +63,7 @@ public class MapView {
      * @param p_gameState the p game state
      * @param p_players   the p players
      */
-    public MapView(GameState p_gameState, List<Player> p_players) {
+    public MapView(GameState p_gameState, List<ModelPlayer> p_players) {
         d_gameState = p_gameState;
         d_players = p_players;
         d_map = p_gameState.getD_map();
@@ -161,9 +161,9 @@ public class MapView {
      * @param p_countryName the name of the country
      * @return the owner of the country
      */
-    private Player getCountryOwner(String p_countryName) {
+    private ModelPlayer getCountryOwner(String p_countryName) {
         if (d_players != null) {
-            for (Player p : d_players) {
+            for (ModelPlayer p : d_players) {
                 if (p.getCountryNames().contains(p_countryName)) {
                     return p;
                 }
@@ -182,7 +182,7 @@ public class MapView {
         renderCenteredString(CONSOLE_WIDTH, "PLAYERS IN THE GAME");
         renderSeparator();
 
-        for (Player p : d_players) {
+        for (ModelPlayer p : d_players) {
             l_counter++;
             renderPlayerInfo(l_counter, p);
         }
@@ -194,9 +194,9 @@ public class MapView {
      * @param p_continentName the name of the continent
      * @return the owner of the continent
      */
-    private Player getContinentOwner(String p_continentName) {
+    private ModelPlayer getContinentOwner(String p_continentName) {
         if (d_players != null) {
-            for (Player p : d_players) {
+            for (ModelPlayer p : d_players) {
                 if (!CommonUtil.isNull(p.getContinentNames()) && p.getContinentNames().contains(p_continentName)) {
                     return p;
                 }
@@ -315,7 +315,7 @@ public class MapView {
      * @param p_index the index of the player
      * @param p_player the player object
      */
-    private void renderPlayerInfo(Integer p_index, Player p_player) {
+    private void renderPlayerInfo(Integer p_index, ModelPlayer p_player) {
         String l_playerInfo = String.format("%s", getColorizedString(p_player.getD_color(), String.format("%02d. %s", p_index, p_player.getPlayerName())));
         System.out.println(l_playerInfo);
     }

@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * The type Player.
  */
-public class Player {
+public class ModelPlayer {
 
     /**
      * The Console logger.
@@ -46,7 +46,7 @@ public class Player {
      *
      * @param p_playerName The name of the player.
      */
-    public Player(String p_playerName) {
+    public ModelPlayer(String p_playerName) {
         this.d_name = p_playerName;
         this.d_noOfUnallocatedArmies = 0;
         this.d_ordersToExecute = new ArrayList<>();
@@ -56,7 +56,7 @@ public class Player {
     /**
      * Instantiates a new Player.
      */
-    public Player() {
+    public ModelPlayer() {
 
     }
 

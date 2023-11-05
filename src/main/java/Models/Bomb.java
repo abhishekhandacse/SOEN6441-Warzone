@@ -3,14 +3,14 @@ package Models;
 import Utils.CommonUtil;
 
 public class Bomb implements Card{
-    Player d_player;
+    ModelPlayer d_player;
 
 	String d_targetCountryID;
 
 	String d_logOrderExecution;
 
 	//Constructor
-	public Bomb(Player p_player, String p_targetCountry) {
+	public Bomb(ModelPlayer p_player, String p_targetCountry) {
 		this.d_player = p_player;
 		this.d_targetCountryID = p_targetCountry;
 	}

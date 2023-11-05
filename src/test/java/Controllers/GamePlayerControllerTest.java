@@ -18,7 +18,7 @@ import Models.Continent;
 import Models.Country;
 import Models.GameState;
 import Models.Map;
-import Models.Player;
+import Models.ModelPlayer;
 import Utils.CommonUtil;
 
 
@@ -30,7 +30,7 @@ public class GamePlayerControllerTest {
     /**
      * The D player info.
      */
-    Player d_playerInfo;
+    ModelPlayer d_playerInfo;
 
 
     /**
@@ -60,7 +60,7 @@ public class GamePlayerControllerTest {
     /**
      * The D exisiting player list.
      */
-    List<Player> d_exisitingPlayerList = new ArrayList<>();
+    List<ModelPlayer> d_exisitingPlayerList = new ArrayList<>();
 
     private final ByteArrayOutputStream d_outContent = new ByteArrayOutputStream();
 
@@ -70,11 +70,11 @@ public class GamePlayerControllerTest {
      */
     @Before
     public void setup() {
-        d_playerInfo = new Player();
+        d_playerInfo = new ModelPlayer();
         d_Game_playerController = new GamePlayerController();
         d_gameState = new GameState();
-        d_exisitingPlayerList.add(new Player("Rajat"));
-        d_exisitingPlayerList.add(new Player("Anurag"));
+        d_exisitingPlayerList.add(new ModelPlayer("Rajat"));
+        d_exisitingPlayerList.add(new ModelPlayer("Anurag"));
 
     }
 
@@ -85,7 +85,7 @@ public class GamePlayerControllerTest {
     @Test
     public void testAddPlayers() {
         assertFalse(CommonUtil.isCollectionEmpty(d_exisitingPlayerList));
-        List<Player> l_updatedPlayers = d_Game_playerController.addRemovePlayers(d_exisitingPlayerList, "add", "Harman");
+        List<ModelPlayer> l_updatedPlayers = d_Game_playerController.addRemovePlayers(d_exisitingPlayerList, "add", "Harman");
         assertEquals("Harman", l_updatedPlayers.get(2).getPlayerName());
 
         System.setOut(new PrintStream(d_outContent));
@@ -99,7 +99,7 @@ public class GamePlayerControllerTest {
      */
     @Test
     public void testRemovePlayers() {
-        List<Player> l_updatedPlayers = d_Game_playerController.addRemovePlayers(d_exisitingPlayerList, "remove", "Rajat");
+        List<ModelPlayer> l_updatedPlayers = d_Game_playerController.addRemovePlayers(d_exisitingPlayerList, "remove", "Rajat");
         assertEquals(1, l_updatedPlayers.size());
 
         System.setOut(new PrintStream(d_outContent));
@@ -131,7 +131,7 @@ public class GamePlayerControllerTest {
         d_Game_playerController.assignCountries(d_gameState);
 
         int l_assignedCountriesSize = 0;
-        for (Player l_pl : d_gameState.getD_playersList()) {
+        for (ModelPlayer l_pl : d_gameState.getD_playersList()) {
             assertNotNull(l_pl.getD_coutriesOwned());
             l_assignedCountriesSize = l_assignedCountriesSize + l_pl.getD_coutriesOwned().size();
         }
@@ -144,7 +144,7 @@ public class GamePlayerControllerTest {
      */
     @Test
     public void testCalculateArmiesForPlayer() {
-        Player l_playerInfo = new Player();
+        ModelPlayer l_playerInfo = new ModelPlayer();
         List<Country> l_countryList = new ArrayList<Country>();
         l_countryList.add(new Country("Waadt"));
         l_countryList.add(new Country("Neuenburg"));
@@ -181,7 +181,7 @@ public class GamePlayerControllerTest {
      */
     @Test
     public void testDeployOrder() throws CommandValidationException {
-        Player l_player = new Player("Abhishek");
+        ModelPlayer l_player = new ModelPlayer("Abhishek");
         l_player.setD_noOfUnallocatedArmies(10);
         Country l_country = new Country(1, "Japan", 1);
         l_player.setD_coutriesOwned(Arrays.asList(l_country));

@@ -17,7 +17,7 @@ public class PlayerTest {
     /**
      * The D exisiting player list.
      */
-    List<Player> d_exisitingPlayerList = new ArrayList<>();
+    List<ModelPlayer> d_exisitingPlayerList = new ArrayList<>();
 
 
     /**
@@ -25,8 +25,8 @@ public class PlayerTest {
      */
     @Before
     public void setup() {
-        d_exisitingPlayerList.add(new Player("Rajat"));
-        d_exisitingPlayerList.add(new Player("Anurag"));
+        d_exisitingPlayerList.add(new ModelPlayer("Rajat"));
+        d_exisitingPlayerList.add(new ModelPlayer("Anurag"));
     }
 
     /**

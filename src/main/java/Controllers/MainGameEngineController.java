@@ -13,7 +13,7 @@ import java.util.Objects;
 import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 import Logger.ConsoleLogger;
-import Models.Player;
+import Models.ModelPlayer;
 import Models.GameState;
 import Utils.CommandHandler;
 import Utils.CommonUtil;
@@ -186,7 +186,7 @@ public class MainGameEngineController {
                 d_consoleLogger.writeLog("\nTo deploy armies use command: deploy countryID num \n");
                 // Issuing order for players
                 while (d_playerController.unassignedArmiesExists(d_state.getD_playersList())) {
-                    for (Player l_player : d_state.getD_playersList()) {
+                    for (ModelPlayer l_player : d_state.getD_playersList()) {
                         if (l_player.getD_noOfUnallocatedArmies() != null && l_player.getD_noOfUnallocatedArmies() != 0)
                             l_player.issueOrder();
                     }
@@ -194,7 +194,7 @@ public class MainGameEngineController {
 
                 // Executing orders
                 while (d_playerController.unexecutedOrdersExists(d_state.getD_playersList())) {
-                    for (Player l_player : d_state.getD_playersList()) {
+                    for (ModelPlayer l_player : d_state.getD_playersList()) {
                         Deploy l_order = l_player.nextOrder();
                         if (l_order != null)
                             l_order.execute(d_state, l_player);
