@@ -3,7 +3,7 @@ package Controllers;
 
 import Logger.ConsoleLogger;
 import Models.Continent;
-import Models.Country;
+import Models.ModelCountry;
 import Models.*;
 import Utils.CommonUtil;
 
@@ -167,7 +167,7 @@ public class GamePlayerController {
         if (!checkPlayersAvailability(p_gameState))
             return;
 
-        List<Country> l_countries = p_gameState.getD_map().getD_countries();
+        List<ModelCountry> l_countries = p_gameState.getD_map().getD_countries();
         int l_countriesPerPlayer = Math.floorDiv(l_countries.size(), p_gameState.getD_playersList().size());
 
         this.performRandomCountryAssignment(l_countriesPerPlayer, l_countries, p_gameState.getD_playersList());
@@ -183,10 +183,10 @@ public class GamePlayerController {
      * @param p_countries          The list of countries available for assignment.
      * @param p_players            The list of players to whom countries are assigned.
      */
-    private void performRandomCountryAssignment(int p_countriesPerPlayer, List<Country> p_countries,
+    private void performRandomCountryAssignment(int p_countriesPerPlayer, List<ModelCountry> p_countries,
                                                 List<ModelPlayer> p_players) {
         // Create a list to store unassigned countries, initially containing all countries.
-        List<Country> l_unassignedCountries = new ArrayList<>(p_countries);
+        List<ModelCountry> l_unassignedCountries = new ArrayList<>(p_countries);
 
         // Loop through each player to assign countries.
         for (ModelPlayer l_pl : p_players) {
@@ -199,7 +199,7 @@ public class GamePlayerController {
                 // Generate a random index to pick a random country from the unassigned list.
                 Random l_random = new Random();
                 int l_randomIndex = l_random.nextInt(l_unassignedCountries.size());
-                Country l_randomCountry = l_unassignedCountries.get(l_randomIndex);
+                ModelCountry l_randomCountry = l_unassignedCountries.get(l_randomIndex);
 
                 // Check if the player's list of owned countries is null, and create it if needed.
                 if (l_pl.getD_coutriesOwned() == null)

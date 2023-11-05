@@ -11,7 +11,7 @@ import org.junit.Test;
 import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 import Models.Continent;
-import Models.Country;
+import Models.ModelCountry;
 import Models.Map;
 import Models.GameState;
 import Utils.CommandHandler;
@@ -143,7 +143,7 @@ public class MainGameEngineControllerTest {
         d_engine.editCountry(l_addCountryIndiaCommand);
         d_engine.editCountry(l_addCountryJapanCommand);
 
-        List<Country> l_countriesList = d_state.getD_map().getD_countries();
+        List<ModelCountry> l_countriesList = d_state.getD_map().getD_countries();
         assertEquals(2, l_countriesList.size());
     }
 }

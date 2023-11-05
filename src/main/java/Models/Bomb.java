@@ -35,7 +35,7 @@ public class Bomb implements Card{
 
 	@Override
 	public boolean valid(GameState p_gameState) {
-		Country l_country = d_player.getD_coutriesOwned().stream()
+		ModelCountry l_country = d_player.getD_coutriesOwned().stream()
 				.filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(this.d_targetCountryID)).findFirst()
 				.orElse(null);
 
@@ -58,7 +58,7 @@ public class Bomb implements Card{
 
 	@Override
 	public Boolean validOrderCheck(GameState p_gameState) {
-		Country l_targetCountry = p_gameState.getD_map().getCountryByName(d_targetCountryID);
+		ModelCountry l_targetCountry = p_gameState.getD_map().getCountryByName(d_targetCountryID);
 		if (l_targetCountry == null) {
 			this.setD_orderExecutionLog("Invalid Target Country! Doesn't exist on the map!", "error");
 			return false;
@@ -82,7 +82,7 @@ public class Bomb implements Card{
 	@Override
 	public void execute(GameState p_gameState) {
 		if (valid(p_gameState)) {
-			Country l_targetCountryID = p_gameState.getD_map().getCountryByName(d_targetCountryID);
+			ModelCountry l_targetCountryID = p_gameState.getD_map().getCountryByName(d_targetCountryID);
 			Integer l_armiesCountOnTargetCountry = l_targetCountryID.getD_armies() == 0 ? 1
 					: l_targetCountryID.getD_armies();
 			Integer l_newArmies = (int) Math.floor(l_armiesCountOnTargetCountry / 2);

@@ -24,7 +24,7 @@ public class ModelPlayer {
     /**
      * The D coutries owned represents the list of countries owned by the player.
      */
-    List<Country> d_coutriesOwned;
+    List<ModelCountry> d_coutriesOwned;
     /**
      * The D continents owned represents the list of continents owned by the player.
      */
@@ -101,7 +101,7 @@ public class ModelPlayer {
      *
      * @return The list of countries owned by the player.
      */
-    public List<Country> getD_coutriesOwned() {
+    public List<ModelCountry> getD_coutriesOwned() {
         return d_coutriesOwned;
     }
 
@@ -110,7 +110,7 @@ public class ModelPlayer {
      *
      * @param p_coutriesOwned The list of countries owned by the player.
      */
-    public void setD_coutriesOwned(List<Country> p_coutriesOwned) {
+    public void setD_coutriesOwned(List<ModelCountry> p_coutriesOwned) {
         this.d_coutriesOwned = p_coutriesOwned;
     }
 
@@ -191,7 +191,7 @@ public class ModelPlayer {
      */
     public List<String> getCountryNames() {
         List<String> l_countryNames = new ArrayList<String>();
-        for (Country c : d_coutriesOwned) {
+        for (ModelCountry c : d_coutriesOwned) {
             l_countryNames.add(c.getD_countryName());
         }
         return l_countryNames;

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * The type Country.
  */
-public class Country {
+public class ModelCountry {
 
     /**
      * The Console logger.
@@ -43,7 +43,7 @@ public class Country {
      * @param p_countryName the p country name is the name of the country
      * @param p_continentId the p continent id is the id of the continent a particular country lies in.
      */
-    public Country(int p_countryId, String p_countryName, int p_continentId) {
+    public ModelCountry(int p_countryId, String p_countryName, int p_continentId) {
         d_countryId = p_countryId;
         d_countryName = p_countryName;
         d_continentId = p_continentId;
@@ -55,7 +55,7 @@ public class Country {
      *
      * @param p_countryName the p country name is a variable to store country name.
      */
-    public Country(String p_countryName) {
+    public ModelCountry(String p_countryName) {
         this.d_countryName = p_countryName;
     }
 

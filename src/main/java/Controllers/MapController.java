@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import Exceptions.MapValidationException;
 import Logger.ConsoleLogger;
 import Models.Continent;
-import Models.Country;
+import Models.ModelCountry;
 import Models.GameState;
 import Models.Map;
 import Utils.CommonUtil;
@@ -48,7 +48,7 @@ public class MapController {
             List<Continent> l_continentObjects = parseContinentsMetaData(l_continentData);
             List<String> l_countryData = getMetaData(l_linesOfFile, "country");
             List<String> l_bordersMetaData = getMetaData(l_linesOfFile, "border");
-            List<Country> l_countryObjects = parseCountriesMetaData(l_countryData);
+            List<ModelCountry> l_countryObjects = parseCountriesMetaData(l_countryData);
 
             // Updates the neighbour of countries in Objects
             l_countryObjects = parseBorderMetaData(l_countryObjects, l_bordersMetaData);
@@ -137,8 +137,8 @@ public class MapController {
      * @param p_continents the p continents
      * @return the list
      */
-    public List<Continent> linkCountryContinents(List<Country> p_countries, List<Continent> p_continents) {
-        for (Country c : p_countries) {
+    public List<Continent> linkCountryContinents(List<ModelCountry> p_countries, List<Continent> p_continents) {
+        for (ModelCountry c : p_countries) {
             for (Continent cont : p_continents) {
                 if (cont.getD_continentID().equals(c.getD_continentId())) {
                     cont.addCountry(c);
@@ -155,13 +155,13 @@ public class MapController {
      * @param p_countriesList the p countries list
      * @return the list
      */
-    public List<Country> parseCountriesMetaData(List<String> p_countriesList) {
+    public List<ModelCountry> parseCountriesMetaData(List<String> p_countriesList) {
 
-        List<Country> l_countriesList = new ArrayList<Country>();
+        List<ModelCountry> l_countriesList = new ArrayList<ModelCountry>();
 
         for (String country : p_countriesList) {
             String[] l_metaDataCountries = country.split(" ");
-            l_countriesList.add(new Country(Integer.parseInt(l_metaDataCountries[0]), l_metaDataCountries[1],
+            l_countriesList.add(new ModelCountry(Integer.parseInt(l_metaDataCountries[0]), l_metaDataCountries[1],
                     Integer.parseInt(l_metaDataCountries[2])));
         }
         return l_countriesList;
@@ -175,7 +175,7 @@ public class MapController {
      * @param p_bordersList   the p borders list
      * @return the list
      */
-    public List<Country> parseBorderMetaData(List<Country> p_countriesList, List<String> p_bordersList) {
+    public List<ModelCountry> parseBorderMetaData(List<ModelCountry> p_countriesList, List<String> p_bordersList) {
         LinkedHashMap<Integer, List<Integer>> l_countryNeighbors = new LinkedHashMap<Integer, List<Integer>>();
 
         for (String l_border : p_bordersList) {
@@ -189,7 +189,7 @@ public class MapController {
                 l_countryNeighbors.put(Integer.parseInt(l_splitString[0]), l_neighbours);
             }
         }
-        for (Country c : p_countriesList) {
+        for (ModelCountry c : p_countriesList) {
             List<Integer> l_adjacentCountries = l_countryNeighbors.get(c.getD_countryId());
             c.setD_adjacentCountryIds(l_adjacentCountries);
         }
@@ -420,7 +420,7 @@ public class MapController {
 
         // Writes Country Objects to File And Organizes Border Data for each of them
         p_writer.write(System.lineSeparator() + "[countries]" + System.lineSeparator());
-        for (Country l_country : p_gameState.getD_map().getD_countries()) {
+        for (ModelCountry l_country : p_gameState.getD_map().getD_countries()) {
             l_countryMetaData = l_country.getD_countryId().toString().concat(" ").concat(l_country.getD_countryName())
                     .concat(" ").concat(l_country.getD_continentId().toString());
             p_writer.write(l_countryMetaData + System.lineSeparator());

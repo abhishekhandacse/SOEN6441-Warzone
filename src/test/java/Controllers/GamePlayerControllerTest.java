@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import Exceptions.CommandValidationException;
 import Models.Continent;
-import Models.Country;
+import Models.ModelCountry;
 import Models.GameState;
 import Models.Map;
 import Models.ModelPlayer;
@@ -145,11 +145,11 @@ public class GamePlayerControllerTest {
     @Test
     public void testCalculateArmiesForPlayer() {
         ModelPlayer l_playerInfo = new ModelPlayer();
-        List<Country> l_countryList = new ArrayList<Country>();
-        l_countryList.add(new Country("Waadt"));
-        l_countryList.add(new Country("Neuenburg"));
-        l_countryList.add(new Country("Fribourg"));
-        l_countryList.add(new Country("Geneve"));
+        List<ModelCountry> l_countryList = new ArrayList<ModelCountry>();
+        l_countryList.add(new ModelCountry("Waadt"));
+        l_countryList.add(new ModelCountry("Neuenburg"));
+        l_countryList.add(new ModelCountry("Fribourg"));
+        l_countryList.add(new ModelCountry("Geneve"));
         l_playerInfo.setD_coutriesOwned(l_countryList);
         List<Continent> l_continentList = new ArrayList<Continent>();
         l_continentList.add(new Continent(1, "Asia", 5));
@@ -183,7 +183,7 @@ public class GamePlayerControllerTest {
     public void testDeployOrder() throws CommandValidationException {
         ModelPlayer l_player = new ModelPlayer("Abhishek");
         l_player.setD_noOfUnallocatedArmies(10);
-        Country l_country = new Country(1, "Japan", 1);
+        ModelCountry l_country = new ModelCountry(1, "Japan", 1);
         l_player.setD_coutriesOwned(Arrays.asList(l_country));
         d_Game_playerController.createDeployOrder("deploy Japan 4", l_player);
 

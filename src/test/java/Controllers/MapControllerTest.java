@@ -2,7 +2,7 @@ package Controllers;
 
 import Exceptions.MapValidationException;
 import Models.Continent;
-import Models.Country;
+import Models.ModelCountry;
 import Models.Map;
 import Models.GameState;
 import Utils.CommonUtil;
@@ -162,7 +162,7 @@ public class MapControllerTest {
             }
         };
 
-        for (Country l_country : d_map.getD_countries()) {
+        for (ModelCountry l_country : d_map.getD_countries()) {
             ArrayList<Integer> l_neighbours = new ArrayList<Integer>();
             l_actualCountryIdList.add(l_country.getD_countryId());
             l_neighbours.addAll(l_country.getD_adjacentCountryIds());
