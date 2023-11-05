@@ -24,7 +24,7 @@ public class MapView {
     /**
      * The D players.
      */
-    List<ModelPlayer> d_players;
+    List<ModelPlayer> d_playersList;
     /**
      * The D game state.
      */
@@ -36,11 +36,11 @@ public class MapView {
     /**
      * The D countries.
      */
-    List<Country> d_countries;
+    List<Country> d_countriesList;
     /**
      * The D continents.
      */
-    List<Continent> d_continents;
+    List<Continent> d_continentsList;
 
 
     /**
@@ -52,8 +52,8 @@ public class MapView {
         d_gameState = p_gameState;
         d_map = p_gameState.getD_map();
         d_map = p_gameState.getD_map();
-        d_countries = d_map.getD_countries();
-        d_continents = d_map.getD_continents();
+        d_countriesList = d_map.getD_countries();
+        d_continentsList = d_map.getD_continents();
     }
 
 
@@ -65,10 +65,10 @@ public class MapView {
      */
     public MapView(GameState p_gameState, List<ModelPlayer> p_players) {
         d_gameState = p_gameState;
-        d_players = p_players;
+        d_playersList = p_players;
         d_map = p_gameState.getD_map();
-        d_countries = d_map.getD_countries();
-        d_continents = d_map.getD_continents();
+        d_countriesList = d_map.getD_countries();
+        d_continentsList = d_map.getD_continents();
     }
 
 
@@ -119,7 +119,7 @@ public class MapView {
         String l_continentName = p_continentName + " [ " + "Control Value" + " : " + d_gameState.getD_map().getContinent(p_continentName).getD_continentValue() + " ]";
 
         renderSeparator();
-        if (d_players != null) {
+        if (d_playersList != null) {
             l_continentName = getColorizedString(getContinentColor(p_continentName), l_continentName);
         }
         renderCenteredString(CONSOLE_WIDTH, l_continentName);
@@ -162,8 +162,8 @@ public class MapView {
      * @return the owner of the country
      */
     private ModelPlayer getCountryOwner(String p_countryName) {
-        if (d_players != null) {
-            for (ModelPlayer p : d_players) {
+        if (d_playersList != null) {
+            for (ModelPlayer p : d_playersList) {
                 if (p.getCountryNames().contains(p_countryName)) {
                     return p;
                 }
@@ -182,7 +182,7 @@ public class MapView {
         renderCenteredString(CONSOLE_WIDTH, "PLAYERS IN THE GAME");
         renderSeparator();
 
-        for (ModelPlayer p : d_players) {
+        for (ModelPlayer p : d_playersList) {
             l_counter++;
             renderPlayerInfo(l_counter, p);
         }
@@ -195,8 +195,8 @@ public class MapView {
      * @return the owner of the continent
      */
     private ModelPlayer getContinentOwner(String p_continentName) {
-        if (d_players != null) {
-            for (ModelPlayer p : d_players) {
+        if (d_playersList != null) {
+            for (ModelPlayer p : d_playersList) {
                 if (!CommonUtil.isNull(p.getContinentNames()) && p.getContinentNames().contains(p_continentName)) {
                     return p;
                 }
@@ -223,13 +223,13 @@ public class MapView {
      * Public method to show the map.
      */
     public void showMap() {
-        if (d_players != null) {
+        if (d_playersList != null) {
             renderPlayers();
         }
 
         // Renders the continent if any
-        if (!CommonUtil.isNull(d_continents)) {
-            d_continents.forEach(l_continent -> {
+        if (!CommonUtil.isNull(d_continentsList)) {
+            d_continentsList.forEach(l_continent -> {
                 String continentHeader = "+==============================================================================+%n" +
                         "| %-75s|%n" +
                         "+==============================================================================+%n" +
@@ -285,7 +285,7 @@ public class MapView {
     private String getFormattedCountryName(int p_index, String p_countryName) {
         String l_indexedString = String.format("%02d. %s", p_index, p_countryName);
 
-        if (d_players != null) {
+        if (d_playersList != null) {
             // Remove "Armies" part from the formatted string
             l_indexedString = String.format("%s", p_countryName);
         }
