@@ -7,6 +7,8 @@ import Utils.CommonUtil;
 import java.util.List;
 import java.util.Objects;
 
+import Constants.ApplicationConstantsHardcoding;
+
 
 /**
  * The type Map view.
@@ -49,12 +51,12 @@ public class MapView {
      * @param p_gameState the p game state
      */
     public MapView(GameState p_gameState) {
-        d_gameState = p_gameState;
-        d_map = p_gameState.getD_map();
-        d_map = p_gameState.getD_map();
-        d_countriesList = d_map.getD_countries();
-        d_continentsList = d_map.getD_continents();
-    }
+		d_gameState = p_gameState;
+		d_map = p_gameState.getD_map();
+		d_playersList = p_gameState.getD_playersList();
+		d_countriesList = d_map.getD_allCountries();
+		d_continentsList = d_map.getD_allContinents();
+	}
 
 
     /**
@@ -223,57 +225,69 @@ public class MapView {
      * Public method to show the map.
      */
     public void showMap() {
-        if (d_playersList != null) {
-            renderPlayers();
-        }
 
-        // Renders the continent if any
-        if (!CommonUtil.isNull(d_continentsList)) {
-            d_continentsList.forEach(l_continent -> {
-                String continentHeader = "+==============================================================================+%n" +
-                        "| %-75s|%n" +
-                        "+==============================================================================+%n" +
-                        "| %-4s | %-30s | %-10s | %-30s|%n" +
-                        "+==============================================================================+%n";
-                System.out.format(getColorizedString(getContinentColor(l_continent.getD_continentName()), continentHeader),
-                        "COUNTRY DETAILS", "No.", "Country Name", "Armies", "Connections");
+		if (d_playersList != null) {
+			createPlayers();
+		}
 
-                List<Country> l_continentCountries = l_continent.getD_countries();
-                final int[] l_countryIndex = {1};
+		// renders the continent if any
+		if (!CommonUtil.isNullObject(d_continentsList)) {
+			d_continentsList.forEach(l_continent -> {
+				createContinentName(l_continent.getD_continentName());
 
-                // Renders the country if any
-                if (!CommonUtil.isCollectionEmpty(l_continentCountries)) {
-                    l_continentCountries.forEach((l_country) -> {
-                        String l_formattedCountryName = getFormattedCountryName(l_countryIndex[0]++, l_country.getD_countryName());
-                        Integer l_countryArmies = getCountryArmies(l_country.getD_countryName());
-                        List<Country> l_adjCountries = null;
-                        try {
-                            l_adjCountries = d_map.getAdjacentCountry(l_country);
-                        } catch (MapValidationException l_invalidMap) {
-                            System.out.println(l_invalidMap.getMessage());
-                        }
-                        assert l_adjCountries != null;
-                        String l_adjacentCountries = getFormattedAdjacentCountryName(l_adjCountries);
+				List<ModelCountry> l_continentCountriesList = l_continent.getD_countries();
+				final int[] l_countryIndex = { 1 };
 
-                        // Apply color to all columns
-                        String countryRow = "| %-4s | %-30s | %-20s | %-30s|%n";
-                        System.out.format(getColorizedString(getCountryColor(l_country.getD_countryName()), countryRow),
-                                l_countryIndex[0] - 1,
-                                getColorizedString(getCountryColor(l_country.getD_countryName()), l_formattedCountryName),
-                                getColorizedString(getCountryColor(l_country.getD_countryName()), String.valueOf(l_countryArmies)),
-                                getColorizedString(getCountryColor(l_country.getD_countryName()), l_adjacentCountries));
-                    });
+				// renders the country if any
+				if (!CommonUtil.isNullOrEmptyCollection(l_continentCountriesList)) {
+					l_continentCountriesList.forEach((l_country) -> {
+						String l_formattedCountryName = getFormattedCountryName(l_countryIndex[0]++,
+								l_country.getD_countryName());
+						System.out.println(l_formattedCountryName);
+						try {
+							List<ModelCountry> l_adjCountries = d_map.getAdjacentCountry(l_country);
 
-                    // Close the country table with color
-                    System.out.format(getColorizedString(getContinentColor(l_continent.getD_continentName()), "+==============================================================================+%n"));
-                } else {
-                    System.out.println("No countries are present in the continent!");
-                }
-            });
-        } else {
-            System.out.println("No continents to display!");
-        }
-    }
+							createFormattedAdjacentCountryName(l_country.getD_countryName(), l_adjCountries);
+						} catch (InvalidMap l_invalidMap) {
+							System.out.println(l_invalidMap.getMessage());
+						}
+					});
+				} else {
+					System.out.println("The Continent has no countries!");
+				}
+			});
+		} else {
+			System.out.println("No continents to display!");
+		}
+	}
+
+    private void createCenteredString(int p_width, String p_s) {
+		String l_centeredString = String.format("%-" + p_width + "s",
+				String.format("%" + (p_s.length() + (p_width - p_s.length()) / 2) + "s", p_s));
+
+		System.out.format(l_centeredString + "\n");
+	}
+
+	private void createSeparator() {
+		StringBuilder l_separator = new StringBuilder();
+
+		for (int i = 0; i < ApplicationConstantsHardcoding.DISPLAY_WIDTH - 2; i++) {
+			l_separator.append("-");
+		}
+		System.out.format("+%s+%n", l_separator.toString());
+	}
+
+	private void createContinentName(String p_continentName) {
+		String l_continentName = p_continentName + " ( " + ApplicationConstantsHardcoding.CONTINENT_CONTROL_VALUE
+				+ " : " + d_gameState.getD_map().getContinent(p_continentName).getD_continentValue() + " )";
+
+		createSeparator();
+		if (d_playersList != null) {
+			l_continentName = getColorizedString(getContinentColor(p_continentName), l_continentName);
+		}
+		createCenteredString(ApplicationConstantsHardcoding.DISPLAY_WIDTH, l_continentName);
+		createSeparator();
+	}
 
     /**
      * Private method to format the name of a country with an index.
