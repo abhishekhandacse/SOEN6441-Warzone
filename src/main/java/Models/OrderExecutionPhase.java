@@ -117,4 +117,16 @@ public class OrderExecutionPhase extends Phase{
 	protected void performAdvance(String p_command, ModelPlayer p_player) {
 		printInvalidCommandInState();
 	}
+
+    protected Boolean checkEndGame(GameState p_gameState) {
+		Integer l_totalCountries = p_gameState.getD_map().getD_allCountries().size();
+		for (ModelPlayer l_player : p_gameState.getD_playersList()) {
+			if (l_player.getD_coutriesOwned().size() == l_totalCountries) {
+				d_gameEngine.setD_gameEngineLog("Player : " + l_player.getPlayerName()
+						+ " has won the Game by conquering all countries. Exiting the Game .....", "end");
+				return true;
+			}
+		}
+		return false;
+	}
 }
