@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import Controllers.GameEngine;
+import Utils.Command;
 import Utils.CommonUtil;
 import Views.MapView;
 
@@ -45,5 +46,75 @@ public class OrderExecutionPhase extends Phase{
 				}
 			}
 		}
+	}
+
+    @Override
+	protected void createPlayers(Command p_command, ModelPlayer p_player) throws InvalidCommand {
+		printInvalidCommandInState();
+	}
+
+	@Override
+	protected void performShowMap(Command p_command, ModelPlayer p_player) {
+		MapView l_mapView = new MapView(d_gameState);
+		l_mapView.showMap();
+	}
+
+	@Override
+	protected void performEditNeighbour(Command p_command, ModelPlayer p_player)
+			throws InvalidCommand, InvalidMap, IOException {
+		printInvalidCommandInState();
+	}
+
+	@Override
+	protected void performEditCountry(Command p_command, ModelPlayer p_player)
+			throws InvalidCommand, InvalidMap, IOException {
+		printInvalidCommandInState();
+	}
+
+	@Override
+	protected void performEditContinent(Command p_command, ModelPlayer p_player)
+			throws IOException, InvalidCommand, InvalidMap {
+		printInvalidCommandInState();
+	}
+
+	@Override
+	protected void performMapEdit(Command p_command, ModelPlayer p_player)
+			throws IOException, InvalidCommand, InvalidMap {
+		printInvalidCommandInState();
+	}
+
+	@Override
+	protected void performAssignCountries(Command p_command, ModelPlayer p_player) throws InvalidCommand, IOException {
+		printInvalidCommandInState();
+	}
+
+	@Override
+	protected void performCreateDeploy(String p_command, ModelPlayer p_player) {
+		printInvalidCommandInState();
+	}
+
+	@Override
+	protected void performValidateMap(Command p_command, ModelPlayer p_player) throws InvalidMap, InvalidCommand {
+		printInvalidCommandInState();
+	}
+
+	@Override
+	protected void performLoadMap(Command p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap {
+		printInvalidCommandInState();
+	}
+
+	@Override
+	protected void performSaveMap(Command p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap {
+		printInvalidCommandInState();
+	}
+
+	@Override
+	protected void performCardHandle(String p_enteredCommand, ModelPlayer p_player) throws IOException {
+		printInvalidCommandInState();
+	}
+
+	@Override
+	protected void performAdvance(String p_command, ModelPlayer p_player) {
+		printInvalidCommandInState();
 	}
 }
