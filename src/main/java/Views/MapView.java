@@ -394,4 +394,43 @@ public class MapView {
         System.out.println(l_playerInfo);
     }
 
+    private String getCountryColor(String p_countryName) {
+		if (getCountryOwner(p_countryName) != null) {
+			return getCountryOwner(p_countryName).getD_color();
+		} else {
+			return null;
+		}
+	}
+
+	private String getContinentColor(String p_continentName) {
+		if (getContinentOwner(p_continentName) != null) {
+			return getContinentOwner(p_continentName).getD_color();
+		} else {
+			return null;
+		}
+	}
+
+	private ModelPlayer getCountryOwner(String p_countryName) {
+		if (d_playersList != null) {
+			for (ModelPlayer p : d_playersList) {
+				if (p.getCountryNames().contains(p_countryName)) {
+					return p;
+				}
+			}
+		}
+		return null;
+	}
+
+	private ModelPlayer getContinentOwner(String p_continentName) {
+		if (d_playersList != null) {
+			for (ModelPlayer p : d_playersList) {
+				if (!CommonUtil.isNullObject(p.getContinentNames())
+						&& p.getContinentNames().contains(p_continentName)) {
+					return p;
+				}
+			}
+		}
+		return null;
+	}
+
 }
