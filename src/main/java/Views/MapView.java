@@ -7,6 +7,8 @@ import Utils.CommonUtil;
 import java.util.List;
 import java.util.Objects;
 
+import org.davidmoten.text.utils.WordWrap;
+
 import Constants.ApplicationConstantsHardcoding;
 
 
@@ -289,6 +291,41 @@ public class MapView {
 		createSeparator();
 	}
 
+    private void createCardsOwnedByPlayers(ModelPlayer p_player) {
+		StringBuilder l_cards = new StringBuilder();
+
+		for (int i = 0; i < p_player.getD_cardsOwnedByPlayer().size(); i++) {
+			l_cards.append(p_player.getD_cardsOwnedByPlayer().get(i));
+			if (i < p_player.getD_cardsOwnedByPlayer().size() - 1)
+				l_cards.append(", ");
+		}
+
+		String l_cardsOwnedByPlayer = "Cards Owned : "
+				+ WordWrap.from(l_cards.toString()).maxWidth(ApplicationConstantsHardcoding.DISPLAY_WIDTH).wrap();
+		System.out.println(getColorizedString(p_player.getD_color(), l_cardsOwnedByPlayer));
+		System.out.println();
+	}
+
+	private void createPlayerInfo(Integer p_index, ModelPlayer p_player) {
+		String l_playerInfo = String.format("%02d. %s %-10s %s", p_index, p_player.getPlayerName(),
+				getPlayerArmies(p_player), " -> " + getColorizedString(p_player.getD_color(), " COLOR "));
+		System.out.println(l_playerInfo);
+	}
+
+	private void createPlayers() {
+		int l_counter = 0;
+
+		createSeparator();
+		createCenteredString(ApplicationConstantsHardcoding.DISPLAY_WIDTH, "GAME PLAYERS");
+		createSeparator();
+
+		for (ModelPlayer p : d_playersList) {
+			l_counter++;
+			createPlayerInfo(l_counter, p);
+			createCardsOwnedByPlayers(p);
+		}
+	}
+
     /**
      * Private method to format the name of a country with an index.
      *
@@ -306,22 +343,45 @@ public class MapView {
         return getColorizedString(getCountryColor(p_countryName), String.format("%-30s", l_indexedString));
     }
 
+    private String getColorizedString(String p_color, String p_s) {
+		if (p_color == null)
+			return p_s;
+
+		return p_color + p_s + ANSI_RESET;
+	}
+
+	private Integer getCountryArmies(String p_countryName) {
+		Integer l_armies = d_gameState.getD_map().getCountryByName(p_countryName).getD_armies();
+
+		if (l_armies == null)
+			return 0;
+		return l_armies;
+	}
+
+	private String getPlayerArmies(ModelPlayer p_player) {
+		return "(Unallocated Armies: " + p_player.getD_noOfUnallocatedArmies() + ")";
+	}
+
     /**
      * Private method to format the names of adjacent countries.
      *
      * @param p_adjCountries the list of adjacent countries
      * @return the formatted string containing the names of adjacent countries
      */
-    private String getFormattedAdjacentCountryName(List<Country> p_adjCountries) {
-        StringBuilder l_commaSeparatedCountries = new StringBuilder();
+    private void createFormattedAdjacentCountryName(String p_countryName, List<ModelCountry> p_adjCountries) {
+		StringBuilder l_commaSeparatedCountries = new StringBuilder();
 
-        for (int i = 0; i < p_adjCountries.size(); i++) {
-            l_commaSeparatedCountries.append(p_adjCountries.get(i).getD_countryName());
-            if (i < p_adjCountries.size() - 1)
-                l_commaSeparatedCountries.append(", ");
-        }
-        return l_commaSeparatedCountries.toString();
-    }
+		for (int i = 0; i < p_adjCountries.size(); i++) {
+			l_commaSeparatedCountries.append(p_adjCountries.get(i).getD_countryName());
+			if (i < p_adjCountries.size() - 1)
+				l_commaSeparatedCountries.append(", ");
+		}
+		String l_adjacentCountry = ApplicationConstantsHardcoding.GRAPH_CONNECTIONS + " : "
+				+ WordWrap.from(l_commaSeparatedCountries.toString())
+						.maxWidth(ApplicationConstantsHardcoding.DISPLAY_WIDTH).wrap();
+		System.out.println(getColorizedString(getCountryColor(p_countryName), l_adjacentCountry));
+		System.out.println();
+	}
 
     /**
      * Private method to render player information.
