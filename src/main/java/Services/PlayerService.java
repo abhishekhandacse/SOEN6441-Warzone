@@ -11,12 +11,24 @@ import Models.ModelCountry;
 import Models.ModelPlayer;
 import Utils.CommonUtil;
 
+/**
+ * PlayerService class
+ */
 public class PlayerService {
     String d_logAssignment = "Country/Continent Assignment:";
 	
+    /**
+     * The Console logger.
+     */
 	String d_logPlayer;
 
-
+    /**
+     * Add a new player to the list of updated players.
+     *
+     * @param p_updatedPlayers         The list of players to which the new player is added.
+     * @param p_enteredPlayerName      The name of the player to be added.
+     * @param p_playerNameAlreadyExist Whether the player's name already exists.
+     */
 	private void addGamePlayer(List<ModelPlayer> p_updatedPlayers, String p_enteredPlayerName,
 							   boolean p_playerNameAlreadyExist) {
 
@@ -29,6 +41,14 @@ public class PlayerService {
 		}
 	}
 
+    /**
+     * Remove a player from the list of existing players.
+     *
+     * @param p_existingPlayerList     List of existing players.
+     * @param p_updatedPlayers         The list of players with the player removed.
+     * @param p_enteredPlayerName      The name of the player to be removed.
+     * @param p_playerNameAlreadyExist Whether the player's name already exists.
+     */
 	private void removeGamePlayer(List<ModelPlayer> p_existingPlayerList, List<ModelPlayer> p_updatedPlayers,
 								  String p_enteredPlayerName, boolean p_playerNameAlreadyExist) {
 		if (p_playerNameAlreadyExist) {
@@ -43,6 +63,13 @@ public class PlayerService {
 		}
 	}
 
+    /**
+     * Update players in the game state.
+     *
+     * @param p_gameState The game state in which players are updated.
+     * @param p_operation The operation to perform (add or remove).
+     * @param p_argument  The player name to add or remove.
+     */
 	public void updatePlayers(GameState p_gameState, String p_operation, String p_argument) {
 		if (!isMapLoaded(p_gameState)) {
 			this.setD_logPlayer("Kindly load the map first to add player: " + p_argument);
@@ -57,6 +84,13 @@ public class PlayerService {
 		}
 	}
 
+     /**
+     * Check if a player name is unique among existing players.
+     *
+     * @param p_existingPlayerList List of existing players.
+     * @param p_playerName         The player name to check for uniqueness.
+     * @return True if the player name is unique; false otherwise.
+     */
 	public boolean isNameUnique(List<ModelPlayer> p_existingPlayerList, String p_playerName) {
 		boolean l_isUnique = true;
 		if (!CommonUtil.isNullOrEmptyCollection(p_existingPlayerList)) {
@@ -70,27 +104,51 @@ public class PlayerService {
 		return l_isUnique;
 	}
 
+    /**
+     * Add or remove players from the list of existing players.
+     *
+     * @param p_existingPlayerList List of existing players.
+     * @param p_operation          The operation to perform (add or remove).
+     * @param p_argument           The player name to add or remove.
+     * @return The updated list of players.
+     */
 	public List<ModelPlayer> addOrRemovePlayers(List<ModelPlayer> p_existingPlayerList, String p_operation, String p_argument) {
-		List<ModelPlayer> l_updatedPlayers = new ArrayList<>();
+		// Create a new list to store the updated players.
+        List<ModelPlayer> l_updatedPlayers = new ArrayList<>();
+
+        // Check if the input list of existing players is not empty.
 		if (!CommonUtil.isNullOrEmptyCollection(p_existingPlayerList))
 			l_updatedPlayers.addAll(p_existingPlayerList);
 
+        // Split the entered argument to get the player's name.
 		String l_enteredPlayerName = p_argument.split(" ")[0];
+        // Check if the player's name already exists in the existing player list.
 		boolean l_playerNameAlreadyExist = !isNameUnique(p_existingPlayerList, l_enteredPlayerName);
 
+        // Check the operation requested (add or remove).
 		switch (p_operation.toLowerCase()) {
 		case "add":
+            // If the operation is 'add', add the player to the updated list.
 			addGamePlayer(l_updatedPlayers, l_enteredPlayerName, l_playerNameAlreadyExist);
 			break;
 		case "remove":
+            // If the operation is 'remove', remove the player from the updated list.
 			removeGamePlayer(p_existingPlayerList, l_updatedPlayers, l_enteredPlayerName, l_playerNameAlreadyExist);
 			break;
 		default:
+            // If an invalid operation is provided, log an error message.
 			setD_logPlayer("Invalid Operation on Players list");
 		}
+
+        // Return the updated list of players.
 		return l_updatedPlayers;
 	}
 
+    /**
+     * Assign countries to players in the game state.
+     *
+     * @param p_gameState The game state in which countries are assigned to players.
+     */
     public void assignCountries(GameState p_gameState) {
 		if (!checkAvailability(p_gameState)){
 			p_gameState.updateLog("Kindly add players before assigning countries",  "effect");
@@ -112,6 +170,12 @@ public class PlayerService {
 
 	}
 
+    /**
+     * Perform assignment of continents to players based on the countries they own.
+     *
+     * @param p_players    The list of players for whom continents are assigned.
+     * @param p_continents The list of continents available for assignment.
+     */
     public void performAssignContinent(List<ModelPlayer> p_players, List<Continent> p_continents) {
 		for (ModelPlayer l_pl : p_players) {
 			List<String> l_countriesOwned = new ArrayList<>();
@@ -136,6 +200,13 @@ public class PlayerService {
 		}
 	}
 
+    /**
+     * Perform a random assignment of countries to players based on a specified number of countries per player.
+     *
+     * @param p_countriesPerPlayer The number of countries to assign to each player.
+     * @param p_countries          The list of countries available for assignment.
+     * @param p_players            The list of players to whom countries are assigned.
+     */
 	private void performCountryAssignmentRandomly(int p_countriesPerPlayer, List<ModelCountry> p_countries,
 												List<ModelPlayer> p_players, GameState p_gameState) {
 		List<ModelCountry> l_unassignedCountries = new ArrayList<>(p_countries);
@@ -168,6 +239,12 @@ public class PlayerService {
 		}
 	}
 	
+    /**
+     * Check if there are players available in the game state.
+     *
+     * @param p_gameState The game state to check.
+     * @return True if players are available; false otherwise.
+     */
 	public boolean checkAvailability(GameState p_gameState) {
 		if (p_gameState.getD_playersList() == null || p_gameState.getD_playersList().isEmpty()) {
 			return false;
@@ -175,6 +252,11 @@ public class PlayerService {
 		return true;
 	}
 
+    /**
+     * Assign colors to players in the game state.
+     *
+     * @param p_gameState The game state in which players' colors are assigned.
+     */
 	public void assignColors(GameState p_gameState) {
 		if (!checkAvailability(p_gameState))
 			return;
@@ -186,6 +268,12 @@ public class PlayerService {
 		}
 	}
 
+    /**
+     * Check if unexecuted orders exist for players.
+     *
+     * @param p_playersList The list of players to check for unexecuted orders.
+     * @return True if unexecuted orders exist; false otherwise.
+     */
 	public boolean unexecutedOrdersExists(List<ModelPlayer> p_playersList) {
 		int l_totalUnexecutedOrders = 0;
 		for (ModelPlayer l_player : p_playersList) {
@@ -194,6 +282,12 @@ public class PlayerService {
 		return l_totalUnexecutedOrders != 0;
 	}
 
+    /**
+     * Check if unassigned armies exist for players.
+     *
+     * @param p_playersList The list of players to check for unassigned armies.
+     * @return True if unassigned armies exist; false otherwise.
+     */
 	public boolean unassignedArmiesExists(List<ModelPlayer> p_playersList) {
 		int l_unassignedArmies = 0;
 		for (ModelPlayer l_player : p_playersList) {
@@ -202,6 +296,12 @@ public class PlayerService {
 		return l_unassignedArmies != 0;
 	}
 
+    /**
+     * Check if a map is loaded in the game state.
+     *
+     * @param p_gameState The game state to check for a loaded map.
+     * @return True if a map is loaded; false otherwise.
+     */
 	public boolean isMapLoaded(GameState p_gameState) {
 		return !CommonUtil.isNullObject(p_gameState.getD_map()) ? true : false;
 	}
@@ -238,6 +338,11 @@ public class PlayerService {
 		return l_armies;
 	}
 
+    /**
+     * Assign armies to players in the game state.
+     *
+     * @param p_gameState The game state in which armies are assigned to players.
+     */
 	public void assignArmies(GameState p_gameState) {
 		for (ModelPlayer l_pl : p_gameState.getD_playersList()) {
 			Integer l_armies = this.calculatePlayerArmies(l_pl);
