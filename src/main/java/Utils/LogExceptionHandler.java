@@ -14,6 +14,11 @@ public class LogExceptionHandler implements Thread.UncaughtExceptionHandler {
      *
      * @param p_gameState Current GameState
      */
+
+    @Override
+    public void uncaughtException(Thread p_t, Throwable p_e) {
+        d_initialGameState.updateLog(p_e.getMessage(), "effect");
+    }
     public LogExceptionHandler(GameState p_gameState){
         d_initialGameState = p_gameState;
     }
@@ -24,8 +29,5 @@ public class LogExceptionHandler implements Thread.UncaughtExceptionHandler {
      * @param p_t Thread of Exception.
      * @param p_e Throwable Instance of Exception
      */
-    @Override
-    public void uncaughtException(Thread p_t, Throwable p_e) {
-        d_initialGameState.updateLog(p_e.getMessage(), "effect");
-    }
+
 }

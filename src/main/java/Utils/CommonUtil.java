@@ -1,80 +1,53 @@
 package Utils;
 
+import Constants.ApplicationConstantsHardcoding;
+
 import java.io.File;
 import java.util.Collection;
-import java.util.Map;
-import java.util.Objects;
-
 
 /**
- * The type Common util.
+ * Utility class for common operations.
  */
 public class CommonUtil {
 
+	/**
+	 * Get the absolute path for a file using the provided file name.
+	 *
+	 * @param p_fileName The name of the file.
+	 * @return The absolute path for the file.
+	 */
+	public static String getAbsolutePathForFile(String p_fileName) {
+		String l_absolutePath = new File("").getAbsolutePath();
+		return l_absolutePath + File.separator + ApplicationConstantsHardcoding.CLASSPATH_SRC_MAIN_RESOURCES + File.separator + p_fileName;
+	}
 
-    /**
-     * Is empty boolean.
-     *
-     * @param p_str the p str
-     * @return the boolean
-     */
-    public static boolean isEmpty(String p_str) {
-        return (p_str == null || p_str.trim().isEmpty());
-    }
+	/**
+	 * Check if a string is null or empty.
+	 *
+	 * @param p_str The string to check.
+	 * @return True if the string is null or empty, otherwise false.
+	 */
+	public static boolean isNullOrEmpty(String p_str) {
+		return (p_str == null || p_str.trim().isEmpty());
+	}
 
+	/**
+	 * Check if an object is null.
+	 *
+	 * @param p_object The object to check.
+	 * @return True if the object is null, otherwise false.
+	 */
+	public static boolean isNullObject(Object p_object) {
+		return (p_object == null);
+	}
 
-    /**
-     * Is not empty boolean.
-     *
-     * @param p_str the p str
-     * @return the boolean
-     */
-    public static boolean isNotEmpty(String p_str) {
-        return !isEmpty(p_str);
-    }
-
-
-    /**
-     * Is null boolean.
-     *
-     * @param p_object the p object
-     * @return the boolean
-     */
-    public static boolean isNull(Object p_object) {
-        return Objects.isNull(p_object);
-    }
-
-
-    /**
-     * Is collection empty boolean.
-     *
-     * @param p_collection the p collection
-     * @return the boolean
-     */
-    public static boolean isCollectionEmpty(Collection<?> p_collection) {
-        return (p_collection == null || p_collection.isEmpty());
-    }
-
-
-    /**
-     * Is map empty boolean.
-     *
-     * @param p_map the p map
-     * @return the boolean
-     */
-    public static boolean isMapEmpty(Map<?, ?> p_map) {
-        return (p_map == null || p_map.isEmpty());
-    }
-
-
-    /**
-     * Gets map file path.
-     *
-     * @param p_fileName the p file name
-     * @return the map file path
-     */
-    public static String getMapFilePath(String p_fileName) {
-        String l_absolutePath = new File("").getAbsolutePath();
-        return l_absolutePath + File.separator + "src/main/maps" + File.separator + p_fileName;
-    }
+	/**
+	 * Check if a collection is null or empty.
+	 *
+	 * @param p_collection The collection to check.
+	 * @return True if the collection is null or empty, otherwise false.
+	 */
+	public static boolean isNullOrEmptyCollection(Collection<?> p_collection) {
+		return (p_collection == null || p_collection.isEmpty());
+	}
 }

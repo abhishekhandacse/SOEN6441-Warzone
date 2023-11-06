@@ -50,26 +50,6 @@ public class Airlift implements Card {
         this.d_nameOfSourceCountry = p_sourceCountryName;
     }
 
-    /**
-     * Executes the order.
-     */
-    @Override
-    public void execute(GameState p_internalGameState) {
-        if (valid(p_internalGameState)) {
-            ModelCountry l_sourceCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfSourceCountry);
-            ModelCountry l_targetCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfTargetCountry);
-            Integer l_updatedTargetArmies = l_targetCountry.getD_armies() + this.d_quantityOfArmy;
-            Integer l_updatedSourceArmies = l_sourceCountry.getD_armies() - this.d_quantityOfArmy;
-            l_targetCountry.setD_armies(l_updatedTargetArmies);
-            l_sourceCountry.setD_armies(l_updatedSourceArmies);
-            d_cardHoldingPlayer.removeCard("airlift");
-            this.setD_orderExecutionLog("Airlift Operation from "+ d_nameOfSourceCountry + " to "+ d_nameOfTargetCountry +" successful!", "default");
-            p_internalGameState.updateLog(d_logOfOrderExecution, "effect");
-        } else {
-            this.setD_orderExecutionLog("Cannot Complete Execution of given Airlift Command!", "error");
-            p_internalGameState.updateLog(d_logOfOrderExecution, "effect");
-        }
-    }
 
     /**
      * Checks the validation before executing orders.
@@ -109,6 +89,28 @@ public class Airlift implements Card {
     }
 
     /**
+     * Executes the order.
+     */
+    @Override
+    public void execute(GameState p_internalGameState) {
+        if (valid(p_internalGameState)) {
+            ModelCountry l_sourceCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfSourceCountry);
+            ModelCountry l_targetCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfTargetCountry);
+            Integer l_updatedTargetArmies = l_targetCountry.getD_armies() + this.d_quantityOfArmy;
+            Integer l_updatedSourceArmies = l_sourceCountry.getD_armies() - this.d_quantityOfArmy;
+            l_targetCountry.setD_armies(l_updatedTargetArmies);
+            l_sourceCountry.setD_armies(l_updatedSourceArmies);
+            d_cardHoldingPlayer.removeCard("airlift");
+            this.setD_orderExecutionLog("Airlift Operation from "+ d_nameOfSourceCountry + " to "+ d_nameOfTargetCountry +" successful!", "default");
+            p_internalGameState.updateLog(d_logOfOrderExecution, "effect");
+        } else {
+            this.setD_orderExecutionLog("Cannot Complete Execution of given Airlift Command!", "error");
+            p_internalGameState.updateLog(d_logOfOrderExecution, "effect");
+        }
+    }
+
+
+    /**
      * Prints the Order.
      */
     @Override
@@ -129,6 +131,19 @@ public class Airlift implements Card {
         return this.d_logOfOrderExecution;
     }
 
+
+
+
+    /**
+     * Return order name.
+     *
+     * @return String
+     */
+    @Override
+    public String getOrderName() {
+        return "airlift";
+    }
+
     /**
      * Prints and Sets the order execution log.
      *
@@ -144,15 +159,14 @@ public class Airlift implements Card {
         }
     }
 
-
     /**
-     * Return order name.
+     * Gives current advance order which is being executed.
      *
-     * @return String
+     * @return advance order command
      */
-    @Override
-    public String getOrderName() {
-        return "airlift";
+    private String currentOrder() {
+        return "Airlift Order : " + "airlift" + " " + this.d_nameOfSourceCountry + " " + this.d_nameOfTargetCountry + " "
+                + this.d_quantityOfArmy;
     }
 
     /**
@@ -179,14 +193,6 @@ public class Airlift implements Card {
     }
 
 
-    /**
-     * Gives current advance order which is being executed.
-     *
-     * @return advance order command
-     */
-    private String currentOrder() {
-        return "Airlift Order : " + "airlift" + " " + this.d_nameOfSourceCountry + " " + this.d_nameOfTargetCountry + " "
-                + this.d_quantityOfArmy;
-    }
+
 
 }
