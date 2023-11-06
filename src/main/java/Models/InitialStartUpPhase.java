@@ -21,10 +21,7 @@ public class InitialStartUpPhase extends Phase{
         l_mapView.showMap();
     }
 
-    @Override
-    protected void performCreateDeploy(String p_command, ModelPlayer p_nameOfPlayer) {
-        printInvalidCommandInState();
-    }
+
 
     @Override
     protected void performCardHandle(String p_enteredCommand, ModelPlayer p_nameOfPlayer) throws IOException {
@@ -36,27 +33,12 @@ public class InitialStartUpPhase extends Phase{
         printInvalidCommandInState();
     }
 
-    public void performEditContinent(Command p_givenCommand, ModelPlayer p_nameOfPlayer) throws IOException, InvalidCommand, InvalidMap {
-        if (!l_isMapLoaded) {
-            d_gameEngine.setD_gameEngineLog("Can not Edit Continent, please perform `editmap` first", "effect");
-            return;
-        }
-        List<java.util.Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
-        Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
-        if (l_operations_list == null || l_operations_list.isEmpty()) {
-            throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCONTINENT);
-        } else {
-            for (java.util.Map<String, String> l_map : l_operations_list) {
-                if (p_givenCommand.checkRequiredKeysPresent(ApplicationConstantsHardcoding.ARGUMENTS_PASSED, l_map)
-                        && p_givenCommand.checkRequiredKeysPresent(ApplicationConstantsHardcoding.OPERATION_REQUESTED, l_map)) {
-                    d_mapService.editFunctions(d_gameState, l_map.get(ApplicationConstantsHardcoding.ARGUMENTS_PASSED),
-                            l_map.get(ApplicationConstantsHardcoding.OPERATION_REQUESTED), 1);
-                } else {
-                    throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCONTINENT);
-                }
-            }
-        }
+    @Override
+    protected void performCreateDeploy(String p_command, ModelPlayer p_nameOfPlayer) {
+        printInvalidCommandInState();
     }
+
+
 
     public void performMapEdit(Command p_givenCommand, ModelPlayer p_nameOfPlayer) throws IOException, InvalidCommand, InvalidMap {
         List<java.util.Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
@@ -98,6 +80,28 @@ public class InitialStartUpPhase extends Phase{
                     }
                 } else {
                     throw new InvalidCommand(ApplicationConstantsHardcoding.VALIDATION_FAILED_ERROR_LOADMAP);
+                }
+            }
+        }
+    }
+
+    public void performEditContinent(Command p_givenCommand, ModelPlayer p_nameOfPlayer) throws IOException, InvalidCommand, InvalidMap {
+        if (!l_isMapLoaded) {
+            d_gameEngine.setD_gameEngineLog("Can not Edit Continent, please perform `editmap` first", "effect");
+            return;
+        }
+        List<java.util.Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
+        Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
+        if (l_operations_list == null || l_operations_list.isEmpty()) {
+            throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCONTINENT);
+        } else {
+            for (java.util.Map<String, String> l_map : l_operations_list) {
+                if (p_givenCommand.checkRequiredKeysPresent(ApplicationConstantsHardcoding.ARGUMENTS_PASSED, l_map)
+                        && p_givenCommand.checkRequiredKeysPresent(ApplicationConstantsHardcoding.OPERATION_REQUESTED, l_map)) {
+                    d_mapService.editFunctions(d_gameState, l_map.get(ApplicationConstantsHardcoding.ARGUMENTS_PASSED),
+                            l_map.get(ApplicationConstantsHardcoding.OPERATION_REQUESTED), 1);
+                } else {
+                    throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCONTINENT);
                 }
             }
         }
