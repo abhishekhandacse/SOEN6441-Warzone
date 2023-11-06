@@ -160,6 +160,16 @@ public class Airlift implements Card {
     }
 
     /**
+     * Gives current advance order which is being executed.
+     *
+     * @return advance order command
+     */
+    private String currentOrder() {
+        return "Airlift Order : " + "airlift" + " " + this.d_nameOfSourceCountry + " " + this.d_nameOfTargetCountry + " "
+                + this.d_quantityOfArmy;
+    }
+
+    /**
      * Checks Pre-validations while issuing commands.
      *
      * @param p_internalGameState current GameState Instance
@@ -183,14 +193,6 @@ public class Airlift implements Card {
     }
 
 
-    /**
-     * Gives current advance order which is being executed.
-     *
-     * @return advance order command
-     */
-    private String currentOrder() {
-        return "Airlift Order : " + "airlift" + " " + this.d_nameOfSourceCountry + " " + this.d_nameOfTargetCountry + " "
-                + this.d_quantityOfArmy;
-    }
+
 
 }
