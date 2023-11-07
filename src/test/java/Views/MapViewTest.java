@@ -1,8 +1,9 @@
 package Views;
 
 /**
- * The type Map view test.
+ * 
+ * This is the MapViewTest Class.
+ * 
  */
 public class MapViewTest {
-
 }

@@ -1,20 +1,19 @@
 package Models;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import Controllers.MapController;
-import Exceptions.MapValidationException;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import Exceptions.InvalidMap;
+import Services.MapService;
 
 /**
- * The type Map test.
+ * 
+ * This class is used to test functionality of Map class functions.
+ * 
  */
 public class MapTest {
 
@@ -77,8 +76,8 @@ public class MapTest {
      */
     @Test (expected = InvalidMap.class)
     public void testContinentConnectivity() throws  InvalidMap{
-        d_map= d_ms.loadMap(d_gameState, "continentConnectivity.map");
-        d_map.Validate();
+          d_map= d_ms.loadMap(d_gameState, "continentConnectivity.map");
+          d_map.Validate();
     }
 
     /**
