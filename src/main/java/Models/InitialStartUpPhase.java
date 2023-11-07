@@ -4,7 +4,7 @@ import Constants.ApplicationConstantsHardcoding;
 import Controllers.GameEngine;
 import Exceptions.InvalidCommand;
 import Exceptions.InvalidMap;
-import Utils.Command;
+import Utils.CommandHandler;
 import Utils.CommonUtil;
 import Utils.LogExceptionHandler;
 import Views.MapView;
@@ -22,7 +22,7 @@ public class InitialStartUpPhase extends Phase{
     }
 
     @Override
-    protected void performingShowMap(Command p_command, ModelPlayer p_nameOfPlayer) {
+    protected void performingShowMap(CommandHandler p_command, ModelPlayer p_nameOfPlayer) {
         MapView l_mapView = new MapView(d_gameState);
         l_mapView.showMap();
     }
@@ -42,7 +42,7 @@ public class InitialStartUpPhase extends Phase{
         printInvalidCommandInState();
     }
 
-    public void performingEditContinent(Command p_givenCommand, ModelPlayer p_nameOfPlayer) throws IOException, InvalidCommand, InvalidMap {
+    public void performingEditContinent(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws IOException, InvalidCommand, InvalidMap {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("Can not Edit Continent, please perform `editmap` first", "effect");
             return;
@@ -64,7 +64,7 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingMapEdit(Command p_givenCommand, ModelPlayer p_nameOfPlayer) throws IOException, InvalidCommand, InvalidMap {
+    public void performingMapEdit(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws IOException, InvalidCommand, InvalidMap {
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
         if (l_operations_list == null || l_operations_list.isEmpty()) {
@@ -80,7 +80,7 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingLoadMap(Command p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand, InvalidMap {
+    public void performingLoadMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand, InvalidMap {
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         boolean l_flagValidate = false;
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
@@ -109,7 +109,7 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingSaveMap(Command p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand, InvalidMap {
+    public void performingSaveMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand, InvalidMap {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("No map found to save, Please `editmap` first", "effect");
             return;
@@ -134,7 +134,7 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingValidateMap(Command p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidMap, InvalidCommand {
+    public void performingValidateMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidMap, InvalidCommand {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("No map found to validate, Please `loadmap` & `editmap` first", "effect");
             return;
@@ -157,7 +157,7 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingEditNeighbour(Command p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand, InvalidMap, IOException {
+    public void performingEditNeighbour(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand, InvalidMap, IOException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("Can not Edit Neighbors, please perform `editmap` first", "effect");
             return;
@@ -179,7 +179,7 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingEditCountry(Command p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand, InvalidMap, IOException {
+    public void performingEditCountry(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand, InvalidMap, IOException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("Can not Edit Country, please perform `editmap` first", "effect");
             return;
@@ -216,7 +216,7 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void creatingPlayers(Command p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand {
+    public void creatingPlayers(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("No map found, Please `loadmap` before adding game players", "effect");
             return;
@@ -242,7 +242,7 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingAssignCountries(Command p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand{
+    public void performingAssignCountries(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand{
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
         if (CommonUtil.isNullOrEmptyCollection(l_operations_list)) {

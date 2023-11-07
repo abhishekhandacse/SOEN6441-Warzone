@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import Controllers.GameEngine;
 import Exceptions.InvalidCommand;
 import Exceptions.InvalidMap;
-import Utils.Command;
+import Utils.CommandHandler;
 import Views.MapView;
 
 public class IssueOrderPhase extends Phase{
@@ -16,55 +16,55 @@ public class IssueOrderPhase extends Phase{
     }
 
     @Override
-    protected void performingAssignCountries(Command p_command, ModelPlayer p_player) throws InvalidCommand, IOException, InvalidMap {
+    protected void performingAssignCountries(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, IOException, InvalidMap {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
 
     @Override
-    protected void creatingPlayers(Command p_command, ModelPlayer p_player) throws InvalidCommand, IOException, InvalidMap {
+    protected void creatingPlayers(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, IOException, InvalidMap {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
 
     @Override
-    protected void performingEditNeighbour(Command p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap, IOException {
+    protected void performingEditNeighbour(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap, IOException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
 
     @Override
-    protected void performingEditCountry(Command p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap, IOException {
+    protected void performingEditCountry(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap, IOException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
 
     @Override
-    protected void performingValidateMap(Command p_command, ModelPlayer p_player) throws InvalidMap, InvalidCommand, IOException {
+    protected void performingValidateMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidMap, InvalidCommand, IOException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
 
     @Override
-    protected void performingLoadMap(Command p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap, IOException {
+    protected void performingLoadMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap, IOException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
 
     @Override
-    protected void performingSaveMap(Command p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap, IOException {
+    protected void performingSaveMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap, IOException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
 
     @Override
-    protected void performingEditContinent(Command p_command, ModelPlayer p_player) throws IOException, InvalidCommand, InvalidMap {
+    protected void performingEditContinent(CommandHandler p_command, ModelPlayer p_player) throws IOException, InvalidCommand, InvalidMap {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
 
     @Override
-    protected void performingMapEdit(Command p_command, ModelPlayer p_player) throws IOException, InvalidCommand, InvalidMap {
+    protected void performingMapEdit(CommandHandler p_command, ModelPlayer p_player) throws IOException, InvalidCommand, InvalidMap {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
@@ -79,7 +79,7 @@ public class IssueOrderPhase extends Phase{
     }
 
     @Override
-    protected void performingShowMap(Command p_command, ModelPlayer p_player) throws InvalidCommand, IOException, InvalidMap {
+    protected void performingShowMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, IOException, InvalidMap {
         MapView l_mapView = new MapView(d_gameState);
         l_mapView.showMap();
 
