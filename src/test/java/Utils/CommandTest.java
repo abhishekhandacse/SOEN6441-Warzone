@@ -19,7 +19,7 @@ public class CommandTest {
 	 */
     @Test
     public void test_validCommand_getRootCommand(){
-        Command l_command = new Command("editcontinent -add continentID continentvalue");
+        CommandHandler l_command = new CommandHandler("editcontinent -add continentID continentvalue");
         String l_rootCommand = l_command.getRootCommand();
 
         assertEquals("editcontinent",l_rootCommand);
@@ -30,7 +30,7 @@ public class CommandTest {
      */
     @Test
     public void test_inValidCommand_getRootCommand(){
-        Command l_command = new Command("");
+        CommandHandler l_command = new CommandHandler("");
         String l_rootCommand = l_command.getRootCommand();
 
         assertEquals("", l_rootCommand);
@@ -41,7 +41,7 @@ public class CommandTest {
      */
     @Test
     public void test_singleWord_getRootCommand(){
-        Command l_command = new Command("validatemap");
+        CommandHandler l_command = new CommandHandler("validatemap");
         String l_rootCommand = l_command.getRootCommand();
 
         assertEquals("validatemap", l_rootCommand);
@@ -52,7 +52,7 @@ public class CommandTest {
      */
     @Test
     public void test_noFlagCommand_getRootCommand(){
-        Command l_command = new Command("loadmap abc.txt");
+        CommandHandler l_command = new CommandHandler("loadmap abc.txt");
         String l_rootCommand = l_command.getRootCommand();
 
         assertEquals("loadmap", l_rootCommand);
@@ -63,7 +63,7 @@ public class CommandTest {
      */
     @Test
     public void test_singleCommand_getOperationsAndArguments(){
-        Command l_command = new Command("editcontinent -remove continentID");
+        CommandHandler l_command = new CommandHandler("editcontinent -remove continentID");
         List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
@@ -83,7 +83,7 @@ public class CommandTest {
      */
     @Test
     public void test_singleCommandWithExtraSpaces_getOperationsAndArguments(){
-        Command l_command = new Command("editcontinent      -remove continentID");
+        CommandHandler l_command = new CommandHandler("editcontinent      -remove continentID");
         List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
@@ -103,7 +103,7 @@ public class CommandTest {
      */
     @Test
     public void test_multiCommand_getOperationsAndArguments(){
-        Command l_command = new Command("editcontinent -add continentID continentValue  -remove continentID");
+        CommandHandler l_command = new CommandHandler("editcontinent -add continentID continentValue  -remove continentID");
         List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
@@ -128,7 +128,7 @@ public class CommandTest {
      */
     @Test
     public void test_noFlagCommand_getOperationsAndArguments(){
-        Command l_command = new Command("loadmap abc.txt");
+        CommandHandler l_command = new CommandHandler("loadmap abc.txt");
         List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
@@ -148,7 +148,7 @@ public class CommandTest {
      */
     @Test
     public void test_noFlagCommandWithExtraSpaces_getOperationsAndArguments(){
-        Command l_command = new Command("loadmap         abc.txt");
+        CommandHandler l_command = new CommandHandler("loadmap         abc.txt");
         List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value

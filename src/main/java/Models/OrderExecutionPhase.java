@@ -3,7 +3,7 @@ package Models;
 import Controllers.GameEngine;
 import Exceptions.InvalidCommand;
 import Exceptions.InvalidMap;
-import Utils.Command;
+import Utils.CommandHandler;
 import Utils.CommonUtil;
 import Views.MapView;
 
@@ -107,7 +107,7 @@ public class OrderExecutionPhase extends Phase {
 	}
 
 	@Override
-	protected void performingShowMap(Command p_command, ModelPlayer p_player) {
+	protected void performingShowMap(CommandHandler p_command, ModelPlayer p_player) {
 		MapView l_mapView = new MapView(d_gameState);
 		l_mapView.showMap();
 	}
@@ -121,7 +121,7 @@ public class OrderExecutionPhase extends Phase {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void performingAssignCountries(Command p_command, ModelPlayer p_player) throws InvalidCommand, IOException {
+	protected void performingAssignCountries(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, IOException {
 		printInvalidCommandInState();
 	}
 
@@ -129,7 +129,7 @@ public class OrderExecutionPhase extends Phase {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void creatingPlayers(Command p_command, ModelPlayer p_player) throws InvalidCommand {
+	protected void creatingPlayers(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand {
 		printInvalidCommandInState();
 	}
 
@@ -137,7 +137,7 @@ public class OrderExecutionPhase extends Phase {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void performingEditNeighbour(Command p_command, ModelPlayer p_player)
+	protected void performingEditNeighbour(CommandHandler p_command, ModelPlayer p_player)
 			throws InvalidCommand, InvalidMap, IOException {
 		printInvalidCommandInState();
 	}
@@ -146,7 +146,7 @@ public class OrderExecutionPhase extends Phase {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void performingEditCountry(Command p_command, ModelPlayer p_player)
+	protected void performingEditCountry(CommandHandler p_command, ModelPlayer p_player)
 			throws InvalidCommand, InvalidMap, IOException {
 		printInvalidCommandInState();
 	}
@@ -155,7 +155,7 @@ public class OrderExecutionPhase extends Phase {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void performingValidateMap(Command p_command, ModelPlayer p_player) throws InvalidMap, InvalidCommand {
+	protected void performingValidateMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidMap, InvalidCommand {
 		printInvalidCommandInState();
 	}
 
@@ -163,7 +163,7 @@ public class OrderExecutionPhase extends Phase {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void performingLoadMap(Command p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap {
+	protected void performingLoadMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap {
 		printInvalidCommandInState();
 	}
 
@@ -171,7 +171,7 @@ public class OrderExecutionPhase extends Phase {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void performingSaveMap(Command p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap {
+	protected void performingSaveMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap {
 		printInvalidCommandInState();
 	}
 
@@ -179,7 +179,7 @@ public class OrderExecutionPhase extends Phase {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void performingEditContinent(Command p_command, ModelPlayer p_player)
+	protected void performingEditContinent(CommandHandler p_command, ModelPlayer p_player)
 			throws IOException, InvalidCommand, InvalidMap {
 		printInvalidCommandInState();
 	}
@@ -188,7 +188,7 @@ public class OrderExecutionPhase extends Phase {
      * {@inheritDoc}
      */
     @Override
-    protected void performingMapEdit(Command p_command, ModelPlayer p_player) throws IOException, InvalidCommand, InvalidMap {
+    protected void performingMapEdit(CommandHandler p_command, ModelPlayer p_player) throws IOException, InvalidCommand, InvalidMap {
         printInvalidCommandInState();
     }
 
