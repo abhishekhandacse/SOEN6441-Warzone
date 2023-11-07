@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import Controllers.GameEngine;
 import Exceptions.InvalidCommand;
-import Exceptions.MapValidationException;
+import Exceptions.InvalidMap;
 import Services.MapService;
 import Services.PlayerService;
 import Utils.Command;
@@ -31,15 +31,15 @@ public abstract class Phase {
         return d_gameState;
     }
 
-    public void handleCommand(String p_enteredCommand) throws MapValidationException, InvalidCommand, IOException {
+    public void handleCommand(String p_enteredCommand) throws InvalidMap, InvalidCommand, IOException {
         commandHandler(p_enteredCommand, null);
     }
 
-    public void handleCommand(String p_enteredCommand, ModelPlayer p_player) throws MapValidationException, InvalidCommand, IOException {
+    public void handleCommand(String p_enteredCommand, ModelPlayer p_player) throws InvalidMap, InvalidCommand, IOException {
         commandHandler(p_enteredCommand, p_player);
     }
 
-    private void commandHandler(String p_enteredCommand, ModelPlayer p_player) throws MapValidationException, InvalidCommand, IOException {
+    private void commandHandler(String p_enteredCommand, ModelPlayer p_player) throws InvalidMap, InvalidCommand, IOException {
         Command l_command = new Command(p_enteredCommand);
         String l_rootCommand = l_command.getRootCommand();
         l_isMapLoaded = d_gameState.getD_map() != null;
@@ -48,51 +48,51 @@ public abstract class Phase {
 
         switch (l_rootCommand) {
             case "editmap": {
-                performMapEdit(l_command, p_player);
+                performingMapEdit(l_command, p_player);
                 break;
             }
             case "editcontinent": {
-                performEditContinent(l_command, p_player);
+                performingEditContinent(l_command, p_player);
                 break;
             }
             case "savemap": {
-                performSaveMap(l_command, p_player);
+                performingSaveMap(l_command, p_player);
                 break;
             }
             case "loadmap": {
-                performLoadMap(l_command, p_player);
+                performingLoadMap(l_command, p_player);
                 break;
             }
             case "validatemap": {
-                performValidateMap(l_command, p_player);
+                performingValidateMap(l_command, p_player);
                 break;
             }
             case "editcountry": {
-                performEditCountry(l_command, p_player);
+                performingEditCountry(l_command, p_player);
                 break;
             }
             case "editneighbor": {
-                performEditNeighbour(l_command, p_player);
+                performingEditNeighbour(l_command, p_player);
                 break;
             }
             case "gameplayer": {
-                createPlayers(l_command, p_player);
+                creatingPlayers(l_command, p_player);
                 break;
             }
             case "assigncountries": {
-                performAssignCountries(l_command, p_player);
+                performingAssignCountries(l_command, p_player);
                 break;
             }
             case "showmap": {
-                performShowMap(l_command, p_player);
+                performingShowMap(l_command, p_player);
                 break;
             }
             case "deploy": {
-                performCreateDeploy(p_enteredCommand, p_player);
+                performingCreateDeploy(p_enteredCommand, p_player);
                 break;
             }
             case "advance": {
-                performAdvance(p_enteredCommand, p_player);
+                performingAdvance(p_enteredCommand, p_player);
                 break;
             }
             case "airlift":
@@ -100,7 +100,7 @@ public abstract class Phase {
             case "negotiate":
             case "bomb":
             {
-                performCardHandle(p_enteredCommand, p_player);
+                performingCardHandle(p_enteredCommand, p_player);
                 break;
             }
 
@@ -116,31 +116,31 @@ public abstract class Phase {
         }
     }
 
-    protected abstract void performCardHandle(String p_enteredCommand, ModelPlayer p_player) throws IOException;
+    protected abstract void performingCardHandle(String p_enteredCommand, ModelPlayer p_player) throws IOException;
 
-    protected abstract void performShowMap(Command p_command, ModelPlayer p_player) throws InvalidCommand, IOException, MapValidationException;
+    protected abstract void performingShowMap(Command p_command, ModelPlayer p_player) throws InvalidCommand, IOException, InvalidMap;
 
-    protected abstract void performAdvance(String p_command, ModelPlayer p_player) throws IOException;
+    protected abstract void performingAdvance(String p_command, ModelPlayer p_player) throws IOException;
 
-    protected abstract void performCreateDeploy(String p_command, ModelPlayer p_player) throws IOException;
+    protected abstract void performingCreateDeploy(String p_command, ModelPlayer p_player) throws IOException;
 
-    protected abstract void performAssignCountries(Command p_command, ModelPlayer p_player) throws InvalidCommand, IOException, MapValidationException;
+    protected abstract void performingAssignCountries(Command p_command, ModelPlayer p_player) throws InvalidCommand, IOException, InvalidMap;
 
-    protected abstract void performEditNeighbour(Command p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException, IOException;
+    protected abstract void performingEditNeighbour(Command p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap, IOException;
 
-    protected abstract void performEditCountry(Command p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException, IOException;
+    protected abstract void performingEditCountry(Command p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap, IOException;
 
-    protected abstract void performValidateMap(Command p_command, ModelPlayer p_player) throws MapValidationException, InvalidCommand, IOException;
+    protected abstract void performingValidateMap(Command p_command, ModelPlayer p_player) throws InvalidMap, InvalidCommand, IOException;
 
-    protected abstract void performLoadMap(Command p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException, IOException;
+    protected abstract void performingLoadMap(Command p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap, IOException;
 
-    protected abstract void performSaveMap(Command p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException, IOException;
+    protected abstract void performingSaveMap(Command p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap, IOException;
 
-    protected abstract void performEditContinent(Command p_command, ModelPlayer p_player) throws IOException, InvalidCommand, MapValidationException;
+    protected abstract void performingEditContinent(Command p_command, ModelPlayer p_player) throws IOException, InvalidCommand, InvalidMap;
 
-    protected abstract void performMapEdit(Command p_command, ModelPlayer p_player) throws IOException, InvalidCommand, MapValidationException;
+    protected abstract void performingMapEdit(Command p_command, ModelPlayer p_player) throws IOException, InvalidCommand, InvalidMap;
 
-    protected abstract void createPlayers(Command p_command, ModelPlayer p_player) throws InvalidCommand, IOException, MapValidationException;
+    protected abstract void creatingPlayers(Command p_command, ModelPlayer p_player) throws InvalidCommand, IOException, InvalidMap;
 
     public void printInvalidCommandInState(){
         d_gameEngine.setD_gameEngineLog("Invalid Command in Current State", "effect");

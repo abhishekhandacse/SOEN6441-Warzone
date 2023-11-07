@@ -57,4 +57,3 @@ public class ModelLogBuffer extends Observable {
         notifyObservers();
     }
 }
-

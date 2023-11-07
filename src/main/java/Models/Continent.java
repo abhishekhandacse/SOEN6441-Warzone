@@ -1,6 +1,6 @@
 package Models;
 
-import Exceptions.MapValidationException;
+import Exceptions.InvalidMap;
 import Utils.CommonUtil;
 
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class Continent {
 		}
 	}
 
-	public void countryRemove(ModelCountry p_country) throws MapValidationException{
+	public void countryRemove(ModelCountry p_country) throws InvalidMap{
 		if(d_countries==null){
 			System.out.println("No such Country Exists");
 		}else {
@@ -76,7 +76,7 @@ public class Continent {
 		}
 	}
 
-	public void removeCountryNeighboursFromAll(Integer p_countryId) throws MapValidationException {
+	public void removeCountryNeighboursFromAll(Integer p_countryId) throws InvalidMap {
 		if (null!=d_countries && !d_countries.isEmpty()) {
 			for (ModelCountry c: d_countries){
 				if (!CommonUtil.isNullObject(c.d_adjacentCountryIds)) {
