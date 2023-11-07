@@ -26,8 +26,8 @@ public class ModelPlayerTest {
 	
 	@Before
 	public void setup() {
-		d_exisitingPlayerList.add(new ModelPlayer("Avneet"));
-		d_exisitingPlayerList.add(new ModelPlayer("Zalak"));
+		d_exisitingPlayerList.add(new ModelPlayer("Anurag"));
+		d_exisitingPlayerList.add(new ModelPlayer("Rajat"));
 		
 		Map l_map = new Map();
 		ModelCountry l_c1 = new ModelCountry(1, "Finland", 10);
