@@ -17,7 +17,7 @@ public class ModelAdvanceTest {
 	
 	@Test
 	public void testInvalidAdvanceOrder() {
-		ModelPlayer l_player = new ModelPlayer("Zalak");
+		ModelPlayer l_player = new ModelPlayer("Rajat");
 		ModelCountry l_country1 = new ModelCountry("India");
 		l_country1.setD_armies(12);
 		ModelCountry l_country2 = new ModelCountry("Canada");
@@ -34,14 +34,14 @@ public class ModelAdvanceTest {
 	
 	@Test
 	public void testAttackersWin() {
-		ModelPlayer l_sourcePlayer = new ModelPlayer("Zalak");
+		ModelPlayer l_sourcePlayer = new ModelPlayer("Rajat");
 		ModelCountry l_country1 = new ModelCountry("India");
 		l_country1.setD_armies(7);
 		List<ModelCountry> l_s1 = new ArrayList<>();
 		l_s1.add(l_country1);
 		l_sourcePlayer.setD_coutriesOwned(l_s1);
 
-		ModelPlayer l_targetPlayer = new ModelPlayer("Mike");
+		ModelPlayer l_targetPlayer = new ModelPlayer("Anurag");
 		ModelCountry l_country2 = new ModelCountry("Canada");
 		l_country2.setD_armies(4);
 		List<ModelCountry> l_s2 = new ArrayList<>();
@@ -59,14 +59,14 @@ public class ModelAdvanceTest {
 	
 	@Test
 	public void testDefendersWin() {
-		ModelPlayer l_sourcePlayer = new ModelPlayer("Zalak");
+		ModelPlayer l_sourcePlayer = new ModelPlayer("Rajat");
 		ModelCountry l_country1 = new ModelCountry("India");
 		l_country1.setD_armies(2);
 		List<ModelCountry> l_s1 = new ArrayList<>();
 		l_s1.add(l_country1);
 		l_sourcePlayer.setD_coutriesOwned(l_s1);
 
-		ModelPlayer l_targetPlayer = new ModelPlayer("Mike");
+		ModelPlayer l_targetPlayer = new ModelPlayer("Anurag");
 		ModelCountry l_country2 = new ModelCountry("Canada");
 		l_country2.setD_armies(4);
 		List<ModelCountry> l_s2 = new ArrayList<>();
@@ -84,7 +84,7 @@ public class ModelAdvanceTest {
 	
 	@Test
 	public void testDeployToTarget() {
-		ModelPlayer l_sourcePlayer = new ModelPlayer("Zalak");
+		ModelPlayer l_sourcePlayer = new ModelPlayer("Rajat");
 		List<ModelCountry> l_s1 = new ArrayList<>();
 		
 		ModelCountry l_country1 = new ModelCountry("India");
