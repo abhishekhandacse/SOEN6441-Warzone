@@ -318,7 +318,7 @@ public class ModelAdvance implements Order {
         l_playersList.add(p_playerOfTarCountry);
 
         PlayerService l_playerService = new PlayerService();
-        l_playerService.performContinentAssignment(l_playersList, p_gameState.getD_map().getD_allContinents());
+        l_playerService.performAssignContinent(l_playersList, p_gameState.getD_map().getD_allContinents());
     }
 
     /**

@@ -3,7 +3,7 @@ package Services;
 import Constants.ApplicationConstantsHardcoding;
 import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
-import Models.Continent;
+import Models.ModelContinent;
 import Models.GameState;
 import Models.Map;
 import Models.ModelCountry;
@@ -38,7 +38,7 @@ public class MapService {
 
 
             List<String> l_contListData = getMetaData(l_fileLines, "continent");
-            List<Continent> l_contListObjects = parseMetadataForContinents(l_contListData);
+            List<ModelContinent> l_contListObjects = parseMetadataForContinents(l_contListData);
             List<String> l_countryListData = getMetaData(l_fileLines, "country");
             List<String> l_metaDataBorders = getMetaData(l_fileLines, "border");
             List<ModelCountry> l_countryListObjects = parseMetadataForCountries(l_countryListData);
@@ -126,14 +126,14 @@ public class MapService {
      * @param p_continentList The list of metadata lines for continents.
      * @return A list of Continent objects created from the parsed metadata.
      */
-    public List<Continent> parseMetadataForContinents(List<String> p_continentList) {
+    public List<ModelContinent> parseMetadataForContinents(List<String> p_continentList) {
         int l_continentId = 1;
-        List<Continent> l_continents = new ArrayList<Continent>();
+        List<ModelContinent> l_continents = new ArrayList<ModelContinent>();
 
 
         for (String cont : p_continentList) {
             String[] l_metaData = cont.split(" ");
-            l_continents.add(new Continent(l_continentId, l_metaData[0], Integer.parseInt(l_metaData[1])));
+            l_continents.add(new ModelContinent(l_continentId, l_metaData[0], Integer.parseInt(l_metaData[1])));
             l_continentId++;
         }
         return l_continents;
@@ -176,9 +176,9 @@ public class MapService {
      * @param p_continents  The list of Continent objects containing continent information.
      * @return The updated list of Continent objects with linked countries.
      */
-    public List<Continent> linkCountryContinents(List<ModelCountry> p_countries, List<Continent> p_continents) {
+    public List<ModelContinent> linkCountryContinents(List<ModelCountry> p_countries, List<ModelContinent> p_continents) {
         for (ModelCountry c : p_countries) {
-            for (Continent cont : p_continents) {
+            for (ModelContinent cont : p_continents) {
                 if (cont.getD_continentID().equals(c.getD_continentId())) {
                     cont.addingCountry(c);
                 }
@@ -458,7 +458,7 @@ public class MapService {
      */
     private void writeMetadataForContinent(GameState p_gameState, FileWriter p_writer) throws IOException {
         p_writer.write(System.lineSeparator() + ApplicationConstantsHardcoding.ALL_CONTINENTS + System.lineSeparator());
-        for (Continent l_continent : p_gameState.getD_map().getD_allContinents()) {
+        for (ModelContinent l_continent : p_gameState.getD_map().getD_allContinents()) {
             p_writer.write(
                     l_continent.getD_continentName().concat(" ").concat(l_continent.getD_continentValue().toString())
                             + System.lineSeparator());

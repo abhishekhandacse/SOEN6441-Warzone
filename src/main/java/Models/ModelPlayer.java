@@ -20,7 +20,7 @@ public class ModelPlayer {
 
 		List<ModelCountry> d_coutriesOwned;
 
-		List<Continent> d_continentsOwned;
+		List<ModelContinent> d_continentsOwned;
 
 		List<Order> order_list;
 
@@ -72,11 +72,11 @@ public class ModelPlayer {
 		this.d_coutriesOwned = p_coutriesOwned;
 	}
 
-		public List<Continent> getD_continentsOwned() {
+		public List<ModelContinent> getD_continentsOwned() {
 		return d_continentsOwned;
 	}
 
-		public void setD_continentsOwned(List<Continent> p_continentsOwned) {
+		public void setD_continentsOwned(List<ModelContinent> p_continentsOwned) {
 		this.d_continentsOwned = p_continentsOwned;
 	}
 
@@ -125,7 +125,7 @@ public class ModelPlayer {
 		public List<String> getContinentNames() {
 		List<String> l_continentNames = new ArrayList<String>();
 		if (d_continentsOwned != null) {
-			for (Continent c : d_continentsOwned) {
+			for (ModelContinent c : d_continentsOwned) {
 				l_continentNames.add(c.getD_continentName());
 			}
 			return l_continentNames;

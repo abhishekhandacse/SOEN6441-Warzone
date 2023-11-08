@@ -2,7 +2,7 @@ package Services;
 
 import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
-import Models.Continent;
+import Models.ModelContinent;
 import Models.ModelCountry;
 import Models.GameState;
 import Models.Map;
@@ -57,13 +57,13 @@ public class MapServiceTest {
 
 	@Test
 	public void testEditContinentRemove() throws IOException, MapValidationException, CommandValidationException {
-		List<Continent> l_continents = new ArrayList<>();
-		Continent l_c1 = new Continent();
+		List<ModelContinent> l_continents = new ArrayList<>();
+		ModelContinent l_c1 = new ModelContinent();
 		l_c1.setD_continentID(1);
 		l_c1.setD_continentName("Asia");
 		l_c1.setD_continentValue(10);
 
-		Continent l_c2 = new Continent();
+		ModelContinent l_c2 = new ModelContinent();
 		l_c2.setD_continentID(2);
 		l_c2.setD_continentName("Europe");
 		l_c2.setD_continentValue(20);
@@ -92,7 +92,7 @@ public class MapServiceTest {
 		List<Integer> l_expectedContinentValueList = new ArrayList<Integer>();
 		l_expectedContinentValueList.addAll(Arrays.asList(5, 4, 5, 3));
 
-		for (Continent l_continent : d_map.getD_allContinents()) {
+		for (ModelContinent l_continent : d_map.getD_allContinents()) {
 			l_actualContinentIdList.add(l_continent.getD_continentID());
 			l_actualContinentValueList.add(l_continent.getD_continentValue());
 		}

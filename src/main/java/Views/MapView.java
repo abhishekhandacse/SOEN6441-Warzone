@@ -37,7 +37,7 @@ public class MapView {
 	/**
 	 * List of Continents
 	 */
-	List<Continent> d_continentsList;
+	List<ModelContinent> d_continentsList;
 
     /**
      * Reset Color ANSI Code.
