@@ -17,10 +17,9 @@ jobs:
           java-version: 1.8
       - name: Maven Clean Install
         run: mvn clean install
-#Commenting out this until we write all the junit tests and javadoc
-#      - name: Run Junit Tests
-#        run: mvn test
-#          - name: Check JavaDoc
-#            run: mvn checkstyle:checkstyle
-#      - name: Generate JavaDoc
-#        run: mvn javadoc:javadoc
+      - name: Run Junit Tests
+        run: mvn test
+          - name: Check JavaDoc
+            run: mvn checkstyle:checkstyle
+      - name: Generate JavaDoc
+        run: mvn javadoc:javadoc
