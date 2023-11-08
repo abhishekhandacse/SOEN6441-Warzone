@@ -1,0 +1,348 @@
+Game is being initialized ......
+
+
+=======Startup of Game Phase=======
+
+Log: Advance Order : advance India France 15 cannot be executed because the number of armies specified in the advance order exceeds the armies of the source country: India
+Log: Advance Order : advance Canada France 10 cannot be executed because the source country: Canada has 10 army units, and all of them cannot be given an advance order; at least one army unit must remain to retain the territory.
+Log: Advance Order : advance Italy France 10 cannot be executed because the source country: Italy specified in the advance order does not belong to the player: Rajat
+Log: Airlift Operation from France to Spain successful!
+Log: Invalid Target Country! Doesn't exist on the map!
+Log: 10 armies have been deployed successfully on country : India
+Log: 15 armies have been deployed successfully on country : Canada
+
+Command Entered: editcontinent
+Log: Can not Edit Continent, please perform `editmap` first
+
+Command Entered: savemap
+Log: No map found to save, Please `editmap` first
+
+Command Entered: editmap
+
+Command Entered: assigncountries -add india
+
+Command Entered: editcontinent -add Europe 10 -add America 20
+Log: Continent Europe added successfully!
+Log: Continent America added successfully!
+
+Command Entered: editcontinent -remove Europe
+Log: Continent Europe removed successfully!
+Log: 
+Player : Anurag is executing Bomb card on country :  Japan with armies :  4. New armies: 2
+Log: 
+Player : Anurag is executing Bomb card on country :  India with armies :  15. New armies: 7
+Log: 
+Player : Anurag is executing Bomb card on country :  Canada with armies :  1. New armies: 0
+Log: Bomb card order : bomb Korea is not executed since Target country : Korea given in bomb command is owned by the player : Anurag VALIDATES:- You cannot bomb your own territory!
+Log: Advance Order : advance India France 15 cannot be executed because the number of armies specified in the advance order exceeds the armies of the source country: India
+Log: Advance Order : advance Canada France 10 cannot be executed because the source country: Canada has 10 army units, and all of them cannot be given an advance order; at least one army unit must remain to retain the territory.
+Log: Advance Order : advance Italy France 10 cannot be executed because the source country: Italy specified in the advance order does not belong to the player: Rajat
+Log: 
+Player : Amanpreet is executing a defensive blockade on Country :  India with armies :  15
+Log: Card Order for Blockage is : blockade USA is not executed since Target country : USA given in blockade command does not belong to the player : Amanpreet The card will have no effect, and you don't get the card back.
+Log: Airlift Operation from France to Spain successful!
+Log: Invalid Target Country! Doesn't exist on the map!
+Log: 10 armies have been deployed successfully on country : India
+Log: 15 armies have been deployed successfully on country : Canada
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Bomb card order : bomb France is not executed as Rajat has negotiation pact with the target country's player!
+Player : Anurag has won the Game by conquering all countries. Exiting the Game .....
+Log: Validating Map......
+Log: East_Europe has no countries, it must possess atleast 1 country
+Log: Couldn't save the changes in map file!
+Log: Country China added successfully!
+Log: Continent Asia removed successfully!
+Log: testedit.map already exists and is loaded for editing
+Log: Continent Asia added successfully!
+Log: Country Maldives added successfully!
+Log: Country Singapore added successfully!
+Log: Neighbour Pair Singapore Maldives added successfully!
+Log: No Such Neighbour Exists
+Log: Continent Asia added successfully!
+Log: Country: Ukraine does not exist!
+Log: test.map already exists and is loaded for editing
+Log: Continent Northern-America added successfully!
+Log: Country Canada added successfully!
+Log: Country Alaska added successfully!
+Log: Neighbour Pair Canada Alaska added successfully!
+
+Command Entered: editcontinent
+Log: Can not Edit Continent, please perform `editmap` first
+
+Command Entered: savemap
+Log: No map found to save, Please `editmap` first
+
+Command Entered: editmap
+
+Command Entered: assigncountries -add india
+
+Command Entered: editcontinent -add Europe 10 -add America 20
+Log: Continent Europe added successfully!
+Log: Continent America added successfully!
+
+Command Entered: editcontinent -remove Europe
+Log: Continent Europe removed successfully!
+Log: 
+Player : Anurag is executing Bomb card on country :  Japan with armies :  4. New armies: 2
+Log: 
+Player : Anurag is executing Bomb card on country :  India with armies :  15. New armies: 7
+Log: 
+Player : Anurag is executing Bomb card on country :  Canada with armies :  1. New armies: 0
+Log: Bomb card order : bomb Korea is not executed since Target country : Korea given in bomb command is owned by the player : Anurag VALIDATES:- You cannot bomb your own territory!
+Log: Advance Order : advance India France 15 cannot be executed because the number of armies specified in the advance order exceeds the armies of the source country: India
+Log: Advance Order : advance Canada France 10 cannot be executed because the source country: Canada has 10 army units, and all of them cannot be given an advance order; at least one army unit must remain to retain the territory.
+Log: Advance Order : advance Italy France 10 cannot be executed because the source country: Italy specified in the advance order does not belong to the player: Rajat
+Log: 
+Player : Amanpreet is executing a defensive blockade on Country :  India with armies :  15
+Log: Card Order for Blockage is : blockade USA is not executed since Target country : USA given in blockade command does not belong to the player : Amanpreet The card will have no effect, and you don't get the card back.
+Log: Airlift Operation from France to Spain successful!
+Log: Invalid Target Country! Doesn't exist on the map!
+Log: 10 armies have been deployed successfully on country : India
+Log: 15 armies have been deployed successfully on country : Canada
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Bomb card order : bomb France is not executed as Rajat has negotiation pact with the target country's player!
+Player : Anurag has won the Game by conquering all countries. Exiting the Game .....
+Log: Validating Map......
+Log: East_Europe has no countries, it must possess atleast 1 country
+Log: Couldn't save the changes in map file!
+Log: Country China added successfully!
+Log: Continent Asia removed successfully!
+Log: testedit.map already exists and is loaded for editing
+Log: Continent Asia added successfully!
+Log: Country Maldives added successfully!
+Log: Country Singapore added successfully!
+Log: Neighbour Pair Singapore Maldives added successfully!
+Log: No Such Neighbour Exists
+Log: Continent Asia added successfully!
+Log: Country: Ukraine does not exist!
+Log: test.map already exists and is loaded for editing
+Log: Continent Northern-America added successfully!
+Log: Country Canada added successfully!
+Log: Country Alaska added successfully!
+Log: Neighbour Pair Canada Alaska added successfully!
+
+Command Entered: editcontinent
+Log: Can not Edit Continent, please perform `editmap` first
+
+Command Entered: savemap
+Log: No map found to save, Please `editmap` first
+
+Command Entered: editmap
+
+Command Entered: assigncountries -add india
+
+Command Entered: editcontinent -add Europe 10 -add America 20
+Log: Continent Europe added successfully!
+Log: Continent America added successfully!
+
+Command Entered: editcontinent -remove Europe
+Log: Continent Europe removed successfully!
+Log: 
+Player : Anurag is executing Bomb card on country :  Japan with armies :  4. New armies: 2
+Log: 
+Player : Anurag is executing Bomb card on country :  India with armies :  15. New armies: 7
+Log: 
+Player : Anurag is executing Bomb card on country :  Canada with armies :  1. New armies: 0
+Log: Bomb card order : bomb Korea is not executed since Target country : Korea given in bomb command is owned by the player : Anurag VALIDATES:- You cannot bomb your own territory!
+Log: Advance Order : advance India France 15 cannot be executed because the number of armies specified in the advance order exceeds the armies of the source country: India
+Log: Advance Order : advance Canada France 10 cannot be executed because the source country: Canada has 10 army units, and all of them cannot be given an advance order; at least one army unit must remain to retain the territory.
+Log: Advance Order : advance Italy France 10 cannot be executed because the source country: Italy specified in the advance order does not belong to the player: Rajat
+Log: 
+Player : Amanpreet is executing a defensive blockade on Country :  India with armies :  15
+Log: Card Order for Blockage is : blockade USA is not executed since Target country : USA given in blockade command does not belong to the player : Amanpreet The card will have no effect, and you don't get the card back.
+Log: Airlift Operation from France to Spain successful!
+Log: Invalid Target Country! Doesn't exist on the map!
+Log: 10 armies have been deployed successfully on country : India
+Log: 15 armies have been deployed successfully on country : Canada
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Bomb card order : bomb France is not executed as Rajat has negotiation pact with the target country's player!
+Player : Anurag has won the Game by conquering all countries. Exiting the Game .....
+Log: Validating Map......
+Log: East_Europe has no countries, it must possess atleast 1 country
+Log: Couldn't save the changes in map file!
+Log: Country China added successfully!
+Log: Continent Asia removed successfully!
+Log: testedit.map already exists and is loaded for editing
+Log: Continent Asia added successfully!
+Log: Country Maldives added successfully!
+Log: Country Singapore added successfully!
+Log: Neighbour Pair Singapore Maldives added successfully!
+Log: No Such Neighbour Exists
+Log: Continent Asia added successfully!
+Log: Country: Ukraine does not exist!
+Log: test.map already exists and is loaded for editing
+Log: Continent Northern-America added successfully!
+Log: Country Canada added successfully!
+Log: Country Alaska added successfully!
+Log: Neighbour Pair Canada Alaska added successfully!
+
+Command Entered: editcontinent
+Log: Can not Edit Continent, please perform `editmap` first
+
+Command Entered: savemap
+Log: No map found to save, Please `editmap` first
+
+Command Entered: editmap
+
+Command Entered: assigncountries -add india
+
+Command Entered: editcontinent -add Europe 10 -add America 20
+Log: Continent Europe added successfully!
+Log: Continent America added successfully!
+
+Command Entered: editcontinent -remove Europe
+Log: Continent Europe removed successfully!
+Log: 
+Player : Anurag is executing Bomb card on country :  Japan with armies :  4. New armies: 2
+Log: 
+Player : Anurag is executing Bomb card on country :  India with armies :  15. New armies: 7
+Log: 
+Player : Anurag is executing Bomb card on country :  Canada with armies :  1. New armies: 0
+Log: Bomb card order : bomb Korea is not executed since Target country : Korea given in bomb command is owned by the player : Anurag VALIDATES:- You cannot bomb your own territory!
+Log: Advance Order : advance India France 15 cannot be executed because the number of armies specified in the advance order exceeds the armies of the source country: India
+Log: Advance Order : advance Canada France 10 cannot be executed because the source country: Canada has 10 army units, and all of them cannot be given an advance order; at least one army unit must remain to retain the territory.
+Log: Advance Order : advance Italy France 10 cannot be executed because the source country: Italy specified in the advance order does not belong to the player: Rajat
+Log: 
+Player : Amanpreet is executing a defensive blockade on Country :  India with armies :  15
+Log: Card Order for Blockage is : blockade USA is not executed since Target country : USA given in blockade command does not belong to the player : Amanpreet The card will have no effect, and you don't get the card back.
+Log: Airlift Operation from France to Spain successful!
+Log: Invalid Target Country! Doesn't exist on the map!
+Log: 10 armies have been deployed successfully on country : India
+Log: 15 armies have been deployed successfully on country : Canada
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Bomb card order : bomb France is not executed as Rajat has negotiation pact with the target country's player!
+Player : Anurag has won the Game by conquering all countries. Exiting the Game .....
+Log: Validating Map......
+Log: East_Europe has no countries, it must possess atleast 1 country
+Log: Couldn't save the changes in map file!
+Log: Country China added successfully!
+Log: Continent Asia removed successfully!
+Log: testedit.map already exists and is loaded for editing
+Log: Continent Asia added successfully!
+Log: Country Maldives added successfully!
+Log: Country Singapore added successfully!
+Log: Neighbour Pair Singapore Maldives added successfully!
+Log: No Such Neighbour Exists
+Log: Continent Asia added successfully!
+Log: Country: Ukraine does not exist!
+Log: test.map already exists and is loaded for editing
+Log: Continent Northern-America added successfully!
+Log: Country Canada added successfully!
+Log: Country Alaska added successfully!
+Log: Neighbour Pair Canada Alaska added successfully!
+
+Command Entered: editcontinent
+Log: Can not Edit Continent, please perform `editmap` first
+
+Command Entered: savemap
+Log: No map found to save, Please `editmap` first
+
+Command Entered: editmap
+
+Command Entered: assigncountries -add india
+
+Command Entered: editcontinent -add Europe 10 -add America 20
+Log: Continent Europe added successfully!
+Log: Continent America added successfully!
+
+Command Entered: editcontinent -remove Europe
+Log: Continent Europe removed successfully!
+Log: 
+Player : Anurag is executing Bomb card on country :  Japan with armies :  4. New armies: 2
+Log: 
+Player : Anurag is executing Bomb card on country :  India with armies :  15. New armies: 7
+Log: 
+Player : Anurag is executing Bomb card on country :  Canada with armies :  1. New armies: 0
+Log: Bomb card order : bomb Korea is not executed since Target country : Korea given in bomb command is owned by the player : Anurag VALIDATES:- You cannot bomb your own territory!
+Log: Advance Order : advance India France 15 cannot be executed because the number of armies specified in the advance order exceeds the armies of the source country: India
+Log: Advance Order : advance Canada France 10 cannot be executed because the source country: Canada has 10 army units, and all of them cannot be given an advance order; at least one army unit must remain to retain the territory.
+Log: Advance Order : advance Italy France 10 cannot be executed because the source country: Italy specified in the advance order does not belong to the player: Rajat
+Log: 
+Player : Amanpreet is executing a defensive blockade on Country :  India with armies :  15
+Log: Card Order for Blockage is : blockade USA is not executed since Target country : USA given in blockade command does not belong to the player : Amanpreet The card will have no effect, and you don't get the card back.
+Log: Airlift Operation from France to Spain successful!
+Log: Invalid Target Country! Doesn't exist on the map!
+Log: 10 armies have been deployed successfully on country : India
+Log: 15 armies have been deployed successfully on country : Canada
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Bomb card order : bomb France is not executed as Rajat has negotiation pact with the target country's player!
+Player : Anurag has won the Game by conquering all countries. Exiting the Game .....
+Log: Validating Map......
+Log: East_Europe has no countries, it must possess atleast 1 country
+Log: Couldn't save the changes in map file!
+Log: Country China added successfully!
+Log: Continent Asia removed successfully!
+Log: testedit.map already exists and is loaded for editing
+Log: Continent Asia added successfully!
+Log: Country Maldives added successfully!
+Log: Country Singapore added successfully!
+Log: Neighbour Pair Singapore Maldives added successfully!
+Log: No Such Neighbour Exists
+Log: Continent Asia added successfully!
+Log: Country: Ukraine does not exist!
+Log: test.map already exists and is loaded for editing
+Log: Continent Northern-America added successfully!
+Log: Country Canada added successfully!
+Log: Country Alaska added successfully!
+Log: Neighbour Pair Canada Alaska added successfully!
+
+Command Entered: editcontinent
+Log: Can not Edit Continent, please perform `editmap` first
+
+Command Entered: savemap
+Log: No map found to save, Please `editmap` first
+
+Command Entered: editmap
+
+Command Entered: assigncountries -add india
+
+Command Entered: editcontinent -add Europe 10 -add America 20
+Log: Continent Europe added successfully!
+Log: Continent America added successfully!
+
+Command Entered: editcontinent -remove Europe
+Log: Continent Europe removed successfully!
+Log: 
+Player : Anurag is executing Bomb card on country :  Japan with armies :  4. New armies: 2
+Log: 
+Player : Anurag is executing Bomb card on country :  India with armies :  15. New armies: 7
+Log: 
+Player : Anurag is executing Bomb card on country :  Canada with armies :  1. New armies: 0
+Log: Bomb card order : bomb Korea is not executed since Target country : Korea given in bomb command is owned by the player : Anurag VALIDATES:- You cannot bomb your own territory!
+Log: Advance Order : advance India France 15 cannot be executed because the number of armies specified in the advance order exceeds the armies of the source country: India
+Log: Advance Order : advance Canada France 10 cannot be executed because the source country: Canada has 10 army units, and all of them cannot be given an advance order; at least one army unit must remain to retain the territory.
+Log: Advance Order : advance Italy France 10 cannot be executed because the source country: Italy specified in the advance order does not belong to the player: Rajat
+Log: 
+Player : Amanpreet is executing a defensive blockade on Country :  India with armies :  15
+Log: Card Order for Blockage is : blockade USA is not executed since Target country : USA given in blockade command does not belong to the player : Amanpreet The card will have no effect, and you don't get the card back.
+Log: Airlift Operation from France to Spain successful!
+Log: Invalid Target Country! Doesn't exist on the map!
+Log: 10 armies have been deployed successfully on country : India
+Log: 15 armies have been deployed successfully on country : Canada
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Bomb card order : bomb France is not executed as Rajat has negotiation pact with the target country's player!
+Player : Anurag has won the Game by conquering all countries. Exiting the Game .....
+Log: Validating Map......
+Log: East_Europe has no countries, it must possess atleast 1 country
+Log: Couldn't save the changes in map file!
+Log: Country China added successfully!
+Log: Continent Asia removed successfully!
+Log: testedit.map already exists and is loaded for editing
+Log: Continent Asia added successfully!
+Log: Country Maldives added successfully!
+Log: Country Singapore added successfully!
+Log: Neighbour Pair Singapore Maldives added successfully!
+Log: No Such Neighbour Exists
+Log: Continent Asia added successfully!
+Log: Country: Ukraine does not exist!
+Log: test.map already exists and is loaded for editing
+Log: Continent Northern-America added successfully!
+Log: Country Canada added successfully!
+Log: Country Alaska added successfully!
+Log: Neighbour Pair Canada Alaska added successfully!

@@ -17,11 +17,9 @@ public class ModelPlayerTest {
 	List<ModelPlayer> d_exisitingPlayerList = new ArrayList<>();
 	
 	List<Order> d_order_list = new ArrayList<Order>();
-
 	
 	ModelPlayer d_player = new ModelPlayer();
 
-	
 	GameState l_gs = new GameState();
 	
 	@Before
