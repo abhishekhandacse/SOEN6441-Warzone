@@ -6,6 +6,9 @@ import Utils.CommonUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This model class manages all the Continents in the map.
+ */
 public class ModelContinent {
 
 	Integer d_continentID;

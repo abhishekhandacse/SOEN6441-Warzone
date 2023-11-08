@@ -8,6 +8,9 @@ import java.util.*;
 
 public class CommandHandler {
 
+    /**
+     * the command
+     */
     public String d_command;
 
     /**

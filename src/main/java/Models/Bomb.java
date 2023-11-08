@@ -22,7 +22,11 @@ public class Bomb implements Card {
 	 */
 	String d_logOrderExecution;
 
-	//Constructor
+	/**
+	 * Constructor of Bomb Class
+	 * @param p_player - player
+	 * @param p_targetCountry - target country
+	 */
 	public Bomb(ModelPlayer p_player, String p_targetCountry) {
 		this.d_player = p_player;
 		this.d_targetCountryID = p_targetCountry;

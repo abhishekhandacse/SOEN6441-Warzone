@@ -32,10 +32,20 @@ public abstract class Phase {
         d_gameState = p_gameState;
     }
 
+    /**
+     * Set the current game state
+     * 
+     * @param p_gameState - game state
+     */
     public void setD_gameState(GameState p_gameState) {
         d_gameState = p_gameState;
     }
 
+    /**
+     * Return the game state
+     * 
+     * @return the game state
+     */
     public GameState getD_gameState() {
         return d_gameState;
     }
@@ -44,6 +54,7 @@ public abstract class Phase {
      * Handles the entered command by delegating to appropriate command handlers based on the root command.
      *
      * @param p_enteredCommand the command to handle
+     * 
      * @throws MapValidationException if an issue with map validation occurs
      * @throws CommandValidationException if an invalid command is encountered
      * @throws IOException if an I/O error occurs

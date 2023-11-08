@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Advance class
+ */
 public class ModelAdvance implements Order {
 
     /**

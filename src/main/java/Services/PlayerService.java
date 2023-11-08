@@ -294,6 +294,13 @@ public class PlayerService {
 		return l_unassignedArmies != 0;
 	}
 
+	/**
+	 * Checks if the map is loaded or not
+	 * 
+	 * @param p_gameState - game state
+	 * 
+	 * @return boolean if the map is loaded or not
+	 */
 	public boolean isMapLoaded(GameState p_gameState) {
 		return !CommonUtil.isNullObject(p_gameState.getD_map()) ? true : false;
 	}

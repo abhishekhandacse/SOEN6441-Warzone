@@ -27,12 +27,7 @@ public class OrderExecutionPhase extends Phase {
 	}
 
 	/**
-	 * This method checks for card handle command and prints invalid command	
-	 *
-	 * @param p_enteredCommand - input command
-	 * @param p_player - current player
-	 * 
-	 * @throws IOException
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected void performingCardHandle(String p_enteredCommand, ModelPlayer p_player) throws IOException {
