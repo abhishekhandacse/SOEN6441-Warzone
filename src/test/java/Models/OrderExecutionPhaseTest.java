@@ -12,43 +12,80 @@ import org.junit.Test;
 import Controllers.GameEngine;
 import Exceptions.MapValidationException;
 
+/**
+ * The OrderExecutionPhaseTest class contains JUnit test cases for the OrderExecutionPhase class,
+ * which is responsible for the execution phase of game orders.
+ */
 public class OrderExecutionPhaseTest {
+    /**
+     * The first player for testing order execution.
+     */
     ModelPlayer d_player1;
 
-	ModelPlayer d_player2;
+    /**
+     * The second player for testing order execution.
+     */
+    ModelPlayer d_player2;
 
-	GameState d_gameState;
+    /**
+     * The game state used for testing order execution.
+     */
+    GameState d_gameState;
 
-	@Before
-	public void setup() throws MapValidationException {
-		d_gameState = new GameState();
-		d_player1 = new ModelPlayer();
-		d_player1.setPlayerName("Anurag");
-		d_player2 = new ModelPlayer();
-		d_player2.setPlayerName("Harman");
+    /**
+     * Set up the initial game state and objects before running the test cases.
+     *
+     * @throws MapValidationException if there is an issue with map validation.
+     */
+    @Before
+    public void setup() throws MapValidationException {
+        // Create a new game state
+        d_gameState = new GameState();
 
-		List<ModelCountry> l_countryList = new ArrayList<ModelCountry>();
-		ModelCountry l_country = new ModelCountry(0, "China", 1);
-		l_country.setD_armies(14);
-		l_countryList.add(l_country);
+        // Create the first player and set their name
+        d_player1 = new ModelPlayer();
+        d_player1.setPlayerName("Anurag");
 
-		ModelCountry l_countryNeighbour = new ModelCountry(1, "Japan", 1);
-		l_countryNeighbour.addNeighbour(0);
-		l_country.addNeighbour(1);
-		l_countryNeighbour.setD_armies(20);
-		l_countryList.add(l_countryNeighbour);
+        // Create the second player and set their name
+        d_player2 = new ModelPlayer();
+        d_player2.setPlayerName("Harman");
 
-		d_player1.setD_coutriesOwned(l_countryList);
+        // Create a list of countries owned by the first player
+        List<ModelCountry> l_countryList = new ArrayList<ModelCountry>();
 
-		Map l_map = new Map();
-		l_map.setD_allCountries(l_countryList);
-		d_gameState.setD_map(l_map);
-		d_gameState.setD_playersList(Arrays.asList(d_player1, d_player2));
-	}
+        // Create a country and set its properties
+        ModelCountry l_country = new ModelCountry(0, "China", 1);
+        l_country.setD_armies(14);
+        l_countryList.add(l_country);
 
+        // Create a neighboring country
+        ModelCountry l_countryNeighbour = new ModelCountry(1, "Japan", 1);
+        l_countryNeighbour.addNeighbour(0);
+        l_country.addNeighbour(1);
+        l_countryNeighbour.setD_armies(20);
+        l_countryList.add(l_countryNeighbour);
+
+        // Set the list of countries owned by the first player
+        d_player1.setD_coutriesOwned(l_countryList);
+
+        // Create a map and set its list of countries
+        Map l_map = new Map();
+        l_map.setD_allCountries(l_countryList);
+        d_gameState.setD_map(l_map);
+
+        // Set the list of players in the game state
+        d_gameState.setD_playersList(Arrays.asList(d_player1, d_player2));
+    }
+
+    /**
+     * Test the checkEndOftheGame method in the OrderExecutionPhase class.
+     */
     @Test
-	public void testEndOfTheGame() {
-		OrderExecutionPhase l_orderExec = new OrderExecutionPhase(new GameEngine(), d_gameState);
-		assertTrue(l_orderExec.checkEndOftheGame(d_gameState));
-	}
+    public void testEndOfTheGame() {
+        // Create an instance of the `OrderExecutionPhase` class with a new `GameEngine` and the game state
+        OrderExecutionPhase l_orderExec = new OrderExecutionPhase(new GameEngine(), d_gameState);
+
+        // Check if the end of the game is reached
+        assertTrue(l_orderExec.checkEndOftheGame(d_gameState));
+    }
 }
