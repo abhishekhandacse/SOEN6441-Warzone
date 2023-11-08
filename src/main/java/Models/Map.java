@@ -1,6 +1,6 @@
 package Models;
 
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 import Utils.CommonUtil;
 
 import java.util.ArrayList;
@@ -166,9 +166,9 @@ public class Map {
      * Validates the complete map.
      *
      * @return Bool Value if map is valid
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public Boolean Validate() throws InvalidMap {
+    public Boolean Validate() throws MapValidationException {
         return (!checkForNullObjects() && checkContinentConnectivity() && checkCountryConnectivity());
     }
 
@@ -176,18 +176,18 @@ public class Map {
      * Performs Null Check on Objects in Map.
      *
      * @return Boolean if it is false
-     * @throws InvalidMap for corresponding Invalid conditions
+     * @throws MapValidationException for corresponding Invalid conditions
      */
-    public Boolean checkForNullObjects() throws InvalidMap{
+    public Boolean checkForNullObjects() throws MapValidationException{
         if(d_allContinents ==null || d_allContinents.isEmpty()){
-            throw new InvalidMap("Map must possess atleast one continent!");
+            throw new MapValidationException("Map must possess atleast one continent!");
         }
         if(d_allCountries ==null || d_allCountries.isEmpty()){
-            throw new InvalidMap("Map must possess atleast one country!");
+            throw new MapValidationException("Map must possess atleast one country!");
         }
         for(ModelCountry c: d_allCountries){
             if(c.getD_adjacentCountryIds().size()<1){
-                throw new InvalidMap(c.getD_countryName()+" does not possess any neighbour, hence isn't reachable!");
+                throw new MapValidationException(c.getD_countryName()+" does not possess any neighbour, hence isn't reachable!");
             }
         }
         return false;
@@ -197,13 +197,13 @@ public class Map {
      * Checks All Continent's Inner Connectivity.
 	 *
 	 * @return Boolean Value if all are connected
-	 * @throws InvalidMap if any continent is not Connected
+	 * @throws MapValidationException if any continent is not Connected
 	 */
-	public Boolean checkContinentConnectivity() throws InvalidMap {
+	public Boolean checkContinentConnectivity() throws MapValidationException {
 		boolean l_flagConnectivity=true;
 		for (Continent c: d_allContinents){
 			if (null == c.getD_countries() || c.getD_countries().size()<1){
-				throw new InvalidMap(c.getD_continentName() + " has no countries, it must possess atleast 1 country");
+				throw new MapValidationException(c.getD_continentName() + " has no countries, it must possess atleast 1 country");
 			}
 			if(!subGraphConnectivity(c)){
 				l_flagConnectivity=false;
@@ -217,9 +217,9 @@ public class Map {
      *
      * @param p_continent Continent being checked
      * @return Bool Value if Continent is Connected
-     * @throws InvalidMap Which country is not connected
+     * @throws MapValidationException Which country is not connected
      */
-    public boolean subGraphConnectivity(Continent p_continent) throws InvalidMap {
+    public boolean subGraphConnectivity(Continent p_continent) throws MapValidationException {
         HashMap<Integer, Boolean> l_continentCountry = new HashMap<Integer, Boolean>();
 
         for (ModelCountry c : p_continent.getD_countries()) {
@@ -232,7 +232,7 @@ public class Map {
             if (!entry.getValue()) {
                 ModelCountry l_country = getCountry(entry.getKey());
                 String l_messageException = l_country.getD_countryName() + " in Continent " + p_continent.getD_continentName() + " is not reachable";
-                throw new InvalidMap(l_messageException);
+                throw new MapValidationException(l_messageException);
             }
         }
         return !l_continentCountry.containsValue(false);
@@ -260,9 +260,9 @@ public class Map {
      * Checks country connectivity in the map.
 	 *
 	 * @return boolean value for condition if all the countries are connected
-     * @throws InvalidMap pointing out which Country is not connected
+     * @throws MapValidationException pointing out which Country is not connected
      */
-    public boolean checkCountryConnectivity() throws InvalidMap {
+    public boolean checkCountryConnectivity() throws MapValidationException {
         for (ModelCountry c : d_allCountries) {
             d_allCountriesReachable.put(c.getD_countryId(), false);
         }
@@ -272,7 +272,7 @@ public class Map {
         for (Entry<Integer, Boolean> entry : d_allCountriesReachable.entrySet()) {
             if (!entry.getValue()) {
                 String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
-                throw new InvalidMap(l_exceptionMessage);
+                throw new MapValidationException(l_exceptionMessage);
             }
         }
         return !d_allCountriesReachable.containsValue(false);
@@ -284,10 +284,10 @@ public class Map {
 	 *
 	 * @param p_countryOfInterest the adjacent country
 	 * @return list of Adjacent Country Objects
-	 * @throws InvalidMap pointing out which Country is not connected
-     * @throws InvalidMap Exception
+	 * @throws MapValidationException pointing out which Country is not connected
+     * @throws MapValidationException Exception
      */
-    public List<ModelCountry> getAdjacentCountry(ModelCountry p_countryOfInterest) throws InvalidMap {
+    public List<ModelCountry> getAdjacentCountry(ModelCountry p_countryOfInterest) throws MapValidationException {
         List<ModelCountry> l_adjCountries = new ArrayList<ModelCountry>();
 
         if (p_countryOfInterest.getD_adjacentCountryIds().size() > 0) {
@@ -295,7 +295,7 @@ public class Map {
                 l_adjCountries.add(getCountry(i));
             }
         } else {
-            throw new InvalidMap(p_countryOfInterest.getD_countryName() + " doesn't have any adjacent countries");
+            throw new MapValidationException(p_countryOfInterest.getD_countryName() + " doesn't have any adjacent countries");
 		}
 		return l_adjCountries;
 	}
@@ -306,9 +306,9 @@ public class Map {
      * Iteratively applies the DFS search from the entered node.
      *
      * @param p_countryOfInterest Country visited first
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public void dfsCountry(ModelCountry p_countryOfInterest) throws InvalidMap {
+    public void dfsCountry(ModelCountry p_countryOfInterest) throws MapValidationException {
         d_allCountriesReachable.put(p_countryOfInterest.getD_countryId(), true);
         for (ModelCountry l_nextCountry : getAdjacentCountry(p_countryOfInterest)) {
             if (!d_allCountriesReachable.get(l_nextCountry.getD_countryId())) {
@@ -362,9 +362,9 @@ public class Map {
      * 
      * @param p_continentName Name of the Continent to be Added
      * @param p_continentControlValue Control value of the continent to be added
-     * @throws InvalidMap to handle Invalid addition
+     * @throws MapValidationException to handle Invalid addition
      */
-    public void addContinent(String p_continentName, Integer p_continentControlValue) throws InvalidMap{
+    public void addContinent(String p_continentName, Integer p_continentControlValue) throws MapValidationException{
         int l_continentId;
 
         if (d_allContinents !=null) {
@@ -372,7 +372,7 @@ public class Map {
             if(CommonUtil.isNullObject(getContinent(p_continentName))){
                 d_allContinents.add(new Continent(l_continentId, p_continentName, p_continentControlValue));
             }else{
-                throw new InvalidMap("Continent "+p_continentName+" cannot be added! It already exists!");
+                throw new MapValidationException("Continent "+p_continentName+" cannot be added! It already exists!");
             }
         }else{
             d_allContinents = new ArrayList<Continent>();
@@ -387,9 +387,9 @@ public class Map {
      *     <li>Deletes Countries in Continents and their associated data in the Map</li>
      * </ul>
      * @param p_continentUnderConsideration Continent Name to be found
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public void removeContinent(String p_continentUnderConsideration) throws InvalidMap{
+    public void removeContinent(String p_continentUnderConsideration) throws MapValidationException{
         if (d_allContinents !=null) {
             if(!CommonUtil.isNullObject(getContinent(p_continentUnderConsideration))){
 
@@ -403,10 +403,10 @@ public class Map {
                 }
                 d_allContinents.remove(getContinent(p_continentUnderConsideration));
             }else{
-                throw new InvalidMap("No such Continent exists!");
+                throw new MapValidationException("No such Continent exists!");
             }
         } else{
-            throw new InvalidMap("No continents in the Map to remove!");
+            throw new MapValidationException("No continents in the Map to remove!");
         }
     }
 
@@ -415,9 +415,9 @@ public class Map {
      * 
      * @param p_countryName Name of Country to be Added
      * @param p_continentName Name of Continent to be added in
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public void addCountry(String p_countryName, String p_continentName) throws InvalidMap{
+    public void addCountry(String p_countryName, String p_continentName) throws MapValidationException{
         int l_countryId;
         if(d_allCountries ==null){
             d_allCountries = new ArrayList<ModelCountry>();
@@ -433,10 +433,10 @@ public class Map {
                     }
                 }
             } else{
-                throw new InvalidMap("Cannot add Country "+p_countryName+" to a Continent that doesn't exist!");
+                throw new MapValidationException("Cannot add Country "+p_countryName+" to a Continent that doesn't exist!");
             }
         }else{
-            throw new InvalidMap("Country with name "+ p_countryName+" already Exists!");
+            throw new MapValidationException("Country with name "+ p_countryName+" already Exists!");
         }
     }
 
@@ -444,9 +444,9 @@ public class Map {
      * Performs the remove country operation on Map.
      * 
      * @param p_countryName Name of country to be Added
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public void removeCountry(String p_countryName) throws InvalidMap{
+    public void removeCountry(String p_countryName) throws MapValidationException{
         if(d_allCountries !=null && !CommonUtil.isNullObject(getCountryByName(p_countryName))) {
             for(Continent c: d_allContinents){
                 if(c.getD_continentID().equals(getCountryByName(p_countryName).getD_continentId())){
@@ -458,7 +458,7 @@ public class Map {
             d_allCountries.remove(getCountryByName(p_countryName));
 
         }else{
-           throw new InvalidMap("Country: "+ p_countryName+" does not exist!");
+           throw new MapValidationException("Country: "+ p_countryName+" does not exist!");
         }
     }
 
@@ -467,14 +467,14 @@ public class Map {
      * 
      * @param p_countryName Country whose neighbours are to be updated
      * @param p_neighbourName Country to be added as neighbour
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public void addCountryNeighbour(String p_countryName, String p_neighbourName) throws InvalidMap{
+    public void addCountryNeighbour(String p_countryName, String p_neighbourName) throws MapValidationException{
         if(d_allCountries !=null){
             if(!CommonUtil.isNullObject(getCountryByName(p_countryName)) && !CommonUtil.isNullObject(getCountryByName(p_neighbourName))){
                 d_allCountries.get(d_allCountries.indexOf(getCountryByName(p_countryName))).addNeighbour(getCountryByName(p_neighbourName).getD_countryId());
             } else{
-                throw new InvalidMap("Invalid Neighbour Pair "+p_countryName+" "+p_neighbourName+"! Either of the Countries Doesn't exist!");
+                throw new MapValidationException("Invalid Neighbour Pair "+p_countryName+" "+p_neighbourName+"! Either of the Countries Doesn't exist!");
             }
         }
     }
@@ -484,14 +484,14 @@ public class Map {
      * 
      * @param p_countryName Country whose neighbors are to be updated
      * @param p_neighbourName Country to be removed as neighbor
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public void removeCountryNeighbour(String p_countryName, String p_neighbourName) throws InvalidMap{
+    public void removeCountryNeighbour(String p_countryName, String p_neighbourName) throws MapValidationException{
         if(d_allCountries !=null){
             if(!CommonUtil.isNullObject(getCountryByName(p_countryName)) && !CommonUtil.isNullObject(getCountryByName(p_neighbourName))) {
                 d_allCountries.get(d_allCountries.indexOf(getCountryByName(p_countryName))).removeNeighbour(getCountryByName(p_neighbourName).getD_countryId());
             } else{
-                throw new InvalidMap("Invalid Neighbour Pair "+p_countryName+" "+p_neighbourName+"! Either of the Countries Doesn't exist!");
+                throw new MapValidationException("Invalid Neighbour Pair "+p_countryName+" "+p_neighbourName+"! Either of the Countries Doesn't exist!");
             }
         }
     }
@@ -501,9 +501,9 @@ public class Map {
      * Used while deletion of a country object.
      * 
      * @param p_countryId Country to be removed
-     * @throws InvalidMap indicates Map Object Validation failure
+     * @throws MapValidationException indicates Map Object Validation failure
      */
-    public void updateNeighboursCont(Integer p_countryId) throws InvalidMap {
+    public void updateNeighboursCont(Integer p_countryId) throws MapValidationException {
         for(Continent c: d_allContinents){
             c.removeCountryNeighboursFromAll(p_countryId);
         }
@@ -514,9 +514,9 @@ public class Map {
      * Used while deletion of country object.
      * 
      * @param p_countryID Country to be removed
-     * @throws InvalidMap indicates Map Object Validation failure
+     * @throws MapValidationException indicates Map Object Validation failure
      */
-    public void removeCountryNeighboursFromAll(Integer p_countryID) throws InvalidMap {
+    public void removeCountryNeighboursFromAll(Integer p_countryID) throws MapValidationException {
         for (ModelCountry c: d_allCountries) {
             if (!CommonUtil.isNullObject(c.getD_adjacentCountryIds())) {
                 if (c.getD_adjacentCountryIds().contains(p_countryID)) {
