@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import Controllers.GameEngine;
-import Exceptions.InvalidCommand;
+import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 import Utils.CommandHandler;
 import Views.MapView;
@@ -30,12 +30,12 @@ public class IssueOrderPhase extends Phase{
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws IOException         if an I/O error occurs
      * @throws MapValidationException if an issue with map validation occurs
      */
     @Override
-    protected void performingAssignCountries(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, IOException, MapValidationException {
+    protected void performingAssignCountries(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, IOException, MapValidationException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
@@ -45,12 +45,12 @@ public class IssueOrderPhase extends Phase{
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws IOException         if an I/O error occurs
      * @throws MapValidationException if an issue with map validation occurs
      */
     @Override
-    protected void creatingPlayers(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, IOException, MapValidationException {
+    protected void creatingPlayers(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, IOException, MapValidationException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
@@ -60,12 +60,12 @@ public class IssueOrderPhase extends Phase{
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws MapValidationException if an issue with map validation occurs
      * @throws IOException         if an I/O error occurs
      */
     @Override
-    protected void performingEditNeighbour(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException, IOException {
+    protected void performingEditNeighbour(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
@@ -75,12 +75,12 @@ public class IssueOrderPhase extends Phase{
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws IOException         if an I/O error occurs
      * @throws MapValidationException if an issue with map validation occurs
      */
     @Override
-    protected void performingEditCountry(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException, IOException {
+    protected void performingEditCountry(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
@@ -91,11 +91,11 @@ public class IssueOrderPhase extends Phase{
      * @param p_command the command handler
      * @param p_player  the player
      * @throws MapValidationException if an issue with map validation occurs
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws IOException         if an I/O error occurs
      */
     @Override
-    protected void performingValidateMap(CommandHandler p_command, ModelPlayer p_player) throws MapValidationException, InvalidCommand, IOException {
+    protected void performingValidateMap(CommandHandler p_command, ModelPlayer p_player) throws MapValidationException, CommandValidationException, IOException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
@@ -105,12 +105,12 @@ public class IssueOrderPhase extends Phase{
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws MapValidationException if an issue with map validation occurs
      * @throws IOException         if an I/O error occurs
      */
     @Override
-    protected void performingLoadMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException, IOException {
+    protected void performingLoadMap(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
@@ -120,12 +120,12 @@ public class IssueOrderPhase extends Phase{
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws MapValidationException if an issue with map validation occurs
      * @throws IOException         if an I/O error occurs
      */
     @Override
-    protected void performingSaveMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException, IOException {
+    protected void performingSaveMap(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
@@ -137,11 +137,11 @@ public class IssueOrderPhase extends Phase{
      * @param p_command the command handler
      * @param p_player  the player
      * @throws IOException         if an I/O error occurs
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws MapValidationException if an issue with map validation occurs
      */
     @Override
-    protected void performingEditContinent(CommandHandler p_command, ModelPlayer p_player) throws IOException, InvalidCommand, MapValidationException {
+    protected void performingEditContinent(CommandHandler p_command, ModelPlayer p_player) throws IOException, CommandValidationException, MapValidationException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
@@ -152,11 +152,11 @@ public class IssueOrderPhase extends Phase{
      * @param p_command the command handler
      * @param p_player  the player
      * @throws IOException         if an I/O error occurs
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws MapValidationException if an issue with map validation occurs
      */
     @Override
-    protected void performingMapEdit(CommandHandler p_command, ModelPlayer p_player) throws IOException, InvalidCommand, MapValidationException {
+    protected void performingMapEdit(CommandHandler p_command, ModelPlayer p_player) throws IOException, CommandValidationException, MapValidationException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
@@ -183,12 +183,12 @@ public class IssueOrderPhase extends Phase{
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws IOException         if an I/O error occurs
      * @throws MapValidationException if an issue with map validation occurs
      */
     @Override
-    protected void performingShowMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, IOException, MapValidationException {
+    protected void performingShowMap(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, IOException, MapValidationException {
         MapView l_mapView = new MapView(d_gameState);
         l_mapView.showMap();
 
@@ -239,16 +239,16 @@ public class IssueOrderPhase extends Phase{
     protected void issueOrders(){
         // issue orders for each player
         do {
-            for (ModelPlayer l_player : d_gameState.getD_players()) {
+            for (ModelPlayer l_player : d_gameState.getD_playersList()) {
                 if (l_player.getD_moreOrders() && !l_player.getPlayerName().equals("Neutral")) {
                     try {
                         l_player.issue_order(this);
-                    } catch (InvalidCommand | IOException | MapValidationException l_exception) {
+                    } catch (CommandValidationException | IOException | MapValidationException l_exception) {
                         d_gameEngine.setD_gameEngineLog(l_exception.getMessage(), "effect");
                     }
                 }
             }
-        } while (d_playerService.checkForMoreOrders(d_gameState.getD_players()));
+        } while (d_playerService.checkForMoreOrders(d_gameState.getD_playersList()));
 
         d_gameEngine.setOrderExecutionPhase();
     }
@@ -257,11 +257,11 @@ public class IssueOrderPhase extends Phase{
      * Asks for orders from the player via the command line interface.
      *
      * @param p_player the player to issue orders for
-     * @throws InvalidCommand      if the entered command is invalid
+     * @throws CommandValidationException      if the entered command is invalid
      * @throws IOException         if an I/O error occurs
      * @throws MapValidationException if an issue with map validation occurs
      */
-    public void askForOrder(ModelPlayer p_player) throws InvalidCommand, IOException, MapValidationException{
+    public void askForOrder(ModelPlayer p_player) throws CommandValidationException, IOException, MapValidationException{
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("\nPlease enter command to issue order for player : " + p_player.getPlayerName()
                 + " or give showmap command to view current state of the game.");

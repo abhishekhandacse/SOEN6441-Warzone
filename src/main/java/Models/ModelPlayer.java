@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Random;
 
 import Constants.ApplicationConstantsHardcoding;
-import Exceptions.InvalidCommand;
+import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 import Utils.CommonUtil;
 
@@ -184,7 +184,7 @@ public class ModelPlayer {
 		return p_player.getD_noOfUnallocatedArmies() < Integer.parseInt(p_noOfArmies);
 	}
 
-		public void issue_order(IssueOrderPhase p_issueOrderPhase) throws InvalidCommand, IOException, MapValidationException {
+		public void issue_order(IssueOrderPhase p_issueOrderPhase) throws CommandValidationException, IOException, MapValidationException {
 		p_issueOrderPhase.askForOrder(this);
 	}
 

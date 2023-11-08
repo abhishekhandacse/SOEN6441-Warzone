@@ -11,8 +11,6 @@ public class Airlift implements Card {
 	 */
 	String d_logOfOrderExecution;
 
-
-
 	/**
 	 * Country to drop armies to.
 	 */
@@ -22,7 +20,6 @@ public class Airlift implements Card {
 	 * Number of armies to Airlift.
 	 */
 	Integer d_quantityOfArmy;
-
 
 	/**
 	 * Player the card is owned by.

@@ -138,7 +138,7 @@ public class ModelAdvance implements Order {
      */
     private ModelPlayer getPlayerOfTargetCountry(GameState p_gameState) {
         ModelPlayer l_playerOfTargetCountry = null;
-        for (ModelPlayer l_player : p_gameState.getD_players()) {
+        for (ModelPlayer l_player : p_gameState.getD_playersList()) {
             String l_cont = l_player.getCountryNames().stream()
                     .filter(l_country -> l_country.equalsIgnoreCase(this.d_tCountryName)).findFirst().orElse(null);
             if (!CommonUtil.isNullOrEmpty(l_cont)) {

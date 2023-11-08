@@ -3,78 +3,67 @@ package Models;
 import Utils.CommonUtil;
 
 /**
- * The target country loses half of their army units when bomb card is used by
- * the player.
+ * Bomb Class - When used by a player, target country loses half it's army.
  */
 public class Bomb implements Card {
 
 	/**
-	 * Bomb card will be owned by this player.
-	 */
-	ModelPlayer d_playerInitiator;
-
-	/**
-	 * name of the target country.
+	 * Target country ID
 	 */
 	String d_targetCountryID;
 
 	/**
-	 * Sets the Log containing Information about orders.
+	 * Bomb Card owned by current player
 	 */
-	String d_orderExecutionLog;
+	ModelPlayer d_player;
 
 	/**
-	 * The constructor receives all the parameters necessary to implement the order.
-	 * 
-	 * @param p_playerInitiator Player
-	 * @param p_targetCountry   target country ID
+	 * Logger Object
 	 */
-	public Bomb(ModelPlayer p_playerInitiator, String p_targetCountry) {
-		this.d_playerInitiator = p_playerInitiator;
+	String d_logOrderExecution;
+
+	//Constructor
+	public Bomb(ModelPlayer p_player, String p_targetCountry) {
+		this.d_player = p_player;
 		this.d_targetCountryID = p_targetCountry;
 	}
 
 	/**
-	 * Executes the Bomb order.
-	 * 
-	 * @param p_gameState current state of the game.
+	 * Fetch the order name
 	 */
 	@Override
-	public void execute(GameState p_gameState) {
-		if (valid(p_gameState)) {
-			ModelCountry l_targetCountryID = p_gameState.getD_map().getCountryByName(d_targetCountryID);
-			Integer l_noOfArmiesOnTargetCountry = l_targetCountryID.getD_armies() == 0 ? 1
-					: l_targetCountryID.getD_armies();
-			Integer l_newArmies = (int) Math.floor(l_noOfArmiesOnTargetCountry / 2);
-			l_targetCountryID.setD_armies(l_newArmies);
-			d_playerInitiator.removeCard("bomb");
-			this.setD_orderExecutionLog(
-					"\nPlayer : " + this.d_playerInitiator.getPlayerName() + " is executing Bomb card on country :  "
-							+ l_targetCountryID.getD_countryName() + " with armies :  " + l_noOfArmiesOnTargetCountry
-							+ ". New armies: " + l_targetCountryID.getD_armies(),
-					"default");
-			p_gameState.updateLog(orderExecutionLog(), "effect");
-		}
+	public String getOrderName() {
+		return "bomb";
 	}
 
 	/**
-	 * Gives current bomb order which is being executed.
+	 * Prints the current order
+	 */
+	@Override
+	public void printOrder() {
+		this.d_logOrderExecution = "----------Bomb card order issued by player "
+				+ this.d_player.getPlayerName() + "----------" + System.lineSeparator()
+				+ "Creating a bomb order = " + "on country ID. " + this.d_targetCountryID;
+		System.out.println(System.lineSeparator() + this.d_logOrderExecution);
+
+	}
+
+	/**
 	 * 
-	 * @return advance order command
+	 * @return Current order string value
 	 */
 	private String currentOrder() {
 		return "Bomb card order : " + "bomb" + " " + this.d_targetCountryID;
 	}
 
 	/**
-	 * Validates whether target country belongs to the Player who executed the order
-	 * or not.
+	 * This method will validate the bomb command before execution
 	 * 
-	 * @return boolean if given advance command is valid or not.
+	 * @param p_gameState - current game state
 	 */
 	@Override
 	public boolean valid(GameState p_gameState) {
-		ModelCountry l_country = d_playerInitiator.getD_coutriesOwned().stream()
+		ModelCountry l_country = d_player.getD_coutriesOwned().stream()
 				.filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(this.d_targetCountryID)).findFirst()
 				.orElse(null);
 
@@ -82,53 +71,17 @@ public class Bomb implements Card {
 		if (!CommonUtil.isNullObject(l_country)) {
 			this.setD_orderExecutionLog(this.currentOrder() + " is not executed since Target country : "
 					+ this.d_targetCountryID + " given in bomb command is owned by the player : "
-					+ d_playerInitiator.getPlayerName() + " VALIDATES:- You cannot bomb your own territory!", "error");
+					+ d_player.getPlayerName() + " VALIDATES:- You cannot bomb your own territory!", "error");
 			p_gameState.updateLog(orderExecutionLog(), "effect");
 			return false;
 		}
 
-		if(!d_playerInitiator.negotiationValidation(this.d_targetCountryID)){
-			this.setD_orderExecutionLog(this.currentOrder() + " is not executed as "+ d_playerInitiator.getPlayerName()+ " has negotiation pact with the target country's player!", "error");
+		if(!d_player.negotiationValidation(this.d_targetCountryID)){
+			this.setD_orderExecutionLog(this.currentOrder() + " is not executed as "+ d_player.getPlayerName()+ " has negotiation pact with the target country's player!", "error");
 			p_gameState.updateLog(orderExecutionLog(), "effect");
 			return false;
 		}
 		return true;
-	}
-
-	/**
-	 * Printing the Bomb order.
-	 */
-	@Override
-	public void printOrder() {
-		this.d_orderExecutionLog = "----------Bomb card order issued by player "
-				+ this.d_playerInitiator.getPlayerName() + "----------" + System.lineSeparator()
-				+ "Creating a bomb order = " + "on country ID. " + this.d_targetCountryID;
-		System.out.println(System.lineSeparator() + this.d_orderExecutionLog);
-
-	}
-
-	/**
-	 * Execution log.
-	 * 
-	 * @return String return execution log
-	 */
-	public String orderExecutionLog() {
-		return this.d_orderExecutionLog;
-	}
-
-	/**
-	 * Prints and Sets the order execution log.
-	 *
-	 * @param p_orderExecutionLog String to be set as log
-	 * @param p_logType           type of log : error, default
-	 */
-	public void setD_orderExecutionLog(String p_orderExecutionLog, String p_logType) {
-		this.d_orderExecutionLog = p_orderExecutionLog;
-		if (p_logType.equals("error")) {
-			System.err.println(p_orderExecutionLog);
-		} else {
-			System.out.println(p_orderExecutionLog);
-		}
 	}
 
 	/**
@@ -148,12 +101,47 @@ public class Bomb implements Card {
 	}
 
 	/**
-	 * Return order name.
+	 * Logs the order execution
+	 */
+	public String orderExecutionLog() {
+		return this.d_logOrderExecution;
+	}
+
+	/**
+	 * Prints and Sets the order execution log.
+	 *
+	 * @param p_orderExecutionLog String to be set as log
+	 * @param p_logType           type of log : error, default
+	 */
+	public void setD_orderExecutionLog(String p_orderExecutionLog, String p_logType) {
+		this.d_logOrderExecution = p_orderExecutionLog;
+		if (p_logType.equals("error")) {
+			System.err.println(p_orderExecutionLog);
+		} else {
+			System.out.println(p_orderExecutionLog);
+		}
+	}
+
+	/**
+	 * Executes the Bomb order.
 	 * 
-	 * @return String order name
+	 * @param p_gameState current state of the game.
 	 */
 	@Override
-	public String getOrderName() {
-		return "bomb";
+	public void execute(GameState p_gameState) {
+		if (valid(p_gameState)) {
+			ModelCountry l_targetCountryID = p_gameState.getD_map().getCountryByName(d_targetCountryID);
+			Integer l_armiesCountOnTargetCountry = l_targetCountryID.getD_armies() == 0 ? 1
+					: l_targetCountryID.getD_armies();
+			Integer l_newArmies = (int) Math.floor(l_armiesCountOnTargetCountry / 2);
+			l_targetCountryID.setD_armies(l_newArmies);
+			d_player.removeCard("bomb");
+			this.setD_orderExecutionLog(
+					"\nPlayer : " + this.d_player.getPlayerName() + " is executing Bomb card on country :  "
+							+ l_targetCountryID.getD_countryName() + " with armies :  " + l_armiesCountOnTargetCountry
+							+ ". New armies: " + l_targetCountryID.getD_armies(),
+					"default");
+			p_gameState.updateLog(orderExecutionLog(), "effect");
+		}
 	}
 }

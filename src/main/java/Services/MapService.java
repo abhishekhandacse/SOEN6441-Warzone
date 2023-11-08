@@ -1,7 +1,7 @@
 package Services;
 
 import Constants.ApplicationConstantsHardcoding;
-import Exceptions.InvalidCommand;
+import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 import Models.Continent;
 import Models.GameState;
@@ -252,9 +252,9 @@ public class MapService {
      * @param p_switchParameter The switch parameter to determine which function to execute (1 for continents, 2 for countries, 3 for neighbors).
      * @throws IOException    If there is an issue with file I/O.
      * @throws MapValidationException    If the map is invalid.
-     * @throws InvalidCommand If an invalid command is passed.
+     * @throws CommandValidationException If an invalid command is passed.
      */
-    public void editFunctions(GameState p_gameState, String p_argument, String p_operation, Integer p_switchParameter) throws IOException, MapValidationException, InvalidCommand {
+    public void editFunctions(GameState p_gameState, String p_argument, String p_operation, Integer p_switchParameter) throws IOException, MapValidationException, CommandValidationException {
         Map l_updatedMap;
         String l_mapFileName = p_gameState.getD_map().getD_inputMapFile();
         Map l_mapToBeUpdated = (CommonUtil.isNullObject(p_gameState.getD_map().getD_allContinents()) && CommonUtil.isNullObject(p_gameState.getD_map().getD_allCountries())) ? this.loadMap(p_gameState, l_mapFileName) : p_gameState.getD_map();

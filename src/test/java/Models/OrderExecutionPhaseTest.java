@@ -43,7 +43,7 @@ public class OrderExecutionPhaseTest {
 		Map l_map = new Map();
 		l_map.setD_allCountries(l_countryList);
 		d_gameState.setD_map(l_map);
-		d_gameState.setD_players(Arrays.asList(d_player1, d_player2));
+		d_gameState.setD_playersList(Arrays.asList(d_player1, d_player2));
 	}
 
     @Test

@@ -12,7 +12,7 @@ import Models.ModelPlayer;
 import Utils.CommonUtil;
 
 /**
- * This service class handles the players.
+ * This service class is used to handle the players.
  */
 public class PlayerService {
 
@@ -27,7 +27,7 @@ public class PlayerService {
 	String d_assignmentLog = "Country/Continent Assignment:";
 
 	/**
-	 * Checks if player name is exists in given existing player list.
+	 * Checks if playerLists contains the current player
 	 * 
 	 * @param p_existingPlayerList existing players list present in game
 	 * @param p_playerName         player name which needs to be looked upon
@@ -123,7 +123,7 @@ public class PlayerService {
 	 * @return boolean players exists or not
 	 */
 	public boolean checkPlayersAvailability(GameState p_gameState) {
-		if (p_gameState.getD_players() == null || p_gameState.getD_players().isEmpty()) {
+		if (p_gameState.getD_playersList() == null || p_gameState.getD_playersList().isEmpty()) {
 			return false;
 		}
 		return true;
@@ -138,7 +138,7 @@ public class PlayerService {
 		if (!checkPlayersAvailability(p_gameState))
 			return;
 
-		List<ModelPlayer> l_players = p_gameState.getD_players();
+		List<ModelPlayer> l_players = p_gameState.getD_playersList();
 
 		for (int i = 0; i < l_players.size(); i++) {
 			l_players.get(i).setD_color(ApplicationConstantsHardcoding.ALL_COLORS.get(i));
@@ -157,15 +157,15 @@ public class PlayerService {
 		}
 
 		List<ModelCountry> l_countries = p_gameState.getD_map().getD_allCountries();
-		int l_playerSize = p_gameState.getD_players().size();
-		ModelPlayer l_neutralPlayer = p_gameState.getD_players().stream()
+		int l_playerSize = p_gameState.getD_playersList().size();
+		ModelPlayer l_neutralPlayer = p_gameState.getD_playersList().stream()
 				.filter(l_player -> l_player.getPlayerName().equalsIgnoreCase("Neutral")).findFirst().orElse(null);
 		if (l_neutralPlayer != null)
 			l_playerSize = l_playerSize - 1;
 		int l_countriesPerPlayer = Math.floorDiv(l_countries.size(), l_playerSize);
 
-		this.performRandomCountryAssignment(l_countriesPerPlayer, l_countries, p_gameState.getD_players(), p_gameState);
-		this.performContinentAssignment(p_gameState.getD_players(), p_gameState.getD_map().getD_allContinents());
+		this.performRandomCountryAssignment(l_countriesPerPlayer, l_countries, p_gameState.getD_playersList(), p_gameState);
+		this.performContinentAssignment(p_gameState.getD_playersList(), p_gameState.getD_map().getD_allContinents());
 		p_gameState.updateLog(d_assignmentLog, "effect");
 		System.out.println("Countries have been assigned to Players.");
 
@@ -269,7 +269,7 @@ public class PlayerService {
 	 * @param p_gameState current game state with map and player information
 	 */
 	public void assignArmies(GameState p_gameState) {
-		for (ModelPlayer l_pl : p_gameState.getD_players()) {
+		for (ModelPlayer l_pl : p_gameState.getD_playersList()) {
 			Integer l_armies = this.calculateArmiesForPlayer(l_pl);
 			this.setD_playerLog("Player : " + l_pl.getPlayerName() + " has been assigned with " + l_armies + " armies");
 			p_gameState.updateLog(this.d_playerLog, "effect");
@@ -309,7 +309,7 @@ public class PlayerService {
 	}
 
 	/**
-	 * This method is called by controller to add players, update gameState.
+	 * update gameState - This method is called by controller to add players
 	 *
 	 * @param p_gameState update game state with players information.
 	 * @param p_operation operation to add or remove player.
@@ -321,19 +321,19 @@ public class PlayerService {
 			p_gameState.updateLog(this.d_playerLog, "effect");
 			return;
 		}
-		List<ModelPlayer> l_updatedPlayers = this.addRemovePlayers(p_gameState.getD_players(), p_operation, p_argument);
+		List<ModelPlayer> l_updatedPlayers = this.addRemovePlayers(p_gameState.getD_playersList(), p_operation, p_argument);
 
 		if (!CommonUtil.isNullObject(l_updatedPlayers)) {
-			p_gameState.setD_players(l_updatedPlayers);
+			p_gameState.setD_playersList(l_updatedPlayers);
 			p_gameState.updateLog(d_playerLog, "effect");
 		}
 	}
 
 	/**
-	 * Check whether map is loaded or not.
+	 * This method checks if the map is loaded or not
 	 * 
-	 * @param p_gameState current game state with map and player information
-	 * @return boolean map is loaded or not
+	 * @param p_gameState current state of the game along with map and player information
+	 * @return boolean value if map is loaded or not
 	 */
 	public boolean isMapLoaded(GameState p_gameState) {
 		return !CommonUtil.isNullObject(p_gameState.getD_map()) ? true : false;
@@ -378,13 +378,13 @@ public class PlayerService {
 	}
 
 	/**
-	 * Find Player By Name.
+	 * Method to find the player by name
 	 *
-	 * @param p_playerName player name to be found
-	 * @param p_gameState GameState Instance.
+	 * @param p_playerName player name
+	 * @param p_gameState Instance of GameState
 	 * @return p_player object
 	 */
 	public ModelPlayer findPlayerByName(String p_playerName, GameState p_gameState) {
-		return p_gameState.getD_players().stream().filter(l_player -> l_player.getPlayerName().equals(p_playerName)).findFirst().orElse(null);
+		return p_gameState.getD_playersList().stream().filter(l_player -> l_player.getPlayerName().equals(p_playerName)).findFirst().orElse(null);
 	}
 }

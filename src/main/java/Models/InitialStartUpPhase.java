@@ -2,7 +2,7 @@ package Models;
 
 import Constants.ApplicationConstantsHardcoding;
 import Controllers.GameEngine;
-import Exceptions.InvalidCommand;
+import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 import Utils.CommandHandler;
 import Utils.CommonUtil;
@@ -42,7 +42,7 @@ public class InitialStartUpPhase extends Phase{
         printInvalidCommandInState();
     }
 
-    public void performingEditContinent(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws IOException, InvalidCommand, MapValidationException {
+    public void performingEditContinent(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws IOException, CommandValidationException, MapValidationException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("Can not Edit Continent, please perform `editmap` first", "effect");
             return;
@@ -50,7 +50,7 @@ public class InitialStartUpPhase extends Phase{
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
         if (l_operations_list == null || l_operations_list.isEmpty()) {
-            throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCONTINENT);
+            throw new CommandValidationException(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCONTINENT);
         } else {
             for (Map<String, String> l_map : l_operations_list) {
                 if (p_givenCommand.checkRequiredKeysPresent(ApplicationConstantsHardcoding.ARGUMENTS_PASSED, l_map)
@@ -58,34 +58,34 @@ public class InitialStartUpPhase extends Phase{
                     d_mapService.editFunctions(d_gameState, l_map.get(ApplicationConstantsHardcoding.ARGUMENTS_PASSED),
                             l_map.get(ApplicationConstantsHardcoding.OPERATION_REQUESTED), 1);
                 } else {
-                    throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCONTINENT);
+                    throw new CommandValidationException(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCONTINENT);
                 }
             }
         }
     }
 
-    public void performingMapEdit(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws IOException, InvalidCommand, MapValidationException {
+    public void performingMapEdit(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws IOException, CommandValidationException, MapValidationException {
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
         if (l_operations_list == null || l_operations_list.isEmpty()) {
-            throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITMAP);
+            throw new CommandValidationException(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITMAP);
         } else {
             for (Map<String, String> l_map : l_operations_list) {
                 if (p_givenCommand.checkRequiredKeysPresent(ApplicationConstantsHardcoding.ARGUMENTS_PASSED, l_map)) {
                     d_mapService.editMap(d_gameState, l_map.get(ApplicationConstantsHardcoding.ARGUMENTS_PASSED));
                 } else {
-                    throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITMAP);
+                    throw new CommandValidationException(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITMAP);
                 }
             }
         }
     }
 
-    public void performingLoadMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand, MapValidationException {
+    public void performingLoadMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws CommandValidationException, MapValidationException {
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         boolean l_flagValidate = false;
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
         if (null == l_operations_list || l_operations_list.isEmpty()) {
-            throw new InvalidCommand(ApplicationConstantsHardcoding.VALIDATION_FAILED_ERROR_LOADMAP);
+            throw new CommandValidationException(ApplicationConstantsHardcoding.VALIDATION_FAILED_ERROR_LOADMAP);
         } else {
             for (Map<String, String> l_map : l_operations_list) {
                 if (p_givenCommand.checkRequiredKeysPresent(ApplicationConstantsHardcoding.ARGUMENTS_PASSED, l_map)) {
@@ -103,13 +103,13 @@ public class InitialStartUpPhase extends Phase{
                         d_mapService.mapReset(d_gameState, l_map.get(ApplicationConstantsHardcoding.ARGUMENTS_PASSED));
                     }
                 } else {
-                    throw new InvalidCommand(ApplicationConstantsHardcoding.VALIDATION_FAILED_ERROR_LOADMAP);
+                    throw new CommandValidationException(ApplicationConstantsHardcoding.VALIDATION_FAILED_ERROR_LOADMAP);
                 }
             }
         }
     }
 
-    public void performingSaveMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand, MapValidationException {
+    public void performingSaveMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws CommandValidationException, MapValidationException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("No map found to save, Please `editmap` first", "effect");
             return;
@@ -117,7 +117,7 @@ public class InitialStartUpPhase extends Phase{
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
         if (null == l_operations_list || l_operations_list.isEmpty()) {
-            throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_SAVEMAP);
+            throw new CommandValidationException(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_SAVEMAP);
         } else {
             for (Map<String, String> l_map : l_operations_list) {
                 if (p_givenCommand.checkRequiredKeysPresent(ApplicationConstantsHardcoding.ARGUMENTS_PASSED, l_map)) {
@@ -128,13 +128,13 @@ public class InitialStartUpPhase extends Phase{
                     } else
                         System.out.println(d_gameState.getError());
                 } else {
-                    throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_SAVEMAP);
+                    throw new CommandValidationException(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_SAVEMAP);
                 }
             }
         }
     }
 
-    public void performingValidateMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws MapValidationException, InvalidCommand {
+    public void performingValidateMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws MapValidationException, CommandValidationException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("No map found to validate, Please `loadmap` & `editmap` first", "effect");
             return;
@@ -153,11 +153,11 @@ public class InitialStartUpPhase extends Phase{
                 }
             }
         } else {
-            throw new InvalidCommand(ApplicationConstantsHardcoding.VALIDATION_FAILED_ERROR_VALIDATEMAP);
+            throw new CommandValidationException(ApplicationConstantsHardcoding.VALIDATION_FAILED_ERROR_VALIDATEMAP);
         }
     }
 
-    public void performingEditNeighbour(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand, MapValidationException, IOException {
+    public void performingEditNeighbour(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws CommandValidationException, MapValidationException, IOException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("Can not Edit Neighbors, please perform `editmap` first", "effect");
             return;
@@ -165,7 +165,7 @@ public class InitialStartUpPhase extends Phase{
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
         if (null == l_operations_list || l_operations_list.isEmpty()) {
-            throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCOUNTRY);
+            throw new CommandValidationException(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCOUNTRY);
         } else {
             for (Map<String, String> l_map : l_operations_list) {
                 if (p_givenCommand.checkRequiredKeysPresent(ApplicationConstantsHardcoding.ARGUMENTS_PASSED, l_map)
@@ -173,13 +173,13 @@ public class InitialStartUpPhase extends Phase{
                     d_mapService.editFunctions(d_gameState, l_map.get(ApplicationConstantsHardcoding.OPERATION_REQUESTED),
                             l_map.get(ApplicationConstantsHardcoding.ARGUMENTS_PASSED), 3);
                 } else {
-                    throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCOUNTRY);
+                    throw new CommandValidationException(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCOUNTRY);
                 }
             }
         }
     }
 
-    public void performingEditCountry(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand, MapValidationException, IOException {
+    public void performingEditCountry(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws CommandValidationException, MapValidationException, IOException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("Can not Edit Country, please perform `editmap` first", "effect");
             return;
@@ -187,7 +187,7 @@ public class InitialStartUpPhase extends Phase{
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
         if (null == l_operations_list || l_operations_list.isEmpty()) {
-            throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCOUNTRY);
+            throw new CommandValidationException(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCOUNTRY);
         } else {
             for (Map<String, String> l_map : l_operations_list) {
                 if (p_givenCommand.checkRequiredKeysPresent(ApplicationConstantsHardcoding.ARGUMENTS_PASSED, l_map)
@@ -195,7 +195,7 @@ public class InitialStartUpPhase extends Phase{
                     d_mapService.editFunctions(d_gameState, l_map.get(ApplicationConstantsHardcoding.OPERATION_REQUESTED),
                             l_map.get(ApplicationConstantsHardcoding.ARGUMENTS_PASSED), 2);
                 } else {
-                    throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCOUNTRY);
+                    throw new CommandValidationException(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_EDITCOUNTRY);
                 }
             }
         }
@@ -210,13 +210,13 @@ public class InitialStartUpPhase extends Phase{
                 String l_commandEntered = l_reader.readLine();
 
                 handleCommand(l_commandEntered);
-            } catch (InvalidCommand | MapValidationException | IOException l_exception) {
+            } catch (CommandValidationException | MapValidationException | IOException l_exception) {
                 d_gameEngine.setD_gameEngineLog(l_exception.getMessage(), "effect");
             }
         }
     }
 
-    public void creatingPlayers(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand {
+    public void creatingPlayers(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws CommandValidationException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("No map found, Please `loadmap` before adding game players", "effect");
             return;
@@ -224,7 +224,7 @@ public class InitialStartUpPhase extends Phase{
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
         if (CommonUtil.isNullOrEmptyCollection(l_operations_list)) {
-            throw new InvalidCommand(ApplicationConstantsHardcoding.VALIDATION_FAILED_ERROR_GAMEPLAYER);
+            throw new CommandValidationException(ApplicationConstantsHardcoding.VALIDATION_FAILED_ERROR_GAMEPLAYER);
         } else {
             if (d_gameState.getD_loadCommand()) {
                 for (Map<String, String> l_map : l_operations_list) {
@@ -233,7 +233,7 @@ public class InitialStartUpPhase extends Phase{
                         d_playerService.updatePlayers(d_gameState, l_map.get(ApplicationConstantsHardcoding.OPERATION_REQUESTED),
                                 l_map.get(ApplicationConstantsHardcoding.ARGUMENTS_PASSED));
                     } else {
-                        throw new InvalidCommand(ApplicationConstantsHardcoding.VALIDATION_FAILED_ERROR_GAMEPLAYER);
+                        throw new CommandValidationException(ApplicationConstantsHardcoding.VALIDATION_FAILED_ERROR_GAMEPLAYER);
                     }
                 }
             } else {
@@ -242,7 +242,7 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingAssignCountries(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws InvalidCommand{
+    public void performingAssignCountries(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws CommandValidationException{
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
         if (CommonUtil.isNullOrEmptyCollection(l_operations_list)) {
@@ -251,7 +251,7 @@ public class InitialStartUpPhase extends Phase{
             d_playerService.assignArmies(d_gameState);
             d_gameEngine.setIssueOrderPhase();
         } else {
-            throw new InvalidCommand(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_ASSIGNCOUNTRIES);
+            throw new CommandValidationException(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_ASSIGNCOUNTRIES);
         }
     }
 

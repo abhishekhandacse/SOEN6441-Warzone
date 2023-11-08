@@ -84,7 +84,7 @@ public class Diplomacy implements Card {
     public Boolean validOrderCheck(GameState p_gameState) {
         PlayerService l_playerService = new PlayerService();
         ModelPlayer l_targetPlayer = l_playerService.findPlayerByName(d_destPlayer, p_gameState);
-        if (!p_gameState.getD_players().contains(l_targetPlayer)) {
+        if (!p_gameState.getD_playersList().contains(l_targetPlayer)) {
             this.setD_orderExecutionLog("Player to negotiate doesn't exist!", "error");
             p_gameState.updateLog(orderExecutionLog(), "effect");
             return false;

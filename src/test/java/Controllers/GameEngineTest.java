@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import Exceptions.InvalidCommand;
+import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 import Models.Continent;
 import Models.GameState;
@@ -33,13 +33,13 @@ public class GameEngineTest {
 		d_presentPhase = d_gameEngine.getD_CurrentPhase();
 	}
 
-	@Test(expected = InvalidCommand.class)
-	public void testPerformEditMapInvalidCommand() throws IOException, InvalidCommand, MapValidationException {
+	@Test(expected = CommandValidationException.class)
+	public void testPerformEditMapInvalidCommand() throws IOException, CommandValidationException, MapValidationException {
 		d_presentPhase.handleCommand("editmap");
 	}
 
 	@Test
-	public void testPerformEditContinentInvalidCommand() throws InvalidCommand, IOException, MapValidationException {
+	public void testPerformEditContinentInvalidCommand() throws CommandValidationException, IOException, MapValidationException {
 		d_presentPhase.handleCommand("editcontinent");
 		GameState l_state = d_presentPhase.getD_gameState();
 
@@ -48,7 +48,7 @@ public class GameEngineTest {
 	}
 
 	@Test
-	public void testPerformEditContinentValidCommand() throws IOException, InvalidCommand, MapValidationException {
+	public void testPerformEditContinentValidCommand() throws IOException, CommandValidationException, MapValidationException {
 		d_Map.setD_inputMapFile("testeditmap.map");
 		GameState l_state = d_presentPhase.getD_gameState();
 
@@ -74,7 +74,7 @@ public class GameEngineTest {
 	}
 
 	@Test
-	public void testPerformSaveMapInvalidCommand() throws InvalidCommand, MapValidationException, IOException {
+	public void testPerformSaveMapInvalidCommand() throws CommandValidationException, MapValidationException, IOException {
 		d_presentPhase.handleCommand("savemap");
 		GameState l_state = d_presentPhase.getD_gameState();
 
@@ -83,8 +83,8 @@ public class GameEngineTest {
 
 	}
 
-	@Test(expected = InvalidCommand.class)
-	public void testAssignCountriesInvalidCommand() throws IOException, MapValidationException, InvalidCommand {
+	@Test(expected = CommandValidationException.class)
+	public void testAssignCountriesInvalidCommand() throws IOException, MapValidationException, CommandValidationException {
 		d_presentPhase.handleCommand("assigncountries -add india");
 		;
 	}

@@ -3,145 +3,146 @@ package Models;
 import java.util.List;
 
 /**
- * This class is used to test functionality of GameState class functions.
+ * The GameState class represents the state of a game, including the map, player information,
+ * unexecuted orders, error messages, and a log buffer for game events.
  */
 public class GameState {
-	
-	/**
-	 * map object.
-	 */
-	Map d_map;
 
-	/**
-	 * Log Entries for existing game state.
-	 */
-	ModelLogBuffer d_logEntryBuffer = new ModelLogBuffer();
-	
-	/**
-	 * list of players.
-	 */
-	List<ModelPlayer> d_players;
-	
-	/**
-	 * list of unexecuted orders.
-	 */
-	List<Order> d_unexecutedOrders;
-	
-	/**
-	 * error message.
-	 */
-	String d_error;
-
-	/**
-	 * Checks if user has used load command.
-	 */
-	Boolean d_loadCommand = false;
-
-	/**
-	 * getter method to get the map.
+    /** 
+	 * The game map. 
 	 * 
-	 * @return map object
-	 */
-	public Map getD_map() {
-		return d_map;
-	}
-	
-	/**
-	 * setter method to set the map.
-	 * 
-	 * @param p_map map object
-	 */
-	public void setD_map(Map p_map) {
-		this.d_map = p_map;
-	}
+	*/
+    Map d_map;
 
-	/**
-	 * getter method to get the list of players.
-	 * 
-	 * @return list of players
-	 */
-	public List<ModelPlayer> getD_players() {
-		return d_players;
-	}
+    /**
+	 *  An error message, if any. 
+	 * */
+    String d_error;
 
-	/**
-	 * setter method to set the players.
-	 * 
-	 * @param p_players list of players
-	 */
-	public void setD_players(List<ModelPlayer> p_players) {
-		this.d_players = p_players;
-	}
+    /** 
+	 * Flag indicating whether a load command has been executed. 
+	 * */
+    Boolean d_loadCommand = false;
 
-	/**
-	 * getter method to get the list of orders which are yet to be executed.
-	 * 
-	 * @return list of orders
-	 */
-	public List<Order> getD_unexecutedOrders() {
-		return d_unexecutedOrders;
-	}
+    /** 
+	 * A list of unexecuted orders. 
+	 * */
+    List<Order> d_unexecutedOrdersList;
 
-	/**
-	 * setter method to set the unexecuted orders.
-	 * 
-	 * @param p_unexecutedOrders list of unexecuted orders
-	 */
-	public void setD_unexecutedOrders(List<Order> p_unexecutedOrders) {
-		this.d_unexecutedOrders = p_unexecutedOrders;
-	}
+    /** 
+	 * A list of players in the game. 
+	 * */
+    List<ModelPlayer> d_playersList;
 
-	/**
-	 * getter method to get the error message.
-	 * 
-	 * @return error message
-	 */
-	public String getError() {
-		return d_error;
-	}
+    /** 
+	 * A log buffer for storing game events. 
+	 * */
+    ModelLogBuffer d_logBuffer = new ModelLogBuffer();
 
-	/**
-	 * setter method to set the error message.
-	 * 
-	 * @param p_error error message
-	 */
-	public void setError(String p_error) {
-		this.d_error = p_error;
-	}
+    /**
+     * Get the game map.
+     *
+     * @return The game map.
+     */
+    public Map getD_map() {
+        return d_map;
+    }
 
-	/**
-	 * Message to be added in the log.
-	 *
-	 * @param p_logMessage Log Message to be set in the Object
-	 * @param p_logType Type of Log Message to be Added
-	 */
-	public void updateLog(String p_logMessage, String p_logType) {
-		d_logEntryBuffer.currentLog(p_logMessage, p_logType);
-	}
+    /**
+     * Set the game map.
+     *
+     * @param p_map The game map to set.
+     */
+    public void setD_map(Map p_map) {
+        this.d_map = p_map;
+    }
 
-	/**
-	 * Fetches the most recent Log in current GameState.
-	 *
-	 * @return recent Log Message
-	 */
-	public String getRecentLog(){
-		return d_logEntryBuffer.getD_logMessage();
-	}
+    /**
+     * Get the error message.
+     *
+     * @return The error message, if any.
+     */
+    public String getError() {
+        return d_error;
+    }
 
-	/**
-	 * Sets the Boolean load map variable.
-	 */
-	public void setD_loadCommand() {
-		this.d_loadCommand = true;
-	}
+    /**
+     * Set an error message.
+     *
+     * @param p_error The error message to set.
+     */
+    public void setError(String p_error) {
+        this.d_error = p_error;
+    }
 
-	/**
-	 * Returns if load command is used.
-	 *
-	 * @return bool value if map is loaded
-	 */
-	public boolean getD_loadCommand(){
-		return this.d_loadCommand;
-	}
-	
+    /**
+     * Check if a load command has been executed.
+     *
+     * @return `true` if a load command has been executed, `false` otherwise.
+     */
+    public boolean getD_loadCommand() {
+        return this.d_loadCommand;
+    }
+
+    /**
+     * Set the load command as executed.
+     */
+    public void setD_loadCommand() {
+        this.d_loadCommand = true;
+    }
+
+    /**
+     * Get the list of unexecuted orders.
+     *
+     * @return The list of unexecuted orders.
+     */
+    public List<Order> getD_unexecutedOrdersList() {
+        return d_unexecutedOrdersList;
+    }
+
+    /**
+     * Set the list of unexecuted orders.
+     *
+     * @param p_unexecutedOrders The list of unexecuted orders to set.
+     */
+    public void setD_unexecutedOrdersList(List<Order> p_unexecutedOrders) {
+        this.d_unexecutedOrdersList = p_unexecutedOrders;
+    }
+
+    /**
+     * Get the list of players in the game.
+     *
+     * @return The list of players.
+     */
+    public List<ModelPlayer> getD_playersList() {
+        return d_playersList;
+    }
+
+    /**
+     * Set the list of players in the game.
+     *
+     * @param p_players The list of players to set.
+     */
+    public void setD_playersList(List<ModelPlayer> p_players) {
+        this.d_playersList = p_players;
+    }
+
+    /**
+     * Get the most recent log message from the log buffer.
+     *
+     * @return The most recent log message.
+     */
+    public String getRecentLog() {
+        return d_logBuffer.getD_logMessage();
+    }
+
+    /**
+     * Update the log buffer with a new log message and its type.
+     *
+     * @param p_logMessage The log message to add.
+     * @param p_logType    The type of the log message.
+     */
+    public void updateLog(String p_logMessage, String p_logType) {
+        d_logBuffer.currentLog(p_logMessage, p_logType);
+    }
 }

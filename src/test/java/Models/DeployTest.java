@@ -1,6 +1,6 @@
 package Models;
 
-import Exceptions.InvalidCommand;
+import Exceptions.CommandValidationException;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -105,10 +105,10 @@ public class DeployTest {
 	 * Tests deploy order logic to see if required order is created and armies are
 	 * re-calculated.
 	 * 
-	 * @throws InvalidCommand if given command is invalid
+	 * @throws CommandValidationException if given command is invalid
 	 */
 	@Test
-	public void testDeployOrder() throws InvalidCommand {
+	public void testDeployOrder() throws CommandValidationException {
 		ModelPlayer l_player = new ModelPlayer("Maze");
 		l_player.setD_noOfUnallocatedArmies(10);
 		ModelCountry l_country = new ModelCountry(1, "Japan", 1);

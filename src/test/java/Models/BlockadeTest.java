@@ -61,7 +61,7 @@ public class BlockadeTest {
 		
 		List<ModelPlayer> l_playerList = new ArrayList<ModelPlayer>();
 		l_playerList.add(d_neutralPlayer);
-		d_gameState.setD_players(l_playerList);
+		d_gameState.setD_playersList(l_playerList);
 		
 		d_blockadeOrder1 = new Blockade(d_player1, "India");
 		d_blockadeOrder2 = new Blockade(d_player1, "USA");
