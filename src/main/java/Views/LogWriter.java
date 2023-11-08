@@ -12,12 +12,23 @@ import java.util.Observable;
 import java.util.Observer;
 
 
+/**
+ * LogWriter class used to log the events
+ */
 public class LogWriter implements Observer {
 
-
+    /**
+     * logger object
+     */
     ModelLogBuffer d_bufferLogEntry;
 
-
+    /**
+     * Updates the log file
+     * 
+     * @param p_observable - observale method
+     * @param p_object - observable object
+     *
+     */
     @Override
     public void update(Observable p_observable, Object p_object) {
         d_bufferLogEntry = (ModelLogBuffer) p_observable;

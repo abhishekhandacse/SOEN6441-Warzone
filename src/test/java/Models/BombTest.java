@@ -10,30 +10,63 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+* The BombTest class contains JUnit test cases for the Bomb class, which represents bomb orders in a game.
+*/
 public class BombTest {
 
+    /**
+     * The game state used for testing bomb orders.
+     */
     GameState d_gameState;
 
+    /**
+     * The first player for testing bomb orders.
+     */
     ModelPlayer d_player1;
 
-	ModelPlayer d_player2;
+    /**
+     * The second player for testing bomb orders.
+     */
+    ModelPlayer d_player2;
 
+    /**
+     * The first bomb order for testing.
+     */
     Bomb d_bombOrder1;
 
-	Bomb d_bombOrder2;
+    /**
+     * The second bomb order for testing.
+     */
+    Bomb d_bombOrder2;
 
-	Bomb d_bombOrder3;
+    /**
+     * The third bomb order for testing.
+     */
+    Bomb d_bombOrder3;
 
-	Bomb d_bombOrder4;
+    /**
+     * The fourth bomb order for testing.
+     */
+    Bomb d_bombOrder4;
 
+    /**
+     * The list of orders used for testing bomb orders.
+     */
     List<Order> d_order_list;
 
-	String d_targetCountry;
+    /**
+     * The target country for bomb orders.
+     */
+    String d_targetCountry;
 
-	Order deployOrder;
+    /**
+     * A deploy order for testing.
+     */
+    Order deployOrder;
 
-    /*
-     * 
+    /**
+     * Set up the initial game state and objects before running the test cases.
      */
 	@Before
 	public void setup() {
@@ -94,6 +127,9 @@ public class BombTest {
         d_player2.setD_ordersToExecute(d_order_list);
     }
 
+     /**
+     * Test the execution of bomb orders, including the calculation of armies after bombing.
+     */
     @Test
 	public void testBombCardExecution() {
 		// Test calculation of half armies.
@@ -113,6 +149,9 @@ public class BombTest {
 
 	}
 
+     /**
+     * Test the validity of bomb orders, ensuring that they meet the required conditions.
+     */
     @Test
 	public void testValidBombOrder() {
 

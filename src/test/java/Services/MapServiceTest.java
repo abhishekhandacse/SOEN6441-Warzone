@@ -1,8 +1,8 @@
 package Services;
 
-import Exceptions.InvalidCommand;
+import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
-import Models.Continent;
+import Models.ModelContinent;
 import Models.ModelCountry;
 import Models.GameState;
 import Models.Map;
@@ -46,7 +46,7 @@ public class MapServiceTest {
 	}
 
 	@Test
-	public void testEditContinentAdd() throws IOException, MapValidationException, InvalidCommand {
+	public void testEditContinentAdd() throws IOException, MapValidationException, CommandValidationException {
 		d_state.setD_map(new Map());
 		Map l_updatedContinents = d_mapService.addRemoveContinents(d_state, d_state.getD_map(), "Add", "Asia 10");
 
@@ -56,14 +56,14 @@ public class MapServiceTest {
 	}
 
 	@Test
-	public void testEditContinentRemove() throws IOException, MapValidationException, InvalidCommand {
-		List<Continent> l_continents = new ArrayList<>();
-		Continent l_c1 = new Continent();
+	public void testEditContinentRemove() throws IOException, MapValidationException, CommandValidationException {
+		List<ModelContinent> l_continents = new ArrayList<>();
+		ModelContinent l_c1 = new ModelContinent();
 		l_c1.setD_continentID(1);
 		l_c1.setD_continentName("Asia");
 		l_c1.setD_continentValue(10);
 
-		Continent l_c2 = new Continent();
+		ModelContinent l_c2 = new ModelContinent();
 		l_c2.setD_continentID(2);
 		l_c2.setD_continentName("Europe");
 		l_c2.setD_continentValue(20);
@@ -92,7 +92,7 @@ public class MapServiceTest {
 		List<Integer> l_expectedContinentValueList = new ArrayList<Integer>();
 		l_expectedContinentValueList.addAll(Arrays.asList(5, 4, 5, 3));
 
-		for (Continent l_continent : d_map.getD_allContinents()) {
+		for (ModelContinent l_continent : d_map.getD_allContinents()) {
 			l_actualContinentIdList.add(l_continent.getD_continentID());
 			l_actualContinentValueList.add(l_continent.getD_continentValue());
 		}
@@ -140,7 +140,7 @@ public class MapServiceTest {
 	}
 
 	@Test
-	public void testEditCountryAdd() throws IOException, MapValidationException, InvalidCommand {
+	public void testEditCountryAdd() throws IOException, MapValidationException, CommandValidationException {
 		d_mapService.loadMap(d_state, "test.map");
 		d_mapService.editFunctions(d_state, "add", "China Asia", 2);
 
@@ -148,14 +148,14 @@ public class MapServiceTest {
 	}
 
 	@Test
-	public void testEditCountryRemove() throws MapValidationException, IOException, InvalidCommand {
+	public void testEditCountryRemove() throws MapValidationException, IOException, CommandValidationException {
 		d_mapService.loadMap(d_state, "test.map");
 		d_mapService.editFunctions(d_state, "remove", "Ukraine", 2);
 		assertEquals("Log: Country: Ukraine does not exist!"+System.lineSeparator(), d_state.getRecentLog());
 	}
 
 	@Test
-	public void testEditNeighborAdd() throws MapValidationException, IOException, InvalidCommand {
+	public void testEditNeighborAdd() throws MapValidationException, IOException, CommandValidationException {
 		d_mapService.loadMap(d_state, "test.map");
 		d_mapService.editFunctions(d_state, "Northern-America 10", "add", 1 );
 		d_mapService.editFunctions(d_state, "add", "Canada Northern-America",  2);
@@ -166,7 +166,7 @@ public class MapServiceTest {
 	}
 
 	@Test
-	public void testEditNeighborRemove() throws MapValidationException, IOException, InvalidCommand{
+	public void testEditNeighborRemove() throws MapValidationException, IOException, CommandValidationException{
 		d_mapService.editMap(d_state, "testedit.map");
 		d_mapService.editFunctions(d_state, "Asia 9", "add",   1);
 		d_mapService.editFunctions(d_state, "add", "Maldives Asia", 2);

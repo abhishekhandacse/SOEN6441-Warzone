@@ -3,7 +3,7 @@ package Models;
 import java.io.IOException;
 
 import Controllers.GameEngine;
-import Exceptions.InvalidCommand;
+import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 import Services.MapService;
 import Services.PlayerService;
@@ -32,10 +32,20 @@ public abstract class Phase {
         d_gameState = p_gameState;
     }
 
+    /**
+     * Set the current game state
+     * 
+     * @param p_gameState - game state
+     */
     public void setD_gameState(GameState p_gameState) {
         d_gameState = p_gameState;
     }
 
+    /**
+     * Return the game state
+     * 
+     * @return the game state
+     */
     public GameState getD_gameState() {
         return d_gameState;
     }
@@ -44,11 +54,12 @@ public abstract class Phase {
      * Handles the entered command by delegating to appropriate command handlers based on the root command.
      *
      * @param p_enteredCommand the command to handle
+     * 
      * @throws MapValidationException if an issue with map validation occurs
-     * @throws InvalidCommand if an invalid command is encountered
+     * @throws CommandValidationException if an invalid command is encountered
      * @throws IOException if an I/O error occurs
      */
-    public void handleCommand(String p_enteredCommand) throws MapValidationException, InvalidCommand, IOException {
+    public void handleCommand(String p_enteredCommand) throws MapValidationException, CommandValidationException, IOException {
         commandHandler(p_enteredCommand, null);
     }
 
@@ -58,10 +69,10 @@ public abstract class Phase {
      * @param p_enteredCommand the command to handle
      * @param p_player the player issuing the command
      * @throws MapValidationException if an issue with map validation occurs
-     * @throws InvalidCommand if an invalid command is encountered
+     * @throws CommandValidationException if an invalid command is encountered
      * @throws IOException if an I/O error occurs
      */
-    public void handleCommand(String p_enteredCommand, ModelPlayer p_player) throws MapValidationException, InvalidCommand, IOException {
+    public void handleCommand(String p_enteredCommand, ModelPlayer p_player) throws MapValidationException, CommandValidationException, IOException {
         commandHandler(p_enteredCommand, p_player);
     }
 
@@ -71,10 +82,10 @@ public abstract class Phase {
      * @param p_enteredCommand the command to handle
      * @param p_player the player issuing the command
      * @throws MapValidationException if an issue with map validation occurs
-     * @throws InvalidCommand if an invalid command is encountered
+     * @throws CommandValidationException if an invalid command is encountered
      * @throws IOException if an I/O error occurs
      */
-    private void commandHandler(String p_enteredCommand, ModelPlayer p_player) throws MapValidationException, InvalidCommand, IOException {
+    private void commandHandler(String p_enteredCommand, ModelPlayer p_player) throws MapValidationException, CommandValidationException, IOException {
         CommandHandler l_command = new CommandHandler(p_enteredCommand);
         String l_rootCommand = l_command.getRootCommand();
         l_isMapLoaded = d_gameState.getD_map() != null;
@@ -165,11 +176,11 @@ public abstract class Phase {
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws IOException         if an I/O error occurs
      * @throws MapValidationException if an issue with map validation occurs
      */
-    protected abstract void performingShowMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, IOException, MapValidationException;
+    protected abstract void performingShowMap(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, IOException, MapValidationException;
 
     /**
      * Performs the issuance of 'advance' orders during the phase.
@@ -194,33 +205,33 @@ public abstract class Phase {
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws IOException         if an I/O error occurs
      * @throws MapValidationException if an issue with map validation occurs
      */
-    protected abstract void performingAssignCountries(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, IOException, MapValidationException;
+    protected abstract void performingAssignCountries(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, IOException, MapValidationException;
 
     /**
      * Performs the editing of neighbors during the phase.
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws MapValidationException if an issue with map validation occurs
      * @throws IOException         if an I/O error occurs
      */
-    protected abstract void performingEditNeighbour(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException, IOException;
+    protected abstract void performingEditNeighbour(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException;
 
     /**
      * Performs the editing of countries during the phase.
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws MapValidationException if an issue with map validation occurs
      * @throws IOException         if an I/O error occurs
      */
-    protected abstract void performingEditCountry(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException, IOException;
+    protected abstract void performingEditCountry(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException;
 
     /**
      * Performs map validation during the phase.
@@ -228,32 +239,32 @@ public abstract class Phase {
      * @param p_command the command handler
      * @param p_player  the player
      * @throws MapValidationException if an issue with map validation occurs
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws IOException         if an I/O error occurs
      */
-    protected abstract void performingValidateMap(CommandHandler p_command, ModelPlayer p_player) throws MapValidationException, InvalidCommand, IOException;
+    protected abstract void performingValidateMap(CommandHandler p_command, ModelPlayer p_player) throws MapValidationException, CommandValidationException, IOException;
 
     /**
      * Performs map loading during the phase.
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws MapValidationException if an issue with map validation occurs
      * @throws IOException         if an I/O error occurs
      */
-    protected abstract void performingLoadMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException, IOException;
+    protected abstract void performingLoadMap(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException;
 
     /**
      * Performs map saving during the phase.
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws MapValidationException if an issue with map validation occurs
      * @throws IOException         if an I/O error occurs
      */
-    protected abstract void performingSaveMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException, IOException;
+    protected abstract void performingSaveMap(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException;
 
     /**
      * Performs the editing of continents during the phase.
@@ -261,10 +272,10 @@ public abstract class Phase {
      * @param p_command the command handler
      * @param p_player  the player
      * @throws IOException         if an I/O error occurs
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws MapValidationException if an issue with map validation occurs
      */
-    protected abstract void performingEditContinent(CommandHandler p_command, ModelPlayer p_player) throws IOException, InvalidCommand, MapValidationException;
+    protected abstract void performingEditContinent(CommandHandler p_command, ModelPlayer p_player) throws IOException, CommandValidationException, MapValidationException;
 
     /**
      * Performs map editing during the phase.
@@ -272,21 +283,21 @@ public abstract class Phase {
      * @param p_command the command handler
      * @param p_player  the player
      * @throws IOException         if an I/O error occurs
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws MapValidationException if an issue with map validation occurs
      */
-    protected abstract void performingMapEdit(CommandHandler p_command, ModelPlayer p_player) throws IOException, InvalidCommand, MapValidationException;
+    protected abstract void performingMapEdit(CommandHandler p_command, ModelPlayer p_player) throws IOException, CommandValidationException, MapValidationException;
 
     /**
      * Creates players during the phase.
      *
      * @param p_command the command handler
      * @param p_player  the player
-     * @throws InvalidCommand      if an invalid command is encountered
+     * @throws CommandValidationException      if an invalid command is encountered
      * @throws IOException         if an I/O error occurs
      * @throws MapValidationException if an issue with map validation occurs
      */
-    protected abstract void creatingPlayers(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, IOException, MapValidationException;
+    protected abstract void creatingPlayers(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, IOException, MapValidationException;
 
     /**
      * Handles the printing of an invalid command message in the current state.

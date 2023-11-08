@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Advance class
+ */
 public class ModelAdvance implements Order {
 
     /**
@@ -138,7 +141,7 @@ public class ModelAdvance implements Order {
      */
     private ModelPlayer getPlayerOfTargetCountry(GameState p_gameState) {
         ModelPlayer l_playerOfTargetCountry = null;
-        for (ModelPlayer l_player : p_gameState.getD_players()) {
+        for (ModelPlayer l_player : p_gameState.getD_playersList()) {
             String l_cont = l_player.getCountryNames().stream()
                     .filter(l_country -> l_country.equalsIgnoreCase(this.d_tCountryName)).findFirst().orElse(null);
             if (!CommonUtil.isNullOrEmpty(l_cont)) {
@@ -318,7 +321,7 @@ public class ModelAdvance implements Order {
         l_playersList.add(p_playerOfTarCountry);
 
         PlayerService l_playerService = new PlayerService();
-        l_playerService.performContinentAssignment(l_playersList, p_gameState.getD_map().getD_allContinents());
+        l_playerService.performAssignContinent(l_playersList, p_gameState.getD_map().getD_allContinents());
     }
 
     /**

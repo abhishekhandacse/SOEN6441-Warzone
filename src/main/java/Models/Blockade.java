@@ -77,7 +77,7 @@ public class Blockade implements Card {
 
             d_initiatorPlayer.getD_coutriesOwned().remove(l_countryIdTarget);
 
-            ModelPlayer l_playerObject = p_stateGame.getD_players().stream()
+            ModelPlayer l_playerObject = p_stateGame.getD_playersList().stream()
                     .filter(l_pl -> l_pl.getPlayerName().equalsIgnoreCase("Neutral")).findFirst().orElse(null);
 
             if (!CommonUtil.isNullObject(l_playerObject)) {

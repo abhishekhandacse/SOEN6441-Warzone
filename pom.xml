@@ -19,7 +19,24 @@
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                 </configuration>
-            </plugin></plugins>
+            </plugin>
+            <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.1.1</version>
+        <configuration>
+            <doclint>all</doclint> 
+        </configuration>
+        <executions>
+            <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                    <goal>jar</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>
+            </plugins>
     </build>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

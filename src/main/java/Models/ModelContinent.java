@@ -6,23 +6,26 @@ import Utils.CommonUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Continent {
+/**
+ * This model class manages all the Continents in the map.
+ */
+public class ModelContinent {
 
 	Integer d_continentID;
 	String d_continentName;
 	Integer d_continentValue;
 	List<ModelCountry> d_countries;
 
-	public Continent(){
+	public ModelContinent(){
 	}
 
-	public Continent(Integer p_continentID, String p_continentName, int p_continentValue) {
+	public ModelContinent(Integer p_continentID, String p_continentName, int p_continentValue) {
 		this.d_continentID=p_continentID;
 		this.d_continentName=p_continentName;
 		this.d_continentValue=p_continentValue;
 	}
 
-	public Continent(String p_continentName) {
+	public ModelContinent(String p_continentName) {
 		this.d_continentName = p_continentName;
 	}
 

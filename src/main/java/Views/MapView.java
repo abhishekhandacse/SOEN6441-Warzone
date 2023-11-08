@@ -14,11 +14,30 @@ import Utils.CommonUtil;
  * This is the MapView Class.
  */
 public class MapView {
-	List<ModelPlayer> d_players;
+	/**
+	 * List of Players
+	 */
+	List<ModelPlayer> d_playersList;
+
+	/**
+	 * Current game state
+	 */
 	GameState d_gameState;
+
+	/**
+	 * Map object
+	 */
 	Map d_map;
-	List<ModelCountry> d_countries;
-	List<Continent> d_continents;
+
+	/**
+	 * List if countries
+	 */
+	List<ModelCountry> d_countriesList;
+
+	/**
+	 * List of Continents
+	 */
+	List<ModelContinent> d_continentsList;
 
     /**
      * Reset Color ANSI Code.
@@ -33,9 +52,9 @@ public class MapView {
 	public MapView(GameState p_gameState){
 		d_gameState = p_gameState;
 		d_map = p_gameState.getD_map();
-		d_players = p_gameState.getD_players();
-		d_countries = d_map.getD_allCountries();
-		d_continents = d_map.getD_allContinents();
+		d_playersList = p_gameState.getD_playersList();
+		d_countriesList = d_map.getD_allCountries();
+		d_continentsList = d_map.getD_allContinents();
 	}
 
     /**
@@ -85,7 +104,7 @@ public class MapView {
 		String l_continentName = p_continentName+" ( "+ ApplicationConstantsHardcoding.CONTINENT_CONTROL_VALUE +" : "+ d_gameState.getD_map().getContinent(p_continentName).getD_continentValue()+" )";
 
 		renderSeparator();
-		if(d_players != null){
+		if(d_playersList != null){
 			l_continentName = getColorizedString(getContinentColor(p_continentName), l_continentName);
 		}
 		renderCenteredString(ApplicationConstantsHardcoding.DISPLAY_WIDTH, l_continentName);
@@ -102,7 +121,7 @@ public class MapView {
 	private String getFormattedCountryName(int p_index, String p_countryName){
 		String l_indexedString = String.format("%02d. %s", p_index, p_countryName);
 
-		if(d_players != null){
+		if(d_playersList != null){
 			String l_armies = "( "+ ApplicationConstantsHardcoding.ALL_ARMIES +" : "+ getCountryArmies(p_countryName)+" )";
 			l_indexedString = String.format("%02d. %s %s", p_index, p_countryName, l_armies);
 		}
@@ -182,8 +201,8 @@ public class MapView {
      * @return the player object
      */
 	private ModelPlayer getCountryOwner(String p_countryName){
-		if (d_players != null) {
-			for (ModelPlayer p: d_players){
+		if (d_playersList != null) {
+			for (ModelPlayer p: d_playersList){
 				if(p.getCountryNames().contains(p_countryName)){
 					return p;
 				}
@@ -214,7 +233,7 @@ public class MapView {
 		renderCenteredString(ApplicationConstantsHardcoding.DISPLAY_WIDTH, "GAME PLAYERS");
 		renderSeparator();
 
-		for(ModelPlayer p: d_players){
+		for(ModelPlayer p: d_playersList){
 			l_counter++;
 			renderPlayerInfo(l_counter, p);
 			renderCardsOwnedByPlayers(p);
@@ -228,8 +247,8 @@ public class MapView {
      * @return player object
      */
 	private ModelPlayer getContinentOwner(String p_continentName){
-		if (d_players != null) {
-			for (ModelPlayer p: d_players){
+		if (d_playersList != null) {
+			for (ModelPlayer p: d_playersList){
 				if(!CommonUtil.isNullObject(p.getContinentNames()) && p.getContinentNames().contains(p_continentName)){
 					return p;
 				}
@@ -267,13 +286,13 @@ public class MapView {
 	 */
 	public void showMap() {
 
-		if(d_players != null){
+		if(d_playersList != null){
 			renderPlayers();
 		}
 
 		// renders the continent if any
-		if (!CommonUtil.isNullObject(d_continents)) {
-			d_continents.forEach(l_continent -> {
+		if (!CommonUtil.isNullObject(d_continentsList)) {
+			d_continentsList.forEach(l_continent -> {
 				renderContinentName(l_continent.getD_continentName());
 
 				List<ModelCountry> l_continentCountries = l_continent.getD_countries();

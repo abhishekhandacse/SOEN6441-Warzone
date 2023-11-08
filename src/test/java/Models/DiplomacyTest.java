@@ -54,7 +54,7 @@ public class DiplomacyTest {
         List<ModelPlayer> l_playerList = new ArrayList<ModelPlayer>();
         l_playerList.add(d_player1);
         l_playerList.add(d_player2);
-        d_gameState.setD_players(l_playerList);
+        d_gameState.setD_playersList(l_playerList);
         d_diplomacyOrder = new Diplomacy(d_player2.getPlayerName(), d_player1);
         d_bombOrder = new Bomb(d_player2, "France");
     }
