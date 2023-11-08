@@ -1,0 +1,352 @@
+
+Command Entered: editcontinent
+Log: Can not Edit Continent, please perform `editmap` first
+
+Command Entered: savemap
+Log: No map found to save, Please `editmap` first
+
+Command Entered: editmap
+
+Command Entered: assigncountries -add india
+
+Command Entered: editcontinent -add Europe 10 -add America 20
+Log: Continent Europe added successfully!
+Log: Continent America added successfully!
+
+Command Entered: editcontinent -remove Europe
+Log: Continent Europe removed successfully!
+Log: Airlift Operation from France to Spain successful!
+Log: Invalid Target Country! Doesn't exist on the map!
+Log: 
+Player : avni is executing defensive blockade on Country :  India with armies :  15
+Log: Card Order for Blockage is : blockade USA is not executed since Target country : USA given in blockade command does not owned to the player : avni The card will have no affect and you don't get the card back.
+Log: 
+Player : Prime is executing Bomb card on country :  Japan with armies :  4. New armies: 2
+Log: 
+Player : Prime is executing Bomb card on country :  India with armies :  15. New armies: 7
+Log: 
+Player : Prime is executing Bomb card on country :  Canada with armies :  1. New armies: 0
+Log: Bomb card order : bomb Norway is not executed since Target country : Norway given in bomb command is owned by the player : Prime VALIDATES:- You cannot bomb your own territory!
+Log: 10 armies have been deployed successfully on country : India
+Log: 15 armies have been deployed successfully on country : Canada
+Log: Negotiation with b approached by a successful!
+Log: Negotiation with b approached by a successful!
+Log: Bomb card order : bomb France is not executed as b has negotiation pact with the target country's player!
+Log: Advance Order : advance India France 15 cannot be executed because the number of armies specified in the advance order exceeds the armies of the source country: India
+Log: Advance Order : advance Canada France 10 cannot be executed because the source country: Canada has 10 army units, and all of them cannot be given an advance order; at least one army unit must remain to retain the territory.
+Log: Advance Order : advance Italy France 10 cannot be executed because the source country: Italy specified in the advance order does not belong to the player: Zalak
+Player : a has won the Game by conquering all countries. Exiting the Game .....
+Log: Country China added successfully!
+Log: Validating Map......
+Log: East_Europe has no countries, it must possess atleast 1 country
+Log: Couldn't save the changes in map file!
+Log: Continent Asia removed successfully!
+Log: testedit.map already exists and is loaded for editing
+Log: Continent Asia added successfully!
+Log: Country Maldives added successfully!
+Log: Country Singapore added successfully!
+Log: Neighbour Pair Singapore Maldives added successfully!
+Log: No Such Neighbour Exists
+Log: Continent Asia added successfully!
+Log: Country: Ukraine does not exist!
+Log: test.map already exists and is loaded for editing
+Log: Continent Northern-America added successfully!
+Log: Country Canada added successfully!
+Log: Country Alaska added successfully!
+Log: Neighbour Pair Canada Alaska added successfully!
+Log: Country/Continent Assignment:
+ Player : Avneet is assigned with country : Alberta-South
+ Player : Avneet is assigned with country : Ontario-North
+ Player : Avneet is assigned with country : British_Columbia-South
+ Player : Avneet is assigned with country : N&L-Labrador
+ Player : Avneet is assigned with country : Quebec-North
+ Player : Avneet is assigned with country : NU-Southern_Islands
+ Player : Avneet is assigned with country : NT-Banks_Island
+ Player : Avneet is assigned with country : BC-Vancouver_Island
+ Player : Avneet is assigned with country : Prince_Edward_Island
+ Player : Avneet is assigned with country : N&L-Newfoundland
+ Player : Avneet is assigned with country : Alberta-North
+ Player : Avneet is assigned with country : Quebec-South
+ Player : Avneet is assigned with country : Quebec-Central
+ Player : Avneet is assigned with country : NT-Northern_Islands
+ Player : Avneet is assigned with country : Nova_Scotia
+ Player : Zalak is assigned with country : Manitoba-South
+ Player : Zalak is assigned with country : NU-Ellesmere_Island
+ Player : Zalak is assigned with country : British_Columbia-North
+ Player : Zalak is assigned with country : NU-Baffin_Island
+ Player : Zalak is assigned with country : Manitoba-North
+ Player : Zalak is assigned with country : Ontario-South
+ Player : Zalak is assigned with country : Northwest_Territories-Continental
+ Player : Zalak is assigned with country : Saskatchewan-North
+ Player : Zalak is assigned with country : Saskatchewan-South
+ Player : Zalak is assigned with country : NT-Victoria_Island-West
+ Player : Zalak is assigned with country : NU-Victoria_Island-East
+ Player : Zalak is assigned with country : Ontario-West
+ Player : Zalak is assigned with country : Yukon_Territory
+ Player : Zalak is assigned with country : New_Brunswick
+ Player : Zalak is assigned with country : NU-Northern_Islands
+ Player : Avneet is assigned with country : Nunavut-Continental
+
+Command Entered: editcontinent
+Log: Can not Edit Continent, please perform `editmap` first
+
+Command Entered: savemap
+Log: No map found to save, Please `editmap` first
+
+Command Entered: editmap
+
+Command Entered: assigncountries -add india
+
+Command Entered: editcontinent -add Europe 10 -add America 20
+Log: Continent Europe added successfully!
+Log: Continent America added successfully!
+
+Command Entered: editcontinent -remove Europe
+Log: Continent Europe removed successfully!
+Player : a has won the Game by conquering all countries. Exiting the Game .....
+Log: 10 armies have been deployed successfully on country : India
+Log: 15 armies have been deployed successfully on country : Canada
+Log: Country/Continent Assignment:
+ Player : Avneet is assigned with country : Ontario-North
+ Player : Avneet is assigned with country : NU-Victoria_Island-East
+ Player : Avneet is assigned with country : NU-Baffin_Island
+ Player : Avneet is assigned with country : NU-Southern_Islands
+ Player : Avneet is assigned with country : Yukon_Territory
+ Player : Avneet is assigned with country : Ontario-West
+ Player : Avneet is assigned with country : Nova_Scotia
+ Player : Avneet is assigned with country : NU-Ellesmere_Island
+ Player : Avneet is assigned with country : Saskatchewan-South
+ Player : Avneet is assigned with country : N&L-Newfoundland
+ Player : Avneet is assigned with country : Alberta-North
+ Player : Avneet is assigned with country : Northwest_Territories-Continental
+ Player : Avneet is assigned with country : Quebec-South
+ Player : Avneet is assigned with country : NU-Northern_Islands
+ Player : Avneet is assigned with country : NT-Victoria_Island-West
+ Player : Zalak is assigned with country : N&L-Labrador
+ Player : Zalak is assigned with country : Prince_Edward_Island
+ Player : Zalak is assigned with country : Saskatchewan-North
+ Player : Zalak is assigned with country : Quebec-North
+ Player : Zalak is assigned with country : Quebec-Central
+ Player : Zalak is assigned with country : BC-Vancouver_Island
+ Player : Zalak is assigned with country : New_Brunswick
+ Player : Zalak is assigned with country : Alberta-South
+ Player : Zalak is assigned with country : British_Columbia-South
+ Player : Zalak is assigned with country : NT-Banks_Island
+ Player : Zalak is assigned with country : Manitoba-South
+ Player : Zalak is assigned with country : NT-Northern_Islands
+ Player : Zalak is assigned with country : British_Columbia-North
+ Player : Zalak is assigned with country : Ontario-South
+ Player : Zalak is assigned with country : Nunavut-Continental
+ Player : Avneet is assigned with country : Manitoba-North
+Log: Advance Order : advance India France 15 cannot be executed because the number of armies specified in the advance order exceeds the armies of the source country: India
+Log: Advance Order : advance Canada France 10 cannot be executed because the source country: Canada has 10 army units, and all of them cannot be given an advance order; at least one army unit must remain to retain the territory.
+Log: Advance Order : advance Italy France 10 cannot be executed because the source country: Italy specified in the advance order does not belong to the player: Zalak
+Log: Airlift Operation from France to Spain successful!
+Log: Invalid Target Country! Doesn't exist on the map!
+Log: 
+Player : avni is executing defensive blockade on Country :  India with armies :  15
+Log: Card Order for Blockage is : blockade USA is not executed since Target country : USA given in blockade command does not owned to the player : avni The card will have no affect and you don't get the card back.
+Log: 
+Player : Prime is executing Bomb card on country :  Japan with armies :  4. New armies: 2
+Log: 
+Player : Prime is executing Bomb card on country :  India with armies :  15. New armies: 7
+Log: 
+Player : Prime is executing Bomb card on country :  Canada with armies :  1. New armies: 0
+Log: Bomb card order : bomb Norway is not executed since Target country : Norway given in bomb command is owned by the player : Prime VALIDATES:- You cannot bomb your own territory!
+Log: Negotiation with b approached by a successful!
+Log: Negotiation with b approached by a successful!
+Log: Bomb card order : bomb France is not executed as b has negotiation pact with the target country's player!
+Log: Country China added successfully!
+Log: Validating Map......
+Log: East_Europe has no countries, it must possess atleast 1 country
+Log: Couldn't save the changes in map file!
+Log: Continent Asia removed successfully!
+Log: testedit.map already exists and is loaded for editing
+Log: Continent Asia added successfully!
+Log: Country Maldives added successfully!
+Log: Country Singapore added successfully!
+Log: Neighbour Pair Singapore Maldives added successfully!
+Log: No Such Neighbour Exists
+Log: Continent Asia added successfully!
+Log: Country: Ukraine does not exist!
+Log: test.map already exists and is loaded for editing
+Log: Continent Northern-America added successfully!
+Log: Country Canada added successfully!
+Log: Country Alaska added successfully!
+Log: Neighbour Pair Canada Alaska added successfully!
+
+Command Entered: editcontinent
+Log: Can not Edit Continent, please perform `editmap` first
+
+Command Entered: savemap
+Log: No map found to save, Please `editmap` first
+
+Command Entered: editmap
+
+Command Entered: assigncountries -add india
+
+Command Entered: editcontinent -add Europe 10 -add America 20
+Log: Continent Europe added successfully!
+Log: Continent America added successfully!
+
+Command Entered: editcontinent -remove Europe
+Log: Continent Europe removed successfully!
+Log: Airlift Operation from France to Spain successful!
+Log: Invalid Target Country! Doesn't exist on the map!
+Log: 
+Player : Amanpreet is executing defensive blockade on Country :  India with armies :  15
+Log: Card Order for Blockage is : blockade USA is not executed since Target country : USA given in blockade command does not owned to the player : Amanpreet The card will have no affect and you don't get the card back.
+Log: 
+Player : Anurag is executing Bomb card on country :  Japan with armies :  4. New armies: 2
+Log: 
+Player : Anurag is executing Bomb card on country :  India with armies :  15. New armies: 7
+Log: 
+Player : Anurag is executing Bomb card on country :  Canada with armies :  1. New armies: 0
+Log: Bomb card order : bomb Korea is not executed since Target country : Korea given in bomb command is owned by the player : Anurag VALIDATES:- You cannot bomb your own territory!
+Log: 10 armies have been deployed successfully on country : India
+Log: 15 armies have been deployed successfully on country : Canada
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Bomb card order : bomb France is not executed as Rajat has negotiation pact with the target country's player!
+Log: Advance Order : advance India France 15 cannot be executed because the number of armies specified in the advance order exceeds the armies of the source country: India
+Log: Advance Order : advance Canada France 10 cannot be executed because the source country: Canada has 10 army units, and all of them cannot be given an advance order; at least one army unit must remain to retain the territory.
+Log: Advance Order : advance Italy France 10 cannot be executed because the source country: Italy specified in the advance order does not belong to the player: Rajat
+Player : Anurag has won the Game by conquering all countries. Exiting the Game .....
+Log: Country China added successfully!
+Log: Validating Map......
+Log: East_Europe has no countries, it must possess atleast 1 country
+Log: Couldn't save the changes in map file!
+Log: Continent Asia removed successfully!
+Log: testedit.map already exists and is loaded for editing
+Log: Continent Asia added successfully!
+Log: Country Maldives added successfully!
+Log: Country Singapore added successfully!
+Log: Neighbour Pair Singapore Maldives added successfully!
+Log: No Such Neighbour Exists
+Log: Continent Asia added successfully!
+Log: Country: Ukraine does not exist!
+Log: test.map already exists and is loaded for editing
+Log: Continent Northern-America added successfully!
+Log: Country Canada added successfully!
+Log: Country Alaska added successfully!
+Log: Neighbour Pair Canada Alaska added successfully!
+Log: Country/Continent Assignment:
+ Player : Avneet is assigned with country : Quebec-Central
+ Player : Avneet is assigned with country : Nunavut-Continental
+ Player : Avneet is assigned with country : Nova_Scotia
+ Player : Avneet is assigned with country : Northwest_Territories-Continental
+ Player : Avneet is assigned with country : Manitoba-North
+ Player : Avneet is assigned with country : NU-Northern_Islands
+ Player : Avneet is assigned with country : Prince_Edward_Island
+ Player : Avneet is assigned with country : Ontario-West
+ Player : Avneet is assigned with country : NT-Victoria_Island-West
+ Player : Avneet is assigned with country : Yukon_Territory
+ Player : Avneet is assigned with country : BC-Vancouver_Island
+ Player : Avneet is assigned with country : NT-Northern_Islands
+ Player : Avneet is assigned with country : NU-Baffin_Island
+ Player : Avneet is assigned with country : Ontario-North
+ Player : Avneet is assigned with country : N&L-Newfoundland
+ Player : Zalak is assigned with country : British_Columbia-South
+ Player : Zalak is assigned with country : Manitoba-South
+ Player : Zalak is assigned with country : New_Brunswick
+ Player : Zalak is assigned with country : Quebec-South
+ Player : Zalak is assigned with country : Saskatchewan-South
+ Player : Zalak is assigned with country : NU-Southern_Islands
+ Player : Zalak is assigned with country : Saskatchewan-North
+ Player : Zalak is assigned with country : British_Columbia-North
+ Player : Zalak is assigned with country : N&L-Labrador
+ Player : Zalak is assigned with country : Quebec-North
+ Player : Zalak is assigned with country : Alberta-North
+ Player : Zalak is assigned with country : NU-Victoria_Island-East
+ Player : Zalak is assigned with country : Ontario-South
+ Player : Zalak is assigned with country : NT-Banks_Island
+ Player : Zalak is assigned with country : Alberta-South
+ Player : Avneet is assigned with country : NU-Ellesmere_Island
+
+Command Entered: editcontinent
+Log: Can not Edit Continent, please perform `editmap` first
+
+Command Entered: savemap
+Log: No map found to save, Please `editmap` first
+
+Command Entered: editmap
+
+Command Entered: assigncountries -add india
+
+Command Entered: editcontinent -add Europe 10 -add America 20
+Log: Continent Europe added successfully!
+Log: Continent America added successfully!
+
+Command Entered: editcontinent -remove Europe
+Log: Continent Europe removed successfully!
+Player : Anurag has won the Game by conquering all countries. Exiting the Game .....
+Log: 10 armies have been deployed successfully on country : India
+Log: 15 armies have been deployed successfully on country : Canada
+Log: Country/Continent Assignment:
+ Player : Avneet is assigned with country : Nova_Scotia
+ Player : Avneet is assigned with country : Quebec-North
+ Player : Avneet is assigned with country : NU-Northern_Islands
+ Player : Avneet is assigned with country : NU-Southern_Islands
+ Player : Avneet is assigned with country : Northwest_Territories-Continental
+ Player : Avneet is assigned with country : Quebec-South
+ Player : Avneet is assigned with country : NU-Victoria_Island-East
+ Player : Avneet is assigned with country : Quebec-Central
+ Player : Avneet is assigned with country : Prince_Edward_Island
+ Player : Avneet is assigned with country : Manitoba-North
+ Player : Avneet is assigned with country : British_Columbia-South
+ Player : Avneet is assigned with country : Saskatchewan-North
+ Player : Avneet is assigned with country : British_Columbia-North
+ Player : Avneet is assigned with country : NT-Banks_Island
+ Player : Avneet is assigned with country : Ontario-West
+ Player : Zalak is assigned with country : Saskatchewan-South
+ Player : Zalak is assigned with country : Alberta-North
+ Player : Zalak is assigned with country : N&L-Labrador
+ Player : Zalak is assigned with country : BC-Vancouver_Island
+ Player : Zalak is assigned with country : Nunavut-Continental
+ Player : Zalak is assigned with country : N&L-Newfoundland
+ Player : Zalak is assigned with country : Manitoba-South
+ Player : Zalak is assigned with country : Alberta-South
+ Player : Zalak is assigned with country : Yukon_Territory
+ Player : Zalak is assigned with country : NT-Victoria_Island-West
+ Player : Zalak is assigned with country : NU-Baffin_Island
+ Player : Zalak is assigned with country : NT-Northern_Islands
+ Player : Zalak is assigned with country : New_Brunswick
+ Player : Zalak is assigned with country : Ontario-North
+ Player : Zalak is assigned with country : NU-Ellesmere_Island
+ Player : Avneet is assigned with country : Ontario-South
+Log: Advance Order : advance India France 15 cannot be executed because the number of armies specified in the advance order exceeds the armies of the source country: India
+Log: Advance Order : advance Canada France 10 cannot be executed because the source country: Canada has 10 army units, and all of them cannot be given an advance order; at least one army unit must remain to retain the territory.
+Log: Advance Order : advance Italy France 10 cannot be executed because the source country: Italy specified in the advance order does not belong to the player: Rajat
+Log: Airlift Operation from France to Spain successful!
+Log: Invalid Target Country! Doesn't exist on the map!
+Log: 
+Player : Amanpreet is executing defensive blockade on Country :  India with armies :  15
+Log: Card Order for Blockage is : blockade USA is not executed since Target country : USA given in blockade command does not owned to the player : Amanpreet The card will have no affect and you don't get the card back.
+Log: 
+Player : Anurag is executing Bomb card on country :  Japan with armies :  4. New armies: 2
+Log: 
+Player : Anurag is executing Bomb card on country :  India with armies :  15. New armies: 7
+Log: 
+Player : Anurag is executing Bomb card on country :  Canada with armies :  1. New armies: 0
+Log: Bomb card order : bomb Korea is not executed since Target country : Korea given in bomb command is owned by the player : Anurag VALIDATES:- You cannot bomb your own territory!
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Bomb card order : bomb France is not executed as Rajat has negotiation pact with the target country's player!
+Log: Country China added successfully!
+Log: Validating Map......
+Log: East_Europe has no countries, it must possess atleast 1 country
+Log: Couldn't save the changes in map file!
+Log: Continent Asia removed successfully!
+Log: testedit.map already exists and is loaded for editing
+Log: Continent Asia added successfully!
+Log: Country Maldives added successfully!
+Log: Country Singapore added successfully!
+Log: Neighbour Pair Singapore Maldives added successfully!
+Log: No Such Neighbour Exists
+Log: Continent Asia added successfully!
+Log: Country: Ukraine does not exist!
+Log: test.map already exists and is loaded for editing
+Log: Continent Northern-America added successfully!
+Log: Country Canada added successfully!
+Log: Country Alaska added successfully!
+Log: Neighbour Pair Canada Alaska added successfully!
