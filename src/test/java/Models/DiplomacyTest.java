@@ -1,6 +1,6 @@
 package Models;
 
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,7 +22,7 @@ public class DiplomacyTest {
     GameState d_gameState;
 
     @Before
-    public void setup() throws InvalidMap {
+    public void setup() throws MapValidationException {
         d_gameState = new GameState();
         d_player1 = new ModelPlayer();
         d_player1.setPlayerName("Amanpreet");
