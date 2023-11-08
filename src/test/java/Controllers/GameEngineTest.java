@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Exceptions.InvalidCommand;
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 import Models.Continent;
 import Models.GameState;
 import Models.Map;
@@ -34,12 +34,12 @@ public class GameEngineTest {
 	}
 
 	@Test(expected = InvalidCommand.class)
-	public void testPerformEditMapInvalidCommand() throws IOException, InvalidCommand, InvalidMap {
+	public void testPerformEditMapInvalidCommand() throws IOException, InvalidCommand, MapValidationException {
 		d_presentPhase.handleCommand("editmap");
 	}
 
 	@Test
-	public void testPerformEditContinentInvalidCommand() throws InvalidCommand, IOException, InvalidMap {
+	public void testPerformEditContinentInvalidCommand() throws InvalidCommand, IOException, MapValidationException {
 		d_presentPhase.handleCommand("editcontinent");
 		GameState l_state = d_presentPhase.getD_gameState();
 
@@ -48,7 +48,7 @@ public class GameEngineTest {
 	}
 
 	@Test
-	public void testPerformEditContinentValidCommand() throws IOException, InvalidCommand, InvalidMap {
+	public void testPerformEditContinentValidCommand() throws IOException, InvalidCommand, MapValidationException {
 		d_Map.setD_inputMapFile("testeditmap.map");
 		GameState l_state = d_presentPhase.getD_gameState();
 
@@ -74,7 +74,7 @@ public class GameEngineTest {
 	}
 
 	@Test
-	public void testPerformSaveMapInvalidCommand() throws InvalidCommand, InvalidMap, IOException {
+	public void testPerformSaveMapInvalidCommand() throws InvalidCommand, MapValidationException, IOException {
 		d_presentPhase.handleCommand("savemap");
 		GameState l_state = d_presentPhase.getD_gameState();
 
@@ -84,7 +84,7 @@ public class GameEngineTest {
 	}
 
 	@Test(expected = InvalidCommand.class)
-	public void testAssignCountriesInvalidCommand() throws IOException, InvalidMap, InvalidCommand {
+	public void testAssignCountriesInvalidCommand() throws IOException, MapValidationException, InvalidCommand {
 		d_presentPhase.handleCommand("assigncountries -add india");
 		;
 	}
