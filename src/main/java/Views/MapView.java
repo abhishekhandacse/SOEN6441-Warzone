@@ -6,7 +6,7 @@ import Constants.ApplicationConstantsHardcoding;
 import Models.*;
 import org.davidmoten.text.utils.WordWrap;
 
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 import Models.ModelPlayer;
 import Utils.CommonUtil;
 
@@ -288,7 +288,7 @@ public class MapView {
 							List<ModelCountry> l_adjCountries = d_map.getAdjacentCountry(l_country);
 
 							renderFormattedAdjacentCountryName(l_country.getD_countryName(), l_adjCountries);
-						} catch (InvalidMap l_invalidMap) {
+						} catch (MapValidationException l_invalidMap) {
 							System.out.println(l_invalidMap.getMessage());
 						}
 					});

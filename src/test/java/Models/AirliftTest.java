@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 
 /**
  * This class is used to test functionality of Airlift class functions.
@@ -37,10 +37,10 @@ public class AirliftTest {
 	/**
 	 * Setup before each test case.
 	 * 
-	 * @throws InvalidMap Invalid Map
+	 * @throws MapValidationException Invalid Map
 	 */
 	@Before
-	public void setup() throws InvalidMap {
+	public void setup() throws MapValidationException {
 		d_gameState = new GameState();
 		d_player1 = new ModelPlayer();
 		d_player1.setPlayerName("a");

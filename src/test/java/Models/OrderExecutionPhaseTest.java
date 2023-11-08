@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Controllers.GameEngine;
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 
 public class OrderExecutionPhaseTest {
     ModelPlayer d_player1;
@@ -20,7 +20,7 @@ public class OrderExecutionPhaseTest {
 	GameState d_gameState;
 
 	@Before
-	public void setup() throws InvalidMap {
+	public void setup() throws MapValidationException {
 		d_gameState = new GameState();
 		d_player1 = new ModelPlayer();
 		d_player1.setPlayerName("Anurag");

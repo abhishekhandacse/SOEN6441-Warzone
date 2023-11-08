@@ -2,7 +2,7 @@ package Models;
 
 import Controllers.GameEngine;
 import Exceptions.InvalidCommand;
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 import Utils.CommandHandler;
 import Utils.CommonUtil;
 import Views.MapView;
@@ -138,7 +138,7 @@ public class OrderExecutionPhase extends Phase {
 	 */
 	@Override
 	protected void performingEditNeighbour(CommandHandler p_command, ModelPlayer p_player)
-			throws InvalidCommand, InvalidMap, IOException {
+			throws InvalidCommand, MapValidationException, IOException {
 		printInvalidCommandInState();
 	}
 
@@ -147,7 +147,7 @@ public class OrderExecutionPhase extends Phase {
 	 */
 	@Override
 	protected void performingEditCountry(CommandHandler p_command, ModelPlayer p_player)
-			throws InvalidCommand, InvalidMap, IOException {
+			throws InvalidCommand, MapValidationException, IOException {
 		printInvalidCommandInState();
 	}
 
@@ -155,7 +155,7 @@ public class OrderExecutionPhase extends Phase {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void performingValidateMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidMap, InvalidCommand {
+	protected void performingValidateMap(CommandHandler p_command, ModelPlayer p_player) throws MapValidationException, InvalidCommand {
 		printInvalidCommandInState();
 	}
 
@@ -163,7 +163,7 @@ public class OrderExecutionPhase extends Phase {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void performingLoadMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap {
+	protected void performingLoadMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException {
 		printInvalidCommandInState();
 	}
 
@@ -171,7 +171,7 @@ public class OrderExecutionPhase extends Phase {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void performingSaveMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, InvalidMap {
+	protected void performingSaveMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, MapValidationException {
 		printInvalidCommandInState();
 	}
 
@@ -180,7 +180,7 @@ public class OrderExecutionPhase extends Phase {
 	 */
 	@Override
 	protected void performingEditContinent(CommandHandler p_command, ModelPlayer p_player)
-			throws IOException, InvalidCommand, InvalidMap {
+			throws IOException, InvalidCommand, MapValidationException {
 		printInvalidCommandInState();
 	}
 
@@ -188,7 +188,7 @@ public class OrderExecutionPhase extends Phase {
      * {@inheritDoc}
      */
     @Override
-    protected void performingMapEdit(CommandHandler p_command, ModelPlayer p_player) throws IOException, InvalidCommand, InvalidMap {
+    protected void performingMapEdit(CommandHandler p_command, ModelPlayer p_player) throws IOException, InvalidCommand, MapValidationException {
         printInvalidCommandInState();
     }
 

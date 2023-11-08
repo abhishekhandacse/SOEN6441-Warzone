@@ -1,6 +1,6 @@
 package Models;
 
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -174,13 +174,13 @@ public class ModelCountry {
      * Removes a neighboring country from the list of adjacent countries.
      *
      * @param p_countryId The unique identifier of the neighboring country to remove.
-     * @throws InvalidMap If the specified neighboring country is not found in the list.
+     * @throws MapValidationException If the specified neighboring country is not found in the list.
      */
-    public void removeNeighbour(Integer p_countryId) throws InvalidMap {
+    public void removeNeighbour(Integer p_countryId) throws MapValidationException {
         if (d_adjacentCountryIds.contains(p_countryId)) {
             d_adjacentCountryIds.remove(d_adjacentCountryIds.indexOf(p_countryId));
         } else {
-            throw new InvalidMap("No Such Neighbour Exists");
+            throw new MapValidationException("No Such Neighbour Exists");
         }
     }
 }
