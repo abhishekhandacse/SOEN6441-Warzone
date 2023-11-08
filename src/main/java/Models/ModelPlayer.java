@@ -355,9 +355,9 @@ public class ModelPlayer {
      * Issues orders during the issue order phase.
      *
      * @param p_issueOrderPhase The issue order phase object.
-     * @throws InvalidCommand If an invalid command is provided.
-     * @throws IOException     If there is an input/output error.
-     * @throws InvalidMap      If the map is invalid.
+     * @throws CommandValidationException If an invalid command is provided.
+     * @throws IOException If there is an input/output error.
+     * @throws MapValidationException If the map is invalid.
      */
 	public void issue_order(IssueOrderPhase p_issueOrderPhase) throws CommandValidationException, IOException, MapValidationException {
         p_issueOrderPhase.askForOrder(this);

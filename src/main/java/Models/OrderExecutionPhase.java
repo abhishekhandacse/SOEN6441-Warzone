@@ -35,12 +35,8 @@ public class OrderExecutionPhase extends Phase {
 	}
 
 	/**
-	 * This method checks for performing advance command and prints invalid command	
-	 *
-	 * @param p_enteredCommand - input command
-	 * @param p_player - current player
-	 * 
-	 */
+	 * {@inheritDoc}
+	*/
 	@Override
 	protected void performingAdvance(String p_command, ModelPlayer p_player) {
 		printInvalidCommandInState();

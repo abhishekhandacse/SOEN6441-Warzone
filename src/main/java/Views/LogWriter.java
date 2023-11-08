@@ -24,8 +24,9 @@ public class LogWriter implements Observer {
 
     /**
      * Updates the log file
-     * @param p_observable
-     * @param p_object
+     * 
+     * @param p_observable - observale method
+     * @param p_object - observable object
      *
      */
     @Override
