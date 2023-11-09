@@ -9,18 +9,41 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class is responsible for testing the Diplomacy order in the game.
+ */
 public class DiplomacyTest {
 
+    /**
+     * The first player object.
+     */
     ModelPlayer d_player1;
 
+    /**
+     * The second player object
+     */
     ModelPlayer d_player2;
 
+    /**
+     * The Bomb order object.
+     */
     Bomb d_bombOrder;
 
+    /**
+     * The Diplomacy order object.
+     */
     Diplomacy d_diplomacyOrder;
 
+    /**
+     *  The game state object.
+     */
     GameState d_gameState;
 
+    /**
+     * Setup method to initialize the test environment and create necessary objects.
+     *
+     * @throws MapValidationException if there is a map validation error.
+     */
     @Before
     public void setup() throws MapValidationException {
         d_gameState = new GameState();
@@ -59,12 +82,18 @@ public class DiplomacyTest {
         d_bombOrder = new Bomb(d_player2, "France");
     }
 
+    /**
+     * Test the execution of the Diplomacy order and verify if a negotiation pact is formed.
+     */
     @Test
     public void testDiplomacyExecution(){
         d_diplomacyOrder.execute(d_gameState);
         assertEquals(d_player1.d_negotiatedWith.get(0), d_player2);
     }
 
+    /**
+     * Test if Diplomacy effectively prevents the execution of a Bomb order.
+     */
     @Test
     public void NegotiationWorking(){
         d_diplomacyOrder.execute(d_gameState);

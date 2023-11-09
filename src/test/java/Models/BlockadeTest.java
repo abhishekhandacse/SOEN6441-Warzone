@@ -12,22 +12,49 @@ import org.junit.Test;
 
 public class BlockadeTest {
 
+	/**
+	 * The first player object.
+	 */
 	ModelPlayer d_player1;
 
+	/**
+	 * The second player object.
+	 */
 	ModelPlayer d_player2;
 
+	/**
+	 * The neutral player object.
+	 */
 	ModelPlayer d_neutralPlayer;
 
+	/**
+	 *  The first Blockade order object.
+	 */
 	Blockade d_blockadeOrder1;
 
+	/**
+	 * The second Blockade order object.
+	 */
 	Blockade d_blockadeOrder2;
 
+	/**
+	 * The third Blockade order object
+	 */
 	Blockade d_blockadeOrder3;
 
+	/**
+	 * A list of orders.
+	 */
 	List<Order> d_order_list;
 
+	/**
+	 * The game state object.
+	 */
 	GameState d_gameState;
 
+	/**
+     * Setup method to initialize the test environment.
+     */
 	@Before
 	public void setup() {
 		d_gameState = new GameState();
@@ -74,6 +101,9 @@ public class BlockadeTest {
 
 	}
 
+	/**
+     * Test the execution of the Blockade order.
+     */
 	@Test
 	public void testBlockadeExecution() {
 		d_blockadeOrder1.execute(d_gameState);
@@ -81,6 +111,9 @@ public class BlockadeTest {
 		assertEquals("15", l_countryIndia.getD_armies().toString());
 	}
 
+	/**
+     * Test the validity of the Blockade order.
+     */
 	@Test
 	public void testValidBlockadeOrder() {
 

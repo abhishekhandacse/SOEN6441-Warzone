@@ -108,7 +108,7 @@ public class DeployTest {
 	 */
 	@Test
 	public void testDeployOrder() throws CommandValidationException {
-		ModelPlayer l_player = new ModelPlayer("Maze");
+		ModelPlayer l_player = new ModelPlayer("Anurag");
 		l_player.setD_noOfUnallocatedArmies(10);
 		ModelCountry l_country = new ModelCountry(1, "Japan", 1);
 		l_player.setD_coutriesOwned(Arrays.asList(l_country));
