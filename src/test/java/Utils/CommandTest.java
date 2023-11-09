@@ -10,38 +10,37 @@ import java.util.Map;
 import static org.junit.Assert.*;
 
 /**
- * The type Command test.
+ * This class is used to test functionality of Command class functions.
  */
 public class CommandTest {
-
-    /**
-     * Test valid command. to check if the command entered by the user is valid  functionality
-     */
+	
+	/**
+	 * Testing if the command entered is valid or not
+	 */
     @Test
-    public void testValidCommand() {
+    public void test_validCommand_getRootCommand(){
         CommandHandler l_command = new CommandHandler("editcontinent -add continentID continentvalue");
         String l_rootCommand = l_command.getRootCommand();
 
-        assertEquals("editcontinent", l_rootCommand);
+        assertEquals("editcontinent",l_rootCommand);
     }
 
     /**
-     * Test in valid command. to check if the command entered by the user is invalid  functionality
+     * Testing if the command entered is invalid or not
      */
     @Test
-    public void testInValidCommand() {
+    public void test_inValidCommand_getRootCommand(){
         CommandHandler l_command = new CommandHandler("");
         String l_rootCommand = l_command.getRootCommand();
 
         assertEquals("", l_rootCommand);
     }
 
-
     /**
-     * Test single word. to check the functionality of the single word command.
+     * Testing the single word commands
      */
     @Test
-    public void testSingleWord() {
+    public void test_singleWord_getRootCommand(){
         CommandHandler l_command = new CommandHandler("validatemap");
         String l_rootCommand = l_command.getRootCommand();
 
@@ -49,10 +48,10 @@ public class CommandTest {
     }
 
     /**
-     * Testno flag command. Check if commands with no flags are working fine.
+     * testing the commands
      */
     @Test
-    public void testNoFlagCommand() {
+    public void test_noFlagCommand_getRootCommand(){
         CommandHandler l_command = new CommandHandler("loadmap abc.txt");
         String l_rootCommand = l_command.getRootCommand();
 
@@ -60,15 +59,15 @@ public class CommandTest {
     }
 
     /**
-     * Test single command. checks if the single command entered is being registered correctly
+     * testing the single operation commands
      */
     @Test
-    public void testSingleCommand() {
+    public void test_singleCommand_getOperationsAndArguments(){
         CommandHandler l_command = new CommandHandler("editcontinent -remove continentID");
-        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
 
         Map<String, String> l_expectedCommandTwo = new HashMap<String, String>() {{
             put("arguments", "continentID");
@@ -80,15 +79,15 @@ public class CommandTest {
     }
 
     /**
-     * Test single command with extra spaces. checks if the single command entered is being registered correctly when we enter extra space
+     * testing if more than one spaces in between the command and its parameters is acceptable or not
      */
     @Test
-    public void testSingleCommandWithExtraSpaces() {
+    public void test_singleCommandWithExtraSpaces_getOperationsAndArguments(){
         CommandHandler l_command = new CommandHandler("editcontinent      -remove continentID");
-        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
 
         Map<String, String> l_expectedCommandTwo = new HashMap<String, String>() {{
             put("arguments", "continentID");
@@ -100,15 +99,15 @@ public class CommandTest {
     }
 
     /**
-     * Test multi command. checks if mulitple commands entered a single line are being registered correctly
+     * testing the multiple commands in a single line are working or not
      */
     @Test
-    public void testMultiCommand() {
+    public void test_multiCommand_getOperationsAndArguments(){
         CommandHandler l_command = new CommandHandler("editcontinent -add continentID continentValue  -remove continentID");
-        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
 
         Map<String, String> l_expectedCommandOne = new HashMap<String, String>() {{
             put("arguments", "continentID continentValue");
@@ -124,17 +123,16 @@ public class CommandTest {
         assertEquals(l_expectedOperationsAndValues, l_actualOperationsAndValues);
     }
 
-
     /**
-     * Test no flag with extra spaces.Checks if no flag commands entered a single line are being registered correctly even if extra space is present
+     * testing commands
      */
     @Test
-    public void testNoFlagWithExtraSpaces() {
-        CommandHandler l_command = new CommandHandler("loadmap         abc.txt");
-        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+    public void test_noFlagCommand_getOperationsAndArguments(){
+        CommandHandler l_command = new CommandHandler("loadmap abc.txt");
+        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
 
         Map<String, String> l_expectedCommandOne = new HashMap<String, String>() {{
             put("arguments", "abc.txt");
@@ -145,4 +143,23 @@ public class CommandTest {
         assertEquals(l_expectedOperationsAndValues, l_actualOperationsAndValues);
     }
 
+    /**
+     * testing if more than one spaces in between the command and its parameters is acceptable or not
+     */
+    @Test
+    public void test_noFlagCommandWithExtraSpaces_getOperationsAndArguments(){
+        CommandHandler l_command = new CommandHandler("loadmap         abc.txt");
+        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+
+        // Preparing Expected Value
+        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+
+        Map<String, String> l_expectedCommandOne = new HashMap<String, String>() {{
+            put("arguments", "abc.txt");
+            put("operation", "filename");
+        }};
+        l_expectedOperationsAndValues.add(l_expectedCommandOne);
+
+        assertEquals(l_expectedOperationsAndValues, l_actualOperationsAndValues);
+    }
 }

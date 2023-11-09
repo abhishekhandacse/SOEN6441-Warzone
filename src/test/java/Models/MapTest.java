@@ -1,105 +1,102 @@
 package Models;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import Controllers.MapController;
-import Exceptions.MapValidationException;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import Exceptions.MapValidationException;
+import Services.MapService;
 
 /**
- * The type Map test.
+ * 
+ * This class is used to test functionality of Map class functions.
+ * 
  */
 public class MapTest {
 
-    /**
-     * The D map.
-     */
     Map d_map;
-    /**
-     * The D ms.
-     */
-    MapController d_ms;
-    /**
-     * The D game state.
-     */
-    State d_gameState;
-
+    MapService d_ms;
+    GameState d_gameState;
 
     /**
-     * Before validate test.
+     * Checking Map Model Operations
      */
     @Before
-    public void beforeValidateTest() {
-        d_map = new Map();
-        d_gameState = new State();
-        d_ms = new MapController();
+    public void beforeValidateTest(){
+        d_map=new Map();
+        d_gameState=new GameState();
+        d_ms= new MapService();
     }
 
+    /**
+     * Checking {@link MapValidationException} for no continent in Map
+     * @throws MapValidationException Exception
+     */
+    @Test (expected = MapValidationException.class)
+    public void testValidateNoContinent() throws MapValidationException{
+        assertEquals(d_map.Validate(), false);
+    }
 
     /**
-     * Test validate.
+     * Required Test #2
+     * Tests a valid and invalid Map for Validate function
      *
-     *
+     * @throws MapValidationException Exception
      */
-    @Test()
+    @Test (expected = MapValidationException.class)
     public void testValidate() throws MapValidationException {
-        d_map = d_ms.loadMap(d_gameState, "canada.map");
+        d_map= d_ms.loadMap(d_gameState, "canada.map");
 
         assertEquals(d_map.Validate(), true);
-        d_map = d_ms.loadMap(d_gameState, "failValidation.map");
-        assertEquals(false, d_map.Validate());
+        d_map= d_ms.loadMap(d_gameState, "swiss.map");
+        d_map.Validate();
     }
 
-
     /**
-     * Test validate no country.
+     * Checking {@link MapValidationException} for no country in Map
      *
-     *
+     * @throws MapValidationException Exception
      */
-    @Test()
-    public void testValidateNoCountry() throws MapValidationException {
-        Continent l_continent = new Continent();
-        List<Continent> l_continents = new ArrayList<Continent>();
+    @Test (expected = MapValidationException.class)
+    public void testValidateNoCountry() throws MapValidationException{
+        ModelContinent l_continent = new ModelContinent();
+        List <ModelContinent> l_continents = new ArrayList<ModelContinent>();
 
         l_continents.add(l_continent);
-        d_map.setD_continents(l_continents);
-        assertFalse(d_map.Validate());
+        d_map.setD_allContinents(l_continents);
+        d_map.Validate();
     }
 
-
     /**
-     * Test continent connectivity.
+     * Required Test # 1
+     * Checks Continent connectivity of an unconnected continent
      *
-     * 
+     * @throws MapValidationException Exception
      */
-    @Test()
-    public void testContinentConnectivity() throws MapValidationException {
-        d_map = d_ms.loadMap(d_gameState, "failValidation.map");
-        assertFalse(d_map.Validate());
+    @Test (expected = MapValidationException.class)
+    public void testContinentConnectivity() throws  MapValidationException{
+        d_map= d_ms.loadMap(d_gameState, "continentConnectivity.map");
+        d_map.Validate();
     }
 
-
     /**
-     * Test country neighbors.
+     * Required Test # 1
+     * Checks Country Connectivity for not connected countries
      *
-     * @throws MapValidationException the map validation exception
+     * @throws MapValidationException Exception
      */
     @Test(expected = MapValidationException.class)
-    public void testCountryNeighbors() throws MapValidationException {
+    public void testCountryConnectivity() throws MapValidationException{
         d_map.addContinent("Asia", 10);
-        d_map.addCountry("Paistan", "Asia");
-        d_map.addCountry("Japan", "Asia");
-        d_map.addCountry("Sri Lanka", "Asia");
-        d_map.addCountryNeighbours("Paistan", "Japan");
-        d_map.addCountryNeighbours("Japan", "Paistan");
-        d_map.addCountry("Paistan", "Sri Lanka");
-        d_map.checkConnectionOfCountry();
+        d_map.addCountry("India", "Asia");
+        d_map.addCountry("China", "Asia");
+        d_map.addCountry("Maldives", "Asia");
+        d_map.addCountryNeighbour("India", "China");
+        d_map.addCountryNeighbour("China", "India");
+        d_map.addCountry("India", "Maldives");
+        d_map.checkCountryConnectivity();
     }
 }

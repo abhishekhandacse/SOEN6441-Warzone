@@ -1,18 +1,17 @@
 package Exceptions;
 
 /**
- * The type Command validation exception.
- *
- * @author Anurag Teckchandani
+ * Command Exceptions are thrown by this class.
  */
 public class CommandValidationException extends Exception {
 
-    /**
-     * Instantiates a new Command validation exception.
-     *
-     * @param p_message: Exception Message
-     */
-    public CommandValidationException(String p_message) {
-        super(p_message);
-    }
+	/**
+	 * InvalidCommand constructor is used to print message when exception is caught in
+	 * case command is invalid.
+	 *
+	 * @param p_message message to print when command is invalid.
+	 */
+	public CommandValidationException(String p_message) {
+		super(p_message);
+	}
 }
