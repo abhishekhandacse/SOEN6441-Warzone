@@ -102,9 +102,8 @@ public class DeployTest {
 	}
 
 	/**
-	 * Tests deploy order logic to see if required order is created and armies are
-	 * re-calculated.
-	 * Required Test #4
+	 * Tests deploy order logic to see if required order is created and armies are re-calculated.
+	 * 
 	 * @throws CommandValidationException if given command is invalid
 	 */
 	@Test
