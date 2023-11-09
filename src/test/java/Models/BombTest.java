@@ -127,7 +127,7 @@ public class BombTest {
         d_player2.setD_ordersToExecute(d_order_list);
     }
 
-     /**
+    /**
      * Test the execution of bomb orders, including the calculation of armies after bombing.
      */
     @Test

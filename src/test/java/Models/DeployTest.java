@@ -46,10 +46,10 @@ public class DeployTest {
 	@Before
 	public void setup() {
 		d_player1 = new ModelPlayer();
-		d_player1.setPlayerName("avni");
+		d_player1.setPlayerName("Anurag");
 
 		d_player2 = new ModelPlayer();
-		d_player2.setPlayerName("priya");
+		d_player2.setPlayerName("Harman");
 
 		List<ModelCountry> l_countryList = new ArrayList<ModelCountry>();
 		l_countryList.add(new ModelCountry("India"));
@@ -104,7 +104,7 @@ public class DeployTest {
 	/**
 	 * Tests deploy order logic to see if required order is created and armies are
 	 * re-calculated.
-	 * 
+	 * Required Test #4
 	 * @throws CommandValidationException if given command is invalid
 	 */
 	@Test

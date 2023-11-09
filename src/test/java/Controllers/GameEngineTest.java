@@ -89,6 +89,7 @@ public class GameEngineTest {
 		;
 	}
 
+	// Required Test #3
 	@Test
 	public void testCorrectStartupPhase() {
 		assertTrue(d_gameEngine.getD_CurrentPhase() instanceof InitialStartUpPhase);

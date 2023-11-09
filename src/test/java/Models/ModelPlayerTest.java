@@ -56,7 +56,7 @@ public class ModelPlayerTest {
 		assertEquals(1, d_exisitingPlayerList.get(0).getD_ordersToExecute().size());
 	}
 
-	
+	// Required Test #5
 	@Test
 	public void testValidateDeployOrderArmies() {
 		d_player.setD_noOfUnallocatedArmies(10);
@@ -68,7 +68,7 @@ public class ModelPlayerTest {
 	
 	@Test
 	public void testCreateDeployOrder() {
-		ModelPlayer l_pl = new ModelPlayer("abc");
+		ModelPlayer l_pl = new ModelPlayer("Harman");
 		l_pl.setD_noOfUnallocatedArmies(20);
 		l_pl.createDeployOrder("Deploy India 5");
 		assertEquals(l_pl.getD_noOfUnallocatedArmies().toString(), "15");
@@ -78,7 +78,7 @@ public class ModelPlayerTest {
 	
 	@Test
 	public void testCountryExists() {		
-		ModelPlayer l_player = new ModelPlayer("abc");
+		ModelPlayer l_player = new ModelPlayer("Amanpreet");
 		assertTrue(l_player.checkAdjacency(l_gs, "Finland", "France"));
 		assertFalse(l_player.checkAdjacency(l_gs, "France", "Finland"));
 	}
@@ -86,14 +86,14 @@ public class ModelPlayerTest {
 	
 	@Test
 	public void testCreateAdvanceOrder() {
-		ModelPlayer l_player = new ModelPlayer("xyz");
+		ModelPlayer l_player = new ModelPlayer("Rajat");
 		l_player.createAdvanceOrder("advance Finland France 10", l_gs);
 		assertEquals(l_player.getD_ordersToExecute().size(), 1);
 	}
 	
 	@Test
 	public void testCreateAdvanceOrderFailure() {
-		ModelPlayer l_player = new ModelPlayer("xyz");
+		ModelPlayer l_player = new ModelPlayer("Anurag");
 		l_player.createAdvanceOrder("advance Finland France 0", l_gs);
 		assertEquals(l_player.getD_ordersToExecute().size(), 0);
 	}

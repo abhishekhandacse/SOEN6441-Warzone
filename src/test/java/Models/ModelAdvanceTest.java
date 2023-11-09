@@ -31,7 +31,7 @@ public class ModelAdvanceTest {
 		assertTrue(new ModelAdvance(l_player, "India", "France", 10).valid(d_gameState));
 	}
 
-	
+	// Required Test #5
 	@Test
 	public void testAttackersWin() {
 		ModelPlayer l_sourcePlayer = new ModelPlayer("Rajat");
@@ -56,7 +56,7 @@ public class ModelAdvanceTest {
 		assertEquals(l_sourcePlayer.getD_coutriesOwned().get(1).getD_armies().toString(), "5");
 	}
 
-	
+	// Required Test #5
 	@Test
 	public void testDefendersWin() {
 		ModelPlayer l_sourcePlayer = new ModelPlayer("Rajat");

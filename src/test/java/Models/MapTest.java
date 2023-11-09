@@ -41,6 +41,7 @@ public class MapTest {
     }
 
     /**
+     * Required Test #2
      * Tests a valid and invalid Map for Validate function
      *
      * @throws MapValidationException Exception
@@ -70,17 +71,19 @@ public class MapTest {
     }
 
     /**
+     * Required Test # 1
      * Checks Continent connectivity of an unconnected continent
      *
      * @throws MapValidationException Exception
      */
     @Test (expected = MapValidationException.class)
     public void testContinentConnectivity() throws  MapValidationException{
-          d_map= d_ms.loadMap(d_gameState, "continentConnectivity.map");
-          d_map.Validate();
+        d_map= d_ms.loadMap(d_gameState, "continentConnectivity.map");
+        d_map.Validate();
     }
 
     /**
+     * Required Test # 1
      * Checks Country Connectivity for not connected countries
      *
      * @throws MapValidationException Exception
