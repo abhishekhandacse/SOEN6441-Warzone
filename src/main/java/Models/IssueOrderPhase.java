@@ -263,6 +263,12 @@ public class IssueOrderPhase extends Phase{
      */
     public void askForOrder(ModelPlayer p_player) throws CommandValidationException, IOException, MapValidationException{
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Deploy order command: 'deploy countryID numarmies' ");
+        System.out.println("Advance order command: 'advance countrynamefrom countynameto numarmies' ");
+        System.out.println("Bomb order command (requires bomb card): 'bomb countryID' ");
+        System.out.println("Blockade order command (required blockade card): 'blockade countryID' ");
+        System.out.println("Airlift order command (requires the airlift card): 'airlift sourcecountryID targetcountryID numarmies' ");
+        System.out.println("Diplomacy order command (requires the diplomacy card): 'negotiate playerID' ");
         System.out.println("\nPlease enter command to issue order for player : " + p_player.getPlayerName()
                 + " or give showmap command to view current state of the game.");
         String l_commandEntered = l_reader.readLine();

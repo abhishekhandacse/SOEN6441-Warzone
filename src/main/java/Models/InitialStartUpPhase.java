@@ -308,8 +308,22 @@ public class InitialStartUpPhase extends Phase {
     public void initPhase()  {
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
         while (d_gameEngine.getD_CurrentPhase() instanceof InitialStartUpPhase) {
+            System.out.println("===================================================================================");
+            System.out.println("List of commands for playing a game.:");
+            System.out.println("===================================================================================");
+            System.out.println("Initiate the map: 'loadmap filename'.");
+            System.out.println("Edit the map: 'editmap filename'.");
+            System.out.println("Display the loaded map: use the command 'showmap'");
+            System.out.println("Include or exclude a player : 'gameplayer -add playername -remove playername' ");
+            System.out.println("Allocate countries : 'assigncountries' ");
+            System.out.println("Save the map : 'savemap filename' ");
+            System.out.println("Load the map : 'loadmap filename' ");
+            System.out.println("===================================================================================");
+            System.out.println("");
+            System.out.println("Input the game commands or input 'exit' to exit the game");
+            System.out.println("");
             try {
-                System.out.println("Enter Game Commands or type 'exit' for quitting");
+                System.out.println("Enter Game Commands or type 'exit' for quitting - ");
                 String l_commandEntered = l_reader.readLine();
 
                 handleCommand(l_commandEntered);
