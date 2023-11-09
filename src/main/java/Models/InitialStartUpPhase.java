@@ -15,34 +15,78 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 
-public class InitialStartUpPhase extends Phase{
+/**
+ * This class represents the initial startup phase of the game.
+ */
+public class InitialStartUpPhase extends Phase {
 
-    public InitialStartUpPhase(GameEngine p_gameEngine, GameState p_initialGameState){
+    /**
+     * Constructor for the InitialStartUpPhase.
+     *
+     * @param p_gameEngine The game engine.
+     * @param p_initialGameState The initial game state.
+     */
+    public InitialStartUpPhase(GameEngine p_gameEngine, GameState p_initialGameState) {
         super(p_gameEngine, p_initialGameState);
     }
 
+    /**
+     * Perform the action to show the map.
+     *
+     * @param p_command The command handler for showing the map.
+     * @param p_nameOfPlayer The player's name.
+     */
     @Override
     protected void performingShowMap(CommandHandler p_command, ModelPlayer p_nameOfPlayer) {
         MapView l_mapView = new MapView(d_gameState);
         l_mapView.showMap();
     }
 
+    /**
+     * Perform the action to create and deploy in the initial startup phase.
+     *
+     * @param p_command The command to create and deploy.
+     * @param p_nameOfPlayer The player's name.
+     */
     @Override
     protected void performingCreateDeploy(String p_command, ModelPlayer p_nameOfPlayer) {
         printInvalidCommandInState();
     }
 
+    /**
+     * Perform the action to handle cards in the initial startup phase.
+     *
+     * @param p_enteredCommand The entered command for card handling.
+     * @param p_nameOfPlayer The player's name.
+     * @throws IOException If an I/O error occurs.
+     */
     @Override
     protected void performingCardHandle(String p_enteredCommand, ModelPlayer p_nameOfPlayer) throws IOException {
         printInvalidCommandInState();
     }
 
+    /**
+     * Perform the advance action in the initial startup phase.
+     *
+     * @param p_command The command for advancing.
+     * @param p_nameOfPlayer The player's name.
+     */
     @Override
     protected void performingAdvance(String p_command, ModelPlayer p_nameOfPlayer) {
         printInvalidCommandInState();
     }
 
-    public void performingEditContinent(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws IOException, CommandValidationException, MapValidationException {
+    /**
+     * Perform the action to edit a continent.
+     *
+     * @param p_givenCommand The command handler for editing a continent.
+     * @param p_nameOfPlayer The player's name.
+     * @throws IOException If an I/O error occurs.
+     * @throws CommandValidationException If the command validation fails.
+     * @throws MapValidationException If the map validation fails.
+     */
+    public void performingEditContinent(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer)
+            throws IOException, CommandValidationException, MapValidationException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("Can not Edit Continent, please perform `editmap` first", "effect");
             return;
@@ -64,7 +108,17 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingMapEdit(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws IOException, CommandValidationException, MapValidationException {
+    /**
+     * Perform the action to edit the map.
+     *
+     * @param p_givenCommand The command handler for editing the map.
+     * @param p_nameOfPlayer The player's name.
+     * @throws IOException If an I/O error occurs.
+     * @throws CommandValidationException If the command validation fails.
+     * @throws MapValidationException If the map validation fails.
+     */
+    public void performingMapEdit(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer)
+            throws IOException, CommandValidationException, MapValidationException {
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
         if (l_operations_list == null || l_operations_list.isEmpty()) {
@@ -80,7 +134,16 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingLoadMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws CommandValidationException, MapValidationException {
+    /**
+     * Perform the action to load a map.
+     *
+     * @param p_givenCommand The command handler for loading a map.
+     * @param p_nameOfPlayer The player's name.
+     * @throws CommandValidationException If the command validation fails.
+     * @throws MapValidationException If the map validation fails.
+     */
+    public void performingLoadMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer)
+            throws CommandValidationException, MapValidationException {
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         boolean l_flagValidate = false;
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
@@ -95,11 +158,11 @@ public class InitialStartUpPhase extends Phase{
                     if (l_mapToLoad.Validate()) {
                         l_flagValidate = true;
                         d_gameState.setD_loadCommand();
-                        d_gameEngine.setD_gameEngineLog(l_map.get(ApplicationConstantsHardcoding.ARGUMENTS_PASSED)+ " has been loaded to start the game", "effect" );
+                        d_gameEngine.setD_gameEngineLog(l_map.get(ApplicationConstantsHardcoding.ARGUMENTS_PASSED) + " has been loaded to start the game", "effect");
                     } else {
                         d_mapService.mapReset(d_gameState, l_map.get(ApplicationConstantsHardcoding.ARGUMENTS_PASSED));
                     }
-                    if(!l_flagValidate){
+                    if (!l_flagValidate) {
                         d_mapService.mapReset(d_gameState, l_map.get(ApplicationConstantsHardcoding.ARGUMENTS_PASSED));
                     }
                 } else {
@@ -109,7 +172,16 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingSaveMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws CommandValidationException, MapValidationException {
+    /**
+     * Perform the action to save the map.
+     *
+     * @param p_givenCommand The command handler for saving the map.
+     * @param p_nameOfPlayer The player's name.
+     * @throws CommandValidationException If the command validation fails.
+     * @throws MapValidationException If the map validation fails.
+     */
+    public void performingSaveMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer)
+            throws CommandValidationException, MapValidationException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("No map found to save, Please `editmap` first", "effect");
             return;
@@ -124,7 +196,7 @@ public class InitialStartUpPhase extends Phase{
                     boolean l_fileUpdateStatus = d_mapService.mapSave(d_gameState,
                             l_map.get(ApplicationConstantsHardcoding.ARGUMENTS_PASSED));
                     if (l_fileUpdateStatus) {
-                        d_gameEngine.setD_gameEngineLog("Required changes have been made in map file", "effect");
+                        d_gameEngine.setD_gameEngineLog("Required changes have been made in the map file", "effect");
                     } else
                         System.out.println(d_gameState.getError());
                 } else {
@@ -134,7 +206,16 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingValidateMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws MapValidationException, CommandValidationException {
+    /**
+     * Perform the action to validate the map.
+     *
+     * @param p_givenCommand The command handler for validating the map.
+     * @param p_nameOfPlayer The player's name.
+     * @throws MapValidationException If the map validation fails.
+     * @throws CommandValidationException If the command validation fails.
+     */
+    public void performingValidateMap(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer)
+            throws MapValidationException, CommandValidationException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("No map found to validate, Please `loadmap` & `editmap` first", "effect");
             return;
@@ -157,7 +238,17 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingEditNeighbour(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws CommandValidationException, MapValidationException, IOException {
+    /**
+     * Perform the action to edit neighbors.
+     *
+     * @param p_givenCommand The command handler for editing neighbors.
+     * @param p_nameOfPlayer The player's name.
+     * @throws CommandValidationException If the command validation fails.
+     * @throws MapValidationException If the map validation fails.
+     * @throws IOException If an I/O error occurs.
+     */
+    public void performingEditNeighbour(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer)
+            throws CommandValidationException, MapValidationException, IOException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("Can not Edit Neighbors, please perform `editmap` first", "effect");
             return;
@@ -179,7 +270,17 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingEditCountry(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws CommandValidationException, MapValidationException, IOException {
+    /**
+     * Performs the editing of country data based on the given command and player.
+     *
+     * @param p_givenCommand The command to perform the edit.
+     * @param p_nameOfPlayer The player attempting the edit.
+     * @throws CommandValidationException If the command validation fails.
+     * @throws MapValidationException If the map validation fails.
+     * @throws IOException If an I/O exception occurs.
+     */
+    public void performingEditCountry(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer)
+            throws CommandValidationException, MapValidationException, IOException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("Can not Edit Country, please perform `editmap` first", "effect");
             return;
@@ -201,7 +302,9 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-
+    /**
+     * Initializes the initial startup phase of the game, allowing players to enter commands.
+     */
     public void initPhase()  {
         BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
         while (d_gameEngine.getD_CurrentPhase() instanceof InitialStartUpPhase) {
@@ -216,6 +319,13 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
+    /**
+     * Creates players for the game based on the given command and player.
+     *
+     * @param p_givenCommand The command to create players.
+     * @param p_nameOfPlayer The player creating the players.
+     * @throws CommandValidationException If the command validation fails.
+     */
     public void creatingPlayers(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws CommandValidationException {
         if (!l_isMapLoaded) {
             d_gameEngine.setD_gameEngineLog("No map found, Please `loadmap` before adding game players", "effect");
@@ -242,7 +352,14 @@ public class InitialStartUpPhase extends Phase{
         }
     }
 
-    public void performingAssignCountries(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws CommandValidationException{
+    /**
+     * Performs the assignment of countries to players based on the given command.
+     *
+     * @param p_givenCommand The command to perform country assignment.
+     * @param p_nameOfPlayer The player assigning countries.
+     * @throws CommandValidationException If the command validation fails.
+     */
+    public void performingAssignCountries(CommandHandler p_givenCommand, ModelPlayer p_nameOfPlayer) throws CommandValidationException {
         List<Map<String, String>> l_operations_list = p_givenCommand.getOperationsAndArguments();
         Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler(d_gameState));
         if (CommonUtil.isNullOrEmptyCollection(l_operations_list)) {
@@ -254,6 +371,8 @@ public class InitialStartUpPhase extends Phase{
             throw new CommandValidationException(ApplicationConstantsHardcoding.COMMAND_INVALID_ERROR_ASSIGNCOUNTRIES);
         }
     }
+
+
 
 
 }
