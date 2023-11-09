@@ -25,7 +25,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.1.1</version>
         <configuration>
-            <doclint>all</doclint> 
+            <doclint>all</doclint>
         </configuration>
         <executions>
             <execution>
