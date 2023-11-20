@@ -1,4 +1,4 @@
-# WarZone
+# WarZone Game
 
 ## Problem Statement
 This project involves the development of a complex Java program for playing the game of Risk. The project is designed to be undertaken by teams of 5 or 6 members. The goal is to create a program that is compatible with the rules and map files of the "Warzone" version of Risk, which can be found at [Warzone](https://www.warzone.com/).
