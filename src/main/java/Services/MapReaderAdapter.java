@@ -23,7 +23,7 @@ public class MapReaderAdapter extends MapFileReader {
      *
      * @param p_conquestMapFileReader The Conquest map file reader to be adapted.
      */
-    public MapReaderAdapter(ConquestMapFileReader p_conquestMapFileReader) {
+            public MapReaderAdapter(ConquestMapFileReader p_conquestMapFileReader) {
         this.l_conquestMapFileReader = p_conquestMapFileReader;
     }
 
