@@ -20,23 +20,38 @@ import Models.Map;
 import Models.ModelPlayer;
 import Utils.CommonUtil;
 
+/**
+ * Test class for the {@code PlayerService} class.
+ *
+ * @version 1.0
+ */
 public class PlayerServiceTest {
 
-		ModelPlayer d_playerInfo;
+	/** Player information for testing. */
+	ModelPlayer d_playerInfo;
 
-		PlayerService d_playerService;
+	/** Player service for testing. */
+	PlayerService d_playerService;
 
-		Map d_map;
+	/** Map for testing. */
+	Map d_map;
 
-		GameState d_gameState;
+	/** Game state for testing. */
+	GameState d_gameState;
 
-		MapService d_mapservice;
+	/** Map service for testing. */
+	MapService d_mapservice;
 
-		List<ModelPlayer> d_exisitingPlayerList = new ArrayList<>();
+	/** Existing player list for testing. */
+	List<ModelPlayer> d_exisitingPlayerList = new ArrayList<>();
 
-		private final ByteArrayOutputStream d_outContent = new ByteArrayOutputStream();
+	/** Output content for testing. */
+	private final ByteArrayOutputStream d_outContent = new ByteArrayOutputStream();
 
-		@Before
+	/**
+	 * Sets up the test environment before each test method is executed.
+	 */
+	@Before
 	public void setup() {
 		d_playerInfo = new ModelPlayer();
 		d_playerService = new PlayerService();
@@ -45,7 +60,10 @@ public class PlayerServiceTest {
 		d_exisitingPlayerList.add(new ModelPlayer("Anurag"));
 	}
 
-		@Test
+	/**
+	 * Tests the addition of players.
+	 */
+	@Test
 	public void testAddPlayers() {
 		assertFalse(CommonUtil.isCollectionEmpty(d_exisitingPlayerList));
 		List<ModelPlayer> l_updatedPlayers = d_playerService.addRemovePlayers(d_exisitingPlayerList, "add", "Aman");
@@ -56,7 +74,10 @@ public class PlayerServiceTest {
 		assertEquals("Player with name : Rajat already Exists. Changes are not made.", d_outContent.toString().trim());
 	}
 
-		@Test
+	/**
+	 * Tests the removal of players.
+	 */
+	@Test
 	public void testRemovePlayers() {
 		List<ModelPlayer> l_updatedPlayers = d_playerService.addRemovePlayers(d_exisitingPlayerList, "remove", "Rajat");
 		assertEquals(1, l_updatedPlayers.size());
@@ -66,13 +87,21 @@ public class PlayerServiceTest {
 		assertEquals("Player with name : Abhishek does not Exist. Changes are not made.", d_outContent.toString().trim());
 	}
 
-		@Test
+	/**
+	 * Tests the availability of players.
+	 */
+	@Test
 	public void testPlayersAvailability() {
 		boolean l_playersExists = d_playerService.checkPlayersAvailability(d_gameState);
 		assertFalse(l_playersExists);
 	}
 
-		@Test
+	/**
+	 * Tests the assignment of countries to players.
+	 *
+	 * @throws InvalidMap if an invalid map is encountered
+	 */
+	@Test
 	public void testPlayerCountryAssignment() throws InvalidMap {
 		d_mapservice = new MapService();
 		d_map = new Map();
@@ -89,7 +118,10 @@ public class PlayerServiceTest {
 		assertEquals(l_assignedCountriesSize, d_gameState.getD_map().getD_countries().size());
 	}
 
-		@Test
+	/**
+	 * Tests the calculation of armies for a player.
+	 */
+	@Test
 	public void testCalculateArmiesForPlayer() {
 		ModelPlayer l_playerInfo = new ModelPlayer();
 		List<Country> l_countryList = new ArrayList<>();
