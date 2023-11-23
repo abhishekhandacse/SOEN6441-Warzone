@@ -11,19 +11,32 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Test class for the {@code ModelDeploy} class.
+ *
+ * @version 1.0
+ */
 public class DeployTest {
 
-		ModelPlayer d_player1;
+	/** Player 1 for testing. */
+	ModelPlayer d_player1;
 
-		ModelPlayer d_player2;
+	/** Player 2 for testing. */
+	ModelPlayer d_player2;
 
-		ModelDeploy d_deployOrder1;
+	/** Deploy order for Player 1. */
+	ModelDeploy d_deployOrder1;
 
-		ModelDeploy d_deployOrder2;
+	/** Deploy order for Player 2. */
+	ModelDeploy d_deployOrder2;
 
-		GameState d_gameState = new GameState();
+	/** Game state used for testing. */
+	GameState d_gameState = new GameState();
 
-		@Before
+	/**
+	 * Sets up the test environment before each test method is executed.
+	 */
+	@Before
 	public void setup() {
 		// Setting up players
 		d_player1 = new ModelPlayer();
@@ -58,13 +71,21 @@ public class DeployTest {
 		d_deployOrder2 = new ModelDeploy(d_player2, "Canada", 15);
 	}
 
-		@Test
+	/**
+	 * Tests the {@code checkValid} method for deploy orders.
+	 * It asserts that the deployment orders are valid for the respective players.
+	 */
+	@Test
 	public void testValidateDeployOrderCountry() {
 		assertTrue(d_deployOrder1.checkValid(d_gameState));
 		assertTrue(d_deployOrder2.checkValid(d_gameState));
 	}
 
-		@Test
+	/**
+	 * Tests the execution of deploy orders.
+	 * It asserts that the armies are correctly deployed to the specified countries.
+	 */
+	@Test
 	public void testDeployOrderExecution() {
 		d_deployOrder1.execute(d_gameState);
 					Country l_countryIndia = d_gameState.getD_map().getCountryByName("India");
@@ -75,7 +96,12 @@ public class DeployTest {
 		assertEquals("15", l_countryCanada.getD_armies().toString());
 	}
 
-		@Test
+	/**
+	 * Tests the creation of deploy orders by a player.
+	 *
+	 * @throws InvalidCommand if the deploy command is invalid
+	 */
+	@Test
 	public void testDeployOrder() throws InvalidCommand {
 		ModelPlayer l_player = new ModelPlayer("Maze");
 		l_player.setD_noOfUnallocatedArmies(10);
