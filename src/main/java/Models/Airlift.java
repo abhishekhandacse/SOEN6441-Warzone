@@ -53,8 +53,8 @@ public class Airlift implements Card {
 	@Override
 	public void execute(GameState p_internalGameState) {
 		if (valid(p_internalGameState)) {
-			ModelCountry l_sourceCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfSourceCountry);
-			ModelCountry l_targetCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfTargetCountry);
+			Country l_sourceCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfSourceCountry);
+			Country l_targetCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfTargetCountry);
 			Integer l_updatedTargetArmies = l_targetCountry.getD_armies() + this.d_quantityOfArmy;
 			Integer l_updatedSourceArmies = l_sourceCountry.getD_armies() - this.d_quantityOfArmy;
 			l_targetCountry.setD_armies(l_updatedTargetArmies);
@@ -73,7 +73,7 @@ public class Airlift implements Card {
 	 */
 	@Override
 	public boolean valid(GameState p_internalGameState) {
-		ModelCountry l_nameOfSourceCountry = d_cardHoldingPlayer.getD_coutriesOwned().stream()
+		Country l_nameOfSourceCountry = d_cardHoldingPlayer.getD_coutriesOwned().stream()
 				.filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(this.d_nameOfSourceCountry.toString()))
 				.findFirst().orElse(null);
 		if (l_nameOfSourceCountry == null) {
@@ -84,7 +84,7 @@ public class Airlift implements Card {
 			p_internalGameState.updateLog(orderExecutionLog(), "effect");
 			return false;
 		}
-		ModelCountry l_targetCountry = d_cardHoldingPlayer.getD_coutriesOwned().stream()
+		Country l_targetCountry = d_cardHoldingPlayer.getD_coutriesOwned().stream()
 				.filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(this.d_nameOfTargetCountry.toString()))
 				.findFirst().orElse(null);
 		if (l_targetCountry == null) {
@@ -160,8 +160,8 @@ public class Airlift implements Card {
 	 */
 	@Override
 	public Boolean validOrderCheck(GameState p_internalGameState) {
-		ModelCountry l_sourceCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfSourceCountry);
-		ModelCountry l_targetCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfTargetCountry);
+		Country l_sourceCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfSourceCountry);
+		Country l_targetCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfTargetCountry);
 		if (l_sourceCountry == null) {
 			this.setD_orderExecutionLog("Invalid Source Country name! This country Doesn't exist on the map!", "error");
 			p_internalGameState.updateLog(orderExecutionLog(), "effect");

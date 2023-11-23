@@ -3,10 +3,10 @@ package Services;
 import Constants.ApplicationConstantsHardcoding;
 import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
-import Models.ModelContinent;
+import Models.Continent;
 import Models.GameState;
 import Models.Map;
-import Models.ModelCountry;
+import Models.Country;
 import Utils.CommonUtil;
 
 import java.io.*;
@@ -38,10 +38,10 @@ public class MapService {
 
 
             List<String> l_contListData = getMetaData(l_fileLines, "continent");
-            List<ModelContinent> l_contListObjects = parseMetadataForContinents(l_contListData);
+            List<Continent> l_contListObjects = parseMetadataForContinents(l_contListData);
             List<String> l_countryListData = getMetaData(l_fileLines, "country");
             List<String> l_metaDataBorders = getMetaData(l_fileLines, "border");
-            List<ModelCountry> l_countryListObjects = parseMetadataForCountries(l_countryListData);
+            List<Country> l_countryListObjects = parseMetadataForCountries(l_countryListData);
 
 
             l_countryListObjects = parseBorderMetaData(l_countryListObjects, l_metaDataBorders);
@@ -107,14 +107,14 @@ public class MapService {
      * @param p_countriesList The list of metadata lines for countries.
      * @return A list of ModelCountry objects created from the parsed metadata.
      */
-    public List<ModelCountry> parseMetadataForCountries(List<String> p_countriesList) {
+    public List<Country> parseMetadataForCountries(List<String> p_countriesList) {
 
         LinkedHashMap<Integer, List<Integer>> l_countryNeighbors = new LinkedHashMap<>();
-        List<ModelCountry> l_countriesList = new ArrayList<ModelCountry>();
+        List<Country> l_countriesList = new ArrayList<Country>();
 
         for (String country : p_countriesList) {
             String[] l_metaDataCountries = country.split(" ");
-            l_countriesList.add(new ModelCountry(Integer.parseInt(l_metaDataCountries[0]), l_metaDataCountries[1],
+            l_countriesList.add(new Country(Integer.parseInt(l_metaDataCountries[0]), l_metaDataCountries[1],
                     Integer.parseInt(l_metaDataCountries[2])));
         }
         return l_countriesList;
@@ -126,14 +126,14 @@ public class MapService {
      * @param p_continentList The list of metadata lines for continents.
      * @return A list of Continent objects created from the parsed metadata.
      */
-    public List<ModelContinent> parseMetadataForContinents(List<String> p_continentList) {
+    public List<Continent> parseMetadataForContinents(List<String> p_continentList) {
         int l_continentId = 1;
-        List<ModelContinent> l_continents = new ArrayList<ModelContinent>();
+        List<Continent> l_continents = new ArrayList<Continent>();
 
 
         for (String cont : p_continentList) {
             String[] l_metaData = cont.split(" ");
-            l_continents.add(new ModelContinent(l_continentId, l_metaData[0], Integer.parseInt(l_metaData[1])));
+            l_continents.add(new Continent(l_continentId, l_metaData[0], Integer.parseInt(l_metaData[1])));
             l_continentId++;
         }
         return l_continents;
@@ -176,9 +176,9 @@ public class MapService {
      * @param p_continents  The list of Continent objects containing continent information.
      * @return The updated list of Continent objects with linked countries.
      */
-    public List<ModelContinent> linkCountryContinents(List<ModelCountry> p_countries, List<ModelContinent> p_continents) {
-        for (ModelCountry c : p_countries) {
-            for (ModelContinent cont : p_continents) {
+    public List<Continent> linkCountryContinents(List<Country> p_countries, List<Continent> p_continents) {
+        for (Country c : p_countries) {
+            for (Continent cont : p_continents) {
                 if (cont.getD_continentID().equals(c.getD_continentId())) {
                     cont.addingCountry(c);
                 }
@@ -222,7 +222,7 @@ public class MapService {
      * @param p_bordersList   The list of metadata lines for country borders.
      * @return The updated list of ModelCountry objects with neighbor information.
      */
-    public List<ModelCountry> parseBorderMetaData(List<ModelCountry> p_countriesList, List<String> p_bordersList) {
+    public List<Country> parseBorderMetaData(List<Country> p_countriesList, List<String> p_bordersList) {
         LinkedHashMap<Integer, List<Integer>> l_countryNeighbors = new LinkedHashMap<Integer, List<Integer>>();
 
         for (String l_border : p_bordersList) {
@@ -236,7 +236,7 @@ public class MapService {
                 l_countryNeighbors.put(Integer.parseInt(l_splitString[0]), l_neighbours);
             }
         }
-        for (ModelCountry c : p_countriesList) {
+        for (Country c : p_countriesList) {
             List<Integer> l_adjacentCountries = l_countryNeighbors.get(c.getD_countryId());
             c.setD_adjacentCountryIds(l_adjacentCountries);
         }
@@ -402,7 +402,7 @@ public class MapService {
 
         // Writes Country Objects to File And Organizes Border Data for each of them
         p_writer.write(System.lineSeparator() + ApplicationConstantsHardcoding.ALL_COUNTRIES + System.lineSeparator());
-        for (ModelCountry l_country : p_gameState.getD_map().getD_allCountries()) {
+        for (Country l_country : p_gameState.getD_map().getD_allCountries()) {
             l_countryMetaData = l_country.getD_countryId().toString().concat(" ").concat(l_country.getD_countryName())
                     .concat(" ").concat(l_country.getD_continentId().toString());
             p_writer.write(l_countryMetaData + System.lineSeparator());
@@ -458,7 +458,7 @@ public class MapService {
      */
     private void writeMetadataForContinent(GameState p_gameState, FileWriter p_writer) throws IOException {
         p_writer.write(System.lineSeparator() + ApplicationConstantsHardcoding.ALL_CONTINENTS + System.lineSeparator());
-        for (ModelContinent l_continent : p_gameState.getD_map().getD_allContinents()) {
+        for (Continent l_continent : p_gameState.getD_map().getD_allContinents()) {
             p_writer.write(
                     l_continent.getD_continentName().concat(" ").concat(l_continent.getD_continentValue().toString())
                             + System.lineSeparator());

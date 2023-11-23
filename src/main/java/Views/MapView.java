@@ -32,12 +32,12 @@ public class MapView {
 	/**
 	 * List if countries
 	 */
-	List<ModelCountry> d_countriesList;
+	List<Country> d_countriesList;
 
 	/**
 	 * List of Continents
 	 */
-	List<ModelContinent> d_continentsList;
+	List<Continent> d_continentsList;
 
     /**
      * Reset Color ANSI Code.
@@ -134,7 +134,7 @@ public class MapView {
      * @param p_countryName Country Name to be rendered.
      * @param p_adjCountries List of adjacent countries to be rendered.
      */
-	private void renderFormattedAdjacentCountryName(String p_countryName, List<ModelCountry> p_adjCountries){
+	private void renderFormattedAdjacentCountryName(String p_countryName, List<Country> p_adjCountries){
 		StringBuilder l_commaSeparatedCountries = new StringBuilder();
 
 		for(int i=0; i<p_adjCountries.size(); i++) {
@@ -295,7 +295,7 @@ public class MapView {
 			d_continentsList.forEach(l_continent -> {
 				renderContinentName(l_continent.getD_continentName());
 
-				List<ModelCountry> l_continentCountries = l_continent.getD_countries();
+				List<Country> l_continentCountries = l_continent.getD_countries();
 				final int[] l_countryIndex = {1};
 
 				// renders the country if any
@@ -304,7 +304,7 @@ public class MapView {
 						String l_formattedCountryName = getFormattedCountryName(l_countryIndex[0]++, l_country.getD_countryName());
 						System.out.println(l_formattedCountryName);
 						try {
-							List<ModelCountry> l_adjCountries = d_map.getAdjacentCountry(l_country);
+							List<Country> l_adjCountries = d_map.getAdjacentCountry(l_country);
 
 							renderFormattedAdjacentCountryName(l_country.getD_countryName(), l_adjCountries);
 						} catch (MapValidationException l_invalidMap) {

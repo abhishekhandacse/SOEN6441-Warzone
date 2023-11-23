@@ -15,8 +15,8 @@ import org.junit.Test;
 import Exceptions.MapValidationException;
 import Models.GameState;
 import Models.Map;
-import Models.ModelContinent;
-import Models.ModelCountry;
+import Models.Continent;
+import Models.Country;
 import Models.ModelPlayer;
 import Utils.CommonUtil;
 
@@ -135,14 +135,14 @@ public class PlayerServiceTest {
 	@Test
 	public void testCalculateArmiesForPlayer() {
 		ModelPlayer l_playerInfo = new ModelPlayer();
-		List<ModelCountry> l_countryList = new ArrayList<ModelCountry>();
-		l_countryList.add(new ModelCountry("China"));
-		l_countryList.add(new ModelCountry("Japan"));
-		l_countryList.add(new ModelCountry("Sri Lanka"));
-		l_countryList.add(new ModelCountry("India"));
+		List<Country> l_countryList = new ArrayList<Country>();
+		l_countryList.add(new Country("China"));
+		l_countryList.add(new Country("Japan"));
+		l_countryList.add(new Country("Sri Lanka"));
+		l_countryList.add(new Country("India"));
 		l_playerInfo.setD_coutriesOwned(l_countryList);
-		List<ModelContinent> l_continentList = new ArrayList<ModelContinent>();
-		l_continentList.add(new ModelContinent(1, "Asia", 5));
+		List<Continent> l_continentList = new ArrayList<Continent>();
+		l_continentList.add(new Continent(1, "Asia", 5));
 		l_playerInfo.setD_continentsOwned(l_continentList);
 		l_playerInfo.setD_noOfUnallocatedArmies(10);
 		Integer l_actualResult = d_playerService.calculatePlayerArmies(l_playerInfo);

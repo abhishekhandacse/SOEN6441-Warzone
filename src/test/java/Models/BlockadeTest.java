@@ -66,16 +66,16 @@ public class BlockadeTest {
 		d_neutralPlayer = new ModelPlayer();
 		d_neutralPlayer.setPlayerName("Neutral");
 		
-		List<ModelCountry> l_countryList = new ArrayList<ModelCountry>();
-		l_countryList.add(new ModelCountry("India"));
-		l_countryList.add(new ModelCountry("Canada"));
+		List<Country> l_countryList = new ArrayList<Country>();
+		l_countryList.add(new Country("India"));
+		l_countryList.add(new Country("Canada"));
 		d_player1.setD_coutriesOwned(l_countryList);
 		d_player2.setD_coutriesOwned(l_countryList);
 		d_neutralPlayer.setD_coutriesOwned(l_countryList);
 
-		List<ModelCountry> l_mapCountries = new ArrayList<ModelCountry>();
-		ModelCountry l_country1 = new ModelCountry(1, "Canada", 1);
-		ModelCountry l_country2 = new ModelCountry(2, "India", 2);
+		List<Country> l_mapCountries = new ArrayList<Country>();
+		Country l_country1 = new Country(1, "Canada", 1);
+		Country l_country2 = new Country(2, "India", 2);
 		l_country1.setD_armies(10);
 		l_country2.setD_armies(5);
 
@@ -107,7 +107,7 @@ public class BlockadeTest {
 	@Test
 	public void testBlockadeExecution() {
 		d_blockadeOrder1.execute(d_gameState);
-		ModelCountry l_countryIndia = d_gameState.getD_map().getCountryByName("India");
+		Country l_countryIndia = d_gameState.getD_map().getCountryByName("India");
 		assertEquals("15", l_countryIndia.getD_armies().toString());
 	}
 

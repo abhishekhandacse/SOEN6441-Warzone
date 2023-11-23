@@ -1,6 +1,6 @@
 package Views;
 
-import Models.ModelLogBuffer;
+import Models.ModelLogEntryBuffer;
 
 
 import java.io.*;
@@ -20,7 +20,7 @@ public class LogWriter implements Observer {
     /**
      * logger object
      */
-    ModelLogBuffer d_bufferLogEntry;
+    ModelLogEntryBuffer d_bufferLogEntry;
 
     /**
      * Updates the log file
@@ -31,7 +31,7 @@ public class LogWriter implements Observer {
      */
     @Override
     public void update(Observable p_observable, Object p_object) {
-        d_bufferLogEntry = (ModelLogBuffer) p_observable;
+        d_bufferLogEntry = (ModelLogEntryBuffer) p_observable;
         File l_logfile = new File("FileLogs.txt");
         String l_logMessage = d_bufferLogEntry.getD_logMessage();
 

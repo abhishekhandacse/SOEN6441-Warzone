@@ -37,7 +37,7 @@ public class Blockade implements Card {
     @Override
     public boolean valid(GameState p_stateGame) {
         // Validates whether the target country belongs to the player who executed the order or not.
-        ModelCountry l_countryValidate = d_initiatorPlayer.getD_coutriesOwned().stream()
+        Country l_countryValidate = d_initiatorPlayer.getD_coutriesOwned().stream()
                 .filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(this.d_countryIdTarget)).findFirst()
                 .orElse(null);
 
@@ -70,7 +70,7 @@ public class Blockade implements Card {
     @Override
     public void execute(GameState p_stateGame) {
         if (valid(p_stateGame)) {
-            ModelCountry l_countryIdTarget = p_stateGame.getD_map().getCountryByName(d_countryIdTarget);
+            Country l_countryIdTarget = p_stateGame.getD_map().getCountryByName(d_countryIdTarget);
             int l_armyCountTargetCountry = l_countryIdTarget.getD_armies() == 0 ? 1
                     : l_countryIdTarget.getD_armies();
             l_countryIdTarget.setD_armies(l_armyCountTargetCountry * 3);
@@ -103,7 +103,7 @@ public class Blockade implements Card {
 
     @Override
     public Boolean validOrderCheck(GameState p_gameState) {
-        ModelCountry l_targetCountry = p_gameState.getD_map().getCountryByName(d_countryIdTarget);
+        Country l_targetCountry = p_gameState.getD_map().getCountryByName(d_countryIdTarget);
         if (l_targetCountry == null) {
             this.setD_orderExecutionLog("Target Country is Invalid! It does not exist on the map!!!!", "error");
             return false;

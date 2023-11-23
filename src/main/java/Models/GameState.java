@@ -37,7 +37,7 @@ public class GameState {
     /** 
 	 * A log buffer for storing game events. 
 	 * */
-    ModelLogBuffer d_logBuffer = new ModelLogBuffer();
+    ModelLogEntryBuffer d_logBuffer = new ModelLogEntryBuffer();
 
     /**
      * Get the game map.

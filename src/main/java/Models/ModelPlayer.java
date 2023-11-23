@@ -30,12 +30,12 @@ public class ModelPlayer {
     /**
      * List of countries owned by the player.
      */
-    List<ModelCountry> d_coutriesOwned;
+    List<Country> d_coutriesOwned;
 
     /**
      * List of continents owned by the player.
      */
-    List<ModelContinent> d_continentsOwned;
+    List<Continent> d_continentsOwned;
 
     /**
      * List of orders to execute for the player.
@@ -80,7 +80,7 @@ public class ModelPlayer {
     public ModelPlayer(String p_playerName) {
         this.d_name = p_playerName;
         this.d_noOfUnallocatedArmies = 0;
-        this.d_coutriesOwned = new ArrayList<ModelCountry>();
+        this.d_coutriesOwned = new ArrayList<Country>();
         this.order_list = new ArrayList<Order>();
         this.d_moreOrders = true;
     }
@@ -132,7 +132,7 @@ public class ModelPlayer {
      *
      * @return The list of countries owned by the player.
      */
-    public List<ModelCountry> getD_coutriesOwned() {
+    public List<Country> getD_coutriesOwned() {
         return d_coutriesOwned;
     }
 
@@ -141,7 +141,7 @@ public class ModelPlayer {
      *
      * @param p_coutriesOwned The new list of countries owned by the player.
      */
-    public void setD_coutriesOwned(List<ModelCountry> p_coutriesOwned) {
+    public void setD_coutriesOwned(List<Country> p_coutriesOwned) {
         this.d_coutriesOwned = p_coutriesOwned;
     }
 
@@ -150,7 +150,7 @@ public class ModelPlayer {
      *
      * @return The list of continents owned by the player.
      */
-    public List<ModelContinent> getD_continentsOwned() {
+    public List<Continent> getD_continentsOwned() {
         return d_continentsOwned;
     }
 
@@ -159,7 +159,7 @@ public class ModelPlayer {
      *
      * @param p_continentsOwned The new list of continents owned by the player.
      */
-    public void setD_continentsOwned(List<ModelContinent> p_continentsOwned) {
+    public void setD_continentsOwned(List<Continent> p_continentsOwned) {
         this.d_continentsOwned = p_continentsOwned;
     }
 
@@ -251,7 +251,7 @@ public class ModelPlayer {
      */
     public List<String> getCountryNames() {
         List<String> l_countryNames = new ArrayList<String>();
-        for (ModelCountry c : d_coutriesOwned) {
+        for (Country c : d_coutriesOwned) {
             l_countryNames.add(c.getD_countryName());
         }
         return l_countryNames;
@@ -265,7 +265,7 @@ public class ModelPlayer {
     public List<String> getContinentNames() {
         List<String> l_continentNames = new ArrayList<String>();
         if (d_continentsOwned != null) {
-            for (ModelContinent c : d_continentsOwned) {
+            for (Continent c : d_continentsOwned) {
                 l_continentNames.add(c.getD_continentName());
             }
             return l_continentNames;
@@ -448,8 +448,8 @@ public class ModelPlayer {
 	@SuppressWarnings("unlikely-arg-type")
 	public boolean checkAdjacency(GameState p_gameState, String p_sourceCountryName, String p_targetCountryName) {
 		// Get the source and target countries from the game state.
-		ModelCountry l_sourceCountry = p_gameState.getD_map().getCountryByName(p_sourceCountryName);
-		ModelCountry l_targetCountry = p_gameState.getD_map().getCountryByName(p_targetCountryName);
+		Country l_sourceCountry = p_gameState.getD_map().getCountryByName(p_sourceCountryName);
+		Country l_targetCountry = p_gameState.getD_map().getCountryByName(p_targetCountryName);
 
 		// Check if the target country's ID exists in the list of adjacent country IDs of the source country.
 		Integer l_targetCountryId = l_sourceCountry.getD_adjacentCountryIds().stream()

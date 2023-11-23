@@ -18,7 +18,7 @@ public class Map {
     /**
      * list of countries.
      */
-    List<ModelCountry> d_allCountries;
+    List<Country> d_allCountries;
 
 	/**
 	 * stores the map file name.
@@ -28,7 +28,7 @@ public class Map {
 	/**
 	 * list of continents.
 	 */
-	List<ModelContinent> d_allContinents;
+	List<Continent> d_allContinents;
 
 
 	/**
@@ -50,7 +50,7 @@ public class Map {
      *
      * @return the list of continents
      */
-    public List<ModelContinent> getD_allContinents() {
+    public List<Continent> getD_allContinents() {
         return d_allContinents;
     }
 
@@ -68,7 +68,7 @@ public class Map {
 	 * 
 	 * @param p_continents list of continents
 	 */
-	public void setD_allContinents(List<ModelContinent> p_continents) {
+	public void setD_allContinents(List<Continent> p_continents) {
 		this.d_allContinents = p_continents;
 	}
 
@@ -77,7 +77,7 @@ public class Map {
 	 * 
 	 * @return list of countries
 	 */
-	public List<ModelCountry> getD_allCountries() {
+	public List<Country> getD_allCountries() {
 		return d_allCountries;
 	}
 
@@ -86,7 +86,7 @@ public class Map {
 	 *
 	 * @param p_countries list of countries
 	 */
-	public void setD_allCountries(List<ModelCountry> p_countries) {
+	public void setD_allCountries(List<Country> p_countries) {
 		this.d_allCountries = p_countries;
 	}
 
@@ -95,7 +95,7 @@ public class Map {
 	 *
 	 * @param p_continent continent to add
 	 */
-	public void addContinent(ModelContinent p_continent){
+	public void addContinent(Continent p_continent){
 		d_allContinents.add(p_continent);
 	}
 
@@ -104,7 +104,7 @@ public class Map {
 	 *
 	 * @param p_country country to add
 	 */
-	public void addCountry(ModelCountry p_country){
+	public void addCountry(Country p_country){
 		d_allCountries.add(p_country);
 	}
 
@@ -116,7 +116,7 @@ public class Map {
     public List<Integer> getCountryIDs(){
         List<Integer> l_countryIDs = new ArrayList<Integer>();
         if(!d_allCountries.isEmpty()){
-            for(ModelCountry c: d_allCountries){
+            for(Country c: d_allCountries){
                 l_countryIDs.add(c.getD_countryId());
             }
         }
@@ -131,7 +131,7 @@ public class Map {
     public List<Integer> getContinentIDs(){
         List<Integer> l_continentIDs = new ArrayList<Integer>();
         if (!d_allContinents.isEmpty()) {
-            for(ModelContinent c: d_allContinents){
+            for(Continent c: d_allContinents){
                 l_continentIDs.add(c.getD_continentID());
             }
         }
@@ -143,7 +143,7 @@ public class Map {
      * check the existing countries.
      */
     public void checkCountries() {
-        for (ModelCountry c: d_allCountries) {
+        for (Country c: d_allCountries) {
             System.out.println("Country Id "+ c.getD_countryId());
             System.out.println("Continent Id "+c.getD_continentId());
             System.out.println("Neighbours:");
@@ -157,7 +157,7 @@ public class Map {
 	 * check the existing continents.
 	 */
 	public void checkContinents() {
-		for(ModelContinent c: d_allContinents) {
+		for(Continent c: d_allContinents) {
 			System.out.println(c.getD_continentID());
 		}
 	}
@@ -185,7 +185,7 @@ public class Map {
         if(d_allCountries ==null || d_allCountries.isEmpty()){
             throw new MapValidationException("Map must possess atleast one country!");
         }
-        for(ModelCountry c: d_allCountries){
+        for(Country c: d_allCountries){
             if(c.getD_adjacentCountryIds().size()<1){
                 throw new MapValidationException(c.getD_countryName()+" does not possess any neighbour, hence isn't reachable!");
             }
@@ -201,7 +201,7 @@ public class Map {
 	 */
 	public Boolean checkContinentConnectivity() throws MapValidationException {
 		boolean l_flagConnectivity=true;
-		for (ModelContinent c: d_allContinents){
+		for (Continent c: d_allContinents){
 			if (null == c.getD_countries() || c.getD_countries().size()<1){
 				throw new MapValidationException(c.getD_continentName() + " has no countries, it must possess atleast 1 country");
 			}
@@ -219,10 +219,10 @@ public class Map {
      * @return Bool Value if Continent is Connected
      * @throws MapValidationException Which country is not connected
      */
-    public boolean subGraphConnectivity(ModelContinent p_continent) throws MapValidationException {
+    public boolean subGraphConnectivity(Continent p_continent) throws MapValidationException {
         HashMap<Integer, Boolean> l_continentCountry = new HashMap<Integer, Boolean>();
 
-        for (ModelCountry c : p_continent.getD_countries()) {
+        for (Country c : p_continent.getD_countries()) {
             l_continentCountry.put(c.getD_countryId(), false);
         }
         dfsSubgraph(p_continent.getD_countries().get(0), l_continentCountry, p_continent);
@@ -230,7 +230,7 @@ public class Map {
         // Iterates Over Entries to locate unreachable countries in continent
         for (Entry<Integer, Boolean> entry : l_continentCountry.entrySet()) {
             if (!entry.getValue()) {
-                ModelCountry l_country = getCountry(entry.getKey());
+                Country l_country = getCountry(entry.getKey());
                 String l_messageException = l_country.getD_countryName() + " in Continent " + p_continent.getD_continentName() + " is not reachable";
                 throw new MapValidationException(l_messageException);
             }
@@ -245,9 +245,9 @@ public class Map {
      * @param p_continentCountry Hashmap of Visited Boolean Values
      * @param p_continent continent being checked for connectivity
      */
-    public void dfsSubgraph(ModelCountry p_c, HashMap<Integer, Boolean> p_continentCountry, ModelContinent p_continent) {
+    public void dfsSubgraph(Country p_c, HashMap<Integer, Boolean> p_continentCountry, Continent p_continent) {
         p_continentCountry.put(p_c.getD_countryId(), true);
-        for (ModelCountry c : p_continent.getD_countries()) {
+        for (Country c : p_continent.getD_countries()) {
             if (p_c.getD_adjacentCountryIds().contains(c.getD_countryId())) {
                 if (!p_continentCountry.get(c.getD_countryId())) {
                     dfsSubgraph(c, p_continentCountry, p_continent);
@@ -263,7 +263,7 @@ public class Map {
      * @throws MapValidationException pointing out which Country is not connected
      */
     public boolean checkCountryConnectivity() throws MapValidationException {
-        for (ModelCountry c : d_allCountries) {
+        for (Country c : d_allCountries) {
             d_allCountriesReachable.put(c.getD_countryId(), false);
         }
         dfsCountry(d_allCountries.get(0));
@@ -287,8 +287,8 @@ public class Map {
 	 * @throws MapValidationException pointing out which Country is not connected
      * @throws MapValidationException Exception
      */
-    public List<ModelCountry> getAdjacentCountry(ModelCountry p_countryOfInterest) throws MapValidationException {
-        List<ModelCountry> l_adjCountries = new ArrayList<ModelCountry>();
+    public List<Country> getAdjacentCountry(Country p_countryOfInterest) throws MapValidationException {
+        List<Country> l_adjCountries = new ArrayList<Country>();
 
         if (p_countryOfInterest.getD_adjacentCountryIds().size() > 0) {
 			for (int i : p_countryOfInterest.getD_adjacentCountryIds()) {
@@ -308,9 +308,9 @@ public class Map {
      * @param p_countryOfInterest Country visited first
      * @throws MapValidationException Exception
      */
-    public void dfsCountry(ModelCountry p_countryOfInterest) throws MapValidationException {
+    public void dfsCountry(Country p_countryOfInterest) throws MapValidationException {
         d_allCountriesReachable.put(p_countryOfInterest.getD_countryId(), true);
-        for (ModelCountry l_nextCountry : getAdjacentCountry(p_countryOfInterest)) {
+        for (Country l_nextCountry : getAdjacentCountry(p_countryOfInterest)) {
             if (!d_allCountriesReachable.get(l_nextCountry.getD_countryId())) {
                 dfsCountry(l_nextCountry);
             }
@@ -323,7 +323,7 @@ public class Map {
 	 * @param p_countryId ID of the country object to be found
      * @return matching country object
      */
-    public ModelCountry getCountry(Integer p_countryId) {
+    public Country getCountry(Integer p_countryId) {
         return d_allCountries.stream().filter(l_country -> l_country.getD_countryId().equals(p_countryId)).findFirst().orElse(null);
     }
 
@@ -333,7 +333,7 @@ public class Map {
      * @param p_nameOfCountry Name of the country object to be found
      * @return matching country object
      */
-    public ModelCountry getCountryByName(String p_nameOfCountry){
+    public Country getCountryByName(String p_nameOfCountry){
         return d_allCountries.stream().filter(l_country -> l_country.getD_countryName().equals(p_nameOfCountry)).findFirst().orElse(null);
     }
 
@@ -343,7 +343,7 @@ public class Map {
      * @param p_nameOfContinent Continent Name to be found
      * @return matching continent object
      */
-    public ModelContinent getContinent(String p_nameOfContinent){
+    public Continent getContinent(String p_nameOfContinent){
        return d_allContinents.stream().filter(l_continent -> l_continent.getD_continentName().equals(p_nameOfContinent)).findFirst().orElse(null);
     }
 
@@ -353,7 +353,7 @@ public class Map {
      * @param p_continentID Continent Id to be found
      * @return continent object
      */
-    public ModelContinent getContinentByID(Integer p_continentID){
+    public Continent getContinentByID(Integer p_continentID){
         return d_allContinents.stream().filter(l_continent -> l_continent.getD_continentID().equals(p_continentID)).findFirst().orElse(null);
     }
 
@@ -370,13 +370,13 @@ public class Map {
         if (d_allContinents !=null) {
             l_continentId= d_allContinents.size()>0?Collections.max(getContinentIDs())+1:1;
             if(CommonUtil.isNullObject(getContinent(p_continentName))){
-                d_allContinents.add(new ModelContinent(l_continentId, p_continentName, p_continentControlValue));
+                d_allContinents.add(new Continent(l_continentId, p_continentName, p_continentControlValue));
             }else{
                 throw new MapValidationException("Continent "+p_continentName+" cannot be added! It already exists!");
             }
         }else{
-            d_allContinents = new ArrayList<ModelContinent>();
-            d_allContinents.add(new ModelContinent(1, p_continentName, p_continentControlValue));
+            d_allContinents = new ArrayList<Continent>();
+            d_allContinents.add(new Continent(1, p_continentName, p_continentControlValue));
         }
     }
 
@@ -395,7 +395,7 @@ public class Map {
 
                 // Deletes the continent and updates neighbour as well as country objects
                 if (getContinent(p_continentUnderConsideration).getD_countries()!=null) {
-                    for(ModelCountry c: getContinent(p_continentUnderConsideration).getD_countries()){
+                    for(Country c: getContinent(p_continentUnderConsideration).getD_countries()){
                         removeCountryNeighboursFromAll(c.getD_countryId());
                         updateNeighboursCont(c.getD_countryId());
                         d_allCountries.remove(c);
@@ -420,14 +420,14 @@ public class Map {
     public void addCountry(String p_countryName, String p_continentName) throws MapValidationException{
         int l_countryId;
         if(d_allCountries ==null){
-            d_allCountries = new ArrayList<ModelCountry>();
+            d_allCountries = new ArrayList<Country>();
         }
         if(CommonUtil.isNullObject(getCountryByName(p_countryName))){
             l_countryId= d_allCountries.size()>0? Collections.max(getCountryIDs())+1:1;
             if(d_allContinents !=null && getContinent(p_continentName)!=null && getContinentIDs().contains(getContinent(p_continentName).getD_continentID())){
-                ModelCountry l_country= new ModelCountry(l_countryId, p_countryName, getContinent(p_continentName).getD_continentID());
+                Country l_country= new Country(l_countryId, p_countryName, getContinent(p_continentName).getD_continentID());
                 d_allCountries.add(l_country);
-                for (ModelContinent c: d_allContinents) {
+                for (Continent c: d_allContinents) {
                     if (c.getD_continentName().equals(p_continentName)) {
                         c.addingCountry(l_country);
                     }
@@ -448,7 +448,7 @@ public class Map {
      */
     public void removeCountry(String p_countryName) throws MapValidationException{
         if(d_allCountries !=null && !CommonUtil.isNullObject(getCountryByName(p_countryName))) {
-            for(ModelContinent c: d_allContinents){
+            for(Continent c: d_allContinents){
                 if(c.getD_continentID().equals(getCountryByName(p_countryName).getD_continentId())){
                     c.countryRemove(getCountryByName(p_countryName));
                 }
@@ -504,7 +504,7 @@ public class Map {
      * @throws MapValidationException indicates Map Object Validation failure
      */
     public void updateNeighboursCont(Integer p_countryId) throws MapValidationException {
-        for(ModelContinent c: d_allContinents){
+        for(Continent c: d_allContinents){
             c.removeCountryNeighboursFromAll(p_countryId);
         }
     }
@@ -517,7 +517,7 @@ public class Map {
      * @throws MapValidationException indicates Map Object Validation failure
      */
     public void removeCountryNeighboursFromAll(Integer p_countryID) throws MapValidationException {
-        for (ModelCountry c: d_allCountries) {
+        for (Country c: d_allCountries) {
             if (!CommonUtil.isNullObject(c.getD_adjacentCountryIds())) {
                 if (c.getD_adjacentCountryIds().contains(p_countryID)) {
                     c.removeNeighbour(p_countryID);

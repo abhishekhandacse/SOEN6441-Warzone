@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import Constants.ApplicationConstantsHardcoding;
-import Models.ModelContinent;
-import Models.ModelCountry;
+import Models.Continent;
+import Models.Country;
 import Models.GameState;
 import Models.ModelPlayer;
 import Utils.CommonUtil;
@@ -150,7 +150,7 @@ public class PlayerService {
 			return;
 		}
 
-		List<ModelCountry> l_countries = p_gameState.getD_map().getD_allCountries();
+		List<Country> l_countries = p_gameState.getD_map().getD_allCountries();
 		int l_playerSize = p_gameState.getD_playersList().size();
 		ModelPlayer l_neutralPlayer = p_gameState.getD_playersList().stream()
 				.filter(l_player -> l_player.getPlayerName().equalsIgnoreCase("Neutral")).findFirst().orElse(null);
@@ -171,13 +171,13 @@ public class PlayerService {
      * @param p_players    The list of players.
      * @param p_continents The list of continents.
      */
-	public void performAssignContinent(List<ModelPlayer> p_players, List<ModelContinent> p_continents) {
+	public void performAssignContinent(List<ModelPlayer> p_players, List<Continent> p_continents) {
 		for (ModelPlayer l_pl : p_players) {
 			List<String> l_countriesOwned = new ArrayList<>();
 			if (!CommonUtil.isNullOrEmptyCollection(l_pl.getD_coutriesOwned())) {
 				l_pl.getD_coutriesOwned().forEach(l_country -> l_countriesOwned.add(l_country.getD_countryName()));
 
-				for (ModelContinent l_cont : p_continents) {
+				for (Continent l_cont : p_continents) {
 					List<String> l_countriesOfContinent = new ArrayList<>();
 					l_cont.getD_countries().forEach(l_count -> l_countriesOfContinent.add(l_count.getD_countryName()));
 					if (l_countriesOwned.containsAll(l_countriesOfContinent)) {
@@ -203,9 +203,9 @@ public class PlayerService {
      * @param p_players            The list of players.
      * @param p_gameState          The current game state.
      */
-	private void performCountryAssignmentRandomly(int p_countriesPerPlayer, List<ModelCountry> p_countries,
+	private void performCountryAssignmentRandomly(int p_countriesPerPlayer, List<Country> p_countries,
 												List<ModelPlayer> p_players, GameState p_gameState) {
-		List<ModelCountry> l_unassignedCountries = new ArrayList<>(p_countries);
+		List<Country> l_unassignedCountries = new ArrayList<>(p_countries);
 		for (ModelPlayer l_pl : p_players) {
 			if(!l_pl.getPlayerName().equalsIgnoreCase("Neutral")) {
 				if (l_unassignedCountries.isEmpty())
@@ -215,7 +215,7 @@ public class PlayerService {
 				for (int i = 0; i < p_countriesPerPlayer; i++) {
 					Random l_random = new Random();
 					int l_randomIndex = l_random.nextInt(l_unassignedCountries.size());
-					ModelCountry l_randomCountry = l_unassignedCountries.get(l_randomIndex);
+					Country l_randomCountry = l_unassignedCountries.get(l_randomIndex);
 
 					if (l_pl.getD_coutriesOwned() == null)
 						l_pl.setD_coutriesOwned(new ArrayList<>());
@@ -346,7 +346,7 @@ public class PlayerService {
 		}
 		if (!CommonUtil.isNullOrEmptyCollection(p_player.getD_continentsOwned())) {
 			int l_continentCtrlValue = 0;
-			for (ModelContinent l_continent : p_player.getD_continentsOwned()) {
+			for (Continent l_continent : p_player.getD_continentsOwned()) {
 				l_continentCtrlValue = l_continentCtrlValue + l_continent.getD_continentValue();
 			}
 			l_armies = l_armies + l_continentCtrlValue;

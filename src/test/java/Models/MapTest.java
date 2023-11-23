@@ -62,8 +62,8 @@ public class MapTest {
      */
     @Test (expected = MapValidationException.class)
     public void testValidateNoCountry() throws MapValidationException{
-        ModelContinent l_continent = new ModelContinent();
-        List <ModelContinent> l_continents = new ArrayList<ModelContinent>();
+        Continent l_continent = new Continent();
+        List <Continent> l_continents = new ArrayList<Continent>();
 
         l_continents.add(l_continent);
         d_map.setD_allContinents(l_continents);

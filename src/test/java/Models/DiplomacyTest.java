@@ -52,24 +52,24 @@ public class DiplomacyTest {
         d_player2 = new ModelPlayer("Rajat");
 
 
-        List<ModelCountry> l_countryList = new ArrayList<ModelCountry>();
-        ModelCountry l_country = new ModelCountry(0, "France", 1);
+        List<Country> l_countryList = new ArrayList<Country>();
+        Country l_country = new Country(0, "France", 1);
         l_country.setD_armies(9);
         l_countryList.add(l_country);
 
-        ModelCountry l_countryNeighbour = new ModelCountry(1, "Belgium", 1);
+        Country l_countryNeighbour = new Country(1, "Belgium", 1);
         l_countryNeighbour.addNeighbour(0);
         l_country.addNeighbour(1);
         l_countryNeighbour.setD_armies(10);
         l_countryList.add(l_countryNeighbour);
 
-        List<ModelCountry> l_countryList2 = new ArrayList<ModelCountry>();
-        ModelCountry l_countryNotNeighbour = new ModelCountry(2, "Spain", 1);
+        List<Country> l_countryList2 = new ArrayList<Country>();
+        Country l_countryNotNeighbour = new Country(2, "Spain", 1);
         l_countryNotNeighbour.setD_armies(15);
         l_countryList2.add(l_countryNotNeighbour);
 
         Map l_map = new Map();
-        l_map.setD_allCountries(new ArrayList<ModelCountry>(){{ addAll(l_countryList); addAll(l_countryList2); }});
+        l_map.setD_allCountries(new ArrayList<Country>(){{ addAll(l_countryList); addAll(l_countryList2); }});
 
         d_gameState.setD_map(l_map);
         d_player1.setD_coutriesOwned(l_countryList);

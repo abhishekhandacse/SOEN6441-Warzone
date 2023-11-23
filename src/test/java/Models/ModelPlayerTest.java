@@ -27,10 +27,10 @@ public class ModelPlayerTest {
         d_exisitingPlayerList.add(new ModelPlayer("Rajat"));
 
         Map l_map = new Map();
-        ModelCountry l_c1 = new ModelCountry(1, "Finland", 10);
+        Country l_c1 = new Country(1, "Finland", 10);
         l_c1.setD_adjacentCountryIds(Arrays.asList(2));
-        ModelCountry l_c2 = new ModelCountry(2, "France", 10);
-        List<ModelCountry> l_countryList = new ArrayList<>();
+        Country l_c2 = new Country(2, "France", 10);
+        List<Country> l_countryList = new ArrayList<>();
         l_countryList.add(l_c1);
         l_countryList.add(l_c2);
         l_map.setD_allCountries(l_countryList);

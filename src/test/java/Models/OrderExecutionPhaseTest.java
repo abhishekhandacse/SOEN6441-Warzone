@@ -51,15 +51,15 @@ public class OrderExecutionPhaseTest {
         d_player2.setPlayerName("Harman");
 
         // Create a list of countries owned by the first player
-        List<ModelCountry> l_countryList = new ArrayList<ModelCountry>();
+        List<Country> l_countryList = new ArrayList<Country>();
 
         // Create a country and set its properties
-        ModelCountry l_country = new ModelCountry(0, "China", 1);
+        Country l_country = new Country(0, "China", 1);
         l_country.setD_armies(14);
         l_countryList.add(l_country);
 
         // Create a neighboring country
-        ModelCountry l_countryNeighbour = new ModelCountry(1, "Japan", 1);
+        Country l_countryNeighbour = new Country(1, "Japan", 1);
         l_countryNeighbour.addNeighbour(0);
         l_country.addNeighbour(1);
         l_countryNeighbour.setD_armies(20);

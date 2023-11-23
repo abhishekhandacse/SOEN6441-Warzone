@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
-import Models.ModelContinent;
+import Models.Continent;
 import Models.GameState;
 import Models.Map;
 import Models.Phase;
@@ -95,7 +95,7 @@ public class GameEngineTest {
 
 		l_state = d_presentPhase.getD_gameState();
 
-		List<ModelContinent> l_continents = l_state.getD_map().getD_allContinents();
+		List<Continent> l_continents = l_state.getD_map().getD_allContinents();
 		assertEquals(2, l_continents.size());
 		assertEquals("Europe", l_continents.get(0).getD_continentName());
 		assertEquals("10", l_continents.get(0).getD_continentValue().toString());

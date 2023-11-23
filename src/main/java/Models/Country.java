@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * The `Country` class represents a country in a game map.
  */
-public class ModelCountry {
+public class Country {
     /**
      * The name of the country.
      */
@@ -40,7 +40,7 @@ public class ModelCountry {
      * @param p_countryName The name of the country.
      * @param p_continentId The identifier of the continent to which the country belongs.
      */
-    public ModelCountry(int p_countryId, String p_countryName, int p_continentId) {
+    public Country(int p_countryId, String p_countryName, int p_continentId) {
         d_countryId = p_countryId;
         d_countryName = p_countryName;
         d_continentId = p_continentId;
@@ -53,7 +53,7 @@ public class ModelCountry {
      * @param p_countryId   The unique identifier for the country.
      * @param p_continentId The identifier of the continent to which the country belongs.
      */
-    public ModelCountry(int p_countryId, int p_continentId) {
+    public Country(int p_countryId, int p_continentId) {
         d_countryId = p_countryId;
         d_continentId = p_continentId;
     }
@@ -63,7 +63,7 @@ public class ModelCountry {
      *
      * @param p_countryName The name of the country.
      */
-    public ModelCountry(String p_countryName) {
+    public Country(String p_countryName) {
         d_countryName = p_countryName;
     }
 

@@ -81,20 +81,20 @@ public class BombTest {
         d_player2.setPlayerName("Harman");
     
         // Create a list of countries and assign them to both players
-        List<ModelCountry> l_countryList = new ArrayList<ModelCountry>();
-        l_countryList.add(new ModelCountry("USA"));
-        l_countryList.add(new ModelCountry("Korea"));
+        List<Country> l_countryList = new ArrayList<Country>();
+        l_countryList.add(new Country("USA"));
+        l_countryList.add(new Country("Korea"));
         d_player1.setD_coutriesOwned(l_countryList);
         d_player2.setD_coutriesOwned(l_countryList);
     
         // Create a list of countries for the game map
-        List<ModelCountry> l_mapCountries = new ArrayList<ModelCountry>();
+        List<Country> l_mapCountries = new ArrayList<Country>();
         // Create individual country objects and set their properties
-        ModelCountry l_country1 = new ModelCountry(1, "USA", 1);
-        ModelCountry l_country2 = new ModelCountry(2, "Korea", 2);
-        ModelCountry l_country3 = new ModelCountry(2, "Japan", 2);
-        ModelCountry l_country4 = new ModelCountry(2, "India", 2);
-        ModelCountry l_country5 = new ModelCountry(2, "Canada", 2);
+        Country l_country1 = new Country(1, "USA", 1);
+        Country l_country2 = new Country(2, "Korea", 2);
+        Country l_country3 = new Country(2, "Japan", 2);
+        Country l_country4 = new Country(2, "India", 2);
+        Country l_country5 = new Country(2, "Canada", 2);
     
         // Set the number of armies in specific countries
         l_country3.setD_armies(4);
@@ -134,17 +134,17 @@ public class BombTest {
 	public void testBombCardExecution() {
 		// Test calculation of half armies.
 		d_bombOrder1.execute(d_gameState);
-		ModelCountry l_targetCountry = d_gameState.getD_map().getCountryByName("Japan");
+		Country l_targetCountry = d_gameState.getD_map().getCountryByName("Japan");
 		assertEquals("2", l_targetCountry.getD_armies().toString());
 
 		// Test round down of armies calculation.
 		d_bombOrder3.execute(d_gameState);
-		ModelCountry l_targetCountry2 = d_gameState.getD_map().getCountryByName("India");
+		Country l_targetCountry2 = d_gameState.getD_map().getCountryByName("India");
 		assertEquals("7", l_targetCountry2.getD_armies().toString());
 
 		// Testing:- targeting a territory with 1 army will leave 0.
 		d_bombOrder4.execute(d_gameState);
-		ModelCountry l_targetCountry3 = d_gameState.getD_map().getCountryByName("Canada");
+		Country l_targetCountry3 = d_gameState.getD_map().getCountryByName("Canada");
 		assertEquals("0", l_targetCountry3.getD_armies().toString());
 
 	}
