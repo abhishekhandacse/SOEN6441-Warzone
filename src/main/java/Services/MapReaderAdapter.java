@@ -15,7 +15,9 @@ import java.util.List;
  */
 public class MapReaderAdapter extends MapFileReader {
 
-    /** The Conquest map file reader to be adapted. */
+    /**
+     * The Conquest map file reader to be adapted.
+     */
     private ConquestMapFileReader l_conquestMapFileReader;
 
     /**
@@ -23,7 +25,7 @@ public class MapReaderAdapter extends MapFileReader {
      *
      * @param p_conquestMapFileReader The Conquest map file reader to be adapted.
      */
-            public MapReaderAdapter(ConquestMapFileReader p_conquestMapFileReader) {
+    public MapReaderAdapter(ConquestMapFileReader p_conquestMapFileReader) {
         this.l_conquestMapFileReader = p_conquestMapFileReader;
     }
 
