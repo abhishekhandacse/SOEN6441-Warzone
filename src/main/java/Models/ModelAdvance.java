@@ -1,3 +1,8 @@
+/**
+ * The `Advance` class represents an "Advance" order in a strategy board game. An Advance order allows a player
+ * to move armies from one of their owned countries to an adjacent target country. If the target country is owned
+ * by another player and has no armies, it can be conquered.
+ */
 package Models;
 
 import java.io.Serializable;
@@ -6,21 +11,47 @@ import java.util.List;
 
 import Services.PlayerService;
 import Utils.CommonUtil;
+/**
+ * Advance class
+ */
 
 public class ModelAdvance implements Order, Serializable {
 
-        String d_targetCountryName;
+    /**
+     * The name of the target country.
+     */
+    String d_targetCountryName;
 
-        String d_sourceCountryName;
+    /**
+     * The name of the source country.
+     */
+    String d_sourceCountryName;
 
-        Integer d_numberOfArmiesToPlace;
+    /**
+     * The number of armies placed in the target country.
+     */
+    Integer d_numberOfArmiesToPlace;
 
 
-        ModelPlayer d_playerInitiator;
+    /**
+     * The player who initiated the Advance order.
+     */
+    ModelPlayer d_playerInitiator;
 
-        String d_orderExecutionLog;
+    /**
+     * A log of the order's execution.
+     */
+    String d_orderExecutionLog;
 
-        public ModelAdvance(ModelPlayer p_playerInitiator, String p_sourceCountryName, String p_targetCountry,
+    /**
+     * Constructs an Advance order.
+     *
+     * @param p_playerInitiator The player who initiates the order.
+     * @param p_sourceCountryName The name of the source country.
+     * @param p_targetCountry The name of the target country.
+     * @param p_numberOfArmiesToPlace The number of armies to be placed in the target country.
+     */
+    public ModelAdvance(ModelPlayer p_playerInitiator, String p_sourceCountryName, String p_targetCountry,
                         Integer p_numberOfArmiesToPlace) {
         this.d_targetCountryName = p_targetCountry;
         this.d_sourceCountryName = p_sourceCountryName;
@@ -29,7 +60,12 @@ public class ModelAdvance implements Order, Serializable {
     }
 
 
-        @Override
+    /**
+     * Executes the Advance order, including deploying armies, conquering, or resolving battles.
+     *
+     * @param p_gameState The current game state.
+     */
+    @Override
     public void execute(GameState p_gameState) {
         if (checkValid(p_gameState)) {
             ModelPlayer l_playerOfTargetCountry = getPlayerOfTargetCountry(p_gameState);
@@ -51,7 +87,15 @@ public class ModelAdvance implements Order, Serializable {
         }
     }
 
-        private void produceOrderResult(GameState p_gameState, ModelPlayer p_playerOfTargetCountry, Country p_targetCountry,
+    /**
+     * Produces the result of the order, including battling and updating ownership.
+     *
+     * @param p_gameState The current game state.
+     * @param p_playerOfTargetCountry The player who owns the target country.
+     * @param p_targetCountry The target country.
+     * @param p_sourceCountry The source country.
+     */
+    private void produceOrderResult(GameState p_gameState, ModelPlayer p_playerOfTargetCountry, Country p_targetCountry,
                                     Country p_sourceCountry) {
         Integer l_armiesInAttack = this.d_numberOfArmiesToPlace < p_targetCountry.getD_armies()
                 ? this.d_numberOfArmiesToPlace
@@ -66,7 +110,14 @@ public class ModelAdvance implements Order, Serializable {
         this.updateContinents(this.d_playerInitiator, p_playerOfTargetCountry, p_gameState);
     }
 
-        private void conquerTargetCountry(GameState p_gameState, ModelPlayer p_playerOfTargetCountry, Country p_targetCountry) {
+    /**
+     * Conquer the target country, transferring ownership and armies to the initiating player.
+     *
+     * @param p_gameState The current game state.
+     * @param p_playerOfTargetCountry The player who owns the target country.
+     * @param p_targetCountry The target country to be conquered.
+     */
+    private void conquerTargetCountry(GameState p_gameState, ModelPlayer p_playerOfTargetCountry, Country p_targetCountry) {
         p_targetCountry.setD_armies(d_numberOfArmiesToPlace);
         p_playerOfTargetCountry.getD_coutriesOwned().remove(p_targetCountry);
         this.d_playerInitiator.getD_coutriesOwned().add(p_targetCountry);
@@ -77,7 +128,13 @@ public class ModelAdvance implements Order, Serializable {
         p_gameState.updateLog(orderExecutionLog(), "effect");
         this.updateContinents(this.d_playerInitiator, p_playerOfTargetCountry, p_gameState);
     }
-    
+    /**
+     * Retrieves the player who owns the target country from the game state.
+     *
+     * @param p_gameState The current game state.
+     * @return The player who owns the target country, or null if not found.
+     */
+
     private ModelPlayer getPlayerOfTargetCountry(GameState p_gameState) {
         ModelPlayer l_playerOfTargetCountry = null;
         for (ModelPlayer l_player : p_gameState.getD_players()) {
@@ -90,11 +147,25 @@ public class ModelAdvance implements Order, Serializable {
         return l_playerOfTargetCountry;
     }
 
-        public void deployArmiesToTarget(Country p_targetCountry) {
+    /**
+     * Deploys armies to the target country.
+     *
+     * @param p_targetCountry The target country to receive the deployed armies.
+     */
+    public void deployArmiesToTarget(Country p_targetCountry) {
         Integer l_updatedTargetContArmies = p_targetCountry.getD_armies() + this.d_numberOfArmiesToPlace;
         p_targetCountry.setD_armies(l_updatedTargetContArmies);
     }
-    
+    /**
+     * Produces the result of a battle, determining surviving armies and ownership changes.
+     *
+     * @param p_sourceCountry The source country of the battle.
+     * @param p_targetCountry The target country of the battle.
+     * @param p_attackerArmies The attacker's army units.
+     * @param p_defenderArmies The defender's army units.
+     * @param p_playerOfTargetCountry The player who owns the target country.
+     */
+
     private void produceBattleResult(Country p_sourceCountry, Country p_targetCountry, List<Integer> p_attackerArmies,
                                      List<Integer> p_defenderArmies, ModelPlayer p_playerOfTargetCountry) {
         Integer l_attackerArmiesLeft = this.d_numberOfArmiesToPlace > p_targetCountry.getD_armies()
@@ -114,7 +185,16 @@ public class ModelAdvance implements Order, Serializable {
                 p_playerOfTargetCountry);
     }
 
-        public void handleSurvivingArmies(Integer p_attackerArmiesLeft, Integer p_defenderArmiesLeft,
+    /**
+     * Handles surviving armies after a battle, updating ownership and armies as needed.
+     *
+     * @param p_attackerArmiesLeft The number of surviving attacker armies.
+     * @param p_defenderArmiesLeft The number of surviving defender armies.
+     * @param p_sourceCountry The source country of the battle.
+     * @param p_targetCountry The target country of the battle.
+     * @param p_playerOfTargetCountry The player who owns the target country.
+     */
+    public void handleSurvivingArmies(Integer p_attackerArmiesLeft, Integer p_defenderArmiesLeft,
                                       Country p_sourceCountry, Country p_targetCountry, ModelPlayer p_playerOfTargetCountry) {
         if (p_defenderArmiesLeft == 0) {
             p_playerOfTargetCountry.getD_coutriesOwned().remove(p_targetCountry);
@@ -143,7 +223,13 @@ public class ModelAdvance implements Order, Serializable {
 
 
 
-        @Override
+    /**
+     * Validates whether the Advance order is valid, including source country ownership and armies.
+     *
+     * @param p_gameState The current game state.
+     * @return True if the order is valid; otherwise, false.
+     */
+    @Override
     public boolean checkValid(GameState p_gameState) {
         Country l_country = d_playerInitiator.getD_coutriesOwned().stream()
                 .filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(this.d_sourceCountryName.toString()))
@@ -179,12 +265,20 @@ public class ModelAdvance implements Order, Serializable {
     }
 
 
-        private String currentOrder() {
+    /**
+     * Generates a log of the current order for display.
+     *
+     * @return A string representing the current order.
+     */
+    private String currentOrder() {
         return "Advance Order : " + "advance" + " " + this.d_sourceCountryName + " " + this.d_targetCountryName + " "
                 + this.d_numberOfArmiesToPlace;
     }
 
-    
+    /**
+     * Prints the order's execution log.
+     */
+
     @Override
     public void printOrder() {
         this.d_orderExecutionLog = "\n---------- Advance order issued by player " + this.d_playerInitiator.getPlayerName()
@@ -192,13 +286,24 @@ public class ModelAdvance implements Order, Serializable {
                 + this.d_sourceCountryName + " to " + this.d_targetCountryName;
         System.out.println(System.lineSeparator() + this.d_orderExecutionLog);
     }
-    
+    /**
+     * Retrieves the log of the order's execution.
+     *
+     * @return The log of the order's execution.
+     */
+
     @Override
     public String orderExecutionLog() {
         return this.d_orderExecutionLog;
     }
 
-        public void setD_orderExecutionLog(String p_orderExecutionLog, String p_logType) {
+    /**
+     * Sets the order execution log and handles different log types (error or default).
+     *
+     * @param p_orderExecutionLog The log message to be set.
+     * @param p_logType The type of the log (error or default).
+     */
+    public void setD_orderExecutionLog(String p_orderExecutionLog, String p_logType) {
         this.d_orderExecutionLog = p_orderExecutionLog;
         if (p_logType.equals("error")) {
             System.err.println(p_orderExecutionLog);
@@ -206,7 +311,14 @@ public class ModelAdvance implements Order, Serializable {
             System.out.println(p_orderExecutionLog);
         }
     }
-    
+    /**
+     * Generates a list of random army units with specified size and role.
+     *
+     * @param p_size The size of the army unit list.
+     * @param p_role The role of the army units (attacker or defender).
+     * @return A list of random army units.
+     */
+
     private List<Integer> generateRandomArmyUnits(int p_size, String p_role) {
         List<Integer> l_armyList = new ArrayList<>();
         Double l_probability = "attacker".equalsIgnoreCase(p_role) ? 0.6 : 0.7;
@@ -217,13 +329,27 @@ public class ModelAdvance implements Order, Serializable {
         }
         return l_armyList;
     }
-    
+    /**
+     * Generates a random integer within a specified range.
+     *
+     * @param p_maximum The maximum value of the random integer (exclusive).
+     * @param p_minimum The minimum value of the random integer (inclusive).
+     * @return A random integer within the specified range.
+     */
+
     private static int getRandomInteger(int p_maximum, int p_minimum) {
         return ((int) (Math.random() * (p_maximum - p_minimum))) + p_minimum;
     }
 
 
-        private void updateContinents(ModelPlayer p_playerOfSourceCountry, ModelPlayer p_playerOfTargetCountry,
+    /**
+     * Updates the continents of the players involved in the battle.
+     *
+     * @param p_playerOfSourceCountry The player who owns the source country.
+     * @param p_playerOfTargetCountry The player who owns the target country.
+     * @param p_gameState The current game state.
+     */
+    private void updateContinents(ModelPlayer p_playerOfSourceCountry, ModelPlayer p_playerOfTargetCountry,
                                   GameState p_gameState) {
         System.out.println("Updating continents of players involved in battle...");
         List<ModelPlayer> l_playesList = new ArrayList<>();
@@ -235,7 +361,12 @@ public class ModelAdvance implements Order, Serializable {
         PlayerService l_playerService = new PlayerService();
         l_playerService.performContinentAssignment(l_playesList, p_gameState.getD_map().getD_continents());
     }
-    
+    /**
+     * Retrieves the name of the order.
+     *
+     * @return The name of the order, which is "advance."
+     */
+
     @Override
     public String getOrderName() {
         return "advance";
