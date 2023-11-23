@@ -2,6 +2,7 @@ package Models;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
@@ -15,13 +16,19 @@ import java.util.List;
  */
 public class RandomPlayerTest {
 
-    /** Player for testing. */
+    /**
+     * Player for testing.
+     */
     ModelPlayer d_player;
 
-    /** Player behavior strategy for testing. */
+    /**
+     * Player behavior strategy for testing.
+     */
     PlayerBehaviorStrategy d_playerBehaviorStrategy;
 
-    /** Game state used for testing. */
+    /**
+     * Game state used for testing.
+     */
     GameState d_gameState = new GameState();
 
     /**
@@ -44,7 +51,7 @@ public class RandomPlayerTest {
         d_player.setD_coutriesOwned(l_list);
         d_player.setStrategy(d_playerBehaviorStrategy);
         d_player.setD_noOfUnallocatedArmies(1);
-                List<ModelPlayer> l_listOfPlayer = new ArrayList<>();
+        List<ModelPlayer> l_listOfPlayer = new ArrayList<>();
         l_listOfPlayer.add(d_player);
 
         Map l_map = new Map();
