@@ -1,3 +1,8 @@
+/**
+ * The {@code ConquestMapFileReader} class reads and parses Conquest map files to create game entities.
+ *
+ * @version 1.0
+ */
 package Services;
 
 import Constants.ApplicationConstants;
@@ -10,12 +15,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Reads and parses Conquest map files to create game entities.
+ */
 public class ConquestMapFileReader implements Serializable {
 
-        public void readConquestFile(GameState p_gameState, Map p_map, List<String> p_linesOfFile) {
+    /**
+     * Reads Conquest map file, extracts metadata, and populates the game state.
+     *
+     * @param p_gameState     The current game state.
+     * @param p_map           The game map.
+     * @param p_linesOfFile   The lines of the Conquest map file.
+     */
+    public void readConquestFile(GameState p_gameState, Map p_map, List<String> p_linesOfFile) {
         List<String> l_continentData = getMetaData(p_linesOfFile, "continent");
         List<Continent> l_continentObjects = parseContinentsMetaData(l_continentData);
-        List<String> l_countryData = getMetaData(p_linesOfFile, "country");
+                    List<String> l_countryData = getMetaData(p_linesOfFile, "country");
         List<Country> l_countryObjects = parseCountriesMetaData(l_countryData, l_continentObjects);
         List<Country> l_updatedCountries = parseBorderMetaData(l_countryObjects, l_countryData);
 
@@ -25,7 +40,14 @@ public class ConquestMapFileReader implements Serializable {
         p_gameState.setD_map(p_map);
     }
 
-             public List<String> getMetaData(List<String> p_fileLines, String p_switchParameter) {
+    /**
+     * Extracts metadata lines from the Conquest map file.
+     *
+     * @param p_fileLines      The lines of the Conquest map file.
+     * @param p_switchParameter The parameter to switch between continent and country metadata.
+     * @return The list of metadata lines.
+     */
+    public List<String> getMetaData(List<String> p_fileLines, String p_switchParameter) {
         switch (p_switchParameter) {
             case "continent":
                 List<String> l_continentLines = p_fileLines.subList(
@@ -41,7 +63,13 @@ public class ConquestMapFileReader implements Serializable {
         }
     }
 
-        public List<Continent> parseContinentsMetaData(List<String> p_continentList) {
+    /**
+     * Parses continent metadata lines and creates continent objects.
+     *
+     * @param p_continentList The list of continent metadata lines.
+     * @return The list of continent objects.
+     */
+    public List<Continent> parseContinentsMetaData(List<String> p_continentList) {
         int l_continentId = 1;
         List<Continent> l_continents = new ArrayList<>();
 
@@ -53,7 +81,14 @@ public class ConquestMapFileReader implements Serializable {
         return l_continents;
     }
 
-        public List<Country> parseCountriesMetaData(List<String> p_countriesList, List<Continent> p_continentList) {
+    /**
+     * Parses country metadata lines and creates country objects.
+     *
+     * @param p_countriesList The list of country metadata lines.
+     * @param p_continentList The list of continent objects.
+     * @return The list of country objects.
+     */
+    public List<Country> parseCountriesMetaData(List<String> p_countriesList, List<Continent> p_continentList) {
         List<Country> l_countriesList = new ArrayList<>();
         int l_country_id = 1;
         for (String country : p_countriesList) {
@@ -67,7 +102,14 @@ public class ConquestMapFileReader implements Serializable {
         return l_countriesList;
     }
 
-        public List<Country> parseBorderMetaData(List<Country> p_countriesList, List<String> p_countryLines) {
+    /**
+     * Parses border metadata lines and updates country objects with adjacent country IDs.
+     *
+     * @param p_countriesList The list of country objects.
+     * @param p_countryLines  The list of country metadata lines.
+     * @return The updated list of country objects.
+     */
+    public List<Country> parseBorderMetaData(List<Country> p_countriesList, List<String> p_countryLines) {
         List<Country> l_updatedCountryList = new ArrayList<>(p_countriesList);
         String l_matchedCountry = null;
         for (Country l_cont : l_updatedCountryList) {
@@ -87,7 +129,14 @@ public class ConquestMapFileReader implements Serializable {
         return l_updatedCountryList;
     }
 
-        public List<Continent> linkCountryContinents(List<Country> p_countries, List<Continent> p_continents) {
+    /**
+     * Links country objects to their respective continents.
+     *
+     * @param p_countries  The list of country objects.
+     * @param p_continents The list of continent objects.
+     * @return The updated list of continent objects.
+     */
+    public List<Continent> linkCountryContinents(List<Country> p_countries, List<Continent> p_continents) {
         for (Country c : p_countries) {
             for (Continent cont : p_continents) {
                 if (cont.getD_continentID().equals(c.getD_continentId())) {
@@ -98,14 +147,28 @@ public class ConquestMapFileReader implements Serializable {
         return p_continents;
     }
 
-        public Continent getContinentByName(List<Continent> p_continentList, String p_continentName) {
+    /**
+     * Retrieves a continent by its name from the list of continents.
+     *
+     * @param p_continentList The list of continent objects.
+     * @param p_continentName The name of the continent to retrieve.
+     * @return The continent object if found, otherwise {@code null}.
+     */
+    public Continent getContinentByName(List<Continent> p_continentList, String p_continentName) {
         Continent l_continent = p_continentList.stream()
                 .filter(l_cont -> l_cont.getD_continentName().equalsIgnoreCase(p_continentName))
                 .findFirst().orElse(null);
         return l_continent;
     }
 
-        public Country getCountryByName(List<Country> p_countryList, String p_countryName) {
+    /**
+     * Retrieves a country by its name from the list of countries.
+     *
+     * @param p_countryList The list of country objects.
+     * @param p_countryName The name of the country to retrieve.
+     * @return The country object if found, otherwise {@code null}.
+     */
+    public Country getCountryByName(List<Country> p_countryList, String p_countryName) {
         Country l_country = p_countryList.stream()
                 .filter(l_cont -> l_cont.getD_countryName().equalsIgnoreCase(p_countryName))
                 .findFirst().orElse(null);
