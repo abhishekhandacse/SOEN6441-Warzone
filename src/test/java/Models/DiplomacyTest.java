@@ -27,7 +27,7 @@ public class DiplomacyTest {
     /**
      * The Bomb order object.
      */
-    Bomb d_bombOrder;
+    ModelBomb d_bombOrder;
 
     /**
      * The Diplomacy order object.
@@ -79,7 +79,7 @@ public class DiplomacyTest {
         l_playerList.add(d_player2);
         d_gameState.setD_playersList(l_playerList);
         d_diplomacyOrder = new Diplomacy(d_player2.getPlayerName(), d_player1);
-        d_bombOrder = new Bomb(d_player2, "France");
+        d_bombOrder = new ModelBomb(d_player2, "France");
     }
 
     /**

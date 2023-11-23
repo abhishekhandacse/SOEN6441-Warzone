@@ -33,22 +33,22 @@ public class BombTest {
     /**
      * The first bomb order for testing.
      */
-    Bomb d_bombOrder1;
+    ModelBomb d_bombOrder1;
 
     /**
      * The second bomb order for testing.
      */
-    Bomb d_bombOrder2;
+    ModelBomb d_bombOrder2;
 
     /**
      * The third bomb order for testing.
      */
-    Bomb d_bombOrder3;
+    ModelBomb d_bombOrder3;
 
     /**
      * The fourth bomb order for testing.
      */
-    Bomb d_bombOrder4;
+    ModelBomb d_bombOrder4;
 
     /**
      * The list of orders used for testing bomb orders.
@@ -114,10 +114,10 @@ public class BombTest {
         d_gameState.setD_map(l_map);
     
         // Create Bomb orders for player 1 targeting specific countries
-        d_bombOrder1 = new Bomb(d_player1, "Japan");
-        d_bombOrder2 = new Bomb(d_player1, "Korea");
-        d_bombOrder3 = new Bomb(d_player1, "India");
-        d_bombOrder4 = new Bomb(d_player1, "Canada");
+        d_bombOrder1 = new ModelBomb(d_player1, "Japan");
+        d_bombOrder2 = new ModelBomb(d_player1, "Korea");
+        d_bombOrder3 = new ModelBomb(d_player1, "India");
+        d_bombOrder4 = new ModelBomb(d_player1, "Canada");
     
         // Add the Bomb orders to the order list
         d_order_list.add(d_bombOrder1);
