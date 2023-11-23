@@ -23,14 +23,14 @@ public class ConquestMapFileReader implements Serializable {
     /**
      * Reads Conquest map file, extracts metadata, and populates the game state.
      *
-     * @param p_gameState     The current game state.
-     * @param p_map           The game map.
-     * @param p_linesOfFile   The lines of the Conquest map file.
+     * @param p_gameState   The current game state.
+     * @param p_map         The game map.
+     * @param p_linesOfFile The lines of the Conquest map file.
      */
     public void readConquestFile(GameState p_gameState, Map p_map, List<String> p_linesOfFile) {
         List<String> l_continentData = getMetaData(p_linesOfFile, "continent");
         List<Continent> l_continentObjects = parseContinentsMetaData(l_continentData);
-                    List<String> l_countryData = getMetaData(p_linesOfFile, "country");
+        List<String> l_countryData = getMetaData(p_linesOfFile, "country");
         List<Country> l_countryObjects = parseCountriesMetaData(l_countryData, l_continentObjects);
         List<Country> l_updatedCountries = parseBorderMetaData(l_countryObjects, l_countryData);
 
@@ -43,7 +43,7 @@ public class ConquestMapFileReader implements Serializable {
     /**
      * Extracts metadata lines from the Conquest map file.
      *
-     * @param p_fileLines      The lines of the Conquest map file.
+     * @param p_fileLines       The lines of the Conquest map file.
      * @param p_switchParameter The parameter to switch between continent and country metadata.
      * @return The list of metadata lines.
      */
