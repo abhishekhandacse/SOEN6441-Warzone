@@ -16,19 +16,29 @@ import org.junit.Test;
  */
 public class BenevolentPlayerTest {
 
-    /** The player under test. */
+    /**
+     * The player under test.
+     */
     ModelPlayer d_player;
 
-    /** The player behavior strategy being tested. */
+    /**
+     * The player behavior strategy being tested.
+     */
     PlayerBehaviorStrategy d_playerBehaviorStrategy;
 
-    /** The instance of BenevolentPlayer. */
+    /**
+     * The instance of BenevolentPlayer.
+     */
     BenevolentPlayer d_benevolentPlayer = new BenevolentPlayer();
 
-    /** The game state used for testing. */
+    /**
+     * The game state used for testing.
+     */
     GameState d_gameState = new GameState();
 
-    /** The country used for testing. */
+    /**
+     * The country used for testing.
+     */
     Country d_country1;
 
     /**
@@ -64,7 +74,7 @@ public class BenevolentPlayerTest {
 
         // Setting up the list of players
         List<ModelPlayer> l_listOfPlayer = new ArrayList<>();
-             l_listOfPlayer.add(d_player);
+        l_listOfPlayer.add(d_player);
 
         // Setting up the game map
         Map l_map = new Map();
@@ -79,7 +89,7 @@ public class BenevolentPlayerTest {
      * It asserts that the weakest country is correctly identified.
      */
     @Test
-               public void testWeakestCountry() {
+    public void testWeakestCountry() {
         assertEquals("Pakistan", d_benevolentPlayer.getWeakestCountry(d_player).getD_countryName());
     }
 
