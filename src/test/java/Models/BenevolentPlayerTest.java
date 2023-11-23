@@ -8,19 +8,33 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test class for the {@code BenevolentPlayer} behavior strategy.
+ * It includes tests for methods that determine the weakest country and weakest neighbor.
+ *
+ * @version 1.0
+ */
 public class BenevolentPlayerTest {
 
-        ModelPlayer d_player;
+    /** The player under test. */
+    ModelPlayer d_player;
 
-        PlayerBehaviorStrategy d_playerBehaviorStrategy;
+    /** The player behavior strategy being tested. */
+    PlayerBehaviorStrategy d_playerBehaviorStrategy;
 
-        BenevolentPlayer d_benevolentPlayer = new BenevolentPlayer();
+    /** The instance of BenevolentPlayer. */
+    BenevolentPlayer d_benevolentPlayer = new BenevolentPlayer();
 
-        GameState d_gameState = new GameState();
+    /** The game state used for testing. */
+    GameState d_gameState = new GameState();
 
-        Country d_country1;
+    /** The country used for testing. */
+    Country d_country1;
 
-        @Before
+    /**
+     * Sets up the test environment before each test method is executed.
+     */
+    @Before
     public void setup() {
         this.d_country1 = new Country(1, "India", 1);
         Country l_country2 = new Country(2, "China", 1);
@@ -60,12 +74,20 @@ public class BenevolentPlayerTest {
         d_gameState.setD_players(l_listOfPlayer);
     }
 
-        @Test
+    /**
+     * Tests the {@code getWeakestCountry} method of the {@code BenevolentPlayer}.
+     * It asserts that the weakest country is correctly identified.
+     */
+    @Test
                public void testWeakestCountry() {
         assertEquals("Pakistan", d_benevolentPlayer.getWeakestCountry(d_player).getD_countryName());
     }
 
-        @Test
+    /**
+     * Tests the {@code getWeakestNeighbor} method of the {@code BenevolentPlayer}.
+     * It asserts that the weakest neighbor of a country is correctly identified.
+     */
+    @Test
     public void testWeakestNeighbor() {
         assertEquals("Pakistan", d_benevolentPlayer.getWeakestNeighbor(d_country1, d_gameState).getD_countryName());
     }
