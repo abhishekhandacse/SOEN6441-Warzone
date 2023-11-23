@@ -151,7 +151,7 @@ public class CommandTest {
     @Test
     public void test_noFlagCommandWithExtraSpaces_getOperationsAndArguments() {
         Command l_command = new Command("loadmap         abc.txt");
-                    List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
         List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<>();
