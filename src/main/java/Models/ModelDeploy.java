@@ -1,24 +1,50 @@
+/**
+ * The {@code ModelDeploy} class represents a Deploy order in a game, allowing a player to deploy a specified number of armies
+ * to a target country.
+ *
+ * @version 1.0
+ */
 package Models;
 
 import java.io.Serializable;
 
+/**
+ * Represents a Deploy order in the game.
+ * This order allows a player to deploy a specified number of armies to a target country.
+ */
 public class ModelDeploy implements Order, Serializable {
 
-		String d_targetCountryName;
+	/** The name of the target country for the deploy order. */
+	String d_targetCountryName;
 
-		Integer d_numberOfArmiesToPlace;
+	/** The number of armies to be deployed. */
+	Integer d_numberOfArmiesToPlace;
 
-		ModelPlayer d_playerInitiator;
+	/** The player who initiated the deploy order. */
+	ModelPlayer d_playerInitiator;
 
-		String d_orderExecutionLog;
+	/** The log of order execution for the deploy order. */
+	String d_orderExecutionLog;
 
-		public ModelDeploy(ModelPlayer p_playerInitiator, String p_targetCountry, Integer p_numberOfArmiesToPlace) {
+	/**
+	 * Constructs a new Deploy order with the specified initiator player, target country, and number of armies to deploy.
+	 *
+	 * @param p_playerInitiator      The player who initiated the deploy order.
+	 * @param p_targetCountry       The name of the target country for the deploy order.
+	 * @param p_numberOfArmiesToPlace The number of armies to be deployed.
+	 */
+	public ModelDeploy(ModelPlayer p_playerInitiator, String p_targetCountry, Integer p_numberOfArmiesToPlace) {
 		this.d_targetCountryName = p_targetCountry;
 		this.d_playerInitiator = p_playerInitiator;
 		this.d_numberOfArmiesToPlace = p_numberOfArmiesToPlace;
 	}
 
-		@Override
+	/**
+	 * Executes the deploy order, deploying the specified number of armies to the target country if the order is valid.
+	 *
+	 * @param p_gameState The current game state.
+	 */
+	@Override
 	public void execute(GameState p_gameState) {
 
 		if (checkValid(p_gameState)) {
@@ -44,7 +70,13 @@ public class ModelDeploy implements Order, Serializable {
 		p_gameState.updateLog(orderExecutionLog(), "effect");
 	}
 
-		@Override
+	/**
+	 * Checks if the deploy order is valid.
+	 *
+	 * @param p_gameState The current game state.
+	 * @return {@code true} if the order is valid, {@code false} otherwise.
+	 */
+	@Override
 	public boolean checkValid(GameState p_gameState) {
 		Country l_country = d_playerInitiator.getD_coutriesOwned().stream()
 						.filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(this.d_targetCountryName.toString()))
@@ -52,18 +84,32 @@ public class ModelDeploy implements Order, Serializable {
 		return l_country != null;
 	}
 
-		@Override
+	/**
+	 * Prints the deploy order.
+	 */
+	@Override
 	public void printOrder() {
 		this.d_orderExecutionLog = "\n---------- Deploy order issued by player " + this.d_playerInitiator.getPlayerName()+" ----------\n"+System.lineSeparator()+"Deploy " + this.d_numberOfArmiesToPlace + " armies to " + this.d_targetCountryName;
 		System.out.println(this.d_orderExecutionLog);
 	}
 
-		@Override
+	/**
+	 * Returns the order execution log for the deploy order.
+	 *
+	 * @return The order execution log for the deploy order.
+	 */
+	@Override
 	public String orderExecutionLog() {
 		return d_orderExecutionLog;
 	}
 
-		public void setD_orderExecutionLog(String p_orderExecutionLog, String p_logType) {
+	/**
+	 * Sets the order execution log and prints it based on the log type.
+	 *
+	 * @param p_orderExecutionLog The order execution log.
+	 * @param p_logType           The type of the log ('error' or 'default').
+	 */
+	public void setD_orderExecutionLog(String p_orderExecutionLog, String p_logType) {
 		this.d_orderExecutionLog = p_orderExecutionLog;
 			if (p_logType.equals("error")) {
 			System.err.println(p_orderExecutionLog);
@@ -72,7 +118,12 @@ public class ModelDeploy implements Order, Serializable {
 		}
 	}
 
-		@Override
+	/**
+	 * Returns the name of the deploy order.
+	 *
+	 * @return The name of the deploy order.
+	 */
+	@Override
 	public String getOrderName() {
 		return "deploy";
 	}
