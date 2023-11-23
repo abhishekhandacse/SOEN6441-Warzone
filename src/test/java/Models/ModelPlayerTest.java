@@ -42,8 +42,8 @@ public class ModelPlayerTest {
      */
     @Test
     public void testNextOrder() {
-        Order l_deployOrder1 = new Deploy(d_exisitingPlayerList.get(0), "India", 5);
-        Order l_deployOrder2 = new Deploy(d_exisitingPlayerList.get(1), "Finland", 6);
+        Order l_deployOrder1 = new ModelDeploy(d_exisitingPlayerList.get(0), "India", 5);
+        Order l_deployOrder2 = new ModelDeploy(d_exisitingPlayerList.get(1), "Finland", 6);
 
         d_order_list.add(l_deployOrder1);
         d_order_list.add(l_deployOrder2);

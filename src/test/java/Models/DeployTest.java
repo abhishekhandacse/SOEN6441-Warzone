@@ -28,12 +28,12 @@ public class DeployTest {
 	/**
 	 * First Deploy Order.
 	 */
-	Deploy d_deployOrder1;
+	ModelDeploy d_deployOrder1;
 
 	/**
 	 * Second Deploy Order.
 	 */
-	Deploy d_deployOrder2;
+	ModelDeploy d_deployOrder2;
 
 	/**
 	 * Game State.
@@ -69,8 +69,8 @@ public class DeployTest {
 		l_map.setD_allCountries(l_mapCountries);
 		d_gameState.setD_map(l_map);
 
-		d_deployOrder1 = new Deploy(d_player1, "India", 5);
-		d_deployOrder2 = new Deploy(d_player2, "Canada", 15);
+		d_deployOrder1 = new ModelDeploy(d_player1, "India", 5);
+		d_deployOrder2 = new ModelDeploy(d_player2, "Canada", 15);
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class DeployTest {
 
 		assertEquals(l_player.getD_noOfUnallocatedArmies().toString(), "6");
 		assertEquals(l_player.getD_ordersToExecute().size(), 1);
-		Deploy l_order = (Deploy) l_player.order_list.get(0);
+		ModelDeploy l_order = (ModelDeploy) l_player.order_list.get(0);
 		assertEquals("Japan", l_order.d_nameOfTargetCountry);
 		assertEquals("4", String.valueOf(l_order.d_quantityOfArmiesToPlace));
 	}

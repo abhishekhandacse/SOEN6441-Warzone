@@ -16,19 +16,13 @@ import java.io.Serializable;
  */
 public class ModelBomb implements Card, Serializable {
 
-    /**
-     * The player who initiated the bomb card.
-     */
+    /** The player who initiated the bomb card. */
     ModelPlayer d_playerInitiator;
 
-    /**
-     * The ID of the target country for the bomb card.
-     */
+    /** The ID of the target country for the bomb card. */
     String d_targetCountryID;
 
-    /**
-     * The log of order execution for the bomb card.
-     */
+    /** The log of order execution for the bomb card. */
     String d_orderExecutionLog;
 
     /**

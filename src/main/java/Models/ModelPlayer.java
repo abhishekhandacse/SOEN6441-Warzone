@@ -330,7 +330,7 @@ public class ModelPlayer {
             if (validateDeployOrderArmies(this, l_noOfArmies)) {
                 this.setD_playerLog("Given deploy order can't be executed as armies in deploy order exceed player's unallocated armies.", "error");
             } else {
-                this.order_list.add(new Deploy(this, l_targetCountry, Integer.parseInt(l_noOfArmies)));
+                this.order_list.add(new ModelDeploy(this, l_targetCountry, Integer.parseInt(l_noOfArmies)));
                 Integer l_unallocatedArmies = this.getD_noOfUnallocatedArmies() - Integer.parseInt(l_noOfArmies);
                 this.setD_noOfUnallocatedArmies(l_unallocatedArmies);
                 this.setD_playerLog("Deploy order has been added to the queue for execution. For player: " + this.d_name, "log");
