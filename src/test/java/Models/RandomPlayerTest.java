@@ -8,15 +8,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test class for the {@code RandomPlayer} class.
+ *
+ * @version 1.0
+ */
 public class RandomPlayerTest {
 
-        ModelPlayer d_player;
+    /** Player for testing. */
+    ModelPlayer d_player;
 
-        PlayerBehaviorStrategy d_playerBehaviorStrategy;
+    /** Player behavior strategy for testing. */
+    PlayerBehaviorStrategy d_playerBehaviorStrategy;
 
-        GameState d_gameState = new GameState();
+    /** Game state used for testing. */
+    GameState d_gameState = new GameState();
 
-        @Before
+    /**
+     * Sets up the test environment before each test method is executed.
+     */
+    @Before
     public void setup() {
         // Setting up a continent and countries for the player
         Continent l_continent = new Continent("Asia");
@@ -42,7 +53,12 @@ public class RandomPlayerTest {
         d_gameState.setD_players(l_listOfPlayer);
     }
 
-        @Test
+    /**
+     * Tests the creation of a deploy order by a random player.
+     *
+     * @throws IOException if an I/O error occurs
+     */
+    @Test
     public void testOrderCreation() throws IOException {
         assertEquals("deploy", d_player.getPlayerOrder(d_gameState).split(" ")[0]);
     }
