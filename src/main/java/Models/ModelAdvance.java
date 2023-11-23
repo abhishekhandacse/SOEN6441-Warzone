@@ -11,6 +11,7 @@ import java.util.List;
 
 import Services.PlayerService;
 import Utils.CommonUtil;
+
 /**
  * Advance class
  */
@@ -46,9 +47,9 @@ public class ModelAdvance implements Order, Serializable {
     /**
      * Constructs an Advance order.
      *
-     * @param p_playerInitiator The player who initiates the order.
-     * @param p_sourceCountryName The name of the source country.
-     * @param p_targetCountry The name of the target country.
+     * @param p_playerInitiator       The player who initiates the order.
+     * @param p_sourceCountryName     The name of the source country.
+     * @param p_targetCountry         The name of the target country.
      * @param p_numberOfArmiesToPlace The number of armies to be placed in the target country.
      */
     public ModelAdvance(ModelPlayer p_playerInitiator, String p_sourceCountryName, String p_targetCountry,
@@ -90,10 +91,10 @@ public class ModelAdvance implements Order, Serializable {
     /**
      * Produces the result of the order, including battling and updating ownership.
      *
-     * @param p_gameState The current game state.
+     * @param p_gameState             The current game state.
      * @param p_playerOfTargetCountry The player who owns the target country.
-     * @param p_targetCountry The target country.
-     * @param p_sourceCountry The source country.
+     * @param p_targetCountry         The target country.
+     * @param p_sourceCountry         The source country.
      */
     private void produceOrderResult(GameState p_gameState, ModelPlayer p_playerOfTargetCountry, Country p_targetCountry,
                                     Country p_sourceCountry) {
@@ -113,9 +114,9 @@ public class ModelAdvance implements Order, Serializable {
     /**
      * Conquer the target country, transferring ownership and armies to the initiating player.
      *
-     * @param p_gameState The current game state.
+     * @param p_gameState             The current game state.
      * @param p_playerOfTargetCountry The player who owns the target country.
-     * @param p_targetCountry The target country to be conquered.
+     * @param p_targetCountry         The target country to be conquered.
      */
     private void conquerTargetCountry(GameState p_gameState, ModelPlayer p_playerOfTargetCountry, Country p_targetCountry) {
         p_targetCountry.setD_armies(d_numberOfArmiesToPlace);
@@ -128,6 +129,7 @@ public class ModelAdvance implements Order, Serializable {
         p_gameState.updateLog(orderExecutionLog(), "effect");
         this.updateContinents(this.d_playerInitiator, p_playerOfTargetCountry, p_gameState);
     }
+
     /**
      * Retrieves the player who owns the target country from the game state.
      *
@@ -156,13 +158,14 @@ public class ModelAdvance implements Order, Serializable {
         Integer l_updatedTargetContArmies = p_targetCountry.getD_armies() + this.d_numberOfArmiesToPlace;
         p_targetCountry.setD_armies(l_updatedTargetContArmies);
     }
+
     /**
      * Produces the result of a battle, determining surviving armies and ownership changes.
      *
-     * @param p_sourceCountry The source country of the battle.
-     * @param p_targetCountry The target country of the battle.
-     * @param p_attackerArmies The attacker's army units.
-     * @param p_defenderArmies The defender's army units.
+     * @param p_sourceCountry         The source country of the battle.
+     * @param p_targetCountry         The target country of the battle.
+     * @param p_attackerArmies        The attacker's army units.
+     * @param p_defenderArmies        The defender's army units.
      * @param p_playerOfTargetCountry The player who owns the target country.
      */
 
@@ -188,10 +191,10 @@ public class ModelAdvance implements Order, Serializable {
     /**
      * Handles surviving armies after a battle, updating ownership and armies as needed.
      *
-     * @param p_attackerArmiesLeft The number of surviving attacker armies.
-     * @param p_defenderArmiesLeft The number of surviving defender armies.
-     * @param p_sourceCountry The source country of the battle.
-     * @param p_targetCountry The target country of the battle.
+     * @param p_attackerArmiesLeft    The number of surviving attacker armies.
+     * @param p_defenderArmiesLeft    The number of surviving defender armies.
+     * @param p_sourceCountry         The source country of the battle.
+     * @param p_targetCountry         The target country of the battle.
      * @param p_playerOfTargetCountry The player who owns the target country.
      */
     public void handleSurvivingArmies(Integer p_attackerArmiesLeft, Integer p_defenderArmiesLeft,
@@ -220,7 +223,6 @@ public class ModelAdvance implements Order, Serializable {
             this.setD_orderExecutionLog(l_country1 + System.lineSeparator() + l_country2, "default");
         }
     }
-
 
 
     /**
@@ -256,8 +258,8 @@ public class ModelAdvance implements Order, Serializable {
             p_gameState.updateLog(orderExecutionLog(), "effect");
             return false;
         }
-        if(!d_playerInitiator.negotiationValidation(this.d_targetCountryName)){
-            this.setD_orderExecutionLog(this.currentOrder() + " is not executed as "+ d_playerInitiator.getPlayerName()+ " has negotiation pact with the target country's player!", "error");
+        if (!d_playerInitiator.negotiationValidation(this.d_targetCountryName)) {
+            this.setD_orderExecutionLog(this.currentOrder() + " is not executed as " + d_playerInitiator.getPlayerName() + " has negotiation pact with the target country's player!", "error");
             p_gameState.updateLog(orderExecutionLog(), "effect");
             return false;
         }
@@ -286,6 +288,7 @@ public class ModelAdvance implements Order, Serializable {
                 + this.d_sourceCountryName + " to " + this.d_targetCountryName;
         System.out.println(System.lineSeparator() + this.d_orderExecutionLog);
     }
+
     /**
      * Retrieves the log of the order's execution.
      *
@@ -301,7 +304,7 @@ public class ModelAdvance implements Order, Serializable {
      * Sets the order execution log and handles different log types (error or default).
      *
      * @param p_orderExecutionLog The log message to be set.
-     * @param p_logType The type of the log (error or default).
+     * @param p_logType           The type of the log (error or default).
      */
     public void setD_orderExecutionLog(String p_orderExecutionLog, String p_logType) {
         this.d_orderExecutionLog = p_orderExecutionLog;
@@ -311,6 +314,7 @@ public class ModelAdvance implements Order, Serializable {
             System.out.println(p_orderExecutionLog);
         }
     }
+
     /**
      * Generates a list of random army units with specified size and role.
      *
@@ -329,6 +333,7 @@ public class ModelAdvance implements Order, Serializable {
         }
         return l_armyList;
     }
+
     /**
      * Generates a random integer within a specified range.
      *
@@ -347,7 +352,7 @@ public class ModelAdvance implements Order, Serializable {
      *
      * @param p_playerOfSourceCountry The player who owns the source country.
      * @param p_playerOfTargetCountry The player who owns the target country.
-     * @param p_gameState The current game state.
+     * @param p_gameState             The current game state.
      */
     private void updateContinents(ModelPlayer p_playerOfSourceCountry, ModelPlayer p_playerOfTargetCountry,
                                   GameState p_gameState) {
@@ -361,6 +366,7 @@ public class ModelAdvance implements Order, Serializable {
         PlayerService l_playerService = new PlayerService();
         l_playerService.performContinentAssignment(l_playesList, p_gameState.getD_map().getD_continents());
     }
+
     /**
      * Retrieves the name of the order.
      *
