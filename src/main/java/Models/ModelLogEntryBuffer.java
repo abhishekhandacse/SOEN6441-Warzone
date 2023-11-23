@@ -15,8 +15,10 @@ import java.util.Observable;
  */
 public class ModelLogEntryBuffer extends Observable implements Serializable {
 
-    /** The log message to be stored in the buffer. */
-                String d_logMessage;
+    /**
+     * The log message to be stored in the buffer.
+     */
+    String d_logMessage;
 
     /**
      * Constructs a new log entry buffer and adds a {@code LogWriter} observer to handle log updates.
@@ -43,7 +45,7 @@ public class ModelLogEntryBuffer extends Observable implements Serializable {
      */
     public void currentLog(String p_messageToUpdate, String p_logType) {
 
-                  switch (p_logType.toLowerCase()) {
+        switch (p_logType.toLowerCase()) {
             case "command":
                 d_logMessage = System.lineSeparator() + "Command Entered: " + p_messageToUpdate + System.lineSeparator();
                 break;
