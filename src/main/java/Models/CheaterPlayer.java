@@ -7,9 +7,19 @@ import java.util.Random;
 
 import Services.PlayerService;
 
+/**
+ * This is the class of Cheater Player who directly attacks its neighboring enemy countries during the issue order phase
+ * and doubles the number of armies on his countries which have enemy neighbors.
+ */
 public class CheaterPlayer extends PlayerBehaviorStrategy {
 
-
+    /**
+     * This method creates a new order.
+     * @param p_player object of Player class
+     * @param p_stateOfGame object of GameState class
+     *
+     * @return Order object of order class
+     */
     @Override
     public String createOrder(ModelPlayer p_player, GameState p_stateOfGame) throws IOException {
 
@@ -38,6 +48,13 @@ public class CheaterPlayer extends PlayerBehaviorStrategy {
     }
 
 
+
+    /**
+     * Doubles the number of armies on country that are neighbor to enemies.
+     *
+     * @param p_player object of Player class
+     * @param p_gameState object of GameState class
+     */
     private void doubleArmyOnEnemyNeighboredCounties(ModelPlayer p_player, GameState p_gameState){
         List<Country> l_countriesOwned = p_player.getD_coutriesOwned();
 
@@ -61,11 +78,24 @@ public class CheaterPlayer extends PlayerBehaviorStrategy {
         }
     }
 
+    /**
+     *
+     * returns a random country owned by player.
+     *
+     * @param p_listOfCountries list of countries owned by player
+     * @return a random country from list
+     */
     private Country getRandomCountry(List<Country> p_listOfCountries){
         Random l_random = new Random();
         return p_listOfCountries.get(l_random.nextInt(p_listOfCountries.size()));
     }
 
+
+    /**
+     * @param p_gameState Current state of the game
+     * @param p_countryId id of the country whose neighbor is to be searched
+     * @return Owner of the Country
+     */
 
     private ModelPlayer getCountryOwner(GameState p_gameState, Integer p_countryId){
         List<ModelPlayer> l_players = p_gameState.getD_players();
@@ -82,6 +112,14 @@ public class CheaterPlayer extends PlayerBehaviorStrategy {
         return l_owner;
     }
 
+    /**
+     * Conquers Target Country when target country doesn't have any army.
+     *
+     * @param p_gameState             Current state of the game
+     * @param p_cheaterPlayer player owning source country
+     * @param p_targetCPlayer player owning the target country
+     * @param p_targetCountry         target country of the battle
+     */
     private void conquerTargetCountry(GameState p_gameState, ModelPlayer p_targetCPlayer, ModelPlayer p_cheaterPlayer, Country p_targetCountry) {
         p_targetCPlayer.getD_coutriesOwned().remove(p_targetCountry);
         p_targetCPlayer.getD_coutriesOwned().add(p_targetCountry);
@@ -89,6 +127,12 @@ public class CheaterPlayer extends PlayerBehaviorStrategy {
         this.updateContinents(p_cheaterPlayer, p_targetCPlayer, p_gameState);
     }
 
+    /**
+     * Conquer all enemies that are neighbor to the country owned by player.
+     *
+     * @param p_player object of Player class
+     * @param p_gameState object of GameState class
+     */
     private void conquerNeighboringEnemies(ModelPlayer p_player, GameState p_gameState){
         List<Country> l_countriesOwned = p_player.getD_coutriesOwned();
 
@@ -111,28 +155,46 @@ public class CheaterPlayer extends PlayerBehaviorStrategy {
     }
 
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String createDeployOrder(ModelPlayer p_player, GameState p_gameState) {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String createAdvanceOrder(ModelPlayer p_player, GameState p_gameState) {
         return null;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String createCardOrder(ModelPlayer p_player, GameState p_gameState, String p_cardName) {
         return null;
     }
 
+    /**
+     * This method returns the player behavior.
+     * @return String player behavior
+     */
     @Override
     public String getPlayerBehavior() {
         return "Cheater";
     }
 
+    /**
+     * Updates continents of players based on battle results.
+     *
+     * @param p_cheaterPlayer player owning source country
+     * @param p_targetCPlayer player owning target country
+     * @param p_gameState             current state of the game
+     */
     private void updateContinents(ModelPlayer p_cheaterPlayer, ModelPlayer p_targetCPlayer,
                                   GameState p_gameState) {
         List<ModelPlayer> l_listOfPlayers = new ArrayList<>();
