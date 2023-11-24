@@ -154,6 +154,22 @@ public class Airlift implements Card, Serializable {
 	}
 
 
+	@Override
+	public Boolean checkValidOrder(GameState p_internalGameState) {
+		Country l_sourceCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfSourceCountry);
+		Country l_targetCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfTargetCountry);
+		if (l_sourceCountry == null) {
+			this.setD_orderExecutionLog("Invalid Source Country name! This country Doesn't exist on the map!", "error");
+			p_internalGameState.updateLog(orderExecutionLog(), "effect");
+			return false;
+		}
+		if (l_targetCountry == null) {
+			this.setD_orderExecutionLog("Invalid Target Country! Doesn't exist on the map!", "error");
+			p_internalGameState.updateLog(orderExecutionLog(), "effect");
+			return false;
+		}
+		return true;
+	}
 
 
 	/**
