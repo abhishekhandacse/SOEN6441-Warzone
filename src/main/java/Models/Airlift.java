@@ -153,7 +153,12 @@ public class Airlift implements Card, Serializable {
 		return "airlift";
 	}
 
-
+	/**
+	 * Checks Pre-validations while issuing commands.
+	 *
+	 * @param p_internalGameState current GameState Instance
+	 * @return Bool if the order is valid
+	 */
 	@Override
 	public Boolean checkValidOrder(GameState p_internalGameState) {
 		Country l_sourceCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfSourceCountry);
