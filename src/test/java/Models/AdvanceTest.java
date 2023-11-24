@@ -10,11 +10,17 @@ import java.util.List;
 
 import org.junit.Test;
 
-
+/**
+ * This class is used to test functionality of Advance order.
+ */
 public class AdvanceTest {
-
+    /**
+     * Recent GameState
+     */
     GameState d_gameState = new GameState();
-
+    /**
+     * Checks whether advance order given is invalid.
+     */
     @Test
     public void testInvalidAdvanceOrder() {
         ModelPlayer l_player = new ModelPlayer("Amanpreet");
@@ -31,6 +37,10 @@ public class AdvanceTest {
         assertTrue(new ModelAdvance(l_player, "India", "France", 10).checkValid(d_gameState));
     }
 
+    /**
+     * Checks if Attacker has won battle, countries and armies are updated correctly
+     * or not.
+     */
     @Test
     public void testAttackersWin() {
         ModelPlayer l_sourcePlayer = new ModelPlayer("Amanpreet");
@@ -55,7 +65,10 @@ public class AdvanceTest {
         assertEquals(l_sourcePlayer.getD_coutriesOwned().get(1).getD_armies().toString(), "5");
     }
 
-
+    /**
+     * Checks if Defender has won battle, countries and armies are updated correctly
+     * or not.
+     */
     @Test
     public void testDefendersWin() {
         ModelPlayer l_sourcePlayer = new ModelPlayer("Amanpreet");
@@ -80,7 +93,9 @@ public class AdvanceTest {
         assertEquals(l_sourcePlayer.getD_coutriesOwned().get(0).getD_armies().toString(), "5");
         assertEquals(l_targetPlayer.getD_coutriesOwned().get(0).getD_armies().toString(), "2");
     }
-
+    /**
+     * Checks if armies are deployed to target or not.
+     */
     @Test
     public void testDeployToTarget() {
         ModelPlayer l_sourcePlayer = new ModelPlayer("Amanpreet");
