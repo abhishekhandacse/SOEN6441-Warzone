@@ -5,13 +5,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
+/**
+ * This is the class of Random Player, who deploys armies randomly , attacks
+ * random neighboring countries and moves armies on his own territories
+ * randomly.
+ */
 public class RandomPlayer extends PlayerBehaviorStrategy {
 
-
+    /**
+     * List containing deploy order countries.
+     */
     ArrayList<Country> d_countriesToBeDeployed = new ArrayList<>();
 
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String createDeployOrder(ModelPlayer p_player, GameState p_gameState){
         if (p_player.getD_noOfUnallocatedArmies()>0) {
@@ -26,7 +36,14 @@ public class RandomPlayer extends PlayerBehaviorStrategy {
             return createAdvanceOrder(p_player,p_gameState);
         }
     }
-
+    /**
+     * This method creates a new order.
+     *
+     * @param p_player    object of Player class
+     * @param p_gameState object of GameState class
+     *
+     * @return Order object of order class
+     */
     @Override
     public String createOrder(ModelPlayer p_player, GameState p_gameState) {
         String l_command;
@@ -68,7 +85,9 @@ public class RandomPlayer extends PlayerBehaviorStrategy {
         }
         return l_command;
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String createAdvanceOrder(ModelPlayer p_player, GameState p_gameState){
         int l_armiesToSend;
@@ -90,7 +109,9 @@ public class RandomPlayer extends PlayerBehaviorStrategy {
         return "advance "+l_randomOwnCountry.getD_countryName()+" "+l_randomNeighbor.getD_countryName()+" "+ l_armiesToSend;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String createCardOrder(ModelPlayer p_player, GameState p_gameState, String p_cardName){
         int l_armiesToSend;
@@ -118,23 +139,44 @@ public class RandomPlayer extends PlayerBehaviorStrategy {
         return null;
     }
 
+    /**
+     * This method returns the player behavior.
+     * @return String player behavior
+     */
     @Override
     public String getPlayerBehavior() {
         return "Random";
     }
 
-
+    /**
+     *
+     * returns a random country owned by player.
+     *
+     * @param p_listOfCountries list of countries owned by player
+     * @return a random country from list
+     */
     private Country getRandomCountry(List<Country> p_listOfCountries){
         Random l_random = new Random();
         return p_listOfCountries.get(l_random.nextInt(p_listOfCountries.size()));
     }
 
-
+    /**
+     * Check if it is first turn.
+     *
+     * @param p_player player instance
+     * @return boolean
+     */
     private Boolean checkIfArmiesDeployed(ModelPlayer p_player){
         return p_player.getD_coutriesOwned().stream().anyMatch(l_country -> l_country.getD_armies() > 0);
     }
 
-
+    /**
+     * Chooses a random player to negotiate.
+     *
+     * @param p_player player object
+     * @param p_gameState current game state.
+     * @return player object
+     */
     private ModelPlayer getRandomPlayer(ModelPlayer p_player, GameState p_gameState){
         ArrayList<ModelPlayer> l_playerList = new ArrayList<>();
         Random l_random = new Random();
