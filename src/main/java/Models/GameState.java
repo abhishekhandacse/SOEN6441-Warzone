@@ -140,56 +140,100 @@ public class GameState implements Serializable {
         d_logBuffer.currentLog(p_logMessage, p_logType);
     }
 
-
+    /**
+     * Fetches the most recent Log in current GameState.
+     *
+     * @return recent Log Message
+     */
     public String getRecentLog() {
         return d_logBuffer.getD_logMessage();
     }
 
+    /**
+     * Sets the Boolean load map variable.
+     */
     public void setD_loadCommand() {
         this.d_loadCommand = true;
     }
 
-
+    /**
+     * Returns if load command is used.
+     *
+     * @return bool value if map is loaded
+     */
     public boolean getD_loadCommand() {
         return this.d_loadCommand;
     }
 
 
+    /**
+     * Returns max number of turns allowed in tournament.
+     *
+     * @return int number of turns
+     */
     public int getD_maxNumberOfTurns() {
         return d_maxNumberOfTurns;
     }
 
-
+    /**
+     * Sets max number of turns allowed in tournament.
+     *
+     * @param p_maxNumberOfTurns number of turns
+     */
     public void setD_maxNumberOfTurns(int p_maxNumberOfTurns) {
         this.d_maxNumberOfTurns = p_maxNumberOfTurns;
     }
 
-
+    /**
+     * Gets number of turns left at any stage of tournament.
+     *
+     * @return int number of remaining turns
+     */
     public int getD_numberOfTurnsLeft() {
         return d_numberOfTurnsLeft;
     }
 
-
+    /**
+     * Sets number of turns left at any stage of tournament.
+     *
+     * @param p_numberOfTurnsLeft number of remaining turns
+     */
     public void setD_numberOfTurnsLeft(int p_numberOfTurnsLeft) {
         this.d_numberOfTurnsLeft = p_numberOfTurnsLeft;
     }
 
-
+    /**
+     * Adds the Failed Player in GameState.
+     *
+     * @param p_player player instance to remove
+     */
     public void removePlayer(ModelPlayer p_player){
         d_playersFailed.add(p_player);
     }
 
-
+    /**
+     * Retrieves the list of failed players.
+     *
+     * @return List of Players that lost game.
+     */
     public List<ModelPlayer> getD_playersFailed() {
         return d_playersFailed;
     }
 
-
+    /**
+     * Sets the winner player object.
+     *
+     * @param p_player winner player object
+     */
     public void setD_winner(ModelPlayer p_player){
         d_winner = p_player;
     }
 
-
+    /**
+     * Returns the winner player object.
+     *
+     * @return returns winning player
+     */
     public ModelPlayer getD_winner(){
         return d_winner;
     }
