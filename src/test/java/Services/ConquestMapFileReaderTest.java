@@ -12,22 +12,41 @@ import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 
+/**
+ * Test class for parsing conquest map file.
+ *
+ */
 public class ConquestMapFileReaderTest {
-
+	/**
+	 * MapService reference to store its object.
+	 */
 	MapService d_mapService;
 
-
+	/**
+	 * Map reference to store its lines.
+	 */
 	List<String> d_mapLines;
 
+	/**
+	 * Map reference to store its context.
+	 */
 	Map d_map;
 
-
+	/**
+	 * GameState reference to store its object.
+	 */
 	GameState d_state;
 
-
+	/**
+	 * Conquest file reader to parse the map file.
+	 */
 	ConquestMapFileReader d_conquestMapFileReader;
 
-
+	/**
+	 * Setup before each MapService Operations
+	 *
+	 * @throws InvalidMap Invalid map exception
+	 */
 	@Before
 	public void setup() throws InvalidMap {
 		d_conquestMapFileReader = new ConquestMapFileReader();
@@ -37,7 +56,13 @@ public class ConquestMapFileReaderTest {
 		d_mapLines = d_mapService.loadFile("testconquest.map");
 	}
 
-
+	/**
+	 * This test case is used to test the functionality of reading conquest map.
+	 *
+	 *
+	 * @throws IOException throws IOException
+	 * @throws InvalidMap Invalid map exception
+	 */
 	@Test
 	public void testReadConquestFile() throws IOException, InvalidMap {
 		d_conquestMapFileReader.readConquestFile(d_state, d_map, d_mapLines);
@@ -46,7 +71,12 @@ public class ConquestMapFileReaderTest {
 		assertEquals(d_state.getD_map().getD_continents().size(), 8);
 		assertEquals(d_state.getD_map().getD_countries().size(), 99);
 	}
-
+	/**
+	 * tests addition or deletion of continent via editcontinent operation
+	 * @throws IOException Exceptions
+	 * @throws InvalidMap Exception
+	 * @throws InvalidCommand Exception
+	 */
 	@Test
 	public void testEditMap() throws IOException, InvalidMap, InvalidCommand {
 		d_conquestMapFileReader.readConquestFile(d_state, d_map, d_mapLines);
