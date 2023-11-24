@@ -56,5 +56,47 @@ public class AdvanceTest {
     }
 
 
+    @Test
+    public void testDefendersWin() {
+        ModelPlayer l_sourcePlayer = new ModelPlayer("Amanpreet");
+        Country l_country1 = new Country("India");
+        l_country1.setD_armies(2);
+        List<Country> l_s1 = new ArrayList<>();
+        l_s1.add(l_country1);
+        l_sourcePlayer.setD_coutriesOwned(l_s1);
 
+        ModelPlayer l_targetPlayer = new ModelPlayer("Rajat");
+        Country l_country2 = new Country("Canada");
+        l_country2.setD_armies(4);
+        List<Country> l_s2 = new ArrayList<>();
+        l_s2.add(l_country2);
+        l_targetPlayer.setD_coutriesOwned(l_s2);
+
+        ModelAdvance l_advance = new ModelAdvance(l_sourcePlayer, "India", "Canada", 5);
+        l_advance.handleSurvivingArmies(3, 2, l_country1, l_country2, l_targetPlayer);
+
+        assertEquals(l_targetPlayer.getD_coutriesOwned().size(), 1);
+        assertEquals(l_sourcePlayer.getD_coutriesOwned().size(), 1);
+        assertEquals(l_sourcePlayer.getD_coutriesOwned().get(0).getD_armies().toString(), "5");
+        assertEquals(l_targetPlayer.getD_coutriesOwned().get(0).getD_armies().toString(), "2");
+    }
+
+    @Test
+    public void testDeployToTarget() {
+        ModelPlayer l_sourcePlayer = new ModelPlayer("Amanpreet");
+        List<Country> l_s1 = new ArrayList<>();
+
+        Country l_country1 = new Country("India");
+        l_country1.setD_armies(7);
+        l_s1.add(l_country1);
+
+        Country l_country2 = new Country("Canada");
+        l_country2.setD_armies(4);
+        l_s1.add(l_country2);
+        l_sourcePlayer.setD_coutriesOwned(l_s1);
+
+        ModelAdvance l_advance = new ModelAdvance(l_sourcePlayer, "India", "Canada", 3);
+        l_advance.deployArmiesToTarget(l_country2);
+        assertEquals(l_country2.getD_armies().toString(), "7");
+    }
 }
