@@ -1,10 +1,11 @@
 package Models;
+import java.io.Serializable;
 
 /**
  * Class handles the execute and validation of Airlift Validate.
  *
  */
-public class Airlift implements Card {
+public class Airlift implements Card, Serializable {
 
 	/**
 	 * Records the execution log.
@@ -52,7 +53,7 @@ public class Airlift implements Card {
 	 */
 	@Override
 	public void execute(GameState p_internalGameState) {
-		if (valid(p_internalGameState)) {
+		if (checkValid(p_internalGameState)) {
 			Country l_sourceCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfSourceCountry);
 			Country l_targetCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfTargetCountry);
 			Integer l_updatedTargetArmies = l_targetCountry.getD_armies() + this.d_quantityOfArmy;
@@ -72,9 +73,9 @@ public class Airlift implements Card {
 	 * Checks the validation before executing orders.
 	 */
 	@Override
-	public boolean valid(GameState p_internalGameState) {
+	public boolean checkValid(GameState p_internalGameState) {
 		Country l_nameOfSourceCountry = d_cardHoldingPlayer.getD_coutriesOwned().stream()
-				.filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(this.d_nameOfSourceCountry.toString()))
+				.filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(this.d_nameOfSourceCountry))
 				.findFirst().orElse(null);
 		if (l_nameOfSourceCountry == null) {
 			this.setD_orderExecutionLog(
@@ -85,7 +86,7 @@ public class Airlift implements Card {
 			return false;
 		}
 		Country l_targetCountry = d_cardHoldingPlayer.getD_coutriesOwned().stream()
-				.filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(this.d_nameOfTargetCountry.toString()))
+				.filter(l_pl -> l_pl.getD_countryName().equalsIgnoreCase(this.d_nameOfTargetCountry))
 				.findFirst().orElse(null);
 		if (l_targetCountry == null) {
 			this.setD_orderExecutionLog(
@@ -129,15 +130,15 @@ public class Airlift implements Card {
 	/**
 	 * Prints and Sets the order execution log.
 	 *
-	 * @param p_executionOrderlog String to be set as log
+	 * @param p_executionOrderLog String to be set as log
 	 * @param p_typeOfLog           type of log : error, default
 	 */
-	public void setD_orderExecutionLog(String p_executionOrderlog, String p_typeOfLog) {
-		this.d_logOfOrderExecution = p_executionOrderlog;
+	public void setD_orderExecutionLog(String p_executionOrderLog, String p_typeOfLog) {
+		this.d_logOfOrderExecution = p_executionOrderLog;
 		if (p_typeOfLog.equals("error")) {
-			System.err.println(p_executionOrderlog);
+			System.err.println(p_executionOrderLog);
 		} else {
-			System.out.println(p_executionOrderlog);
+			System.out.println(p_executionOrderLog);
 		}
 	}
 
@@ -152,28 +153,7 @@ public class Airlift implements Card {
 		return "airlift";
 	}
 
-	/**
-	 * Checks Pre-validations while issuing commands.
-	 *
-	 * @param p_internalGameState current GameState Instance
-	 * @return Bool if the order is valid
-	 */
-	@Override
-	public Boolean validOrderCheck(GameState p_internalGameState) {
-		Country l_sourceCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfSourceCountry);
-		Country l_targetCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfTargetCountry);
-		if (l_sourceCountry == null) {
-			this.setD_orderExecutionLog("Invalid Source Country name! This country Doesn't exist on the map!", "error");
-			p_internalGameState.updateLog(orderExecutionLog(), "effect");
-			return false;
-		}
-		if (l_targetCountry == null) {
-			this.setD_orderExecutionLog("Invalid Target Country! Doesn't exist on the map!", "error");
-			p_internalGameState.updateLog(orderExecutionLog(), "effect");
-			return false;
-		}
-		return true;
-	}
+
 
 
 	/**
