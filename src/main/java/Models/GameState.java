@@ -1,148 +1,196 @@
 package Models;
-
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The GameState class represents the state of a game, including the map, player information,
- * unexecuted orders, error messages, and a log buffer for game events.
+ * This class is used to test functionality of GameState class functions.
  */
-public class GameState {
+public class GameState implements Serializable {
 
-    /** 
-	 * The game map. 
-	 * 
-	*/
+    /**
+     * map object.
+     */
     Map d_map;
 
     /**
-	 *  An error message, if any. 
-	 * */
-    String d_error;
-
-    /** 
-	 * Flag indicating whether a load command has been executed. 
-	 * */
-    Boolean d_loadCommand = false;
-
-    /** 
-	 * A list of unexecuted orders. 
-	 * */
-    List<Order> d_unexecutedOrdersList;
-
-    /** 
-	 * A list of players in the game. 
-	 * */
-    List<ModelPlayer> d_playersList;
-
-    /** 
-	 * A log buffer for storing game events. 
-	 * */
+     * Log Entries for existing game state.
+     */
     ModelLogEntryBuffer d_logBuffer = new ModelLogEntryBuffer();
 
     /**
-     * Get the game map.
+     * list of players.
+     */
+    List<ModelPlayer> d_players;
+
+    /**
+     * list of unexecuted orders.
+     */
+    List<Order> d_unexecutedOrderList;
+
+    /**
+     * error message.
+     */
+    String d_error;
+
+    /**
+     * Checks if user has used load command.
+     */
+    Boolean d_loadCommand = false;
+
+    /**
+     * Number of turns in tournament.
+     */
+    int d_maxNumberOfTurns = 0;
+
+    /**
+     * Number of remaining turns in tournament.
+     */
+    int d_numberOfTurnsLeft = 0;
+
+    /**
+     * Maintains list of players lost in the game.
+     */
+    List<ModelPlayer> d_playersFailed = new ArrayList<>();
+
+    /**
+     * Winner Player.
+     */
+    ModelPlayer d_winner;
+
+    /**
+     * getter method to get the map.
      *
-     * @return The game map.
+     * @return map object
      */
     public Map getD_map() {
         return d_map;
     }
 
     /**
-     * Set the game map.
+     * setter method to set the map.
      *
-     * @param p_map The game map to set.
+     * @param p_map map object
      */
     public void setD_map(Map p_map) {
         this.d_map = p_map;
     }
 
     /**
-     * Get the error message.
+     * getter method to get the list of players.
      *
-     * @return The error message, if any.
+     * @return list of players
+     */
+    public List<ModelPlayer> getD_players() {
+        return d_players;
+    }
+
+    /**
+     * setter method to set the players.
+     *
+     * @param p_players list of players
+     */
+    public void setD_players(List<ModelPlayer> p_players) {
+        this.d_players = p_players;
+    }
+
+    /**
+     * getter method to get the list of orders which are yet to be executed.
+     *
+     * @return list of orders
+     */
+    public List<Order> getD_unexecutedOrders() {
+        return d_unexecutedOrderList;
+    }
+
+    /**
+     * setter method to set the unexecuted orders.
+     *
+     * @param p_unexecutedOrders list of unexecuted orders
+     */
+    public void setD_unexecutedOrders(List<Order> p_unexecutedOrders) {
+        this.d_unexecutedOrderList = p_unexecutedOrders;
+    }
+
+    /**
+     * getter method to get the error message.
+     *
+     * @return error message
      */
     public String getError() {
         return d_error;
     }
 
     /**
-     * Set an error message.
+     * setter method to set the error message.
      *
-     * @param p_error The error message to set.
+     * @param p_error error message
      */
     public void setError(String p_error) {
         this.d_error = p_error;
     }
 
     /**
-     * Check if a load command has been executed.
+     * Message to be added in the log.
      *
-     * @return `true` if a load command has been executed, `false` otherwise.
+     * @param p_logMessage Log Message to be set in the Object
+     * @param p_logType    Type of Log Message to be Added
      */
-    public boolean getD_loadCommand() {
-        return this.d_loadCommand;
+    public void updateLog(String p_logMessage, String p_logType) {
+        d_logBuffer.currentLog(p_logMessage, p_logType);
     }
 
-    /**
-     * Set the load command as executed.
-     */
-    public void setD_loadCommand() {
-        this.d_loadCommand = true;
-    }
 
-    /**
-     * Get the list of unexecuted orders.
-     *
-     * @return The list of unexecuted orders.
-     */
-    public List<Order> getD_unexecutedOrdersList() {
-        return d_unexecutedOrdersList;
-    }
-
-    /**
-     * Set the list of unexecuted orders.
-     *
-     * @param p_unexecutedOrders The list of unexecuted orders to set.
-     */
-    public void setD_unexecutedOrdersList(List<Order> p_unexecutedOrders) {
-        this.d_unexecutedOrdersList = p_unexecutedOrders;
-    }
-
-    /**
-     * Get the list of players in the game.
-     *
-     * @return The list of players.
-     */
-    public List<ModelPlayer> getD_playersList() {
-        return d_playersList;
-    }
-
-    /**
-     * Set the list of players in the game.
-     *
-     * @param p_players The list of players to set.
-     */
-    public void setD_playersList(List<ModelPlayer> p_players) {
-        this.d_playersList = p_players;
-    }
-
-    /**
-     * Get the most recent log message from the log buffer.
-     *
-     * @return The most recent log message.
-     */
     public String getRecentLog() {
         return d_logBuffer.getD_logMessage();
     }
 
-    /**
-     * Update the log buffer with a new log message and its type.
-     *
-     * @param p_logMessage The log message to add.
-     * @param p_logType    The type of the log message.
-     */
-    public void updateLog(String p_logMessage, String p_logType) {
-        d_logBuffer.currentLog(p_logMessage, p_logType);
+    public void setD_loadCommand() {
+        this.d_loadCommand = true;
+    }
+
+
+    public boolean getD_loadCommand() {
+        return this.d_loadCommand;
+    }
+
+
+    public int getD_maxNumberOfTurns() {
+        return d_maxNumberOfTurns;
+    }
+
+
+    public void setD_maxNumberOfTurns(int p_maxNumberOfTurns) {
+        this.d_maxNumberOfTurns = p_maxNumberOfTurns;
+    }
+
+
+    public int getD_numberOfTurnsLeft() {
+        return d_numberOfTurnsLeft;
+    }
+
+
+    public void setD_numberOfTurnsLeft(int p_numberOfTurnsLeft) {
+        this.d_numberOfTurnsLeft = p_numberOfTurnsLeft;
+    }
+
+
+    public void removePlayer(ModelPlayer p_player){
+        d_playersFailed.add(p_player);
+    }
+
+
+    public List<ModelPlayer> getD_playersFailed() {
+        return d_playersFailed;
+    }
+
+
+    public void setD_winner(ModelPlayer p_player){
+        d_winner = p_player;
+    }
+
+
+    public ModelPlayer getD_winner(){
+        return d_winner;
     }
 }
