@@ -2,24 +2,18 @@ package Utils;
 
 import Models.GameState;
 
+import java.io.Serializable;
+
+
 /**
  * Class to Add Exception to Logs that are not caught using try/catch.
  */
-public class LogExceptionHandler implements Thread.UncaughtExceptionHandler{
+public class LogHandlerException implements Thread.UncaughtExceptionHandler, Serializable {
 
     /**
      * GameState to which Exception Log Belongs to.
      */
-    GameState d_initialGameState;
-
-    /**
-     * Constructor to set the GameState Object.
-     *
-     * @param p_gameState Current GameState
-     */
-    public LogExceptionHandler(GameState p_gameState){
-        d_initialGameState = p_gameState;
-    }
+    GameState d_gameState;
 
     /**
      * Updates the Log in the GameState.
@@ -29,6 +23,17 @@ public class LogExceptionHandler implements Thread.UncaughtExceptionHandler{
      */
     @Override
     public void uncaughtException(Thread p_t, Throwable p_e) {
-            d_initialGameState.updateLog(p_e.getMessage(), "effect");
+        d_gameState.updateLog(p_e.getMessage(), "effect");
     }
+
+    /**
+     * Constructor to set the GameState Object.
+     *
+     * @param p_currentGameState Current GameState
+     */
+    public LogHandlerException(GameState p_currentGameState){
+        d_gameState = p_currentGameState;
+    }
+
+
 }
