@@ -1,37 +1,39 @@
 package Models;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class HumanPlayer extends PlayerBehaviorStrategy{
 
-    @Override
-    public String getPlayerBehavior() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPlayerBehavior'");
-    }
+	@Override
+	public String createCardOrder(ModelPlayer p_modelPlayer, GameState p_currentGameState, String p_currentCardName) {
+		return null;
+	}
 
-    @Override
-    public String createOrder(ModelPlayer p_modelPlayer, GameState p_currentGameState) throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createOrder'");
-    }
+	@Override
+	public String createOrder(ModelPlayer p_modelPlayer, GameState p_currentGameState) throws IOException {
 
-    @Override
-    public String createCardOrder(ModelPlayer p_modelPlayer, GameState p_currentGameState, String p_currentCardName) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createCardOrder'");
-    }
+		BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("\nPlease enter command to issue order for player : " + p_modelPlayer.getPlayerName()
+				+ " or give showmap command to view current state of the game.");
+		String l_commandEntered = l_reader.readLine();
+		return l_commandEntered;
+	}
 
-    @Override
-    public String createAdvanceOrder(ModelPlayer p_modelPlayer, GameState p_currentGameState) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createAdvanceOrder'");
-    }
+	@Override
+	public String createDeployOrder(ModelPlayer p_modelPlayer, GameState p_currentGameState) {
+		return null;
+	}
 
-    @Override
-    public String createDeployOrder(ModelPlayer p_modelPlayer, GameState p_currentGameState) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createDeployOrder'");
-    }
+	@Override
+	public String createAdvanceOrder(ModelPlayer p_modelPlayer, GameState p_currentGameState) {
+		return null;
+	}
+
+	@Override
+	public String getPlayerBehavior() {
+		return "Human";
+	}
     
 }
