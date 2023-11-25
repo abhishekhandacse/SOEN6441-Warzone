@@ -1,18 +1,17 @@
 package Models;
 
+
 /**
- * The card interface extends the Order
- * It represents an abstraction for cards used within a game. 
- * 
+ * This model class manages all the cards owned by the player.
  */
 public interface Card extends Order {
 
     /**
-     * 
-     * Implementing classes must define the validation logic for the card's order and checks the order validity
+     * Pre-validation of card type order.
      *
-     * @param p_gameState Game's current state
-     * @return a Boolean value indicating whether the card order is valid (true) or not (false)
+     * @param p_currentGameState Gamestate
+     * @return true or false
      */
-    Boolean validOrderCheck(GameState p_gameState);
+    public Boolean checkIfOrderIsValid(GameState p_currentGameState);
+
 }
