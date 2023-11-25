@@ -2,77 +2,88 @@ package Models;
 
 import Services.PlayerService;
 
+import java.io.Serializable;
+
 /**
- * The `Diplomacy` class represents a card that allows players to negotiate attacks with other players.
+ * Handles diplomacy command.
+ *
  */
-public class Diplomacy implements Card {
+public class Diplomacy implements Card, Serializable {
 
     /**
-     * The player who issued the diplomacy request.
+     * Player issuing the negotiate order.
      */
-    ModelPlayer d_sourcePlayer;
+    ModelPlayer d_modelIssuingPlayer;
 
     /**
-     * The name of the target player for the diplomacy request.
+     * Records the execution log.
      */
-    String d_destPlayer;
+    String d_orderExecutionLog;
+    String d_playerTarget;
+
+
 
     /**
-     * Log of the execution order.
-     */
-    String d_executionOrderLog;
-
-    /**
-     * Constructs a `Diplomacy` card with the target player and the issuing player.
+     * Constructor to create diplomacy order.
      *
-     * @param p_targetPlayer   The name of the target player for the diplomacy request.
-     * @param p_IssuingPlayer  The player who issues the diplomacy request.
+     * @param p_targetPlayer target player to negotiate with
+     * @param p_IssuingPlayer negotiate issuing player.
      */
-    public Diplomacy(String p_targetPlayer, ModelPlayer p_IssuingPlayer) {
-        this.d_destPlayer = p_targetPlayer;
-        this.d_sourcePlayer = p_IssuingPlayer;
+    public Diplomacy(String p_targetPlayer, ModelPlayer p_IssuingPlayer){
+        this.d_playerTarget = p_targetPlayer;
+        this.d_modelIssuingPlayer = p_IssuingPlayer;
     }
 
+    /**
+     * Prints orders.
+     */
+    public void printOrder() {
+        this.d_orderExecutionLog = "----------Diplomacy order issued by player " + this.d_modelIssuingPlayer.getPlayerName()
+                + "----------" + System.lineSeparator() + "Request to " + " negotiate attacks from "
+                + this.d_playerTarget;
+        System.out.println(System.lineSeparator()+this.d_orderExecutionLog);
+    }
+
+    /**
+     * Executing the negotiate order.
+     */
     @Override
-    public boolean valid(GameState p_gameState) {
-        // Diplomacy card is always valid.
+    public void execute(GameState p_currentGameState) {
+        PlayerService l_playerService = new PlayerService();
+        ModelPlayer l_targetPlayer = l_playerService.findPlayerByName(d_playerTarget, p_currentGameState);
+        l_targetPlayer.addPlayerNegotiation(d_modelIssuingPlayer);
+        d_modelIssuingPlayer.addPlayerNegotiation(l_targetPlayer);
+        d_modelIssuingPlayer.removeCard("negotiate");
+        this.setD_orderExecutionLog("Negotiation with "+ d_playerTarget + " approached by "+ d_modelIssuingPlayer.getPlayerName()+" successful!", "default");
+        p_currentGameState.updateLog(d_orderExecutionLog, "effect");
+    }
+
+    /**
+     * checks if order is valid.
+     */
+    @Override
+    public boolean checkValid(GameState p_gameState) {
         return true;
     }
 
-    /**
-     * Prints the diplomacy order information.
-     */
-    public void printOrder() {
-        this.d_executionOrderLog = "==========Diplomacy order issued by player " + this.d_sourcePlayer.getPlayerName()
-                + "==========" + System.lineSeparator() + "Request to negotiate attacks from "
-                + this.d_destPlayer;
-        System.out.println(System.lineSeparator() + this.d_executionOrderLog);
-    }
 
+
+    /**
+     * sets execution log.
+     */
     @Override
     public String orderExecutionLog() {
-        return this.d_executionOrderLog;
-    }
-
-    @Override
-    public void execute(GameState p_gameState) {
-        PlayerService l_playerService = new PlayerService();
-        ModelPlayer l_targetPlayer = l_playerService.findPlayerByName(d_destPlayer, p_gameState);
-        l_targetPlayer.addPlayerNegotiation(d_sourcePlayer);
-        d_sourcePlayer.addPlayerNegotiation(l_targetPlayer);
-        d_sourcePlayer.removeCard("negotiate");
-        this.setD_orderExecutionLog("Negotiation with " + d_destPlayer + " approached by " + d_sourcePlayer.getPlayerName() + " successful!", "default");
-        p_gameState.updateLog(d_executionOrderLog, "effect");
+        return this.d_orderExecutionLog;
     }
 
     /**
-     * Sets the execution order log.
+     * Prints and Sets the order execution log.
      *
-     * @param p_orderExecutionLog The log message for the execution of the order.
-     * @param p_logType           The type of log (e.g., "error" or other).
+     * @param p_orderExecutionLog String to be set as log
+     * @param p_logType           type of log : error, default
      */
     public void setD_orderExecutionLog(String p_orderExecutionLog, String p_logType) {
-        this.d_executionOrderLog = p_orderExecutionLog;
+        this.d_orderExecutionLog = p_orderExecutionLog;
         if (p_logType.equals("error")) {
             System.err.println(p_orderExecutionLog);
         } else {
@@ -80,24 +91,42 @@ public class Diplomacy implements Card {
         }
     }
 
+
+    /**
+     * checks valid order.
+     */
     @Override
-    public Boolean validOrderCheck(GameState p_gameState) {
+    public Boolean checkIfOrderIsValid(GameState p_currentGameState) {
         PlayerService l_playerService = new PlayerService();
-        ModelPlayer l_targetPlayer = l_playerService.findPlayerByName(d_destPlayer, p_gameState);
-        if (!p_gameState.getD_playersList().contains(l_targetPlayer)) {
+        ModelPlayer l_targetPlayer = l_playerService.findPlayerByName(d_playerTarget, p_currentGameState);
+        if(!p_currentGameState.getD_players().contains(l_targetPlayer)){
             this.setD_orderExecutionLog("Player to negotiate doesn't exist!", "error");
-            p_gameState.updateLog(orderExecutionLog(), "effect");
+            p_currentGameState.updateLog(orderExecutionLog(), "effect");
             return false;
         }
         return true;
     }
 
-    private String currentOrder() {
-        return "Diplomacy Order : " + "negotiate" + " " + this.d_destPlayer;
-    }
 
+
+    /**
+     * Return order name.
+     *
+     * @return String
+     */
     @Override
     public String getOrderName() {
         return "diplomacy";
     }
+
+    /**
+     * Gives current advance order which is being executed.
+     *
+     * @return advance order command
+     */
+    private String currentOrder() {
+        return "Diplomacy Order : " + "negotiate" + " " + this.d_playerTarget;
+    }
+
+
 }
