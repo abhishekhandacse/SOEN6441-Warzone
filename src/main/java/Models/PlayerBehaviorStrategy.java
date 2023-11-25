@@ -20,10 +20,6 @@ public abstract class PlayerBehaviorStrategy implements Serializable {
      */
     ModelPlayer d_modelPlayer;
 
-
-
-
-
     /**
      * This method returns the player behavior.
      * @return String player behavior
