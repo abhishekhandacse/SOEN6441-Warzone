@@ -1,6 +1,6 @@
 package Models;
 
-import Exceptions.MapValidationException;
+import Exceptions.InvalidMap;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,46 +10,55 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * This class is responsible for testing the Diplomacy order in the game.
+ * Deplomacy test class.
+ *
  */
-public class DiplomacyTest {
-
+public class DiplomacyUnitTest {
     /**
-     * The first player object.
+     * country to shift armies from.
      */
-    ModelPlayer d_player1;
+    Airlift d_invalidAirLift1;
 
     /**
-     * The second player object
-     */
-    ModelPlayer d_player2;
-
-    /**
-     * The Bomb order object.
-     */
-    ModelBomb d_bombOrder;
-
-    /**
-     * The Diplomacy order object.
-     */
-    Diplomacy d_diplomacyOrder;
-
-    /**
-     *  The game state object.
+     * Game State.
      */
     GameState d_gameState;
 
     /**
-     * Setup method to initialize the test environment and create necessary objects.
+     * Bomb Order.
+     */
+    ModelBomb d_Model_bombOrder;
+
+
+    /**
+     * Second Player
+     */
+    ModelPlayer d_player2;
+    /**
+     * First Player.
+     */
+    ModelPlayer d_player1;
+
+
+    /**
+     * diplomacy order.
+     */
+    Diplomacy d_diplomacyOrder;
+
+
+
+
+    /**
+     * Setup before the tests.
      *
-     * @throws MapValidationException if there is a map validation error.
+     * @throws InvalidMap Exception
      */
     @Before
-    public void setup() throws MapValidationException {
+    public void setup() throws InvalidMap {
         d_gameState = new GameState();
         d_player1 = new ModelPlayer();
-        d_player1.setPlayerName("Amanpreet");
-        d_player2 = new ModelPlayer("Rajat");
+        d_player2 = new ModelPlayer("b");
+        d_player1.setPlayerName("a");
 
 
         List<Country> l_countryList = new ArrayList<Country>();
@@ -58,8 +67,8 @@ public class DiplomacyTest {
         l_countryList.add(l_country);
 
         Country l_countryNeighbour = new Country(1, "Belgium", 1);
-        l_countryNeighbour.addNeighbour(0);
-        l_country.addNeighbour(1);
+        l_countryNeighbour.addNeighbours(0);
+        l_country.addNeighbours(1);
         l_countryNeighbour.setD_armies(10);
         l_countryList.add(l_countryNeighbour);
 
@@ -69,21 +78,22 @@ public class DiplomacyTest {
         l_countryList2.add(l_countryNotNeighbour);
 
         Map l_map = new Map();
-        l_map.setD_allCountries(new ArrayList<Country>(){{ addAll(l_countryList); addAll(l_countryList2); }});
+        l_map.setD_countries(new ArrayList<Country>(){{ addAll(l_countryList); addAll(l_countryList2); }});
 
         d_gameState.setD_map(l_map);
-        d_player1.setD_coutriesOwned(l_countryList);
         d_player2.setD_coutriesOwned(l_countryList2);
+        d_player1.setD_coutriesOwned(l_countryList);
+
         List<ModelPlayer> l_playerList = new ArrayList<ModelPlayer>();
-        l_playerList.add(d_player1);
         l_playerList.add(d_player2);
-        d_gameState.setD_playersList(l_playerList);
+        l_playerList.add(d_player1);
+        d_gameState.setD_players(l_playerList);
         d_diplomacyOrder = new Diplomacy(d_player2.getPlayerName(), d_player1);
-        d_bombOrder = new ModelBomb(d_player2, "France");
+        d_Model_bombOrder = new ModelBomb(d_player2, "France");
     }
 
     /**
-     * Test the execution of the Diplomacy order and verify if a negotiation pact is formed.
+     * Tests if diplomacy works.
      */
     @Test
     public void testDiplomacyExecution(){
@@ -92,12 +102,12 @@ public class DiplomacyTest {
     }
 
     /**
-     * Test if Diplomacy effectively prevents the execution of a Bomb order.
+     * Tests the next orders after negotiation if they work.
      */
     @Test
     public void NegotiationWorking(){
+        d_Model_bombOrder.execute(d_gameState);
         d_diplomacyOrder.execute(d_gameState);
-        d_bombOrder.execute(d_gameState);
-        assertEquals(d_gameState.getRecentLog().trim(), "Log: Bomb card order : bomb France is not executed as Rajat has negotiation pact with the target country's player!");
+        assertEquals( "Log: Negotiation with b approached by a successful!",d_gameState.getRecentLog().trim());
     }
 }
