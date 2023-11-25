@@ -56,7 +56,7 @@ public class ModelDeploy implements Order, Serializable {
     public void execute(GameState p_gameState) {
 
         if (checkValid(p_gameState)) {
-            for (Country l_country : p_gameState.getD_map().getD_countries()) {
+            for (Country l_country : p_gameState.getD_map().getD_countriesList()) {
                 if (l_country.getD_countryName().equalsIgnoreCase(this.d_targetCountryName)) {
                     Integer l_armiesToUpdate = l_country.getD_armies() == null ? this.d_numberOfArmiesToPlace
                             : l_country.getD_armies() + this.d_numberOfArmiesToPlace;

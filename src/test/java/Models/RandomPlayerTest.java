@@ -55,7 +55,7 @@ public class RandomPlayerTest {
         l_listOfPlayer.add(d_player);
 
         Map l_map = new Map();
-        l_map.setD_countries(l_list);
+        l_map.setD_countriesList(l_list);
         d_gameState.setD_map(l_map);
         d_gameState.setD_players(l_listOfPlayer);
     }

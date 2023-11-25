@@ -11,10 +11,25 @@ import java.util.List;
  */
 public class Continent {
 
-	Integer d_continentID;
+	/**
+	 * continent name.
+	 */
 	String d_continentName;
+
+	/**
+	 * continent ID.
+	 */
+	Integer d_continentID;
+
+	/**
+	 * continent value.
+	 */
 	Integer d_continentValue;
-	List<Country> d_countries;
+
+	/**
+	 * List of countries.
+	 */
+	List<Country> d_countriesList;
 
 	/**
 	 * Default constructor for ModelContinent.
@@ -49,8 +64,8 @@ public class Continent {
 	 *
 	 * @param p_countries The list of countries in the continent.
 	 */
-	public void setD_countries(List<Country> p_countries) {
-		this.d_countries = p_countries;
+	public void setD_countriesList(List<Country> p_countries) {
+		this.d_countriesList = p_countries;
 	}
 
 	/**
@@ -112,8 +127,8 @@ public class Continent {
 	 *
 	 * @return The list of countries in the continent.
 	 */
-	public List<Country> getD_countries() {
-		return d_countries;
+	public List<Country> getD_countriesList() {
+		return d_countriesList;
 	}
 
 	/**
@@ -122,11 +137,11 @@ public class Continent {
 	 * @param p_country The country to be added.
 	 */
 	public void addingCountry(Country p_country) {
-		if (d_countries != null) {
-			d_countries.add(p_country);
+		if (d_countriesList != null) {
+			d_countriesList.add(p_country);
 		} else {
-			d_countries = new ArrayList<Country>();
-			d_countries.add(p_country);
+			d_countriesList = new ArrayList<Country>();
+			d_countriesList.add(p_country);
 		}
 	}
 
@@ -137,10 +152,10 @@ public class Continent {
 	 * @throws MapValidationException If the country does not exist.
 	 */
 	public void countryRemove(Country p_country) throws MapValidationException {
-		if (d_countries == null) {
+		if (d_countriesList == null) {
 			System.out.println("No such Country Exists");
 		} else {
-			d_countries.remove(p_country);
+			d_countriesList.remove(p_country);
 		}
 	}
 
@@ -151,9 +166,9 @@ public class Continent {
 	 * @throws MapValidationException If the country does not exist.
 	 */
 	public void removeCountryNeighboursFromAll(Integer p_countryId) throws MapValidationException {
-		if (null != d_countries && !d_countries.isEmpty()) {
-			for (Country c : d_countries) {
-				if (!CommonUtil.isNullObject(c.d_adjacentCountryIds)) {
+		if (null != d_countriesList && !d_countriesList.isEmpty()) {
+			for (Country c : d_countriesList) {
+				if (!CommonUtil.isNull(c.d_adjacentCountryIds)) {
 					if (c.getD_adjacentCountryIds().contains(p_countryId)) {
 						c.removeNeighbour(p_countryId);
 					}

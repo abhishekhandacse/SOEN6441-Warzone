@@ -69,7 +69,7 @@ public class ConquestMapFileReaderTest {
 
 		assertNotNull(d_state.getD_map());
 		assertEquals(d_state.getD_map().getD_continents().size(), 8);
-		assertEquals(d_state.getD_map().getD_countries().size(), 99);
+		assertEquals(d_state.getD_map().getD_countriesList().size(), 99);
 	}
 	/**
 	 * tests addition or deletion of continent via editcontinent operation
@@ -92,9 +92,9 @@ public class ConquestMapFileReaderTest {
 
 		d_mapService.editFunctions(d_state, "add", "Swiss Europe", 2);
 		d_mapService.editFunctions(d_state, "add", "Norway Europe", 2);
-		assertEquals(d_state.getD_map().getD_countries().size(), 101);
+		assertEquals(d_state.getD_map().getD_countriesList().size(), 101);
 
 		d_mapService.editFunctions(d_state, "remove", "Swiss", 2);
-		assertEquals(d_state.getD_map().getD_countries().size(), 100);
+		assertEquals(d_state.getD_map().getD_countriesList().size(), 100);
 	}
 }

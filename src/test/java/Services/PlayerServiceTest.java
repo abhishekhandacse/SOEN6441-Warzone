@@ -129,7 +129,7 @@ public class PlayerServiceTest {
             assertNotNull(l_pl.getD_coutriesOwned());
             l_assignedCountriesSize = l_assignedCountriesSize + l_pl.getD_coutriesOwned().size();
         }
-        assertEquals(l_assignedCountriesSize, d_gameState.getD_map().getD_countries().size());
+        assertEquals(l_assignedCountriesSize, d_gameState.getD_map().getD_countriesList().size());
     }
 
     /**

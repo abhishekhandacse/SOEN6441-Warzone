@@ -295,7 +295,7 @@ public class MapView {
 			d_continentsList.forEach(l_continent -> {
 				renderContinentName(l_continent.getD_continentName());
 
-				List<Country> l_continentCountries = l_continent.getD_countries();
+				List<Country> l_continentCountries = l_continent.getD_countriesList();
 				final int[] l_countryIndex = {1};
 
 				// renders the country if any

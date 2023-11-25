@@ -179,7 +179,7 @@ public class PlayerService {
 
 				for (Continent l_cont : p_continents) {
 					List<String> l_countriesOfContinent = new ArrayList<>();
-					l_cont.getD_countries().forEach(l_count -> l_countriesOfContinent.add(l_count.getD_countryName()));
+					l_cont.getD_countriesList().forEach(l_count -> l_countriesOfContinent.add(l_count.getD_countryName()));
 					if (l_countriesOwned.containsAll(l_countriesOfContinent)) {
 						if (l_pl.getD_continentsOwned() == null)
 							l_pl.setD_continentsOwned(new ArrayList<>());

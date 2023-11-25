@@ -73,7 +73,7 @@ public class DeployTest {
 
         // Setting up the game map
         Map l_map = new Map();
-        l_map.setD_countries(l_mapCountries);
+        l_map.setD_countriesList(l_mapCountries);
         d_gameState.setD_map(l_map);
 
         // Creating deploy orders
