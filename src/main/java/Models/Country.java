@@ -120,7 +120,12 @@ public class Country {
 		if(!d_adjacentCountryIds.contains(p_countryId))
 			d_adjacentCountryIds.add(p_countryId);
 	}
-
+    /**
+     * Removes a neighboring country from the list of adjacent countries.
+     *
+     * @param p_countryId The ID of the neighboring country to be removed
+     * @throws InvalidMap  If the specified neighboring country does not exist
+     */
 	public void removeNeighbours(Integer p_countryId) throws InvalidMap {
 		if(d_adjacentCountryIds.contains(p_countryId)){
 			d_adjacentCountryIds.remove(d_adjacentCountryIds.indexOf(p_countryId));
