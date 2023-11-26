@@ -1,281 +1,176 @@
 package Models;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.List;
+import java.util.Map;
+import Constants.ApplicationConstants;
 import Controllers.GameEngine;
 import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
+import Services.GameService;
 import Utils.CommandHandler;
+import Utils.LogHandlerException;
 import Views.MapView;
 
-/**
- * The IssueOrderPhase class represents the phase in the game where players issue orders.
- * Extends the Phase class.
- */
-public class IssueOrderPhase extends Phase{
+public class IssueOrderPhase extends Phase {
 
-    /**
-     * Constructor for the IssueOrderPhase class.
-     *
-     * @param p_gameEngine the game engine
-     * @param p_gameState  the current state of the game
-     */
-    public IssueOrderPhase(GameEngine p_gameEngine, GameState p_gameState) {
-        super(p_gameEngine, p_gameState);
-    }
-    /**
-     * Handles the assigning of countries to players during the issue order phase.
-     * Overrides the method from the Phase class.
-     *
-     * @param p_command the command handler
-     * @param p_player  the player
-     * @throws CommandValidationException      if an invalid command is encountered
-     * @throws IOException         if an I/O error occurs
-     * @throws MapValidationException if an issue with map validation occurs
-     */
-    @Override
-    protected void performingAssignCountries(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, IOException, MapValidationException {
+	public IssueOrderPhase(GameEngine p_gameEngine, GameState p_gameState) {
+		super(p_gameEngine, p_gameState);
+	}
+
+	@Override
+	public void initPhase(boolean p_isTournamentMode) {
+		while (d_gameEngine.getD_CurrentPhase() instanceof IssueOrderPhase) {
+			issueOrders(p_isTournamentMode);
+		}
+	}
+
+	@Override
+    protected void performLoadGame(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException {
         printInvalidCommandInState();
         askForOrder(p_player);
     }
 
-    /**
-     * Creates players during the issue order phase.
-     *
-     * @param p_command the command handler
-     * @param p_player  the player
-     * @throws CommandValidationException      if an invalid command is encountered
-     * @throws IOException         if an I/O error occurs
-     * @throws MapValidationException if an issue with map validation occurs
-     */
     @Override
-    protected void creatingPlayers(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, IOException, MapValidationException {
-        printInvalidCommandInState();
-        askForOrder(p_player);
-    }
+    protected void performSaveGame(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException {
+        List<java.util.Map<String, String>> l_operations_list = p_command.getOperationsAndArguments();
 
-    /**
-     * Performs the editing of neighbors during the issue order phase.
-     *
-     * @param p_command the command handler
-     * @param p_player  the player
-     * @throws CommandValidationException      if an invalid command is encountered
-     * @throws MapValidationException if an issue with map validation occurs
-     * @throws IOException         if an I/O error occurs
-     */
-    @Override
-    protected void performingEditNeighbour(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException {
-        printInvalidCommandInState();
-        askForOrder(p_player);
-    }
+        Thread.setDefaultUncaughtExceptionHandler(new LogHandlerException(d_gameState));
 
-    /**
-     * Overrides the Phase class method to handle the editing of countries during the issue order phase.
-     *
-     * @param p_command the command handler
-     * @param p_player  the player
-     * @throws CommandValidationException      if an invalid command is encountered
-     * @throws IOException         if an I/O error occurs
-     * @throws MapValidationException if an issue with map validation occurs
-     */
-    @Override
-    protected void performingEditCountry(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException {
-        printInvalidCommandInState();
-        askForOrder(p_player);
-    }
+        if (l_operations_list == null || l_operations_list.isEmpty()) {
+            throw new CommandValidationException(ApplicationConstants.INVALID_COMMAND_ERROR_SAVEGAME);
+        }
 
-    /**
-     * Validates the map during the issue order phase.
-     *
-     * @param p_command the command handler
-     * @param p_player  the player
-     * @throws MapValidationException if an issue with map validation occurs
-     * @throws CommandValidationException      if an invalid command is encountered
-     * @throws IOException         if an I/O error occurs
-     */
-    @Override
-    protected void performingValidateMap(CommandHandler p_command, ModelPlayer p_player) throws MapValidationException, CommandValidationException, IOException {
-        printInvalidCommandInState();
-        askForOrder(p_player);
-    }
+        for (Map<String, String> l_map : l_operations_list) {
+            if (p_command.checkRequiredKeysPresent(ApplicationConstants.ARGUMENTS, l_map)) {
+                String l_filename = l_map.get(ApplicationConstants.ARGUMENTS);
+                GameService.saveGame(this, l_filename);
+                d_gameEngine.setD_gameEngineLog("Game Saved Successfully to "+l_filename, "effect");
 
-    /**
-     * Loads the map during the issue order phase.
-     *
-     * @param p_command the command handler
-     * @param p_player  the player
-     * @throws CommandValidationException      if an invalid command is encountered
-     * @throws MapValidationException if an issue with map validation occurs
-     * @throws IOException         if an I/O error occurs
-     */
-    @Override
-    protected void performingLoadMap(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException {
-        printInvalidCommandInState();
-        askForOrder(p_player);
-    }
-
-    /**
-     * Saves the map during the issue order phase.
-     *
-     * @param p_command the command handler
-     * @param p_player  the player
-     * @throws CommandValidationException      if an invalid command is encountered
-     * @throws MapValidationException if an issue with map validation occurs
-     * @throws IOException         if an I/O error occurs
-     */
-    @Override
-    protected void performingSaveMap(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException {
-        printInvalidCommandInState();
-        askForOrder(p_player);
-    }
-
-    /**
-     * Performs the editing of the continent during the issue order phase.
-     * Overrides the method from the Phase class.
-     *
-     * @param p_command the command handler
-     * @param p_player  the player
-     * @throws IOException         if an I/O error occurs
-     * @throws CommandValidationException      if an invalid command is encountered
-     * @throws MapValidationException if an issue with map validation occurs
-     */
-    @Override
-    protected void performingEditContinent(CommandHandler p_command, ModelPlayer p_player) throws IOException, CommandValidationException, MapValidationException {
-        printInvalidCommandInState();
-        askForOrder(p_player);
-    }
-
-    /**
-     * Overrides the Phase class method to perform map editing during the issue order phase.
-     *
-     * @param p_command the command handler
-     * @param p_player  the player
-     * @throws IOException         if an I/O error occurs
-     * @throws CommandValidationException      if an invalid command is encountered
-     * @throws MapValidationException if an issue with map validation occurs
-     */
-    @Override
-    protected void performingMapEdit(CommandHandler p_command, ModelPlayer p_player) throws IOException, CommandValidationException, MapValidationException {
-        printInvalidCommandInState();
-        askForOrder(p_player);
-    }
-
-    /**
-     * Performs the handling of card-related commands during the issue order phase.
-     *
-     * @param p_enteredCommand the entered command
-     * @param p_player         the player
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void performingCardHandle(String p_enteredCommand, ModelPlayer p_player) throws IOException {
-        if(p_player.getD_cardsOwnedByPlayer().contains(p_enteredCommand.split(" ")[0])) {
-                p_player.handleCardCommands(p_enteredCommand, d_gameState);
-                d_gameEngine.setD_gameEngineLog(p_player.d_playerLog, "effect");
-        }  
-        p_player.checkForMoreOrders();
-    }
-
-    /**
-     * Shows the map during the issue order phase.
-     * Overrides the method from the Phase class.
-     *
-     * @param p_command the command handler
-     * @param p_player  the player
-     * @throws CommandValidationException      if an invalid command is encountered
-     * @throws IOException         if an I/O error occurs
-     * @throws MapValidationException if an issue with map validation occurs
-     */
-    @Override
-    protected void performingShowMap(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, IOException, MapValidationException {
-        MapView l_mapView = new MapView(d_gameState);
-        l_mapView.showMap();
-
-        askForOrder(p_player);
-    }
-
-    /**
-     * Performs the issuing of 'advance' orders during the issue order phase.
-     *
-     * @param p_command the command
-     * @param p_player  the player
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void performingAdvance(String p_command, ModelPlayer p_player) throws IOException {
-        p_player.createAdvanceOrder(p_command, d_gameState);
-        d_gameState.updateLog(p_player.getD_playerLog(), "effect");
-        p_player.checkForMoreOrders();
-    }
-
-    /**
-     * Initializes the issue order phase, allowing players to issue orders.
-     */
-    @Override
-    public void initPhase(){
-        while (d_gameEngine.getD_CurrentPhase() instanceof IssueOrderPhase) {
-            issueOrders();
+            } else {
+                throw new CommandValidationException(ApplicationConstants.INVALID_COMMAND_ERROR_SAVEGAME);
+            }
         }
     }
 
-    /**
-     * Performs the creation of 'deploy' orders during the issue order phase.
-     *
-     * @param p_command the command
-     * @param p_player  the player
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void performingCreateDeploy(String p_command, ModelPlayer p_player) throws IOException {
-        p_player.createDeployOrder(p_command);
-        d_gameState.updateLog(p_player.getD_playerLog(), "effect");
-        p_player.checkForMoreOrders();
+    protected void performCardHandle(String p_enteredCommand, ModelPlayer p_player) throws IOException {
+		if(p_player.getD_cardsOwnedByPlayer().contains(p_enteredCommand.split(" ")[0])) {
+			p_player.handleCardCommands(p_enteredCommand, d_gameState);
+		}
     }
 
-    /**
-     * Handles the issuance of orders by players in the game.
-     */
-    protected void issueOrders(){
+	@Override
+	protected void performShowMap(CommandHandler p_command, ModelPlayer p_player) throws InvalidCommand, IOException, MapValidationException {
+		MapView l_mapView = new MapView(d_gameState);
+		l_mapView.showMap();
+
+		askForOrder(p_player);
+	}
+
+	@Override
+	protected void performAdvance(String p_command, ModelPlayer p_player) throws IOException {
+		p_player.createAdvanceOrder(p_command, d_gameState);
+		d_gameState.updateLog(p_player.getD_playerLog(), "effect");
+	}
+
+	@Override
+	protected void performCreateDeploy(String p_command, ModelPlayer p_player) throws IOException {
+		p_player.createDeployOrder(p_command);
+		d_gameState.updateLog(p_player.getD_playerLog(), "effect");
+	}
+
+	@Override
+	protected void performAssignCountries(CommandHandler p_command, ModelPlayer p_player, boolean isTournamentMode, GameState p_gameState)
+			throws CommandValidationException, IOException, MapValidationException {
+		printInvalidCommandInState();
+		askForOrder(p_player);
+	}
+
+	@Override
+	protected void performEditNeighbours(CommandHandler p_command, ModelPlayer p_player)
+			throws CommandValidationException, MapValidationException, IOException {
+		printInvalidCommandInState();
+		askForOrder(p_player);
+	}
+
+	@Override
+	protected void performEditCountry(CommandHandler p_command, ModelPlayer p_player)
+			throws CommandValidationException, MapValidationException, IOException {
+		printInvalidCommandInState();
+		askForOrder(p_player);
+	}
+
+	@Override
+	protected void performValidateMap(CommandHandler p_command, ModelPlayer p_player)
+			throws MapValidationException, CommandValidationException, IOException {
+		printInvalidCommandInState();
+		askForOrder(p_player);
+	}
+
+	@Override
+	protected void performLoadMap(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException {
+		printInvalidCommandInState();
+		askForOrder(p_player);
+	}
+
+	@Override
+	protected void performSaveMap(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, MapValidationException, IOException {
+		printInvalidCommandInState();
+		askForOrder(p_player);
+	}
+
+	@Override
+	protected void performEditContinent(CommandHandler p_command, ModelPlayer p_player)
+			throws IOException, CommandValidationException, MapValidationException {
+		printInvalidCommandInState();
+		askForOrder(p_player);
+	}
+
+	@Override
+	protected void performMapEdit(CommandHandler p_command, ModelPlayer p_player) throws IOException, CommandValidationException, MapValidationException {
+		printInvalidCommandInState();
+		askForOrder(p_player);
+	}
+
+	protected void issueOrders(boolean p_isTournamentMode){
         // issue orders for each player
         do {
-            for (ModelPlayer l_player : d_gameState.getD_playersList()) {
+            for (ModelPlayer l_player : d_gameState.getD_players()) {
+				//System.out.println("l_player :" + l_player.getPlayerName());
+				if(l_player.getD_coutriesOwned().size()==0){
+					l_player.setD_moreOrders(false);
+				}
                 if (l_player.getD_moreOrders() && !l_player.getPlayerName().equals("Neutral")) {
                     try {
                         l_player.issue_order(this);
+                        l_player.checkForMoreOrders(p_isTournamentMode);
                     } catch (CommandValidationException | IOException | MapValidationException l_exception) {
                         d_gameEngine.setD_gameEngineLog(l_exception.getMessage(), "effect");
                     }
                 }
             }
-        } while (d_playerService.checkForMoreOrders(d_gameState.getD_playersList()));
-
+        } while (d_playerService.checkForMoreOrders(d_gameState.getD_players()));
         d_gameEngine.setOrderExecutionPhase();
     }
 
-    /**
-     * Asks for orders from the player via the command line interface.
-     *
-     * @param p_player the player to issue orders for
-     * @throws CommandValidationException      if the entered command is invalid
-     * @throws IOException         if an I/O error occurs
-     * @throws MapValidationException if an issue with map validation occurs
-     */
     public void askForOrder(ModelPlayer p_player) throws CommandValidationException, IOException, MapValidationException{
-        BufferedReader l_reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Deploy order command: 'deploy countryID numarmies' ");
-        System.out.println("Advance order command: 'advance countrynamefrom countynameto numarmies' ");
-        System.out.println("Bomb order command (requires bomb card): 'bomb countryID' ");
-        System.out.println("Blockade order command (required blockade card): 'blockade countryID' ");
-        System.out.println("Airlift order command (requires the airlift card): 'airlift sourcecountryID targetcountryID numarmies' ");
-        System.out.println("Diplomacy order command (requires the diplomacy card): 'negotiate playerID' ");
-        System.out.println("\nPlease enter command to issue order for player : " + p_player.getPlayerName()
-                + " or give showmap command to view current state of the game.");
-        String l_commandEntered = l_reader.readLine();
+        String l_commandEntered = p_player.getPlayerOrder(d_gameState);
+        if(l_commandEntered == null) return;
 
         d_gameState.updateLog("(Player: "+p_player.getPlayerName()+") "+ l_commandEntered, "order");
-
         handleCommand(l_commandEntered, p_player);
     }
+
+	@Override
+	protected void tournamentGamePlay(CommandHandler p_enteredCommand) {
+		// printInvalidCommandInState();
+	}
+
+	@Override
+	protected void createPlayers(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, IOException, MapValidationException {
+		printInvalidCommandInState();
+		askForOrder(p_player);
+	}
 
 }
