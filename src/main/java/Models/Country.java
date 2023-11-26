@@ -126,11 +126,11 @@ public class Country {
      * @param p_countryId The ID of the neighboring country to be removed
      * @throws InvalidMap  If the specified neighboring country does not exist
      */
-	public void removeNeighbours(Integer p_countryId) throws InvalidMap {
+	public void removeNeighbours(Integer p_countryId) throws MapValidationException {
 		if(d_adjacentCountryIds.contains(p_countryId)){
 			d_adjacentCountryIds.remove(d_adjacentCountryIds.indexOf(p_countryId));
 		}else{
-			throw new InvalidMap("No Such Neighbour Exists");
+			throw new MapValidationException("No Such Neighbour Exists");
 		}
 	}
 }
