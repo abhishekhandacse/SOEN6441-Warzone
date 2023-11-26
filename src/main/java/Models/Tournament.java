@@ -11,18 +11,42 @@ import Exceptions.MapValidationException;
 import Services.MapService;
 import Utils.CommandHandler;
 
+/**
+ * The Tournament class represents a tournament in the Risk game.
+ * It manages multiple game states, each associated with a specific map and player strategies.
+ */
+
 public class Tournament implements Serializable {
 
 	MapService d_mapService = new MapService();
 	List<GameState> d_gameStateList = new ArrayList<GameState>();
-
+	/**
+     * Gets the list of game states associated with the tournament.
+     *
+     * @return The list of game states.
+     */
 	public List<GameState> getD_gameStateList() {
 		return d_gameStateList;
 	}
+	/**
+     * Sets the list of game states associated with the tournament.
+     *
+     * @param d_gameStateList The list of game states to set.
+     */
 	public void setD_gameStateList(List<GameState> d_gameStateList) {
 		this.d_gameStateList = d_gameStateList;
 	}
-
+	/**
+     * Parses the tournament command and performs the associated actions.
+     *
+     * @param p_gameState  The current game state.
+     * @param p_operation  The operation part of the tournament command.
+     * @param p_argument   The argument part of the tournament command.
+     * @param p_gameEngine The game engine managing the game.
+     * @return True if the command is successfully parsed and executed, false otherwise.
+     * @throws MapValidationException     If map validation fails.
+     * @throws CommandValidationException If command validation fails.
+     */
 	public boolean parseTournamentCommand(GameState p_gameState, String p_operation, String p_argument,
 			GameEngine p_gameEngine) throws MapValidationException, CommandValidationException {
 
@@ -43,7 +67,13 @@ public class Tournament implements Serializable {
 		}
 		throw new CommandValidationException(ApplicationConstants.INVALID_COMMAND_TOURNAMENT_MODE);
 	}
-
+	/**
+     * Handles parsing and validation of the "D" (max number of turns) part of the tournament command.
+     *
+     * @param p_argument   The argument containing the max number of turns.
+     * @param p_gameEngine The game engine managing the game.
+     * @return True if the argument is valid and processed, false otherwise.
+     */
 	private boolean pasrseNoOfTurnArguments(String p_argument, GameEngine p_gameEngine) {
 		int l_maxTurns = Integer.parseInt(p_argument.split(" ")[0]);
 		if (l_maxTurns >= 10 && l_maxTurns <= 50) {
@@ -59,7 +89,14 @@ public class Tournament implements Serializable {
 			return false;
 		}
 	}
-
+	/**
+     * Handles parsing and validation of the "G" (number of games) part of the tournament command.
+     *
+     * @param p_argument   The argument containing the number of games.
+     * @param p_gameEngine The game engine managing the game.
+     * @return True if the argument is valid and processed, false otherwise.
+     * @throws MapValidationException If map validation fails.
+     */
 	private boolean parseNoOfGameArgument(String p_argument, GameEngine p_gameEngine) throws MapValidationException {
 		int l_noOfGames = Integer.parseInt(p_argument.split(" ")[0]);
 
@@ -89,7 +126,12 @@ public class Tournament implements Serializable {
 			return false;
 		}
 	}
-
+	/**
+     * Creates a new list of player instances based on the given list, copying their strategies.
+     *
+     * @param p_playersList The list of players to copy.
+     * @return A new list of players with copied strategies.
+     */
 	private List<ModelPlayer> getPlayersToAdd(List<ModelPlayer> p_playersList) {
 		List<ModelPlayer> p_playersToCopy = new ArrayList<>();
 		for (ModelPlayer l_pl : p_playersList) {
@@ -108,7 +150,16 @@ public class Tournament implements Serializable {
 		}
 		return p_playersToCopy;
 	}
-
+	/**
+     * Parses and validates the player strategies part of the tournament command.
+     *
+     * @param p_gameState  The current game state.
+     * @param p_argument   The argument containing player strategies.
+     * @param p_gameEngine The game engine managing the game.
+     * @return True if the argument is valid and processed, false otherwise.
+     * @throws MapValidationException     If map validation fails.
+     * @throws CommandValidationException If command validation fails.
+     */
 	private boolean parseStrategyArguments(GameState p_gameState, String p_argument, GameEngine p_gameEngine) {
 		String[] l_listofplayerstrategies = p_argument.split(" ");
 		int l_playerStrategiesSize = l_listofplayerstrategies.length;
@@ -162,7 +213,14 @@ public class Tournament implements Serializable {
 			}
 		}
 	}
-
+	/**
+     * Parses and validates the map files part of the tournament command.
+     *
+     * @param p_argument   The argument containing map file names.
+     * @param p_gameEngine The game engine managing the game.
+     * @return True if the argument is valid and processed, false otherwise.
+     * @throws MapValidationException If map validation fails.
+     */
 	private boolean parseMapArguments(String p_argument, GameEngine p_gameEngine) throws MapValidationException {
 		String[] l_listOfMapFiles = p_argument.split(" ");
 		int l_mapFilesSize = l_listOfMapFiles.length;
@@ -189,7 +247,13 @@ public class Tournament implements Serializable {
 		}
 		return true;
 	}
-
+	/**
+     * Checks if the required arguments are present in the tournament command.
+     *
+     * @param p_operations_list The list of operations and arguments.
+     * @param p_command         The tournament command.
+     * @return True if the required arguments are present, false otherwise.
+     */
 	public boolean requiredTournamentArgPresent(List<Map<String, String>> p_operations_list, Command p_command) {
 		String l_argumentKey = new String();
 		if (p_operations_list.size() != 4)
