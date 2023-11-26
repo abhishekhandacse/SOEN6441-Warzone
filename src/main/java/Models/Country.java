@@ -11,13 +11,38 @@ import java.util.List;
  */
 public class Country {
 
+    /**
+     * The number of armies in the country.
+     */
     Integer d_armies;
-	Integer d_countryId;
-	Integer d_continentId;
-	String d_countryName;
 
-	List<Integer> d_adjacentCountryIds = new ArrayList<Integer>();
+    /**
+     * The ID of the country.
+     */
+    Integer d_countryId;
 
+    /**
+     * The ID of the continent to which the country belongs.
+     */
+    Integer d_continentId;
+
+    /**
+     * The name of the country.
+     */
+    String d_countryName;
+
+    /**
+     * The list of IDs of adjacent countries.
+     */
+    List<Integer> d_adjacentCountryIds = new ArrayList<>();
+
+    /**
+     * Constructor for the Country class with full information.
+     *
+     * @param p_countryId    The ID of the country
+     * @param p_countryName  The name of the country
+     * @param p_continentId  The ID of the continent to which the country belongs
+     */
 	public Country(int p_countryId, String p_countryName, int p_continentId) {
 		d_countryId = p_countryId;
 		d_countryName = p_countryName;
@@ -25,12 +50,21 @@ public class Country {
 		d_adjacentCountryIds = new ArrayList<>();
 		d_armies = 0;
 	}
-
+    /**
+     * Constructor for the Country class with limited information.
+     *
+     * @param p_countryId    The ID of the country
+     * @param p_continentId  The ID of the continent to which the country belongs
+     */
 	public Country(int p_countryId, int p_continentId) {
 		d_countryId = p_countryId;
 		d_continentId = p_continentId;
 	}
-
+    /**
+     * Constructor for the Country class with only the country name.
+     *
+     * @param p_countryName  The name of the country
+     */
 	public Country(String p_countryName) {
 		d_countryName = p_countryName;
 	}
@@ -77,7 +111,11 @@ public class Country {
 	public void setD_adjacentCountryIds(List<Integer> p_adjacentCountryIds) {
 		this.d_adjacentCountryIds = p_adjacentCountryIds;
 	}
-
+    /**
+     * Adds a neighboring country to the list of adjacent countries.
+     *
+     * @param p_countryId The ID of the neighboring country to be added
+     */
 	public void addNeighbours(Integer p_countryId){
 		if(!d_adjacentCountryIds.contains(p_countryId))
 			d_adjacentCountryIds.add(p_countryId);
