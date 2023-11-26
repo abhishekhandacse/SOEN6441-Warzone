@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 import Services.MapService;
 
 /**
@@ -31,11 +31,11 @@ public class ForMapTest {
     }
 
     /**
-     * Checking {@link InvalidMap} for no continent in Map
-     * @throws InvalidMap Exception
+     * Checking {@link MapValidationException} for no continent in Map
+     * @throws MapValidationException Exception
      */
-    @Test (expected = InvalidMap.class)
-    public void testValidateNoContinent() throws InvalidMap{
+    @Test (expected = MapValidationException.class)
+    public void testValidateNoContinent() throws MapValidationException{
         assertEquals(d_map.Validate(), false);
     }
 
@@ -43,10 +43,10 @@ public class ForMapTest {
      * Required Test #2
      * Tests a valid and invalid Map for Validate function
      *
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    @Test (expected = InvalidMap.class)
-    public void testValidate() throws InvalidMap {
+    @Test (expected = MapValidationException.class)
+    public void testValidate() throws MapValidationException {
         d_map= d_ms.loadMap(d_stateOfGame, "canada.map");
 
         assertEquals(d_map.Validate(), true);
@@ -55,12 +55,12 @@ public class ForMapTest {
     }
 
     /**
-     * Checking {@link InvalidMap} for no country in Map
+     * Checking {@link MapValidationException} for no country in Map
      *
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    @Test (expected = InvalidMap.class)
-    public void testValidateNoCountry() throws InvalidMap{
+    @Test (expected = MapValidationException.class)
+    public void testValidateNoCountry() throws MapValidationException{
         Continent l_continent = new Continent();
         List <Continent> l_continents = new ArrayList<>();
 
@@ -73,10 +73,10 @@ public class ForMapTest {
      * Required Test # 1
      * Checks Continent connectivity of an unconnected continent
      *
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    @Test (expected = InvalidMap.class)
-    public void testContinentConnectivity() throws  InvalidMap{
+    @Test (expected = MapValidationException.class)
+    public void testContinentConnectivity() throws  MapValidationException{
         d_map= d_ms.loadMap(d_stateOfGame, "continentConnectivity.map");
         d_map.Validate();
     }
@@ -85,10 +85,10 @@ public class ForMapTest {
      * Required Test # 1
      * Checks Country Connectivity for not connected countries
      *
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    @Test(expected = InvalidMap.class)
-    public void testCountryConnectivity() throws InvalidMap{
+    @Test(expected = MapValidationException.class)
+    public void testCountryConnectivity() throws MapValidationException{
         d_map.addContinent("Asia", 10);
         d_map.addCountry("India", "Asia");
         d_map.addCountry("China", "Asia");

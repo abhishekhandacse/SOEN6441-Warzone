@@ -1,7 +1,7 @@
 package Services;
 
 import Exceptions.InvalidCommand;
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 import Models.GameState;
 import Models.Map;
 import org.junit.Before;
@@ -45,10 +45,10 @@ public class ConquestMapFileReaderTest {
 	/**
 	 * Setup before each MapService Operations
 	 *
-	 * @throws InvalidMap Invalid map exception
+	 * @throws MapValidationException Invalid map exception
 	 */
 	@Before
-	public void setup() throws InvalidMap {
+	public void setup() throws MapValidationException {
 		d_conquestMapFileReader = new ConquestMapFileReader();
 		d_mapService = new MapService();
 		d_map = new Map();
@@ -61,10 +61,10 @@ public class ConquestMapFileReaderTest {
 	 *
 	 *
 	 * @throws IOException throws IOException
-	 * @throws InvalidMap Invalid map exception
+	 * @throws MapValidationException Invalid map exception
 	 */
 	@Test
-	public void testReadConquestFile() throws IOException, InvalidMap {
+	public void testReadConquestFile() throws IOException, MapValidationException {
 		d_conquestMapFileReader.readConquestFile(d_state, d_map, d_mapLines);
 
 		assertNotNull(d_state.getD_map());
@@ -74,11 +74,11 @@ public class ConquestMapFileReaderTest {
 	/**
 	 * tests addition or deletion of continent via editcontinent operation
 	 * @throws IOException Exceptions
-	 * @throws InvalidMap Exception
+	 * @throws MapValidationException Exception
 	 * @throws InvalidCommand Exception
 	 */
 	@Test
-	public void testEditMap() throws IOException, InvalidMap, InvalidCommand {
+	public void testEditMap() throws IOException, MapValidationException, InvalidCommand {
 		d_conquestMapFileReader.readConquestFile(d_state, d_map, d_mapLines);
 		Map l_updatedContinents = d_mapService.addRemoveContinents(d_state, d_state.getD_map(), "Add", "Asia 10");
 		l_updatedContinents = d_mapService.addRemoveContinents(d_state, d_state.getD_map(), "Add", "Europe 20");

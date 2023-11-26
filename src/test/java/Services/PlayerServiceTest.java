@@ -9,7 +9,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -113,10 +113,10 @@ public class PlayerServiceTest {
     /**
      * Tests the assignment of countries to players.
      *
-     * @throws InvalidMap if an invalid map is encountered
+     * @throws MapValidationException if an invalid map is encountered
      */
     @Test
-    public void testPlayerCountryAssignment() throws InvalidMap {
+    public void testPlayerCountryAssignment() throws MapValidationException {
         d_mapservice = new MapService();
         d_map = new Map();
         d_map = d_mapservice.loadMap(d_gameState, "canada.map");

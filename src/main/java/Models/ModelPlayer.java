@@ -12,7 +12,7 @@ import java.util.Random;
 import Constants.ApplicationConstants;
 import Exceptions.CommandValidationException;
 import Exceptions.InvalidCommand;
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 import Exceptions.MapValidationException;
 import Utils.CommonUtil;
 

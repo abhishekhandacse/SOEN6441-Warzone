@@ -254,7 +254,7 @@ public class Tournament implements Serializable {
      * @param p_command         The tournament command.
      * @return True if the required arguments are present, false otherwise.
      */
-	public boolean requiredTournamentArgPresent(List<Map<String, String>> p_operations_list, Command p_command) {
+	public boolean requiredTournamentArgPresent(List<Map<String, String>> p_operations_list, CommandHandler p_command) {
 		String l_argumentKey = new String();
 		if (p_operations_list.size() != 4)
 			return false;

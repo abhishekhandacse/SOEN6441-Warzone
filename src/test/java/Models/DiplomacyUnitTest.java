@@ -1,6 +1,6 @@
 package Models;
 
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -51,10 +51,10 @@ public class DiplomacyUnitTest {
     /**
      * Setup before the tests.
      *
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
     @Before
-    public void setup() throws InvalidMap {
+    public void setup() throws MapValidationException {
         d_gameState = new GameState();
         d_player1 = new ModelPlayer();
         d_player2 = new ModelPlayer("b");

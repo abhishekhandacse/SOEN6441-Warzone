@@ -43,10 +43,10 @@ public class GameEngineUnitTest {
 	 *
 	 * @throws IOException    Exception
 	 * @throws InvalidCommand Exception
-	 * @throws InvalidMap Exception
+	 * @throws MapValidationException Exception
 	 */
 	@Test(expected = InvalidCommand.class)
-	public void testPerformEditMapInvalidCommand() throws IOException, InvalidCommand, InvalidMap {
+	public void testPerformEditMapInvalidCommand() throws IOException, InvalidCommand, MapValidationException {
 		d_currentPhase.handleCommand("editmap");
 	}
 
@@ -66,11 +66,11 @@ public class GameEngineUnitTest {
 	 * Tests the {@link InvalidCommand } in savemap
 	 *
 	 * @throws InvalidCommand Exception
-	 * @throws InvalidMap     Exception
+	 * @throws MapValidationException     Exception
 	 * @throws IOException Exception
 	 */
 	@Test
-	public void testPerformSaveMapInvalidCommand() throws InvalidCommand, InvalidMap, IOException {
+	public void testPerformSaveMapInvalidCommand() throws InvalidCommand, MapValidationException, IOException {
 		d_currentPhase.handleCommand("savemap");
 		GameState l_state = d_currentPhase.getD_gameState();
 
@@ -85,10 +85,10 @@ public class GameEngineUnitTest {
 	 *
 	 * @throws IOException    Exception
 	 * @throws InvalidCommand Exception
-	 * @throws InvalidMap     Exception
+	 * @throws MapValidationException     Exception
 	 */
 	@Test
-	public void testPerformEditContinentInvalidCommand() throws InvalidCommand, IOException, InvalidMap {
+	public void testPerformEditContinentInvalidCommand() throws InvalidCommand, IOException, MapValidationException {
 		d_currentPhase.handleCommand("editcontinent");
 		GameState l_state = d_currentPhase.getD_gameState();
 
@@ -101,7 +101,7 @@ public class GameEngineUnitTest {
 
 
 	@Test(expected = InvalidCommand.class)
-	public void testAssignCountriesInvalidCommand() throws IOException, InvalidMap, InvalidCommand {
+	public void testAssignCountriesInvalidCommand() throws IOException, MapValidationException, InvalidCommand {
 		d_currentPhase.getD_gameState().setD_loadCommand();
 		d_currentPhase.handleCommand("assigncountries -add india");
 		;
@@ -112,11 +112,11 @@ public class GameEngineUnitTest {
 	 * Tests savegame command.
 	 *
 	 * @throws InvalidCommand Exception
-	 * @throws InvalidMap     Exception
+	 * @throws MapValidationException     Exception
 	 * @throws IOException Exception
 	 */
 	@Test
-	public void testPerformSaveGameValidCommand() throws InvalidCommand, InvalidMap, IOException {
+	public void testPerformSaveGameValidCommand() throws InvalidCommand, MapValidationException, IOException {
 		d_currentPhase.handleCommand("savegame hello.txt");
 		GameState l_state = d_currentPhase.getD_gameState();
 
@@ -131,10 +131,10 @@ public class GameEngineUnitTest {
 	 *
 	 * @throws IOException    Exception
 	 * @throws InvalidCommand Exception
-	 * @throws InvalidMap     Exception
+	 * @throws MapValidationException     Exception
 	 */
 	@Test
-	public void testPerformEditContinentValidCommand() throws IOException, InvalidCommand, InvalidMap {
+	public void testPerformEditContinentValidCommand() throws IOException, InvalidCommand, MapValidationException {
 		d_map.setD_mapFile("testeditmap.map");
 		GameState l_state = d_currentPhase.getD_gameState();
 

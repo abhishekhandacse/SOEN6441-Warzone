@@ -1,6 +1,6 @@
 package Models;
 
-import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 import Utils.CommonUtil;
 
 import java.io.Serializable;
@@ -138,18 +138,18 @@ public class Map implements Serializable {
      * Performs Null Check on Objects in Map.
      *
      * @return Boolean if it is false
-     * @throws InvalidMap for corresponding Invalid conditions
+     * @throws MapValidationException for corresponding Invalid conditions
      */
-    public Boolean checkForNullObjects() throws InvalidMap{
+    public Boolean checkForNullObjects() throws MapValidationException{
         if(d_continents==null || d_continents.isEmpty()){
-            throw new InvalidMap("Map must possess atleast one continent!");
+            throw new MapValidationException("Map must possess atleast one continent!");
         }
         if(d_countries==null || d_countries.isEmpty()){
-            throw new InvalidMap("Map must possess atleast one country!");
+            throw new MapValidationException("Map must possess atleast one country!");
         }
         for(Country c: d_countries){
             if(c.getD_adjacentCountryIds().size()<1){
-                throw new InvalidMap(c.getD_countryName()+" does not possess any neighbour, hence isn't reachable!");
+                throw new MapValidationException(c.getD_countryName()+" does not possess any neighbour, hence isn't reachable!");
             }
         }
         return false;
@@ -190,9 +190,9 @@ public class Map implements Serializable {
      * Validates the complete map.
      *
      * @return Bool Value if map is valid
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public Boolean Validate() throws InvalidMap {
+    public Boolean Validate() throws MapValidationException {
         return (!checkForNullObjects() && checkContinentConnectivity() && checkCountryConnectivity());
     }
 
@@ -200,13 +200,13 @@ public class Map implements Serializable {
      * Checks All Continent's Inner Connectivity.
      *
      * @return Boolean Value if all are connected
-     * @throws InvalidMap if any continent is not Connected
+     * @throws MapValidationException if any continent is not Connected
      */
-    public Boolean checkContinentConnectivity() throws InvalidMap {
+    public Boolean checkContinentConnectivity() throws MapValidationException {
         boolean l_flagConnectivity=true;
         for (Continent c:d_continents){
             if (null == c.getD_countries() || c.getD_countries().size()<1){
-                throw new InvalidMap(c.getD_continentName() + " has no countries, it must possess atleast 1 country");
+                throw new MapValidationException(c.getD_continentName() + " has no countries, it must possess atleast 1 country");
             }
             if(!subGraphConnectivity(c)){
                 l_flagConnectivity=false;
@@ -220,9 +220,9 @@ public class Map implements Serializable {
      *
      * @param p_continent Continent being checked
      * @return Bool Value if Continent is Connected
-     * @throws InvalidMap Which country is not connected
+     * @throws MapValidationException Which country is not connected
      */
-    public boolean subGraphConnectivity(Continent p_continent) throws InvalidMap {
+    public boolean subGraphConnectivity(Continent p_continent) throws MapValidationException {
         HashMap<Integer, Boolean> l_continentCountry = new HashMap<Integer, Boolean>();
 
         for (Country c : p_continent.getD_countries()) {
@@ -235,7 +235,7 @@ public class Map implements Serializable {
             if (!entry.getValue()) {
                 Country l_country = getCountry(entry.getKey());
                 String l_messageException = l_country.getD_countryName() + " in Continent " + p_continent.getD_continentName() + " is not reachable";
-                throw new InvalidMap(l_messageException);
+                throw new MapValidationException(l_messageException);
             }
         }
         return !l_continentCountry.containsValue(false);
@@ -263,9 +263,9 @@ public class Map implements Serializable {
      * Checks country connectivity in the map.
      *
      * @return boolean value for condition if all the countries are connected
-     * @throws InvalidMap pointing out which Country is not connected
+     * @throws MapValidationException pointing out which Country is not connected
      */
-    public boolean checkCountryConnectivity() throws InvalidMap {
+    public boolean checkCountryConnectivity() throws MapValidationException {
         for (Country c : d_countries) {
             d_countryReach.put(c.getD_countryId(), false);
         }
@@ -275,7 +275,7 @@ public class Map implements Serializable {
         for (Entry<Integer, Boolean> entry : d_countryReach.entrySet()) {
             if (!entry.getValue()) {
                 String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
-                throw new InvalidMap(l_exceptionMessage);
+                throw new MapValidationException(l_exceptionMessage);
             }
         }
         return !d_countryReach.containsValue(false);
@@ -285,9 +285,9 @@ public class Map implements Serializable {
      * Iteratively applies the DFS search from the entered node.
      *
      * @param p_c Country visited first
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public void dfsCountry(Country p_c) throws InvalidMap {
+    public void dfsCountry(Country p_c) throws MapValidationException {
         d_countryReach.put(p_c.getD_countryId(), true);
         for (Country l_nextCountry : getAdjacentCountry(p_c)) {
             if (!d_countryReach.get(l_nextCountry.getD_countryId())) {
@@ -301,10 +301,10 @@ public class Map implements Serializable {
      *
      * @param p_country the adjacent country
      * @return list of Adjacent Country Objects
-     * @throws InvalidMap pointing out which Country is not connected
-     * @throws InvalidMap Exception
+     * @throws MapValidationException pointing out which Country is not connected
+     * @throws MapValidationException Exception
      */
-    public List<Country> getAdjacentCountry(Country p_country) throws InvalidMap {
+    public List<Country> getAdjacentCountry(Country p_country) throws MapValidationException {
         List<Country> l_adjCountries = new ArrayList<Country>();
 
         if (p_country.getD_adjacentCountryIds().size() > 0) {
@@ -312,7 +312,7 @@ public class Map implements Serializable {
                 l_adjCountries.add(getCountry(i));
             }
         } else {
-            throw new InvalidMap(p_country.getD_countryName() + " doesn't have any adjacent countries");
+            throw new MapValidationException(p_country.getD_countryName() + " doesn't have any adjacent countries");
         }
         return l_adjCountries;
     }
@@ -373,9 +373,9 @@ public class Map implements Serializable {
      *
      * @param p_continentName Name of the Continent to be Added
      * @param p_controlValue Control value of the continent to be added
-     * @throws InvalidMap to handle Invalid addition
+     * @throws MapValidationException to handle Invalid addition
      */
-    public void addContinent(String p_continentName, Integer p_controlValue) throws InvalidMap{
+    public void addContinent(String p_continentName, Integer p_controlValue) throws MapValidationException{
         int l_continentId;
 
         if (d_continents!=null) {
@@ -383,7 +383,7 @@ public class Map implements Serializable {
             if(CommonUtil.isNull(getContinent(p_continentName))){
                 d_continents.add(new Continent(l_continentId, p_continentName, p_controlValue));
             }else{
-                throw new InvalidMap("Continent "+p_continentName+" cannot be added! It already exists!");
+                throw new MapValidationException("Continent "+p_continentName+" cannot be added! It already exists!");
             }
         }else{
             d_continents= new ArrayList<Continent>();
@@ -398,9 +398,9 @@ public class Map implements Serializable {
      *     <li>Deletes Countries in Continents and their associated data in the Map</li>
      * </ul>
      * @param p_continentName Continent Name to be found
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public void removeContinent(String p_continentName) throws InvalidMap{
+    public void removeContinent(String p_continentName) throws MapValidationException{
         if (d_continents!=null) {
             if(!CommonUtil.isNull(getContinent(p_continentName))){
 
@@ -414,10 +414,10 @@ public class Map implements Serializable {
                 }
                 d_continents.remove(getContinent(p_continentName));
             }else{
-                throw new InvalidMap("No such Continent exists!");
+                throw new MapValidationException("No such Continent exists!");
             }
         } else{
-            throw new InvalidMap("No continents in the Map to remove!");
+            throw new MapValidationException("No continents in the Map to remove!");
         }
     }
 
@@ -426,9 +426,9 @@ public class Map implements Serializable {
      *
      * @param p_countryName Name of Country to be Added
      * @param p_continentName Name of Continent to be added in
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public void addCountry(String p_countryName, String p_continentName) throws InvalidMap{
+    public void addCountry(String p_countryName, String p_continentName) throws MapValidationException{
         int l_countryId;
         if(d_countries==null){
             d_countries= new ArrayList<Country>();
@@ -444,10 +444,10 @@ public class Map implements Serializable {
                     }
                 }
             } else{
-                throw new InvalidMap("Cannot add Country "+p_countryName+" to a Continent that doesn't exist!");
+                throw new MapValidationException("Cannot add Country "+p_countryName+" to a Continent that doesn't exist!");
             }
         }else{
-            throw new InvalidMap("Country with name "+ p_countryName+" already Exists!");
+            throw new MapValidationException("Country with name "+ p_countryName+" already Exists!");
         }
     }
 
@@ -455,9 +455,9 @@ public class Map implements Serializable {
      * Performs the remove country operation on Map.
      *
      * @param p_countryName Name of country to be Added
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public void removeCountry(String p_countryName) throws InvalidMap{
+    public void removeCountry(String p_countryName) throws MapValidationException{
         if(d_countries!=null && !CommonUtil.isNull(getCountryByName(p_countryName))) {
             for(Continent c: d_continents){
                 if(c.getD_continentID().equals(getCountryByName(p_countryName).getD_continentId())){
@@ -469,7 +469,7 @@ public class Map implements Serializable {
             d_countries.remove(getCountryByName(p_countryName));
 
         }else{
-            throw new InvalidMap("Country: "+ p_countryName+" does not exist!");
+            throw new MapValidationException("Country: "+ p_countryName+" does not exist!");
         }
     }
 
@@ -478,14 +478,14 @@ public class Map implements Serializable {
      *
      * @param p_countryName Country whose neighbours are to be updated
      * @param p_neighbourName Country to be added as neighbour
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public void addCountryNeighbour(String p_countryName, String p_neighbourName) throws InvalidMap{
+    public void addCountryNeighbour(String p_countryName, String p_neighbourName) throws MapValidationException{
         if(d_countries!=null){
             if(!CommonUtil.isNull(getCountryByName(p_countryName)) && !CommonUtil.isNull(getCountryByName(p_neighbourName))){
                 d_countries.get(d_countries.indexOf(getCountryByName(p_countryName))).addNeighbours(getCountryByName(p_neighbourName).getD_countryId());
             } else{
-                throw new InvalidMap("Invalid Neighbour Pair "+p_countryName+" "+p_neighbourName+"! Either of the Countries Doesn't exist!");
+                throw new MapValidationException("Invalid Neighbour Pair "+p_countryName+" "+p_neighbourName+"! Either of the Countries Doesn't exist!");
             }
         }
     }
@@ -495,14 +495,14 @@ public class Map implements Serializable {
      *
      * @param p_countryName Country whose neighbors are to be updated
      * @param p_neighbourName Country to be removed as neighbor
-     * @throws InvalidMap Exception
+     * @throws MapValidationException Exception
      */
-    public void removeCountryNeighbour(String p_countryName, String p_neighbourName) throws InvalidMap{
+    public void removeCountryNeighbour(String p_countryName, String p_neighbourName) throws MapValidationException{
         if(d_countries!=null){
             if(!CommonUtil.isNull(getCountryByName(p_countryName)) && !CommonUtil.isNull(getCountryByName(p_neighbourName))) {
                 d_countries.get(d_countries.indexOf(getCountryByName(p_countryName))).removeNeighbours(getCountryByName(p_neighbourName).getD_countryId());
             } else{
-                throw new InvalidMap("Invalid Neighbour Pair "+p_countryName+" "+p_neighbourName+"! Either of the Countries Doesn't exist!");
+                throw new MapValidationException("Invalid Neighbour Pair "+p_countryName+" "+p_neighbourName+"! Either of the Countries Doesn't exist!");
             }
         }
     }
@@ -512,9 +512,9 @@ public class Map implements Serializable {
      * Used while deletion of a country object.
      *
      * @param p_countryId Country to be removed
-     * @throws InvalidMap indicates Map Object Validation failure
+     * @throws MapValidationException indicates Map Object Validation failure
      */
-    public void updateNeighboursCont(Integer p_countryId) throws InvalidMap {
+    public void updateNeighboursCont(Integer p_countryId) throws MapValidationException {
         for(Continent c: d_continents){
             c.removeCountryNeighboursFromAll(p_countryId);
         }
@@ -525,9 +525,9 @@ public class Map implements Serializable {
      * Used while deletion of country object.
      *
      * @param p_countryID Country to be removed
-     * @throws InvalidMap indicates Map Object Validation failure
+     * @throws MapValidationException indicates Map Object Validation failure
      */
-    public void removeCountryNeighboursFromAll(Integer p_countryID) throws InvalidMap {
+    public void removeCountryNeighboursFromAll(Integer p_countryID) throws MapValidationException {
         for (Country c: d_countries) {
             if (!CommonUtil.isNull(c.getD_adjacentCountryIds())) {
                 if (c.getD_adjacentCountryIds().contains(p_countryID)) {

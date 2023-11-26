@@ -124,7 +124,7 @@ public class Country {
      * Removes a neighboring country from the list of adjacent countries.
      *
      * @param p_countryId The ID of the neighboring country to be removed
-     * @throws InvalidMap  If the specified neighboring country does not exist
+     * @throws MapValidationException  If the specified neighboring country does not exist
      */
 	public void removeNeighbours(Integer p_countryId) throws MapValidationException {
 		if(d_adjacentCountryIds.contains(p_countryId)){
