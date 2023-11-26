@@ -54,7 +54,7 @@ public class Map implements Serializable {
      *
      * @return list of countries
      */
-    public List<Country> getD_countries() {
+    public List<Country> getD_countriesList() {
         return d_countries;
     }
 
@@ -205,7 +205,7 @@ public class Map implements Serializable {
     public Boolean checkContinentConnectivity() throws MapValidationException {
         boolean l_flagConnectivity=true;
         for (Continent c:d_continents){
-            if (null == c.getD_countries() || c.getD_countries().size()<1){
+            if (null == c.getD_countriesList() || c.getD_countriesList().size()<1){
                 throw new MapValidationException(c.getD_continentName() + " has no countries, it must possess atleast 1 country");
             }
             if(!subGraphConnectivity(c)){
@@ -225,10 +225,10 @@ public class Map implements Serializable {
     public boolean subGraphConnectivity(Continent p_continent) throws MapValidationException {
         HashMap<Integer, Boolean> l_continentCountry = new HashMap<Integer, Boolean>();
 
-        for (Country c : p_continent.getD_countries()) {
+        for (Country c : p_continent.getD_countriesList()) {
             l_continentCountry.put(c.getD_countryId(), false);
         }
-        dfsSubgraph(p_continent.getD_countries().get(0), l_continentCountry, p_continent);
+        dfsSubgraph(p_continent.getD_countriesList().get(0), l_continentCountry, p_continent);
 
         // Iterates Over Entries to locate unreachable countries in continent
         for (Entry<Integer, Boolean> entry : l_continentCountry.entrySet()) {
@@ -250,7 +250,7 @@ public class Map implements Serializable {
      */
     public void dfsSubgraph(Country p_c, HashMap<Integer, Boolean> p_continentCountry, Continent p_continent) {
         p_continentCountry.put(p_c.getD_countryId(), true);
-        for (Country c : p_continent.getD_countries()) {
+        for (Country c : p_continent.getD_countriesList()) {
             if (p_c.getD_adjacentCountryIds().contains(c.getD_countryId())) {
                 if (!p_continentCountry.get(c.getD_countryId())) {
                     dfsSubgraph(c, p_continentCountry, p_continent);
@@ -405,8 +405,8 @@ public class Map implements Serializable {
             if(!CommonUtil.isNull(getContinent(p_continentName))){
 
                 // Deletes the continent and updates neighbour as well as country objects
-                if (getContinent(p_continentName).getD_countries()!=null) {
-                    for(Country c: getContinent(p_continentName).getD_countries()){
+                if (getContinent(p_continentName).getD_countriesList()!=null) {
+                    for(Country c: getContinent(p_continentName).getD_countriesList()){
                         removeCountryNeighboursFromAll(c.getD_countryId());
                         updateNeighboursCont(c.getD_countryId());
                         d_countries.remove(c);
@@ -440,7 +440,7 @@ public class Map implements Serializable {
                 d_countries.add(l_country);
                 for (Continent c: d_continents) {
                     if (c.getD_continentName().equals(p_continentName)) {
-                        c.addCountry(l_country);
+                        c.addingCountry(l_country);
                     }
                 }
             } else{
@@ -461,7 +461,7 @@ public class Map implements Serializable {
         if(d_countries!=null && !CommonUtil.isNull(getCountryByName(p_countryName))) {
             for(Continent c: d_continents){
                 if(c.getD_continentID().equals(getCountryByName(p_countryName).getD_continentId())){
-                    c.removeCountry(getCountryByName(p_countryName));
+                    c.countryRemove(getCountryByName(p_countryName));
                 }
                 c.removeCountryNeighboursFromAll(getCountryByName(p_countryName).getD_countryId());
             }

@@ -60,8 +60,8 @@ public class OrderExecutionPhaseTest {
 
         // Create a neighboring country
         Country l_countryNeighbour = new Country(1, "Japan", 1);
-        l_countryNeighbour.addNeighbour(0);
-        l_country.addNeighbour(1);
+        l_countryNeighbour.addNeighbours(0);
+        l_country.addNeighbours(1);
         l_countryNeighbour.setD_armies(20);
         l_countryList.add(l_countryNeighbour);
 
@@ -70,11 +70,11 @@ public class OrderExecutionPhaseTest {
 
         // Create a map and set its list of countries
         Map l_map = new Map();
-        l_map.setD_allCountries(l_countryList);
+        l_map.setD_countries(l_countryList);
         d_gameState.setD_map(l_map);
 
         // Set the list of players in the game state
-        d_gameState.setD_playersList(Arrays.asList(d_player1, d_player2));
+        d_gameState.setD_players(Arrays.asList(d_player1, d_player2));
     }
 
     /**

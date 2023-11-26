@@ -56,7 +56,7 @@ public class MapFileReader implements Serializable {
 		for (Country c : p_countries) {
 			for (Continent cont : p_continents) {
 				if (cont.getD_continentID().equals(c.getD_continentId())) {
-					cont.addCountry(c);
+					cont.addingCountry(c);
 				}
 			}
 		}

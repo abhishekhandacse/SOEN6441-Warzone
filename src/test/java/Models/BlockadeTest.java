@@ -83,12 +83,12 @@ public class BlockadeTest {
 		l_mapCountries.add(l_country2);
 
 		Map l_map = new Map();
-		l_map.setD_allCountries(l_mapCountries);
+		l_map.setD_countries(l_mapCountries);
 		d_gameState.setD_map(l_map);
 		
 		List<ModelPlayer> l_playerList = new ArrayList<ModelPlayer>();
 		l_playerList.add(d_neutralPlayer);
-		d_gameState.setD_playersList(l_playerList);
+		d_gameState.setD_players(l_playerList);
 		
 		d_blockadeOrder1 = new Blockade(d_player1, "India");
 		d_blockadeOrder2 = new Blockade(d_player1, "USA");
@@ -117,10 +117,10 @@ public class BlockadeTest {
 	@Test
 	public void testValidBlockadeOrder() {
 
-		boolean l_actualBoolean = d_blockadeOrder1.valid(d_gameState);
+		boolean l_actualBoolean = d_blockadeOrder1.checkValid(d_gameState);
 		assertTrue(l_actualBoolean);
 
-		boolean l_actualBoolean2 = d_blockadeOrder2.valid(d_gameState);
+		boolean l_actualBoolean2 = d_blockadeOrder2.checkValid(d_gameState);
 		assertFalse(l_actualBoolean2);
 
 	}

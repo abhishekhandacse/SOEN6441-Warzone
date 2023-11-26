@@ -9,8 +9,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import Exceptions.CommandValidationException;
+import Exceptions.MapValidationException;
 import Models.Continent;
 import Models.GameState;
+import Models.InitStartUpPhase;
 import Models.Map;
 import Models.Phase;
 
@@ -39,14 +42,14 @@ public class GameEngineUnitTest {
 
 
 	/**
-	 * Tests the {@link InvalidCommand } in editmap command.
+	 * Tests the {@link CommandValidationException } in editmap command.
 	 *
 	 * @throws IOException    Exception
-	 * @throws InvalidCommand Exception
+	 * @throws CommandValidationException Exception
 	 * @throws MapValidationException Exception
 	 */
-	@Test(expected = InvalidCommand.class)
-	public void testPerformEditMapInvalidCommand() throws IOException, InvalidCommand, MapValidationException {
+	@Test(expected = CommandValidationException.class)
+	public void testPerformEditMapInvalidCommand() throws IOException, CommandValidationException, MapValidationException {
 		d_currentPhase.handleCommand("editmap");
 	}
 
@@ -63,14 +66,14 @@ public class GameEngineUnitTest {
 	}
 
 	/**
-	 * Tests the {@link InvalidCommand } in savemap
+	 * Tests the {@link CommandValidationException } in savemap
 	 *
-	 * @throws InvalidCommand Exception
+	 * @throws CommandValidationException Exception
 	 * @throws MapValidationException     Exception
 	 * @throws IOException Exception
 	 */
 	@Test
-	public void testPerformSaveMapInvalidCommand() throws InvalidCommand, MapValidationException, IOException {
+	public void testPerformSaveMapInvalidCommand() throws CommandValidationException, MapValidationException, IOException {
 		d_currentPhase.handleCommand("savemap");
 		GameState l_state = d_currentPhase.getD_gameState();
 
@@ -81,14 +84,14 @@ public class GameEngineUnitTest {
 
 
 	/**
-	 * Tests the {@link InvalidCommand} in editcontinent command
+	 * Tests the {@link CommandValidationException} in editcontinent command
 	 *
 	 * @throws IOException    Exception
-	 * @throws InvalidCommand Exception
+	 * @throws CommandValidationException Exception
 	 * @throws MapValidationException     Exception
 	 */
 	@Test
-	public void testPerformEditContinentInvalidCommand() throws InvalidCommand, IOException, MapValidationException {
+	public void testPerformEditContinentInvalidCommand() throws CommandValidationException, IOException, MapValidationException {
 		d_currentPhase.handleCommand("editcontinent");
 		GameState l_state = d_currentPhase.getD_gameState();
 
@@ -100,8 +103,8 @@ public class GameEngineUnitTest {
 
 
 
-	@Test(expected = InvalidCommand.class)
-	public void testAssignCountriesInvalidCommand() throws IOException, MapValidationException, InvalidCommand {
+	@Test(expected = CommandValidationException.class)
+	public void testAssignCountriesInvalidCommand() throws IOException, MapValidationException, CommandValidationException {
 		d_currentPhase.getD_gameState().setD_loadCommand();
 		d_currentPhase.handleCommand("assigncountries -add india");
 		;
@@ -111,12 +114,12 @@ public class GameEngineUnitTest {
 	/**
 	 * Tests savegame command.
 	 *
-	 * @throws InvalidCommand Exception
+	 * @throws CommandValidationException Exception
 	 * @throws MapValidationException     Exception
 	 * @throws IOException Exception
 	 */
 	@Test
-	public void testPerformSaveGameValidCommand() throws InvalidCommand, MapValidationException, IOException {
+	public void testPerformSaveGameValidCommand() throws CommandValidationException, MapValidationException, IOException {
 		d_currentPhase.handleCommand("savegame hello.txt");
 		GameState l_state = d_currentPhase.getD_gameState();
 
@@ -130,11 +133,11 @@ public class GameEngineUnitTest {
 	 * Tests the editcontinent command
 	 *
 	 * @throws IOException    Exception
-	 * @throws InvalidCommand Exception
+	 * @throws CommandValidationException Exception
 	 * @throws MapValidationException     Exception
 	 */
 	@Test
-	public void testPerformEditContinentValidCommand() throws IOException, InvalidCommand, MapValidationException {
+	public void testPerformEditContinentValidCommand() throws IOException, CommandValidationException, MapValidationException {
 		d_map.setD_mapFile("testeditmap.map");
 		GameState l_state = d_currentPhase.getD_gameState();
 
@@ -171,6 +174,6 @@ public class GameEngineUnitTest {
 	 */
 	@Test
 	public void testCorrectStartupPhase() {
-		assertTrue(d_gameEngine.getD_CurrentPhase() instanceof initialStartUpPhase);
+		assertTrue(d_gameEngine.getD_CurrentPhase() instanceof InitStartUpPhase);
 	}
 }

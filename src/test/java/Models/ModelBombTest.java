@@ -101,7 +101,7 @@ public class ModelBombTest {
         l_mapCountries.add(l_country5);
 
         Map l_map = new Map();
-        l_map.setD_countriesList(l_mapCountries);
+        l_map.setD_countries(l_mapCountries);
         d_gameState.setD_map(l_map);
         d_Model_bombOrder1 = new ModelBomb(d_player1, "Japan");
         d_Model_bombOrder2 = new ModelBomb(d_player1, "Norway");

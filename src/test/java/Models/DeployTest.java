@@ -1,6 +1,6 @@
 package Models;
 
-import Exceptions.InvalidCommand;
+import Exceptions.CommandValidationException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -73,7 +73,7 @@ public class DeployTest {
 
         // Setting up the game map
         Map l_map = new Map();
-        l_map.setD_countriesList(l_mapCountries);
+        l_map.setD_countries(l_mapCountries);
         d_gameState.setD_map(l_map);
 
         // Creating deploy orders
@@ -109,10 +109,10 @@ public class DeployTest {
     /**
      * Tests the creation of deploy orders by a player.
      *
-     * @throws InvalidCommand if the deploy command is invalid
+     * @throws CommandValidationException if the deploy command is invalid
      */
     @Test
-    public void testDeployOrder() throws InvalidCommand {
+    public void testDeployOrder() throws CommandValidationException {
         ModelPlayer l_player = new ModelPlayer("Maze");
         l_player.setD_noOfUnallocatedArmies(10);
         Country l_country = new Country(1, "Japan", 1);

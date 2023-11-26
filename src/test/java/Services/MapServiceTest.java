@@ -162,7 +162,7 @@ public class MapServiceTest {
 			}
 		};
 
-		for (Country l_country : d_map.getD_countries()) {
+		for (Country l_country : d_map.getD_countriesList()) {
 			ArrayList<Integer> l_neighbours = new ArrayList<Integer>();
 			l_actualCountryIdList.add(l_country.getD_countryId());
 			l_neighbours.addAll(l_country.getD_adjacentCountryIds());

@@ -53,7 +53,7 @@ public class MapView {
 		d_gameState = p_gameState;
 		d_map = p_gameState.getD_map();
 		d_playersList = p_gameState.getD_players();
-		d_countriesList = d_map.getD_countries();
+		d_countriesList = d_map.getD_countriesList();
 		d_continentsList = d_map.getD_continents();
 	}
 

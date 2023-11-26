@@ -160,7 +160,7 @@ public class Airlift implements Card, Serializable {
 	 * @return Bool if the order is valid
 	 */
 	@Override
-	public Boolean checkValidOrder(GameState p_internalGameState) {
+	public Boolean checkIfOrderIsValid(GameState p_internalGameState) {
 		Country l_sourceCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfSourceCountry);
 		Country l_targetCountry = p_internalGameState.getD_map().getCountryByName(d_nameOfTargetCountry);
 		if (l_sourceCountry == null) {

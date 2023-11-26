@@ -36,7 +36,7 @@ public class ConquestMapFileReader implements Serializable {
 
         l_continentObjects = linkCountryContinents(l_updatedCountries, l_continentObjects);
         p_map.setD_continents(l_continentObjects);
-        p_map.setD_countriesList(l_countryObjects);
+        p_map.setD_countries(l_countryObjects);
         p_gameState.setD_map(p_map);
     }
 
@@ -140,7 +140,7 @@ public class ConquestMapFileReader implements Serializable {
         for (Country c : p_countries) {
             for (Continent cont : p_continents) {
                 if (cont.getD_continentID().equals(c.getD_continentId())) {
-                    cont.addCountry(c);
+                    cont.addingCountry(c);
                 }
             }
         }

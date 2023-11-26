@@ -30,10 +30,10 @@ public class ModelAdvanceTest {
         List<Country> l_countries = Arrays.asList(l_country1, l_country2);
         l_player.setD_coutriesOwned(l_countries);
 
-        assertFalse(new ModelAdvance(l_player, "India", "France", 15).valid(d_gameState));
-        assertFalse(new ModelAdvance(l_player, "Canada", "France", 10).valid(d_gameState));
-        assertFalse(new ModelAdvance(l_player, "Italy", "France", 10).valid(d_gameState));
-        assertTrue(new ModelAdvance(l_player, "India", "France", 10).valid(d_gameState));
+        assertFalse(new ModelAdvance(l_player, "India", "France", 15).checkValid(d_gameState));
+        assertFalse(new ModelAdvance(l_player, "Canada", "France", 10).checkValid(d_gameState));
+        assertFalse(new ModelAdvance(l_player, "Italy", "France", 10).checkValid(d_gameState));
+        assertTrue(new ModelAdvance(l_player, "India", "France", 10).checkValid(d_gameState));
     }
 
     /**

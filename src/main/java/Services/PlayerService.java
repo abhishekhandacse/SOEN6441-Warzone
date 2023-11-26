@@ -171,7 +171,7 @@ public class PlayerService implements Serializable {
 			return;
 		}
 
-		List<Country> l_countries = p_gameState.getD_map().getD_countries();
+		List<Country> l_countries = p_gameState.getD_map().getD_countriesList();
 		int l_playerSize = p_gameState.getD_players().size();
 		ModelPlayer l_neutralPlayer = p_gameState.getD_players().stream()
 				.filter(l_player -> l_player.getPlayerName().equalsIgnoreCase("Neutral")).findFirst().orElse(null);

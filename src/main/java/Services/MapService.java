@@ -84,7 +84,7 @@ public class MapService implements Serializable {
     public void editFunctions(GameState p_currentGameState, String p_currentArgument, String p_currentOperation, Integer p_switchParameterToDifferentParameter) throws IOException, MapValidationException, CommandValidationException{
         Map l_updatedMap;
         String l_mapFileName = p_currentGameState.getD_map().getD_mapFile();
-        Map l_mapToBeUpdated = (CommonUtil.isNull(p_currentGameState.getD_map().getD_continents()) && CommonUtil.isNull(p_currentGameState.getD_map().getD_countries())) ? this.loadMap(p_currentGameState, l_mapFileName) : p_currentGameState.getD_map();
+        Map l_mapToBeUpdated = (CommonUtil.isNull(p_currentGameState.getD_map().getD_continents()) && CommonUtil.isNull(p_currentGameState.getD_map().getD_countriesList())) ? this.loadMap(p_currentGameState, l_mapFileName) : p_currentGameState.getD_map();
 
         // Edit Control Logic for Continent, Country & Neighbor
         if(!CommonUtil.isNull(l_mapToBeUpdated)){

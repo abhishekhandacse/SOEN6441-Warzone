@@ -239,7 +239,7 @@ public class OrderExecutionPhase extends Phase {
 	}
 
 	protected Boolean checkEndOftheGame(GameState p_gameState) {
-		Integer l_totalCountries = p_gameState.getD_map().getD_countries().size();
+		Integer l_totalCountries = p_gameState.getD_map().getD_countriesList().size();
 		d_playerService.updatePlayersInGame(p_gameState);
 		for (ModelPlayer l_player : p_gameState.getD_players()) {
 			if (l_player.getD_coutriesOwned().size() == l_totalCountries) {

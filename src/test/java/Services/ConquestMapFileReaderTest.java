@@ -1,6 +1,6 @@
 package Services;
 
-import Exceptions.InvalidCommand;
+import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 import Models.GameState;
 import Models.Map;
@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -75,10 +76,10 @@ public class ConquestMapFileReaderTest {
 	 * tests addition or deletion of continent via editcontinent operation
 	 * @throws IOException Exceptions
 	 * @throws MapValidationException Exception
-	 * @throws InvalidCommand Exception
+	 * @throws CommandValidationException Exception
 	 */
 	@Test
-	public void testEditMap() throws IOException, MapValidationException, InvalidCommand {
+	public void testEditMap() throws IOException, MapValidationException, CommandValidationException {
 		d_conquestMapFileReader.readConquestFile(d_state, d_map, d_mapLines);
 		Map l_updatedContinents = d_mapService.addRemoveContinents(d_state, d_state.getD_map(), "Add", "Asia 10");
 		l_updatedContinents = d_mapService.addRemoveContinents(d_state, d_state.getD_map(), "Add", "Europe 20");

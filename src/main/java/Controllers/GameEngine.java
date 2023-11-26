@@ -24,7 +24,7 @@ public class GameEngine {
     /**
      * The present phase of the game.
      */
-    private Phase d_presentPhaseGame = new initialStartUpPhase(this, d_stateOfGame);
+    private Phase d_presentPhaseGame = new InitStartUpPhase(this, d_stateOfGame);
 
     /**
      * Sets the current phase of the game.
@@ -62,7 +62,7 @@ public class GameEngine {
 
     public void setStartUpPhase(){
         this.setD_gameEngineLog("Start Up Phase", "phase");
-        setD_CurrentPhase(new initialStartUpPhase(this, d_stateOfGame));
+        setD_CurrentPhase(new InitStartUpPhase(this, d_stateOfGame));
         getD_CurrentPhase().initPhase(d_isTournamentMode);
     }
 

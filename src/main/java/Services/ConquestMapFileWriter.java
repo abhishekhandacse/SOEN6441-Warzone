@@ -46,7 +46,7 @@ public class ConquestMapFileWriter implements Serializable {
 
         // Writes Country Objects to File And Organizes Border Data for each of them
         p_currentFileWriter.write(System.lineSeparator() + ApplicationConstants.CONQUEST_TERRITORIES + System.lineSeparator());
-        for (Country l_country : p_initialGameState.getD_map().getD_countries()) {
+        for (Country l_country : p_initialGameState.getD_map().getD_countriesList()) {
             l_countryMetaData = new String();
             l_countryMetaData = l_country.getD_countryName().concat(",dummy1,dummy2,")
                     .concat(p_initialGameState.getD_map().getContinentByID(l_country.getD_continentId()).getD_continentName());
@@ -73,7 +73,7 @@ public class ConquestMapFileWriter implements Serializable {
         if (null != p_currentGameState.getD_map().getD_continents() && !p_currentGameState.getD_map().getD_continents().isEmpty()) {
             writeContinentMetadata(p_currentGameState, p_currentFileWriter);
         }
-        if (null != p_currentGameState.getD_map().getD_countries() && !p_currentGameState.getD_map().getD_countries().isEmpty()) {
+        if (null != p_currentGameState.getD_map().getD_countriesList() && !p_currentGameState.getD_map().getD_countriesList().isEmpty()) {
             writeCountryAndBoarderMetaData(p_currentGameState, p_currentFileWriter);
         }
     }

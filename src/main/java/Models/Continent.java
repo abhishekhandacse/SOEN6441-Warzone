@@ -170,7 +170,7 @@ public class Continent {
 			for (Country c : d_countriesList) {
 				if (!CommonUtil.isNull(c.d_adjacentCountryIds)) {
 					if (c.getD_adjacentCountryIds().contains(p_countryId)) {
-						c.removeNeighbour(p_countryId);
+						c.removeNeighbours(p_countryId);
 					}
 				}
 			}

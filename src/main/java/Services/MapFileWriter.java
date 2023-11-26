@@ -26,7 +26,7 @@ public class MapFileWriter implements Serializable {
 
 		// Writes Country Objects to File And Organizes Border Data for each of them
 		p_writer.write(System.lineSeparator() + ApplicationConstants.COUNTRIES + System.lineSeparator());
-		for (Country l_country : p_gameState.getD_map().getD_countries()) {
+		for (Country l_country : p_gameState.getD_map().getD_countriesList()) {
 			l_countryMetaData = new String();
 			l_countryMetaData = l_country.getD_countryId().toString().concat(" ").concat(l_country.getD_countryName())
 					.concat(" ").concat(l_country.getD_continentId().toString());
@@ -77,8 +77,8 @@ public class MapFileWriter implements Serializable {
 				&& !p_gameState.getD_map().getD_continents().isEmpty()) {
 			writeContinentMetadata(p_gameState, l_writer);
 		}
-		if (null != p_gameState.getD_map().getD_countries()
-				&& !p_gameState.getD_map().getD_countries().isEmpty()) {
+		if (null != p_gameState.getD_map().getD_countriesList()
+				&& !p_gameState.getD_map().getD_countriesList().isEmpty()) {
 			writeCountryAndBoarderMetaData(p_gameState, l_writer);
 		}
 	}

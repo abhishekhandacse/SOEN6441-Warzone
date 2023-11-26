@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Controllers.GameEngine;
-import Exceptions.InvalidCommand;
+import Exceptions.CommandValidationException;
 import Exceptions.MapValidationException;
 
 public class TournamentUnitTest {
@@ -48,11 +48,11 @@ public class TournamentUnitTest {
     /**
      * Tests tournament command in case of invalid map arguments passed.
      *
-     * @throws InvalidCommand invalid command passed
+     * @throws CommandValidationException invalid command passed
      * @throws MapValidationException     invalid map name passed
      */
     @Test
-    public void testInvalidMapArgs() throws MapValidationException, InvalidCommand {
+    public void testInvalidMapArgs() throws MapValidationException, CommandValidationException {
         Tournament l_tournament = new Tournament();
         assertFalse(l_tournament.parseTournamentCommand(d_gameState, "M",
                 "test.map test123.map canada.map conquest.map swiss.map europe.map", new GameEngine()));
@@ -60,11 +60,11 @@ public class TournamentUnitTest {
     /**
      * Tests tournament command in case of invalid player arguments passed.
      *
-     * @throws InvalidCommand invalid command passed
+     * @throws CommandValidationException invalid command passed
      * @throws MapValidationException     invalid map name passed
      */
     @Test
-    public void testInvalidPlayerStrategiesArgs() throws MapValidationException, InvalidCommand {
+    public void testInvalidPlayerStrategiesArgs() throws MapValidationException, CommandValidationException {
         Tournament l_tournament = new Tournament();
         assertFalse(l_tournament.parseTournamentCommand(d_gameState, "P",
                 "Random Human", new GameEngine()));
@@ -72,11 +72,11 @@ public class TournamentUnitTest {
     /**
      * Tests tournament command in case of invalid game arguments passed.
      *
-     * @throws InvalidCommand invalid command passed
+     * @throws CommandValidationException invalid command passed
      * @throws MapValidationException     invalid map name passed
      */
     @Test
-    public void testInvalidNoOfGamesArgs() throws MapValidationException, InvalidCommand {
+    public void testInvalidNoOfGamesArgs() throws MapValidationException, CommandValidationException {
         Tournament l_tournament = new Tournament();
         assertFalse(l_tournament.parseTournamentCommand(d_gameState, "G",
                 "6", new GameEngine()));
@@ -84,11 +84,11 @@ public class TournamentUnitTest {
     /**
      * Tests tournament command in case of invalid turns arguments passed.
      *
-     * @throws InvalidCommand invalid command passed
+     * @throws CommandValidationException invalid command passed
      * @throws MapValidationException     invalid map name passed
      */
     @Test
-    public void testInvalidNoOfTurnsArgs() throws MapValidationException, InvalidCommand {
+    public void testInvalidNoOfTurnsArgs() throws MapValidationException, CommandValidationException {
         Tournament l_tournament = new Tournament();
         assertFalse(l_tournament.parseTournamentCommand(d_gameState, "D",
                 "60", new GameEngine()));
@@ -97,12 +97,12 @@ public class TournamentUnitTest {
     /**
      * Checks if valid tournament command is passed and plays the tournament.
      *
-     * @throws InvalidCommand invalid command passed
+     * @throws CommandValidationException invalid command passed
      * @throws MapValidationException     invalid map name passed
      */
     @Test
-    public void testValidTournament() throws MapValidationException, InvalidCommand {
-        initialStartUpPhase l_initial_startUpPhase = new initialStartUpPhase(new GameEngine(), d_gameState);
+    public void testValidTournament() throws MapValidationException, CommandValidationException {
+        InitStartUpPhase l_initial_startUpPhase = new InitStartUpPhase(new GameEngine(), d_gameState);
         Tournament l_tournament = new Tournament();
         GameEngine l_gameEngine = new GameEngine();
         l_tournament.parseTournamentCommand(d_gameState, "M",
