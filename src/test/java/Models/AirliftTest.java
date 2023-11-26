@@ -51,8 +51,8 @@ public class AirliftTest {
 		l_countryList.add(l_country);
 
 		Country l_countryNeighbour = new Country(1, "Belgium", 1);
-		l_countryNeighbour.addNeighbour(0);
-		l_country.addNeighbour(1);
+		l_countryNeighbour.addNeighbours(0);
+		l_country.addNeighbours(1);
 		l_countryNeighbour.setD_armies(10);
 		l_countryList.add(l_countryNeighbour);
 
@@ -61,7 +61,7 @@ public class AirliftTest {
 		l_countryList.add(l_countryNotNeighbour);
 
 		Map l_map = new Map();
-		l_map.setD_allCountries(l_countryList);
+		l_map.setD_countries(l_countryList);
 
 		d_gameState.setD_map(l_map);
 		d_player1.setD_coutriesOwned(l_countryList);
@@ -84,7 +84,7 @@ public class AirliftTest {
 	@Test
 	public void testInvalidAirLift() {
 		d_invalidAirLift1 = new Airlift("France", "India", 1, d_player1);
-		d_invalidAirLift1.validOrderCheck(d_gameState);
+		d_invalidAirLift1.checkIfOrderIsValid(d_gameState);
 		assertEquals(d_gameState.getRecentLog(),
 				"Log: Invalid Target Country! Doesn't exist on the map!" + System.lineSeparator());
 	}
