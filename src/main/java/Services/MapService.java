@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import Constants.ApplicationConstants;
-import Exceptions.InvalidCommand;
-import Exceptions.InvalidMap;
+import Exceptions.CommandValidationException;
+import Exceptions.MapValidationException;
 import Models.Continent;
 import Models.Country;
 import Models.GameState;
@@ -28,9 +28,9 @@ public class MapService implements Serializable {
      *
      * @param p_fileNameLoaded map file name to load.
      * @return List of lines from map file.
-     * @throws InvalidMap indicates Map Object Validation failure
+     * @throws MapValidationException indicates Map Object Validation failure
      */
-    public List<String> loadFile(String p_fileNameLoaded) throws InvalidMap{
+    public List<String> loadFile(String p_fileNameLoaded) throws MapValidationException{
 
         String l_filePath = CommonUtil.getMapFilePath(p_fileNameLoaded);
         List<String> l_lineList = new ArrayList<>();
@@ -41,7 +41,7 @@ public class MapService implements Serializable {
             l_lineList = l_reader.lines().collect(Collectors.toList());
             l_reader.close();
         } catch (IOException l_e1) {
-            throw new InvalidMap("Map File not Found!");
+            throw new MapValidationException("Map File not Found!");
         }
         return l_lineList;
     }
@@ -52,9 +52,9 @@ public class MapService implements Serializable {
      * @param p_currentGameState current state of game.
      * @param p_currentLoadFileName map file name.
      * @return Map object after processing map file.
-     * @throws InvalidMap indicates Map Object Validation failure
+     * @throws MapValidationException indicates Map Object Validation failure
      */
-    public Map loadMap(GameState p_currentGameState, String p_currentLoadFileName) throws InvalidMap {
+    public Map loadMap(GameState p_currentGameState, String p_currentLoadFileName) throws MapValidationException {
         Map l_map = new Map();
         List<String> l_linesOfFile = loadFile(p_currentLoadFileName);
 
@@ -78,10 +78,10 @@ public class MapService implements Serializable {
      * @param p_currentOperation Add/Remove operation to be performed.
      * @param p_switchParameterToDifferentParameter Type of Edit Operation to be performed.
      * @throws IOException Exception.
-     * @throws InvalidMap invalidmap exception.
-     * @throws InvalidCommand invalid command exception
+     * @throws MapValidationException MapValidationException exception.
+     * @throws CommandValidationException invalid command exception
      */
-    public void editFunctions(GameState p_currentGameState, String p_currentArgument, String p_currentOperation, Integer p_switchParameterToDifferentParameter) throws IOException, InvalidMap, InvalidCommand{
+    public void editFunctions(GameState p_currentGameState, String p_currentArgument, String p_currentOperation, Integer p_switchParameterToDifferentParameter) throws IOException, MapValidationException, CommandValidationException{
         Map l_updatedMap;
         String l_mapFileName = p_currentGameState.getD_map().getD_mapFile();
         Map l_mapToBeUpdated = (CommonUtil.isNull(p_currentGameState.getD_map().getD_continents()) && CommonUtil.isNull(p_currentGameState.getD_map().getD_countries())) ? this.loadMap(p_currentGameState, l_mapFileName) : p_currentGameState.getD_map();
@@ -115,9 +115,9 @@ public class MapService implements Serializable {
      * @param p_currentOperation Operation to perform on Continents
      * @param p_currentArgument Arguments pertaining to the operations
      * @return List of updated continents
-     * @throws InvalidMap invalidmap exception
+     * @throws MapValidationException MapValidationException exception
      */
-    public Map addRemoveContinents(GameState p_currentGameState, Map p_currentMapToBeUpdated, String p_currentOperation, String p_currentArgument) throws InvalidMap {
+    public Map addRemoveContinents(GameState p_currentGameState, Map p_currentMapToBeUpdated, String p_currentOperation, String p_currentArgument) throws MapValidationException {
 
         try {
             if (p_currentOperation.equalsIgnoreCase("add") && p_currentArgument.split(" ").length==2) {
@@ -127,9 +127,9 @@ public class MapService implements Serializable {
                 p_currentMapToBeUpdated.removeContinent(p_currentArgument.split(" ")[0]);
                 this.setD_MapServiceLog("Continent "+ p_currentArgument.split(" ")[0]+ " removed successfully!", p_currentGameState);
             } else {
-                throw new InvalidMap("Continent "+p_currentArgument.split(" ")[0]+" couldn't be added/removed. Changes are not made due to Invalid Command Passed.");
+                throw new MapValidationException("Continent "+p_currentArgument.split(" ")[0]+" couldn't be added/removed. Changes are not made due to Invalid Command Passed.");
             }
-        } catch (InvalidMap | NumberFormatException l_e) {
+        } catch (MapValidationException | NumberFormatException l_e) {
             this.setD_MapServiceLog(l_e.getMessage(), p_currentGameState);
         }
         return p_currentMapToBeUpdated;
@@ -141,10 +141,10 @@ public class MapService implements Serializable {
      *
      * @param p_currentGameState GameState model class object
      * @param p_editCurrentFilePath consists of base filepath
-     * @throws InvalidMap indicates Map Object Validation failure
+     * @throws MapValidationException indicates Map Object Validation failure
      * @throws IOException triggered in case the file does not exist or the file name is invalid
      */
-    public void editMap(GameState p_currentGameState, String p_editCurrentFilePath) throws IOException, InvalidMap {
+    public void editMap(GameState p_currentGameState, String p_editCurrentFilePath) throws IOException, MapValidationException {
 
         String l_filePath = CommonUtil.getMapFilePath(p_editCurrentFilePath);
         File l_fileToBeEdited = new File(l_filePath);
@@ -178,9 +178,9 @@ public class MapService implements Serializable {
      * @param p_currentGameState Current GameState
      * @param p_currentFileName filename to save things in
      * @return true/false based on successful save operation of map to file
-     * @throws InvalidMap InvalidMap exception
+     * @throws MapValidationException MapValidationException exception
      */
-    public boolean saveMap(GameState p_currentGameState, String p_currentFileName) throws InvalidMap {
+    public boolean saveMap(GameState p_currentGameState, String p_currentFileName) throws MapValidationException {
         try {
             String l_mapFormat = null;
             // Verifies if the file linked to savemap and edited by user are same
@@ -209,7 +209,7 @@ public class MapService implements Serializable {
                 }
             }
             return true;
-        } catch (IOException | InvalidMap l_e) {
+        } catch (IOException | MapValidationException l_e) {
             this.setD_MapServiceLog(l_e.getMessage(), p_currentGameState);
             p_currentGameState.updateLog("Couldn't save the changes in map file!", "effect");
             p_currentGameState.setError("Error in saving map file");
@@ -225,9 +225,9 @@ public class MapService implements Serializable {
      * @param p_currentOperation Operation to be performed
      * @param p_currentArgument Arguments for the pertaining command operation
      * @return Updated Map Object
-     * @throws InvalidMap invalidmap exception
+     * @throws MapValidationException MapValidationException exception
      */
-    public Map addRemoveCountry(GameState p_currentGameState, Map p_mapToBeUpdatedCorrectly, String p_currentArgument, String p_currentOperation) throws InvalidMap{
+    public Map addRemoveCountry(GameState p_currentGameState, Map p_mapToBeUpdatedCorrectly, String p_currentArgument, String p_currentOperation) throws MapValidationException{
 
         try {
             if (p_currentOperation.equalsIgnoreCase("add") && p_currentArgument.split(" ").length==2){
@@ -237,9 +237,9 @@ public class MapService implements Serializable {
                 p_mapToBeUpdatedCorrectly.removeCountry(p_currentArgument.split(" ")[0]);
                 this.setD_MapServiceLog("Country "+ p_currentArgument.split(" ")[0]+ " removed successfully!", p_currentGameState);
             }else{
-                throw new InvalidMap("Country "+p_currentArgument.split(" ")[0]+" could not be "+ p_currentOperation +"ed!");
+                throw new MapValidationException("Country "+p_currentArgument.split(" ")[0]+" could not be "+ p_currentOperation +"ed!");
             }
-        } catch (InvalidMap l_e) {
+        } catch (MapValidationException l_e) {
             this.setD_MapServiceLog(l_e.getMessage(), p_currentGameState);
         }
         return p_mapToBeUpdatedCorrectly;
@@ -253,9 +253,9 @@ public class MapService implements Serializable {
      * @param p_currentOperation Add/Remove operation to be performed
      * @param p_argumentPassed Arguments for the pertaining command operation
      * @return map to be updated
-     * @throws InvalidMap invalidmap exception
+     * @throws MapValidationException MapValidationException exception
      */
-    public Map addRemoveNeighbour(GameState p_currentGameState, Map p_currentMapToBeUpdated, String p_argumentPassed, String p_currentOperation) throws InvalidMap{
+    public Map addRemoveNeighbour(GameState p_currentGameState, Map p_currentMapToBeUpdated, String p_argumentPassed, String p_currentOperation) throws MapValidationException{
 
         try {
             if (p_currentOperation.equalsIgnoreCase("add") && p_argumentPassed.split(" ").length==2){
@@ -265,9 +265,9 @@ public class MapService implements Serializable {
                 p_currentMapToBeUpdated.removeCountryNeighbour(p_argumentPassed.split(" ")[0], p_argumentPassed.split(" ")[1]);
                 this.setD_MapServiceLog("Neighbour Pair "+p_argumentPassed.split(" ")[0]+" "+p_argumentPassed.split(" ")[1]+" removed successfully!", p_currentGameState);
             }else{
-                throw new InvalidMap("Neighbour could not be "+ p_currentOperation +"ed!");
+                throw new MapValidationException("Neighbour could not be "+ p_currentOperation +"ed!");
             }
-        } catch (InvalidMap l_e) {
+        } catch (MapValidationException l_e) {
             this.setD_MapServiceLog(l_e.getMessage(), p_currentGameState);
         }
         return p_currentMapToBeUpdated;
