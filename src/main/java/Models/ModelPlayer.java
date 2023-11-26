@@ -4,13 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import Constants.ApplicationConstants;
+import Exceptions.CommandValidationException;
 import Exceptions.InvalidCommand;
 import Exceptions.InvalidMap;
+import Exceptions.MapValidationException;
 import Utils.CommonUtil;
 
 
@@ -272,7 +275,7 @@ public class ModelPlayer implements Serializable {
     }
 
 
-    public void issue_order(IssueOrderPhase p_issueOrderPhase) throws InvalidCommand, IOException, InvalidMap {
+    public void issue_order(IssueOrderPhase p_issueOrderPhase) throws CommandValidationException, IOException, MapValidationException {
         p_issueOrderPhase.askForOrder(this);
     }
 
