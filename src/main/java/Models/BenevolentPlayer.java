@@ -7,15 +7,28 @@ import java.util.List;
 import java.util.Random;
 import java.util.Map.Entry;
 
+/**
+ * The BenevolentPlayer class represents a player with a benevolent strategy.
+ * It extends the PlayerBehaviorStrategy class and implements methods for creating different types of game orders.
+ */
 public class BenevolentPlayer extends PlayerBehaviorStrategy{
 
+	/**
+     * List to keep track of countries where armies are deployed during the benevolent strategy.
+     */
     ArrayList<Country> d_deployCountriesList = new ArrayList<Country>();
 
+	/**
+	 * {@inheritDoc}
+	 */
     @Override
     public String getPlayerBehavior() {
         return "Benevolent";
     }
 
+	/**
+	 * {@inheritDoc}
+	 */
     @Override
     public String createOrder(ModelPlayer p_modelPlayer, GameState p_currentGameState) {
 		String l_command;
@@ -69,6 +82,9 @@ public class BenevolentPlayer extends PlayerBehaviorStrategy{
 		return l_command;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
     @Override
     public String createCardOrder(ModelPlayer p_modelPlayer, GameState p_currentGameState, String p_currentCardName) {
         int l_armiesToSend;
@@ -99,6 +115,9 @@ public class BenevolentPlayer extends PlayerBehaviorStrategy{
 		return null;
     }
 
+	/**
+	 * {@inheritDoc}
+	 */
     @Override
     public String createAdvanceOrder(ModelPlayer p_modelPlayer, GameState p_currentGameState) {
         // advance on weakest country
@@ -121,6 +140,9 @@ public class BenevolentPlayer extends PlayerBehaviorStrategy{
 				+ " " + l_armiesToSend;
     }
 
+	/**
+	 * {@inheritDoc}
+	 */
     @Override
     public String createDeployOrder(ModelPlayer p_modelPlayer, GameState p_currentGameState) {
         if (p_modelPlayer.getD_noOfUnallocatedArmies()>0) {
@@ -137,6 +159,12 @@ public class BenevolentPlayer extends PlayerBehaviorStrategy{
 		}
     }
 
+	/**
+     * Checks if any armies have been deployed by the player.
+     *
+     * @param p_player The player to check.
+     * @return True if any armies have been deployed, false otherwise.
+     */
     private Boolean checkIfArmiesDepoyed(ModelPlayer p_player){
 		if(p_player.getD_coutriesOwned().stream().anyMatch(l_country -> l_country.getD_armies()>0)){
 			return true;
@@ -144,11 +172,24 @@ public class BenevolentPlayer extends PlayerBehaviorStrategy{
 		return false;
 	}
 
+	/**
+     * Retrieves a random country from a list of countries.
+     *
+     * @param p_listOfCountries The list of countries to choose from.
+     * @return A randomly selected country.
+     */
     private Country getRandomCountry(List<Country> p_listOfCountries) {
 		Random l_random = new Random();
 		return p_listOfCountries.get(l_random.nextInt(p_listOfCountries.size()));
 	}
 
+	/**
+     * Retrieves the weakest neighbor of a given country.
+     *
+     * @param l_randomSourceCountry The source country.
+     * @param p_gameState           The current state of the game.
+     * @return The weakest neighbor country.
+     */
     public Country getWeakestNeighbor(Country l_randomSourceCountry, GameState p_gameState) {
 		List<Integer> l_adjacentCountryIds = l_randomSourceCountry.getD_adjacentCountryIds();
 		List<Country> l_listOfNeighbors = new ArrayList<Country>();
@@ -162,6 +203,13 @@ public class BenevolentPlayer extends PlayerBehaviorStrategy{
 		return l_Country;
 	}
 
+	/**
+     * Retrieves a list of enemy neighbors for a given player and country.
+     *
+     * @param p_player The player.
+     * @param p_country The country for which to find enemy neighbors.
+     * @return A list of enemy neighbor country IDs.
+     */
 	private ArrayList<Integer> randomEnemyNeighbor(ModelPlayer p_player, Country p_country) {
 		ArrayList<Integer> l_enemyNeighbors = new ArrayList<Integer>();
 
@@ -172,12 +220,24 @@ public class BenevolentPlayer extends PlayerBehaviorStrategy{
 		return l_enemyNeighbors;
 	}
 
+	/**
+     * Retrieves the weakest country owned by the player.
+     *
+     * @param p_player The player.
+     * @return The weakest country.
+     */
     public Country getWeakestCountry(ModelPlayer p_player) {
 		List<Country> l_countriesOwnedByPlayer = p_player.getD_coutriesOwned();
 		Country l_Country = calculateWeakestCountry(l_countriesOwnedByPlayer);
 		return l_Country;
 	}
 
+	/**
+     * Calculates the weakest country from a list of countries.
+     *
+     * @param l_listOfCountries The list of countries to evaluate.
+     * @return The weakest country.
+     */
     public Country calculateWeakestCountry(List<Country> l_listOfCountries) {
 		LinkedHashMap<Country, Integer> l_CountryWithArmies = new LinkedHashMap<Country, Integer>();
 

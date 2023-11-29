@@ -12,10 +12,21 @@ import java.util.List;
 
 public class TournamentView {
 
+    /**
+     * Tournament object
+     */
     Tournament d_tournament;
+
+    /**
+     * list of state
+     */
     List<GameState> d_gameStateObjects;
 
+    /**
+     * Constant value for ANSI_RESET
+     */
     public static final String ANSI_RESET = "\u001B[0m";
+
     /**
      * Creates a TournamentView with the specified Tournament object.
      *

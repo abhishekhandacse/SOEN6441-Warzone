@@ -10,16 +10,20 @@ import java.util.*;
 
 public class CommandHandler implements Serializable {
 
+    /**
+     * Command string
+     */
     public String d_command;
+
     /**
      * Constructs a new CommandHandler object with the specified command string.
      *
      * @param p_command The command string to be processed.
      */
-
     public CommandHandler(String p_command){
         this.d_command = p_command.trim().replaceAll(" +", " ");
     }
+
     /**
      * Private helper method to create a map containing operation and arguments based on the given operation string.
      *
@@ -41,13 +45,22 @@ public class CommandHandler implements Serializable {
         return l_operationMap;
     }
 
+    /**
+     * getter for command
+     * @return the command
+     */
     public String getD_command() {
         return d_command;
     }
 
+    /**
+     * Getter for root command
+     * @return root command
+     */
     public String getRootCommand(){
         return d_command.split(" ")[0];
     }
+
     /**
      * Parses the original command string into a list of maps, each representing an operation and its arguments.
      *
@@ -78,6 +91,7 @@ public class CommandHandler implements Serializable {
 
         return l_operations_list;
     }
+    
     /**
      * Checks whether the required key is present in the provided map and has a non-empty value.
      *

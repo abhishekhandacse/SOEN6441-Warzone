@@ -33,6 +33,12 @@ public class PlayerService implements Serializable {
 	 */
 	String d_assignmentLog = "Country/Continent Assignment:";
 
+	/**
+	 * checks if plater name is unique
+	 * @param p_existingPlayerList - player list
+	 * @param p_playerName - name to check 
+	 * @return - boolean value
+	 */
 	public boolean isPlayerNameUnique(List<ModelPlayer> p_existingPlayerList, String p_playerName) {
 		boolean l_isUnique = true;
 		if (!CommonUtil.isCollectionEmpty(p_existingPlayerList)) {
@@ -75,6 +81,12 @@ public class PlayerService implements Serializable {
 		return l_updatedPlayers;
 	}
 
+	/**
+	 * Add game player 
+	 * @param p_updatedPlayers list of player
+	 * @param p_enteredPlayerName - player name
+	 * @param p_playerNameAlreadyExist - boolean value
+	 */
 	private void addGamePlayer(List<ModelPlayer> p_updatedPlayers, String p_enteredPlayerName,
                                boolean p_playerNameAlreadyExist) {
 		Random l_random = new Random();
@@ -111,6 +123,13 @@ public class PlayerService implements Serializable {
 		}
 	}
 	
+	/**
+	 * Remove player
+	 * @param p_existingPlayerList player list 
+	 * @param p_updatedPlayers - new list
+	 * @param p_enteredPlayerName - player name
+	 * @param p_playerNameAlreadyExist - boolean value
+	 */
 	private void removeGamePlayer(List<ModelPlayer> p_existingPlayerList, List<ModelPlayer> p_updatedPlayers,
                                   String p_enteredPlayerName, boolean p_playerNameAlreadyExist) {
 		if (p_playerNameAlreadyExist) {
@@ -141,6 +160,12 @@ public class PlayerService implements Serializable {
 		}
 	}
 
+	/**
+     * Performs continent assignment for players based on the countries they own.
+     *
+     * @param p_players    List of players.
+     * @param p_continents List of continents in the game.
+     */
 	public void performContinentAssignment(List<ModelPlayer> p_players, List<Continent> p_continents) {
 		for (ModelPlayer l_pl : p_players) {
 			List<String> l_countriesOwned = new ArrayList<>();
@@ -165,6 +190,11 @@ public class PlayerService implements Serializable {
 		}
 	}
 
+	/**
+     * Assigns countries to players randomly and performs continent assignment.
+     *
+     * @param p_gameState Current game state.
+     */
 	public void assignCountries(GameState p_gameState) {
 		if (!checkPlayersAvailability(p_gameState)){
 			p_gameState.updateLog("Kindly add players before assigning countries",  "effect");
@@ -186,6 +216,14 @@ public class PlayerService implements Serializable {
 
 	}
 
+	/**
+	 * perform random country assignment
+	 * 
+	 * @param p_countriesPerPlayer - number of countries per player
+	 * @param p_countries = list of countries
+	 * @param p_players - list of player
+	 * @param p_gameState - game state
+	 */
 	private void performRandomCountryAssignment(int p_countriesPerPlayer, List<Country> p_countries,
                                                 List<ModelPlayer> p_players, GameState p_gameState) {
 		List<Country> l_unassignedCountries = new ArrayList<>(p_countries);
@@ -337,6 +375,11 @@ public class PlayerService implements Serializable {
 		return l_totalUnexecutedOrders != 0;
 	}
 
+	/**
+	 * checks if unassignedArmiesExists
+	 * @param p_playersList list of players
+	 * @return - boolean value
+	 */
 	public boolean unassignedArmiesExists(List<ModelPlayer> p_playersList) {
 		int l_unassignedArmies = 0;
 		for (ModelPlayer l_player : p_playersList) {
@@ -345,6 +388,10 @@ public class PlayerService implements Serializable {
 		return l_unassignedArmies != 0;
 	}
 
+	/**
+	 * Reset player flag
+	 * @param p_playersList - players list
+	 */
 	public void resetPlayersFlag(List<ModelPlayer> p_playersList) {
 		for (ModelPlayer l_player : p_playersList) {
 			if (!l_player.getPlayerName().equalsIgnoreCase("Neutral"))

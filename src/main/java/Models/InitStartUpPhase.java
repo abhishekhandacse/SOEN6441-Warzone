@@ -22,6 +22,11 @@ import java.util.Map;
  */
 public class InitStartUpPhase extends Phase {
 
+	/**
+	 * Constructor
+	 * @param p_gameEngine - gameengine
+	 * @param p_gameState - game state
+	 */
 	public InitStartUpPhase(GameEngine p_gameEngine, GameState p_gameState) {
 		super(p_gameEngine, p_gameState);
 	}
@@ -304,9 +309,13 @@ public class InitStartUpPhase extends Phase {
 	 */
 	public void performAssignCountries(CommandHandler p_command, ModelPlayer p_player, boolean p_istournamentmode,
                                           GameState p_gameState) throws CommandValidationException {
-		if (p_gameState.getD_loadCommand()) {
+		if(d_gameState != null && d_gameState.d_players != null && d_gameState.d_players.size() < 2){
+				throw new CommandValidationException("Cannot Assign countries with only player");
+		}
+		else if (p_gameState.getD_loadCommand()) {
 			List<Map<String, String>> l_operations_list = p_command.getOperationsAndArguments();
 			Thread.setDefaultUncaughtExceptionHandler(new LogHandlerException(d_gameState));
+			
 			if (CommonUtil.isCollectionEmpty(l_operations_list) || p_istournamentmode) {
 				d_gameEngine.setD_gameState(p_gameState);
 				d_gameEngine.setD_isTournamentMode(p_istournamentmode);
@@ -322,27 +331,42 @@ public class InitStartUpPhase extends Phase {
 		}
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
     @Override
     protected void performCardHandle(String p_enteredCommand, ModelPlayer p_player) throws IOException {
         printCommandValidationExceptionInState();
     }
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void performShowMap(CommandHandler p_command, ModelPlayer p_player) {
 		MapView l_mapView = new MapView(d_gameState);
 		l_mapView.showMap();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void performAdvance(String p_command, ModelPlayer p_player) {
 		printCommandValidationExceptionInState();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void performCreateDeploy(String p_command, ModelPlayer p_player) {
 		printCommandValidationExceptionInState();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void tournamentGamePlay(CommandHandler p_command) throws CommandValidationException, MapValidationException {
 

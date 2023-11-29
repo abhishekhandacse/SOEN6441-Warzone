@@ -3,7 +3,7 @@ package Controllers;
 import Models.*;
 
 /**
- * The `GameEngine` class represents the core engine of the game. It manages different game phases and provides
+ * The GameEngine class represents the core engine of the game. It manages different game phases and provides
  * methods to switch between them.
  */
 public class GameEngine {
@@ -13,10 +13,18 @@ public class GameEngine {
      */
     private GameState d_stateOfGame = new GameState();
 
+    /**
+     * Getter for game state
+     * @return the game state
+     */
     public GameState getD_gameState() {
         return d_stateOfGame;
     }
 
+    /**
+     * Setter for game state
+     * @param p_gameState - the game state 
+     */
     public void setD_gameState(GameState p_gameState) {
         this.d_stateOfGame = p_gameState;
     }
@@ -44,22 +52,40 @@ public class GameEngine {
         return d_presentPhaseGame;
     }
 
+    /**
+     * boolean value to check if we are in tounament mode
+     */
     static boolean d_isTournamentMode = false;
 
+    /**
+     *  gets the boolean value
+     * @return value to check if we are in tounament mode
+     */
     public boolean isD_isTournamentMode() {
         return d_isTournamentMode;
     }
 
+    /**
+     * Sets value to check if we are in tounament mode
+     * @param p_isTournamentMode - boolean value
+     */
     public void setD_isTournamentMode(boolean p_isTournamentMode) {
         GameEngine.d_isTournamentMode = p_isTournamentMode;
     }
 
+    /**
+     * Load the current phase
+     * @param p_phase - curent phase
+     */
     public void loadPhase(Phase p_phase){
         d_presentPhaseGame = p_phase;
         d_stateOfGame = p_phase.getD_gameState();
         getD_CurrentPhase().initPhase(d_isTournamentMode);
     }
 
+    /**
+     * Set the startup phase
+     */
     public void setStartUpPhase(){
         this.setD_gameEngineLog("Start Up Phase", "phase");
         setD_CurrentPhase(new InitStartUpPhase(this, d_stateOfGame));
@@ -92,6 +118,7 @@ public class GameEngine {
 
     /**
      * Sets the game to the Issue Order phase.
+     * @param p_isTournamentMode - boolean value
      */
     public void setIssueOrderPhase(boolean p_isTournamentMode) {
         this.setD_gameEngineLog("Issue of Order Phase", "phase");

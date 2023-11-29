@@ -11,6 +11,9 @@ import Models.Continent;
 import Models.Country;
 import Models.GameState;
 
+/**
+ * Map file Writer class
+ */
 public class MapFileWriter implements Serializable {
     /**
      * Writes country metadata and organizes border data for each country to the specified file writer.

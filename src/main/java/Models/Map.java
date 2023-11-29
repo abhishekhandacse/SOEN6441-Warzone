@@ -36,6 +36,10 @@ public class Map implements Serializable {
     HashMap<Integer, Boolean> d_countryReach = new HashMap<Integer, Boolean>();
 
 
+    /**
+     * Getter for list of continents
+     * @return - list of continents
+     */
     public List<Continent> getD_continents() {
         return d_continents;
     }

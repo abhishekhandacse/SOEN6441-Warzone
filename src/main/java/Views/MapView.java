@@ -57,6 +57,9 @@ public class MapView {
 		d_continentsList = d_map.getD_continents();
 	}
 
+	/**
+	 * method to show the map
+	 */
 	public void showMap() {
 
 		if(d_playersList != null){
@@ -120,6 +123,12 @@ public class MapView {
 		}
 	}
 
+	/**
+     * Gets the owner of the continent.
+     *
+     * @param p_continentName Continent Name to check ownership.
+     * @return Owner of the continent.
+     */
 	private ModelPlayer getContinentOwner(String p_continentName){
 		if (d_playersList != null) {
 			for (ModelPlayer p: d_playersList){
@@ -131,6 +140,12 @@ public class MapView {
 		return null;
 	}
 
+	/**
+     * Gets the owner of the country.
+     *
+     * @param p_countryName Country Name to check ownership.
+     * @return Owner of the country.
+     */
 	private String getCountryColor(String p_countryName){
 		if(getCountryOwner(p_countryName) != null){
 			return getCountryOwner(p_countryName).getD_color();
@@ -139,6 +154,12 @@ public class MapView {
 		}
 	}
 
+	/**
+     * Gets the number of armies in the country.
+     *
+     * @param p_countryName Country Name to check armies.
+     * @return Number of armies in the country.
+     */
 	private ModelPlayer getCountryOwner(String p_countryName){
 		if (d_playersList != null) {
 			for (ModelPlayer p: d_playersList){
@@ -150,6 +171,7 @@ public class MapView {
 		return null;
 	}
 
+	
 	private Integer getCountryArmies(String p_countryName){
 		Integer l_armies = d_gameState.getD_map().getCountryByName(p_countryName).getD_armies();
 
@@ -158,6 +180,12 @@ public class MapView {
 		return l_armies;
 	}
 
+	/**
+     * Gets the formatted string for player armies.
+     *
+     * @param p_player Player instance to check armies.
+     * @return Formatted string for player armies.
+     */
 	private String getPlayerArmies(ModelPlayer p_player){
 		return "(Unallocated Armies: "+p_player.getD_noOfUnallocatedArmies()+")";
 	}
@@ -174,7 +202,7 @@ public class MapView {
 		System.out.format(l_centeredString+"\n");
 	}
 
-/**
+	/**
      * Renders the Separator for heading.
      *
      */
@@ -187,11 +215,19 @@ public class MapView {
 		System.out.format("+%s+%n", l_separator.toString());
 	}
 
+	/**
+	 * Render player info
+	 * @param p_index - index
+	 * @param p_player - player
+	 */
 	private void renderPlayerInfo(Integer p_index, ModelPlayer p_player){
 		String l_playerInfo = String.format("%02d. %s %-10s %s", p_index,p_player.getPlayerName(), getPlayerArmies(p_player), " -> "+ getColorizedString(p_player.getD_color(), " COLOR "));
 		System.out.println(l_playerInfo);
 	}
 
+	/**
+	 * render players
+	 */
 	private void renderPlayers(){
 		int l_counter = 0;
 

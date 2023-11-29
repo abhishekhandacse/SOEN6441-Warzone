@@ -19,6 +19,10 @@ public class Diplomacy implements Card, Serializable {
      * Records the execution log.
      */
     String d_orderExecutionLog;
+
+    /**
+     * Target player
+     */
     String d_playerTarget;
 
 

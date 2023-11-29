@@ -18,8 +18,16 @@ import Utils.CommandHandler;
 
 public class Tournament implements Serializable {
 
+	/**
+     * object for MapService
+     */
 	MapService d_mapService = new MapService();
+
+	/**
+	 * game state list
+	 */
 	List<GameState> d_gameStateList = new ArrayList<GameState>();
+	
 	/**
      * Gets the list of game states associated with the tournament.
      *

@@ -22,10 +22,18 @@ import Constants.ApplicationConstants;
  */
 public class OrderExecutionPhase extends Phase {
 
+	/**
+	 * Constructor 
+	 * @param p_gameEngine - game engine
+	 * @param p_gameState - game state
+	 */
 	public OrderExecutionPhase(GameEngine p_gameEngine, GameState p_gameState) {
 		super(p_gameEngine, p_gameState);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void initPhase(boolean isTournamentMode) {
 		executeOrders();
@@ -120,6 +128,12 @@ public class OrderExecutionPhase extends Phase {
 		}
 	}
 
+	/**
+	 * Gets input from user to continue for next turn
+	 * @param isTournamentMode boolean value
+	 * @return string
+	 * @throws IOException io exception
+	 */
 	private String continueForNextTurn(boolean isTournamentMode) throws IOException {
 		String l_continue = new String();
 		if (isTournamentMode) {
@@ -141,17 +155,26 @@ public class OrderExecutionPhase extends Phase {
 		printCommandValidationExceptionInState();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void performShowMap(CommandHandler p_command, ModelPlayer p_player) {
 		MapView l_mapView = new MapView(d_gameState);
 		l_mapView.showMap();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void performCardHandle(String p_enteredCommand, ModelPlayer p_player) throws IOException {
 		printCommandValidationExceptionInState();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void performAdvance(String p_command, ModelPlayer p_player) {
 		printCommandValidationExceptionInState();
@@ -165,6 +188,9 @@ public class OrderExecutionPhase extends Phase {
 		printCommandValidationExceptionInState();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void performCreateDeploy(String p_command, ModelPlayer p_player) {
 		printCommandValidationExceptionInState();
@@ -238,6 +264,11 @@ public class OrderExecutionPhase extends Phase {
 		printCommandValidationExceptionInState();
 	}
 
+	/**
+	 * Checks the end of game
+	 * @param p_gameState - game state
+	 * @return - boolean value if game is ended or not
+	 */
 	protected Boolean checkEndOftheGame(GameState p_gameState) {
 		Integer l_totalCountries = p_gameState.getD_map().getD_countriesList().size();
 		d_playerService.updatePlayersInGame(p_gameState);
@@ -252,6 +283,9 @@ public class OrderExecutionPhase extends Phase {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void tournamentGamePlay(CommandHandler p_enteredCommand) {
 //		d_gameEngine.setD_gameEngineLog("\nStarting Execution Of Tournament Mode.....", "start");

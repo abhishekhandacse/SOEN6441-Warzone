@@ -10,6 +10,9 @@ import Models.GameState;
  */
 public class MapWriterAdapter extends MapFileWriter{
 
+    /**
+     * ConquestMapFileWriter object
+     */
     private ConquestMapFileWriter l_conqMapFileWriter;
 
     /**

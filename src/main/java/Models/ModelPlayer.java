@@ -73,8 +73,14 @@ public class ModelPlayer implements Serializable {
     List<ModelPlayer> d_negotiatedWith = new ArrayList<ModelPlayer>();
 
 
+    /**
+     * PlayerBehaviorStrategy object
+     */
     PlayerBehaviorStrategy d_playerBehaviorStrategy;
 
+    /**
+     * player flag
+     */
     Boolean d_playerFlag;
 
     /**
