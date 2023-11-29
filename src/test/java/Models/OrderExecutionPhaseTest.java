@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import Controllers.GameEngine;
 import Exceptions.MapValidationException;
-import Exceptions.MapValidationException;
 
 public class OrderExecutionPhaseTest {
 	
