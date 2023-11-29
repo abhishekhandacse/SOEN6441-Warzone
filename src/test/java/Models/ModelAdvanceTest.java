@@ -38,8 +38,8 @@ public class ModelAdvanceTest {
 
     /**
      * Test to simulate attackers winning a battle and the consequences.
-	 *  Required Test #5
      */
+    // Required Test #5
     @Test
     public void testAttackersWin() {
         ModelPlayer l_sourcePlayer = new ModelPlayer("Rajat");
@@ -66,8 +66,8 @@ public class ModelAdvanceTest {
 
     /**
      * Test to simulate defenders winning a battle and the consequences.
-	 *  Required Test #5
      */
+    // Required Test #5
     @Test
     public void testDefendersWin() {
         ModelPlayer l_sourcePlayer = new ModelPlayer("Rajat");

@@ -118,6 +118,7 @@ public class GameEngineUnitTest {
 	 * @throws MapValidationException     Exception
 	 * @throws IOException Exception
 	 */
+	// Test Case 6
 	@Test
 	public void testPerformSaveGameValidCommand() throws CommandValidationException, MapValidationException, IOException {
 		d_currentPhase.handleCommand("savegame hello.txt");
@@ -172,6 +173,7 @@ public class GameEngineUnitTest {
 	/**
 	 * Validates correct startup phase.
 	 */
+	// Required Test #3
 	@Test
 	public void testCorrectStartupPhase() {
 		assertTrue(d_gameEngine.getD_CurrentPhase() instanceof InitStartUpPhase);

@@ -40,11 +40,11 @@ public class ForMapTest {
     }
 
     /**
-     * Required Test #2
      * Tests a valid and invalid Map for Validate function
      *
      * @throws MapValidationException Exception
      */
+    // Required Test #2
     @Test (expected = MapValidationException.class)
     public void testValidate() throws MapValidationException {
         d_map= d_ms.loadMap(d_stateOfGame, "canada.map");
@@ -70,11 +70,11 @@ public class ForMapTest {
     }
 
     /**
-     * Required Test # 1
      * Checks Continent connectivity of an unconnected continent
      *
      * @throws MapValidationException Exception
      */
+    // Required Test #1
     @Test (expected = MapValidationException.class)
     public void testContinentConnectivity() throws  MapValidationException{
         d_map= d_ms.loadMap(d_stateOfGame, "continentConnectivity.map");
@@ -82,11 +82,11 @@ public class ForMapTest {
     }
 
     /**
-     * Required Test # 1
      * Checks Country Connectivity for not connected countries
      *
      * @throws MapValidationException Exception
      */
+    // Required Test #1
     @Test(expected = MapValidationException.class)
     public void testCountryConnectivity() throws MapValidationException{
         d_map.addContinent("Asia", 10);

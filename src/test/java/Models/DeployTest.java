@@ -95,6 +95,7 @@ public class DeployTest {
      * Tests the execution of deploy orders.
      * It asserts that the armies are correctly deployed to the specified countries.
      */
+    // Required Test #4
     @Test
     public void testDeployOrderExecution() {
         d_deployOrder1.execute(d_gameState);

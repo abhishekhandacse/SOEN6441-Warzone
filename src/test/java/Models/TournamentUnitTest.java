@@ -100,6 +100,7 @@ public class TournamentUnitTest {
      * @throws CommandValidationException invalid command passed
      * @throws MapValidationException     invalid map name passed
      */
+    // Test Case 7
     @Test
     public void testValidTournament() throws MapValidationException, CommandValidationException {
         InitStartUpPhase l_initial_startUpPhase = new InitStartUpPhase(new GameEngine(), d_gameState);
