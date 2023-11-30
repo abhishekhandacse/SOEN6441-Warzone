@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public class PlayerServiceTest {
      * Tests the addition of players.
      */
     @Test
-    public void testAddPlayers() {
+    public void testAddPlayers() throws IOException{
         assertFalse(CommonUtil.isCollectionEmpty(d_exisitingPlayerList));
         List<ModelPlayer> l_updatedPlayers = d_playerService.addRemovePlayers(d_exisitingPlayerList, "add", "Aman");
         assertEquals("Aman", l_updatedPlayers.get(2).getPlayerName());
@@ -92,7 +93,7 @@ public class PlayerServiceTest {
      * Tests the removal of players.
      */
     @Test
-    public void testRemovePlayers() {
+    public void testRemovePlayers() throws IOException{
         List<ModelPlayer> l_updatedPlayers = d_playerService.addRemovePlayers(d_exisitingPlayerList, "remove", "Rajat");
         assertEquals(1, l_updatedPlayers.size());
 

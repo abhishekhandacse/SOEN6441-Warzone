@@ -319,10 +319,11 @@ public class InitStartUpPhase extends Phase {
 			if (CommonUtil.isCollectionEmpty(l_operations_list) || p_istournamentmode) {
 				d_gameEngine.setD_gameState(p_gameState);
 				d_gameEngine.setD_isTournamentMode(p_istournamentmode);
-				d_playerService.assignCountries(p_gameState);
-				d_playerService.assignColors(p_gameState);
-				d_playerService.assignArmies(p_gameState);
-				d_gameEngine.setIssueOrderPhase(p_istournamentmode);
+				if(d_playerService.assignCountries(p_gameState)) {
+					d_playerService.assignColors(p_gameState);
+					d_playerService.assignArmies(p_gameState);
+					d_gameEngine.setIssueOrderPhase(p_istournamentmode);
+				}
 			} else {
 				throw new CommandValidationException(ApplicationConstants.INVALID_COMMAND_ERROR_ASSIGNCOUNTRIES);
 			}
@@ -406,7 +407,8 @@ public class InitStartUpPhase extends Phase {
 				}
 				d_gameEngine.setD_gameEngineLog("************ Tournament Completed ************", "effect");
 				TournamentView l_tournamentView = new TournamentView(d_tournament);
-				l_tournamentView.viewTournaments();
+				l_tournamentView.viewTournament();
+				d_tournament = new Tournament();
 			}
 		} else {
 			d_gameEngine.setD_gameEngineLog("Please add 2 or more players first in the game.", "effect");
@@ -416,7 +418,7 @@ public class InitStartUpPhase extends Phase {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void createPlayers(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException {
+	public void createPlayers(CommandHandler p_command, ModelPlayer p_player) throws CommandValidationException, IOException {
 
 		List<Map<String, String>> l_operations_list = p_command.getOperationsAndArguments();
 
