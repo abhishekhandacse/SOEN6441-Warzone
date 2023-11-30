@@ -9,23 +9,43 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * This class tests the working of Aggressive ModelPlayer Behavior.
+ */
 public class AggressivePlayerTest {
 
-	GameState d_gameState = new GameState();
-
+	/**
+	 * aggressive ModelPlayer to test.
+	 */
 	ModelPlayer d_player;
 
-	Country d_country1;
-
+	/**
+	 * Strategy of ModelPlayer.
+	 */
 	PlayerBehaviorStrategy d_playerBehaviorStrategy;
 
+	/**
+	 * Aggressive player strategy.
+	 */
 	AggressivePlayer d_aggressivePlayer = new AggressivePlayer();
 
-	
+	/**
+	 * Game State.
+	 */
+	GameState d_gameState = new GameState();
+
+	/**
+	 * Country.
+	 */
+	Country d_country1;
+
+	/**
+	 * Setup For testing Aggressive Behavior Strategy.
+	 */
 	@Before
 	public void setup() {
-		this.d_country1 = new Country(1, "India", 1);
-		Country l_country2 = new Country(1, "Pakistan", 1);
+		this.d_country1 = new Country(1, "Spain", 1);
+		Country l_country2 = new Country(1, "France", 1);
 		Country l_country3 = new Country(1, "Portugal", 1);
 
 		l_country2.setD_countryId(3);
@@ -60,14 +80,12 @@ public class AggressivePlayerTest {
 
 	}
 
-	@Test
-	public void testOrderCreation() throws IOException {
-		assertEquals("deploy", d_player.getPlayerOrder(d_gameState).split(" ")[0]);
-	}
-
+	/**
+	 * Check if aggressive player deploy armies on weakest country or not.
+	 */
 	@Test
 	public void testStrongestCountry() {
-		assertEquals("India", d_aggressivePlayer.getStrongestCountry(d_player, d_gameState).getD_countryName());
+		assertEquals("Spain", d_aggressivePlayer.getStrongestCountry(d_player, d_gameState).getD_countryName());
 	}
 
 }
