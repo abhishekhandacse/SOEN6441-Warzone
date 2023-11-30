@@ -11,15 +11,14 @@ import Exceptions.MapValidationException;
 import Services.MapService;
 
 /**
- * 
+ *
  * This class is used to test functionality of Map class functions.
- * 
+ *
  */
-public class MapTest {
-
+public class ForMapTest {
     Map d_map;
     MapService d_ms;
-    GameState d_gameState;
+    GameState d_stateOfGame;
 
     /**
      * Checking Map Model Operations
@@ -27,7 +26,7 @@ public class MapTest {
     @Before
     public void beforeValidateTest(){
         d_map=new Map();
-        d_gameState=new GameState();
+        d_stateOfGame =new GameState();
         d_ms= new MapService();
     }
 
@@ -41,17 +40,17 @@ public class MapTest {
     }
 
     /**
-     * Required Test #2
      * Tests a valid and invalid Map for Validate function
      *
      * @throws MapValidationException Exception
      */
+    // Required Test #2
     @Test (expected = MapValidationException.class)
     public void testValidate() throws MapValidationException {
-        d_map= d_ms.loadMap(d_gameState, "canada.map");
+        d_map= d_ms.loadMap(d_stateOfGame, "canada.map");
 
         assertEquals(d_map.Validate(), true);
-        d_map= d_ms.loadMap(d_gameState, "swiss.map");
+        d_map= d_ms.loadMap(d_stateOfGame, "swiss.map");
         d_map.Validate();
     }
 
@@ -62,32 +61,32 @@ public class MapTest {
      */
     @Test (expected = MapValidationException.class)
     public void testValidateNoCountry() throws MapValidationException{
-        ModelContinent l_continent = new ModelContinent();
-        List <ModelContinent> l_continents = new ArrayList<ModelContinent>();
+        Continent l_continent = new Continent();
+        List <Continent> l_continents = new ArrayList<>();
 
         l_continents.add(l_continent);
-        d_map.setD_allContinents(l_continents);
+        d_map.setD_continents(l_continents);
         d_map.Validate();
     }
 
     /**
-     * Required Test # 1
      * Checks Continent connectivity of an unconnected continent
      *
      * @throws MapValidationException Exception
      */
+    // Required Test #1
     @Test (expected = MapValidationException.class)
     public void testContinentConnectivity() throws  MapValidationException{
-        d_map= d_ms.loadMap(d_gameState, "continentConnectivity.map");
+        d_map= d_ms.loadMap(d_stateOfGame, "continentConnectivity.map");
         d_map.Validate();
     }
 
     /**
-     * Required Test # 1
      * Checks Country Connectivity for not connected countries
      *
      * @throws MapValidationException Exception
      */
+    // Required Test #1
     @Test(expected = MapValidationException.class)
     public void testCountryConnectivity() throws MapValidationException{
         d_map.addContinent("Asia", 10);

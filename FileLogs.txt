@@ -570,3 +570,364 @@ Log: Continent Northern-America added successfully!
 Log: Country Canada added successfully!
 Log: Country Alaska added successfully!
 Log: Neighbour Pair Canada Alaska added successfully!
+
+Command Entered: editcontinent
+Log: Can not Edit Continent, please perform `editmap` first
+
+Command Entered: savemap
+Log: No map found to save, Please `editmap` first
+
+Command Entered: editmap
+
+Command Entered: assigncountries -add india
+
+Command Entered: editcontinent -add Europe 10 -add America 20
+Log: Continent Europe added successfully!
+Log: Continent America added successfully!
+
+Command Entered: editcontinent -remove Europe
+Log: Continent Europe removed successfully!
+Log: Airlift Operation from France to Spain successful!
+Log: Invalid Target Country! Doesn't exist on the map!
+Log: 
+Player : Amanpreet is executing a defensive blockade on Country :  India with armies :  15
+Log: Card Order for Blockage is : blockade USA is not executed since Target country : USA given in blockade command does not belong to the player : Amanpreet The card will have no effect, and you don't get the card back.
+Log: 
+Player : Anurag is executing Bomb card on country :  Japan with armies :  4. New armies: 2
+Log: 
+Player : Anurag is executing Bomb card on country :  India with armies :  15. New armies: 7
+Log: 
+Player : Anurag is executing Bomb card on country :  Canada with armies :  1. New armies: 0
+Log: Bomb card order : bomb Korea is not executed since Target country : Korea given in bomb command is owned by the player : Anurag VALIDATES:- You cannot bomb your own territory!
+Log: 10 armies have been deployed successfully on country : India
+Log: 15 armies have been deployed successfully on country : Canada
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Negotiation with Rajat approached by Amanpreet successful!
+Log: Bomb card order : bomb France is not executed as Rajat has negotiation pact with the target country's player!
+Log: Advance Order : advance India France 15 cannot be executed because the number of armies specified in the advance order exceeds the armies of the source country: India
+Log: Advance Order : advance Canada France 10 cannot be executed because the source country: Canada has 10 army units, and all of them cannot be given an advance order; at least one army unit must remain to retain the territory.
+Log: Advance Order : advance Italy France 10 cannot be executed because the source country: Italy specified in the advance order does not belong to the player: Rajat
+Player : Anurag has won the Game by conquering all countries. Exiting the Game .....
+Log: Validating Map......
+Log: East_Europe has no countries, it must possess atleast 1 country
+Log: Couldn't save the changes in map file!
+Log: Country China added successfully!
+Log: Continent Asia removed successfully!
+Log: testedit.map already exists and is loaded for editing
+Log: Continent Asia added successfully!
+Log: Country Maldives added successfully!
+Log: Country Singapore added successfully!
+Log: Neighbour Pair Singapore Maldives added successfully!
+Log: No Such Neighbour Exists
+Log: Continent Asia added successfully!
+Log: Country: Ukraine does not exist!
+Log: test.map already exists and is loaded for editing
+Log: Continent Northern-America added successfully!
+Log: Country Canada added successfully!
+Log: Country Alaska added successfully!
+Log: Neighbour Pair Canada Alaska added successfully!
+Log: Country/Continent Assignment:
+ Player : Anurag is assigned with country : NU-Southern_Islands
+ Player : Anurag is assigned with country : Saskatchewan-South
+ Player : Anurag is assigned with country : Prince_Edward_Island
+ Player : Anurag is assigned with country : NU-Ellesmere_Island
+ Player : Anurag is assigned with country : Nova_Scotia
+ Player : Anurag is assigned with country : Manitoba-North
+ Player : Anurag is assigned with country : British_Columbia-North
+ Player : Anurag is assigned with country : N&L-Labrador
+ Player : Anurag is assigned with country : Alberta-South
+ Player : Anurag is assigned with country : Manitoba-South
+ Player : Anurag is assigned with country : Alberta-North
+ Player : Anurag is assigned with country : Ontario-West
+ Player : Anurag is assigned with country : NU-Baffin_Island
+ Player : Anurag is assigned with country : N&L-Newfoundland
+ Player : Anurag is assigned with country : Northwest_Territories-Continental
+ Player : Zalak is assigned with country : New_Brunswick
+ Player : Zalak is assigned with country : NT-Victoria_Island-West
+ Player : Zalak is assigned with country : British_Columbia-South
+ Player : Zalak is assigned with country : Ontario-South
+ Player : Zalak is assigned with country : NU-Victoria_Island-East
+ Player : Zalak is assigned with country : NT-Banks_Island
+ Player : Zalak is assigned with country : Quebec-South
+ Player : Zalak is assigned with country : Quebec-North
+ Player : Zalak is assigned with country : BC-Vancouver_Island
+ Player : Zalak is assigned with country : Saskatchewan-North
+ Player : Zalak is assigned with country : Ontario-North
+ Player : Zalak is assigned with country : Nunavut-Continental
+ Player : Zalak is assigned with country : Yukon_Territory
+ Player : Zalak is assigned with country : Quebec-Central
+ Player : Zalak is assigned with country : NU-Northern_Islands
+ Player : Anurag is assigned with country : NT-Northern_Islands
+Game is being initialized .....
+
+
+=======Startup of Game Phase=======
+
+Game is being initialized .....
+
+
+=======Startup of Game Phase=======
+
+
+Command Entered: editcontinent
+Log: Can not Edit Continent, please perform `editmap` first
+
+Command Entered: savemap
+Log: No map found to save, Please `editmap` first
+
+Command Entered: editmap
+
+Command Entered: assigncountries -add india
+
+Command Entered: editcontinent -add Europe 10 -add America 20
+Log: Continent Europe added successfully!
+Log: Continent America added successfully!
+
+Command Entered: editcontinent -remove Europe
+Log: Continent Europe removed successfully!
+
+Command Entered: editcontinent
+Log: Can not Edit Continent, please perform `editmap` first
+
+Command Entered: savemap
+Log: No map found to save, Please `editmap` first
+
+Command Entered: editmap
+
+Command Entered: assigncountries -add india
+
+Command Entered: editcontinent -add Europe 10 -add America 20
+Log: Continent Europe added successfully!
+Log: Continent America added successfully!
+
+Command Entered: editcontinent -remove Europe
+Log: Continent Europe removed successfully!
+Game is being initialized .....
+
+
+=======Startup of Game Phase=======
+
+
+Command Entered: loadmap test.map
+Log: test.map has been loaded to start the game
+
+Command Entered: playername -add aman
+Log: Invalid Command
+
+Command Entered: gameplayer -add aman
+Log: Player with name : aman has been added successfully.
+
+Command Entered: assigncountries
+Log: Country/Continent Assignment:
+ Player : aman is assigned with country : Pakistan
+ Player : aman is assigned with country : France
+ Player : aman is assigned with country : Belgium
+ Player : aman is assigned with country : India
+ Player : aman is assigned with continent : Asia
+ Player : aman is assigned with continent : Europe
+Log: Player : aman has been assigned with 24 armies
+
+=======Issue of Order Phase=======
+
+
+ Order Issued: (Player: aman) exitr
+
+Command Entered: exitr
+Log: Invalid Command
+
+ Order Issued: (Player: aman) exit
+
+Command Entered: exit
+Log: Exit Command Entered, Game Ends!
+Game is being initialized .....
+
+
+=======Startup of Game Phase=======
+
+
+Command Entered: loadmap test.map
+Log: test.map has been loaded to start the game
+
+Command Entered: gameplayer -add aman
+Log: Player with name : aman has been added successfully.
+
+Command Entered: gameplayer -add rajat
+Log: Player with name : rajat has been added successfully.
+
+Command Entered: assigncountries
+Log: Country/Continent Assignment:
+ Player : aman is assigned with country : France
+ Player : aman is assigned with country : India
+ Player : rajat is assigned with country : Belgium
+ Player : rajat is assigned with country : Pakistan
+Log: Player : aman has been assigned with 3 armies
+Log: Player : rajat has been assigned with 3 armies
+
+=======Issue of Order Phase=======
+
+
+ Order Issued: (Player: aman) showmap
+
+Command Entered: showmap
+
+ Order Issued: (Player: aman) deploy India 3
+
+Command Entered: deploy India 3
+Log: Deploy order has been added to the queue for execution. For player: aman
+
+ Order Issued: (Player: rajat) deploy Pakistan 3
+
+Command Entered: deploy Pakistan 3
+Log: Deploy order has been added to the queue for execution. For player: rajat
+
+=======Execution of Order Phase=======
+
+
+Starting Execution Of Orders.....
+Log: 
+---------- Deploy order issued by player aman ----------
+
+Deploy 3 armies to India
+Log: 3 armies have been deployed successfully on country : India
+Log: 
+---------- Deploy order issued by player rajat ----------
+
+Deploy 3 armies to Pakistan
+Log: 3 armies have been deployed successfully on country : Pakistan
+Log: Player : aman has been assigned with 3 armies
+Log: Player : rajat has been assigned with 3 armies
+Log: Player : Neutral has been assigned with 0 armies
+
+=======Issue of Order Phase=======
+
+
+ Order Issued: (Player: aman) showmap
+
+Command Entered: showmap
+
+ Order Issued: (Player: aman) deploy India 3
+
+Command Entered: deploy India 3
+Log: Deploy order has been added to the queue for execution. For player: aman
+
+ Order Issued: (Player: rajat) deploy Belgium 3
+
+Command Entered: deploy Belgium 3
+Log: Deploy order has been added to the queue for execution. For player: rajat
+
+ Order Issued: (Player: aman) showmap
+
+Command Entered: showmap
+
+ Order Issued: (Player: aman) advance India Pakistan 2
+
+Command Entered: advance India Pakistan 2
+Log: Advance order has been added to the queue for execution. For player: aman
+
+ Order Issued: (Player: rajat) advance Pakistan Belgium 2
+
+Command Entered: advance Pakistan Belgium 2
+Log: Advance order has been added to the queue for execution. For player: rajat
+
+=======Execution of Order Phase=======
+
+
+Starting Execution Of Orders.....
+Log: 
+---------- Deploy order issued by player aman ----------
+
+Deploy 3 armies to India
+Log: 6 armies have been deployed successfully on country : India
+Log: 
+---------- Deploy order issued by player rajat ----------
+
+Deploy 3 armies to Belgium
+Log: 3 armies have been deployed successfully on country : Belgium
+Log: 
+---------- Advance order issued by Player: aman ----------
+
+Move 2 armies from India to Pakistan
+Log: Country: Pakistan now has 3 remaining armies and is still owned by Player: rajat
+Country: India now has 4 armies and is still owned by Player: aman
+Log: 
+---------- Advance order issued by Player: rajat ----------
+
+Move 2 armies from Pakistan to Belgium
+Log: Player : aman has been assigned with 3 armies
+Log: Player : rajat has been assigned with 3 armies
+Log: Player : Neutral has been assigned with 0 armies
+
+=======Issue of Order Phase=======
+
+
+ Order Issued: (Player: aman) advance India Pakistan 3
+
+Command Entered: advance India Pakistan 3
+Log: Advance order has been added to the queue for execution. For player: aman
+
+ Order Issued: (Player: rajat) advance Belgium France 4
+
+Command Entered: advance Belgium France 4
+Log: Advance order has been added to the queue for execution. For player: rajat
+
+=======Execution of Order Phase=======
+
+
+Starting Execution Of Orders.....
+Log: 
+---------- Advance order issued by Player: aman ----------
+
+Move 3 armies from India to Pakistan
+Log: Country: Pakistan now has 1 remaining armies and is still owned by Player: rajat
+Country: India now has 3 armies and is still owned by Player: aman
+Log: 
+---------- Advance order issued by Player: rajat ----------
+
+Move 4 armies from Belgium to France
+Log: Player : rajat is assigned with Country : France and armies : 4
+Log: Player : aman has been assigned with 6 armies
+Log: Player : rajat has been assigned with 26 armies
+Log: Player : Neutral has been assigned with 0 armies
+
+=======Issue of Order Phase=======
+
+
+ Order Issued: (Player: aman) showmap
+
+Command Entered: showmap
+
+ Order Issued: (Player: aman) deploy India 6
+
+Command Entered: deploy India 6
+Log: Deploy order has been added to the queue for execution. For player: aman
+
+ Order Issued: (Player: rajat) blockade Pakistan
+
+Command Entered: blockade Pakistan
+Log: Card Command Added to Queue for Execution Successfully!
+Log: Card Command Added to Queue for Execution Successfully!
+
+=======Execution of Order Phase=======
+
+
+Starting Execution Of Orders.....
+Log: 
+---------- Deploy order issued by player aman ----------
+
+Deploy 6 armies to India
+Log: 9 armies have been deployed successfully on country : India
+Log: ==========Blockade card order issued by player rajat==========
+Creating a defensive blockade with armies = on country ID: Pakistan
+Log: 
+Player : rajat is executing a defensive blockade on Country :  Pakistan with armies :  3
+Log: Player : aman has been assigned with 3 armies
+Log: Player : rajat has been assigned with 49 armies
+Log: Player : Neutral has been assigned with 3 armies
+
+=======Issue of Order Phase=======
+
+
+ Order Issued: (Player: aman) exit
+
+Command Entered: exit
+Log: Exit Command Entered, Game Ends!

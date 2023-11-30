@@ -45,23 +45,23 @@ public class AirliftTest {
 		d_player1 = new ModelPlayer();
 		d_player1.setPlayerName("a");
 
-		List<ModelCountry> l_countryList = new ArrayList<ModelCountry>();
-		ModelCountry l_country = new ModelCountry(0, "France", 1);
+		List<Country> l_countryList = new ArrayList<Country>();
+		Country l_country = new Country(0, "France", 1);
 		l_country.setD_armies(9);
 		l_countryList.add(l_country);
 
-		ModelCountry l_countryNeighbour = new ModelCountry(1, "Belgium", 1);
-		l_countryNeighbour.addNeighbour(0);
-		l_country.addNeighbour(1);
+		Country l_countryNeighbour = new Country(1, "Belgium", 1);
+		l_countryNeighbour.addNeighbours(0);
+		l_country.addNeighbours(1);
 		l_countryNeighbour.setD_armies(10);
 		l_countryList.add(l_countryNeighbour);
 
-		ModelCountry l_countryNotNeighbour = new ModelCountry(2, "Spain", 1);
+		Country l_countryNotNeighbour = new Country(2, "Spain", 1);
 		l_countryNotNeighbour.setD_armies(15);
 		l_countryList.add(l_countryNotNeighbour);
 
 		Map l_map = new Map();
-		l_map.setD_allCountries(l_countryList);
+		l_map.setD_countries(l_countryList);
 
 		d_gameState.setD_map(l_map);
 		d_player1.setD_coutriesOwned(l_countryList);
@@ -74,7 +74,7 @@ public class AirliftTest {
 	@Test
 	public void testAirliftExecution() {
 		d_airliftOrder.execute(d_gameState);
-		ModelCountry l_countryIndia = d_gameState.getD_map().getCountryByName("Spain");
+		Country l_countryIndia = d_gameState.getD_map().getCountryByName("Spain");
 		assertEquals("17", l_countryIndia.getD_armies().toString());
 	}
 
@@ -84,7 +84,7 @@ public class AirliftTest {
 	@Test
 	public void testInvalidAirLift() {
 		d_invalidAirLift1 = new Airlift("France", "India", 1, d_player1);
-		d_invalidAirLift1.validOrderCheck(d_gameState);
+		d_invalidAirLift1.checkIfOrderIsValid(d_gameState);
 		assertEquals(d_gameState.getRecentLog(),
 				"Log: Invalid Target Country! Doesn't exist on the map!" + System.lineSeparator());
 	}

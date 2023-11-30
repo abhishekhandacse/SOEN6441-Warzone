@@ -23,36 +23,36 @@ public class ModelAdvanceTest {
     @Test
     public void testInvalidAdvanceOrder() {
         ModelPlayer l_player = new ModelPlayer("Rajat");
-        ModelCountry l_country1 = new ModelCountry("India");
+        Country l_country1 = new Country("India");
         l_country1.setD_armies(12);
-        ModelCountry l_country2 = new ModelCountry("Canada");
+        Country l_country2 = new Country("Canada");
         l_country2.setD_armies(10);
-        List<ModelCountry> l_countries = Arrays.asList(l_country1, l_country2);
+        List<Country> l_countries = Arrays.asList(l_country1, l_country2);
         l_player.setD_coutriesOwned(l_countries);
 
-        assertFalse(new ModelAdvance(l_player, "India", "France", 15).valid(d_gameState));
-        assertFalse(new ModelAdvance(l_player, "Canada", "France", 10).valid(d_gameState));
-        assertFalse(new ModelAdvance(l_player, "Italy", "France", 10).valid(d_gameState));
-        assertTrue(new ModelAdvance(l_player, "India", "France", 10).valid(d_gameState));
+        assertFalse(new ModelAdvance(l_player, "India", "France", 15).checkValid(d_gameState));
+        assertFalse(new ModelAdvance(l_player, "Canada", "France", 10).checkValid(d_gameState));
+        assertFalse(new ModelAdvance(l_player, "Italy", "France", 10).checkValid(d_gameState));
+        assertTrue(new ModelAdvance(l_player, "India", "France", 10).checkValid(d_gameState));
     }
 
     /**
      * Test to simulate attackers winning a battle and the consequences.
-	 *  Required Test #5
      */
+    // Required Test #5
     @Test
     public void testAttackersWin() {
         ModelPlayer l_sourcePlayer = new ModelPlayer("Rajat");
-        ModelCountry l_country1 = new ModelCountry("India");
+        Country l_country1 = new Country("India");
         l_country1.setD_armies(7);
-        List<ModelCountry> l_s1 = new ArrayList<>();
+        List<Country> l_s1 = new ArrayList<>();
         l_s1.add(l_country1);
         l_sourcePlayer.setD_coutriesOwned(l_s1);
 
         ModelPlayer l_targetPlayer = new ModelPlayer("Anurag");
-        ModelCountry l_country2 = new ModelCountry("Canada");
+        Country l_country2 = new Country("Canada");
         l_country2.setD_armies(4);
-        List<ModelCountry> l_s2 = new ArrayList<>();
+        List<Country> l_s2 = new ArrayList<>();
         l_s2.add(l_country2);
         l_targetPlayer.setD_coutriesOwned(l_s2);
 
@@ -66,21 +66,21 @@ public class ModelAdvanceTest {
 
     /**
      * Test to simulate defenders winning a battle and the consequences.
-	 *  Required Test #5
      */
+    // Required Test #5
     @Test
     public void testDefendersWin() {
         ModelPlayer l_sourcePlayer = new ModelPlayer("Rajat");
-        ModelCountry l_country1 = new ModelCountry("India");
+        Country l_country1 = new Country("India");
         l_country1.setD_armies(2);
-        List<ModelCountry> l_s1 = new ArrayList<>();
+        List<Country> l_s1 = new ArrayList<>();
         l_s1.add(l_country1);
         l_sourcePlayer.setD_coutriesOwned(l_s1);
 
         ModelPlayer l_targetPlayer = new ModelPlayer("Anurag");
-        ModelCountry l_country2 = new ModelCountry("Canada");
+        Country l_country2 = new Country("Canada");
         l_country2.setD_armies(4);
-        List<ModelCountry> l_s2 = new ArrayList<>();
+        List<Country> l_s2 = new ArrayList<>();
         l_s2.add(l_country2);
         l_targetPlayer.setD_coutriesOwned(l_s2);
 
@@ -99,13 +99,13 @@ public class ModelAdvanceTest {
     @Test
     public void testDeployToTarget() {
         ModelPlayer l_sourcePlayer = new ModelPlayer("Rajat");
-        List<ModelCountry> l_s1 = new ArrayList<>();
+        List<Country> l_s1 = new ArrayList<>();
 
-        ModelCountry l_country1 = new ModelCountry("India");
+        Country l_country1 = new Country("India");
         l_country1.setD_armies(7);
         l_s1.add(l_country1);
 
-        ModelCountry l_country2 = new ModelCountry("Canada");
+        Country l_country2 = new Country("Canada");
         l_country2.setD_armies(4);
         l_s1.add(l_country2);
         l_sourcePlayer.setD_coutriesOwned(l_s1);

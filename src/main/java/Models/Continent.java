@@ -9,17 +9,32 @@ import java.util.List;
 /**
  * This model class manages all the Continents in the map.
  */
-public class ModelContinent {
+public class Continent {
 
-	Integer d_continentID;
+	/**
+	 * continent name.
+	 */
 	String d_continentName;
+
+	/**
+	 * continent ID.
+	 */
+	Integer d_continentID;
+
+	/**
+	 * continent value.
+	 */
 	Integer d_continentValue;
-	List<ModelCountry> d_countries;
+
+	/**
+	 * List of countries.
+	 */
+	List<Country> d_countriesList;
 
 	/**
 	 * Default constructor for ModelContinent.
 	 */
-	public ModelContinent() {
+	public Continent() {
 	}
 
 	/**
@@ -29,7 +44,7 @@ public class ModelContinent {
 	 * @param p_continentName The name of the continent.
 	 * @param p_continentValue The reinforcement value of the continent.
 	 */
-	public ModelContinent(Integer p_continentID, String p_continentName, int p_continentValue) {
+	public Continent(Integer p_continentID, String p_continentName, int p_continentValue) {
 		this.d_continentID = p_continentID;
 		this.d_continentName = p_continentName;
 		this.d_continentValue = p_continentValue;
@@ -40,7 +55,7 @@ public class ModelContinent {
 	 *
 	 * @param p_continentName The name of the continent.
 	 */
-	public ModelContinent(String p_continentName) {
+	public Continent(String p_continentName) {
 		this.d_continentName = p_continentName;
 	}
 
@@ -49,8 +64,8 @@ public class ModelContinent {
 	 *
 	 * @param p_countries The list of countries in the continent.
 	 */
-	public void setD_countries(List<ModelCountry> p_countries) {
-		this.d_countries = p_countries;
+	public void setD_countriesList(List<Country> p_countries) {
+		this.d_countriesList = p_countries;
 	}
 
 	/**
@@ -112,8 +127,8 @@ public class ModelContinent {
 	 *
 	 * @return The list of countries in the continent.
 	 */
-	public List<ModelCountry> getD_countries() {
-		return d_countries;
+	public List<Country> getD_countriesList() {
+		return d_countriesList;
 	}
 
 	/**
@@ -121,12 +136,12 @@ public class ModelContinent {
 	 *
 	 * @param p_country The country to be added.
 	 */
-	public void addingCountry(ModelCountry p_country) {
-		if (d_countries != null) {
-			d_countries.add(p_country);
+	public void addingCountry(Country p_country) {
+		if (d_countriesList != null) {
+			d_countriesList.add(p_country);
 		} else {
-			d_countries = new ArrayList<ModelCountry>();
-			d_countries.add(p_country);
+			d_countriesList = new ArrayList<Country>();
+			d_countriesList.add(p_country);
 		}
 	}
 
@@ -136,11 +151,11 @@ public class ModelContinent {
 	 * @param p_country The country to be removed.
 	 * @throws MapValidationException If the country does not exist.
 	 */
-	public void countryRemove(ModelCountry p_country) throws MapValidationException {
-		if (d_countries == null) {
+	public void countryRemove(Country p_country) throws MapValidationException {
+		if (d_countriesList == null) {
 			System.out.println("No such Country Exists");
 		} else {
-			d_countries.remove(p_country);
+			d_countriesList.remove(p_country);
 		}
 	}
 
@@ -151,11 +166,11 @@ public class ModelContinent {
 	 * @throws MapValidationException If the country does not exist.
 	 */
 	public void removeCountryNeighboursFromAll(Integer p_countryId) throws MapValidationException {
-		if (null != d_countries && !d_countries.isEmpty()) {
-			for (ModelCountry c : d_countries) {
-				if (!CommonUtil.isNullObject(c.d_adjacentCountryIds)) {
+		if (null != d_countriesList && !d_countriesList.isEmpty()) {
+			for (Country c : d_countriesList) {
+				if (!CommonUtil.isNull(c.d_adjacentCountryIds)) {
 					if (c.getD_adjacentCountryIds().contains(p_countryId)) {
-						c.removeNeighbour(p_countryId);
+						c.removeNeighbours(p_countryId);
 					}
 				}
 			}

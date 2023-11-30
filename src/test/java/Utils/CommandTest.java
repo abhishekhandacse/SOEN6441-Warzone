@@ -10,26 +10,28 @@ import java.util.Map;
 import static org.junit.Assert.*;
 
 /**
- * This class is used to test functionality of Command class functions.
+ * Test class for the {@code CommandHandler} class.
+ *
+ * @version 1.0
  */
 public class CommandTest {
-	
-	/**
-	 * Testing if the command entered is valid or not
-	 */
+
+    /**
+     * Tests the retrieval of the root command from a valid command.
+     */
     @Test
-    public void test_validCommand_getRootCommand(){
+    public void test_validCommand_getRootCommand() {
         CommandHandler l_command = new CommandHandler("editcontinent -add continentID continentvalue");
         String l_rootCommand = l_command.getRootCommand();
 
-        assertEquals("editcontinent",l_rootCommand);
+        assertEquals("editcontinent", l_rootCommand);
     }
 
     /**
-     * Testing if the command entered is invalid or not
+     * Tests the retrieval of the root command from an invalid command.
      */
     @Test
-    public void test_inValidCommand_getRootCommand(){
+    public void test_inValidCommand_getRootCommand() {
         CommandHandler l_command = new CommandHandler("");
         String l_rootCommand = l_command.getRootCommand();
 
@@ -37,10 +39,10 @@ public class CommandTest {
     }
 
     /**
-     * Testing the single word commands
+     * Tests the retrieval of the root command from a single-word command.
      */
     @Test
-    public void test_singleWord_getRootCommand(){
+    public void test_singleWord_getRootCommand() {
         CommandHandler l_command = new CommandHandler("validatemap");
         String l_rootCommand = l_command.getRootCommand();
 
@@ -48,10 +50,10 @@ public class CommandTest {
     }
 
     /**
-     * testing the commands
+     * Tests the retrieval of the root command from a no-flag command.
      */
     @Test
-    public void test_noFlagCommand_getRootCommand(){
+    public void test_noFlagCommand_getRootCommand() {
         CommandHandler l_command = new CommandHandler("loadmap abc.txt");
         String l_rootCommand = l_command.getRootCommand();
 
@@ -59,15 +61,15 @@ public class CommandTest {
     }
 
     /**
-     * testing the single operation commands
+     * Tests the retrieval of operations and arguments from a single command.
      */
     @Test
-    public void test_singleCommand_getOperationsAndArguments(){
+    public void test_singleCommand_getOperationsAndArguments() {
         CommandHandler l_command = new CommandHandler("editcontinent -remove continentID");
-        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<>();
 
         Map<String, String> l_expectedCommandTwo = new HashMap<String, String>() {{
             put("arguments", "continentID");
@@ -79,15 +81,15 @@ public class CommandTest {
     }
 
     /**
-     * testing if more than one spaces in between the command and its parameters is acceptable or not
+     * Tests the retrieval of operations and arguments from a single command with extra spaces.
      */
     @Test
-    public void test_singleCommandWithExtraSpaces_getOperationsAndArguments(){
+    public void test_singleCommandWithExtraSpaces_getOperationsAndArguments() {
         CommandHandler l_command = new CommandHandler("editcontinent      -remove continentID");
-        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<>();
 
         Map<String, String> l_expectedCommandTwo = new HashMap<String, String>() {{
             put("arguments", "continentID");
@@ -99,15 +101,15 @@ public class CommandTest {
     }
 
     /**
-     * testing the multiple commands in a single line are working or not
+     * Tests the retrieval of operations and arguments from multiple commands.
      */
     @Test
-    public void test_multiCommand_getOperationsAndArguments(){
+    public void test_multiCommand_getOperationsAndArguments() {
         CommandHandler l_command = new CommandHandler("editcontinent -add continentID continentValue  -remove continentID");
-        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<>();
 
         Map<String, String> l_expectedCommandOne = new HashMap<String, String>() {{
             put("arguments", "continentID continentValue");
@@ -124,15 +126,15 @@ public class CommandTest {
     }
 
     /**
-     * testing commands
+     * Tests the retrieval of operations and arguments from a no-flag command.
      */
     @Test
-    public void test_noFlagCommand_getOperationsAndArguments(){
+    public void test_noFlagCommand_getOperationsAndArguments() {
         CommandHandler l_command = new CommandHandler("loadmap abc.txt");
-        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<>();
 
         Map<String, String> l_expectedCommandOne = new HashMap<String, String>() {{
             put("arguments", "abc.txt");
@@ -144,15 +146,15 @@ public class CommandTest {
     }
 
     /**
-     * testing if more than one spaces in between the command and its parameters is acceptable or not
+     * Tests the retrieval of operations and arguments from a no-flag command with extra spaces.
      */
     @Test
-    public void test_noFlagCommandWithExtraSpaces_getOperationsAndArguments(){
+    public void test_noFlagCommandWithExtraSpaces_getOperationsAndArguments() {
         CommandHandler l_command = new CommandHandler("loadmap         abc.txt");
-        List<Map<String , String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
+        List<Map<String, String>> l_actualOperationsAndValues = l_command.getOperationsAndArguments();
 
         // Preparing Expected Value
-        List<Map<String , String>> l_expectedOperationsAndValues = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> l_expectedOperationsAndValues = new ArrayList<>();
 
         Map<String, String> l_expectedCommandOne = new HashMap<String, String>() {{
             put("arguments", "abc.txt");

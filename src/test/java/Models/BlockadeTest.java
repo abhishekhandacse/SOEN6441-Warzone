@@ -66,16 +66,16 @@ public class BlockadeTest {
 		d_neutralPlayer = new ModelPlayer();
 		d_neutralPlayer.setPlayerName("Neutral");
 		
-		List<ModelCountry> l_countryList = new ArrayList<ModelCountry>();
-		l_countryList.add(new ModelCountry("India"));
-		l_countryList.add(new ModelCountry("Canada"));
+		List<Country> l_countryList = new ArrayList<Country>();
+		l_countryList.add(new Country("India"));
+		l_countryList.add(new Country("Canada"));
 		d_player1.setD_coutriesOwned(l_countryList);
 		d_player2.setD_coutriesOwned(l_countryList);
 		d_neutralPlayer.setD_coutriesOwned(l_countryList);
 
-		List<ModelCountry> l_mapCountries = new ArrayList<ModelCountry>();
-		ModelCountry l_country1 = new ModelCountry(1, "Canada", 1);
-		ModelCountry l_country2 = new ModelCountry(2, "India", 2);
+		List<Country> l_mapCountries = new ArrayList<Country>();
+		Country l_country1 = new Country(1, "Canada", 1);
+		Country l_country2 = new Country(2, "India", 2);
 		l_country1.setD_armies(10);
 		l_country2.setD_armies(5);
 
@@ -83,12 +83,12 @@ public class BlockadeTest {
 		l_mapCountries.add(l_country2);
 
 		Map l_map = new Map();
-		l_map.setD_allCountries(l_mapCountries);
+		l_map.setD_countries(l_mapCountries);
 		d_gameState.setD_map(l_map);
 		
 		List<ModelPlayer> l_playerList = new ArrayList<ModelPlayer>();
 		l_playerList.add(d_neutralPlayer);
-		d_gameState.setD_playersList(l_playerList);
+		d_gameState.setD_players(l_playerList);
 		
 		d_blockadeOrder1 = new Blockade(d_player1, "India");
 		d_blockadeOrder2 = new Blockade(d_player1, "USA");
@@ -107,7 +107,7 @@ public class BlockadeTest {
 	@Test
 	public void testBlockadeExecution() {
 		d_blockadeOrder1.execute(d_gameState);
-		ModelCountry l_countryIndia = d_gameState.getD_map().getCountryByName("India");
+		Country l_countryIndia = d_gameState.getD_map().getCountryByName("India");
 		assertEquals("15", l_countryIndia.getD_armies().toString());
 	}
 
@@ -117,10 +117,10 @@ public class BlockadeTest {
 	@Test
 	public void testValidBlockadeOrder() {
 
-		boolean l_actualBoolean = d_blockadeOrder1.valid(d_gameState);
+		boolean l_actualBoolean = d_blockadeOrder1.checkValid(d_gameState);
 		assertTrue(l_actualBoolean);
 
-		boolean l_actualBoolean2 = d_blockadeOrder2.valid(d_gameState);
+		boolean l_actualBoolean2 = d_blockadeOrder2.checkValid(d_gameState);
 		assertFalse(l_actualBoolean2);
 
 	}
