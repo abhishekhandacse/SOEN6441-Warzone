@@ -40,8 +40,8 @@ public class ModelPlayerTest {
 	 */
 	@Before
 	public void setup() {
-		d_exisitingPlayerList.add(new ModelPlayer("Avneet"));
-		d_exisitingPlayerList.add(new ModelPlayer("Zalak"));
+		d_exisitingPlayerList.add(new ModelPlayer("Amanpreet"));
+		d_exisitingPlayerList.add(new ModelPlayer("Rajat"));
 		
 		Map l_map = new Map();
 		Country l_c1 = new Country(1, "Finland", 10);

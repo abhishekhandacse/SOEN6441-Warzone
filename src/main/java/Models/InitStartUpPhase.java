@@ -74,8 +74,13 @@ public class InitStartUpPhase extends Phase {
             System.out.println("Allocate countries : 'assigncountries' ");
             System.out.println("Save the map : 'savemap filename' ");
             System.out.println("Load the map : 'loadmap filename' ");
+			System.out.println("Edit continent: 'editcontinent -add continentID continentvalue -remove continentID' ");
+			System.out.println("Edit countries: 'editcountry -add countryID continentID -remove countryID' ");
+			System.out.println("Edit neighbours: 'editneighbor -add countryID neighborcountryID -remove countryID neighborcountryIDshowmap' ");
+			System.out.println("Show Map: 'showmap'");
+			System.out.println("Valitdate Map: 'validatemap'");
+			System.out.println("Tournament game play commands: 'tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns'");
             System.out.println("===================================================================================");
-            System.out.println("");
             System.out.println("");
 			try {
 				System.out.println("Enter Game Commands or type 'exit' for quitting");
